@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Thesis Research</title>
+  <link rel="stylesheet" href="https://stackedit.io/style.css" />
+</head>
+
+<body class="stackedit">
+  <div class="stackedit__html"><h1 id="research-outline">Research Outline</h1>
+<h2 id="ingredients">Ingredients</h2>
+<ul>
+<li>Optimization of scheduling based on model of learner’s activation decay</li>
+<li>Further optimization of activation by tracking response times</li>
+<li>Presentation of words in-context by generating multiple-choice fill-in-the-blank questions</li>
+<li>Implementing scaffolding to improve learning experience</li>
+<li>Providing more meaningful feedback to the user</li>
+<li>Including other proven learning methodologies</li>
+<li>Learning effects described by Dr. Ramscar</li>
+</ul>
+<p>[TOC]</p>
+<h3 id="scheduling">Scheduling</h3>
+<p><em>Folder of papers: <a href="https://drive.google.com/drive/folders/0B_kzRS5tOgsXeGQ2Wmt0bDliU2s?usp=sharing">link</a></em></p>
+<p>[x][<a href="https://drive.google.com/file/d/0B_kzRS5tOgsXUkFKWUNVNVptVXM/view?usp=sharing">link</a>] <strong>Sense, F. et al.</strong> - Stability of Individual Parameters in a Model of Optimal Fact Learning</p>
+<blockquote>
+<ul>
+<li>Includes formulas for activation and decay</li>
+<li>Includes flowchart for ideal item selection</li>
+</ul>
+</blockquote>
+<p>[x][<a href="https://drive.google.com/file/d/0B_kzRS5tOgsXMjJVbXdGaVJuc3c/view?usp=sharing">link</a>] <strong>Sense, F. et al.</strong> - An Individual’s Rate of Forgetting Is Stable Over Time but Differs Across Materials</p>
+<blockquote>
+<ul>
+<li>Cites many articles describing the success of the spacing and testing effects (p2-3)</li>
+<li>Is very similar to above article</li>
+</ul>
+</blockquote>
+<p>[x][<a href="https://drive.google.com/file/d/0B_kzRS5tOgsXNjdHbHE5QUtOeU0/view?usp=sharing">link</a>] <strong>Koelewijn, L.</strong> - Optimizing Fact Learning Gains</p>
+<blockquote>
+<ul>
+<li>Cites many articles establishing the background of learning, and computer learning specifically (p5)</li>
+<li>Is very similar to the van Thiel paper</li>
+<li>Tests the user’s reaction time right away to determine baseline reaction time value individually</li>
+<li>Also uses the median of all initial trials as an indicator of the initial alpha value, rather than setting a fixed alpha (p13), but has middling results (p33).</li>
+<li>Compares directly with the van Thiel paper</li>
+<li>Contains both laboratory and real-world experiments and results</li>
+<li>In addition to using initial tested reaction time, base reaction time value (f) can also be optimized for by finding the greatest standard deviation of activation (alpha). (p21)</li>
+<li>Warns about overlearning (p36)</li>
+</ul>
+</blockquote>
+<p>[x][<a href="https://drive.google.com/file/d/0B_kzRS5tOgsXWmNFNmI5WmwtV3c/view?usp=sharing">link</a>] <strong>van Rijn, H. et al.</strong> - Passing the Test:  Improving Learning gains by Balancing Spacing and Testing Effects</p>
+<blockquote>
+<ul>
+<li>Claims that the Pavlik/Anderson model is based on the work of Anderson/Schooler (1991)</li>
+<li>Describes using new encounters to adjust activation by a fixed amount in the correct direction, rather than doing a hard recalculation, due to noise being large.  (p3-4 - Subsymbolic Model Tracing)</li>
+<li>Only adjusts activation based on reaction time if the difference between expected and observed reaction time is &gt;0.5s (p4 - Algorithm 4)</li>
+</ul>
+</blockquote>
+<p>[x][<a href="https://drive.google.com/file/d/0B8zQ4O1-JvDrRXFjcmRsVVZYT2s/view?usp=sharing">link</a>] <strong>Pavlik &amp; Anderson (2005)</strong> - Practice and Forgetting Effects on Vocabulary Memory:<br>
+An Activation-Based Model of the Spacing Effect</p>
+<blockquote>
+<ul>
+<li>Paper that serves as basis for most other papers linked here for learning scheduling</li>
+<li>Mentions other possible models for modeling learning/forgetting other than the power-based function used by all of these papers, and provides their rationale for choosing a power function (p3)</li>
+<li>Contains interesting figures demonstrating the spacing effect (p7)</li>
+<li>Describes a formula for assigning a probability of recall based on activation (p10)</li>
+<li>Describes scaling of the passage of time outside an experiment as “psychological time” (p10-11)</li>
+<li>Theorizes about biological explanations for the observed learning/forgetting processes</li>
+</ul>
+</blockquote>
+<p>[x][<a href="https://drive.google.com/file/d/0B8zQ4O1-JvDrYWJ4U21lLWR1MjQ/view?usp=sharing">link</a>] <strong>Pavlik &amp; Anderson (2008)</strong> - Using a Model to Compute the Optimal Schedule of Practice</p>
+<blockquote>
+<ul>
+<li>Serves as basis for most other papers linked here for learning scheduling</li>
+<li>Contents are mostly covered by other papers that heavily refer to it</li>
+</ul>
+</blockquote>
+<p>[x][<a href="https://drive.google.com/file/d/0B8zQ4O1-JvDrbEhIbmdWTHF3VzA/view?usp=sharing">link</a>] <strong>Settles, B. and Meeder, B.</strong> - A Trainable Spaced Repetition Model for Language Learning</p>
+<blockquote>
+<ul>
+<li>Paper from Duolingo</li>
+<li>Contains a different method of determining the probability of recall for a word as a function of time</li>
+<li>Serves as a look into a real-world application of these methods on a large scale</li>
+<li>Includes link to code (p9)</li>
+</ul>
+</blockquote>
+<p>[x][<a href="https://drive.google.com/file/d/0B8zQ4O1-JvDrY01ZbmRPS01qV3c/view?usp=sharing">link</a>] <strong>Lindsey, V. et al</strong> - Improving Students’ Long-Term Knowledge Retention Through Personalized Review</p>
+<blockquote>
+<ul>
+<li>Doesn’t contain much useful information not otherwise discussed in other papers</li>
+</ul>
+</blockquote>
+<p>[x][<a href="https://drive.google.com/file/d/0B8zQ4O1-JvDrWFB4aTBnakRwMjQ/view?usp=sharing">link</a>] <strong>Streeter, M.</strong> - Mixture Modeling of Individual Learning Curves</p>
+<blockquote>
+<ul>
+<li>Paper from Duolingo</li>
+<li>Really dense math, difficult to follow</li>
+</ul>
+</blockquote>
+<p>[<a href="https://drive.google.com/file/d/0B8zQ4O1-JvDrLVRiQXdFMDQwUkU/view?usp=sharing">link</a>] <strong>Lindsey, R. et al.</strong> - Optimizing Retention with Cognitive Models</p>
+<blockquote>
+<ul>
+<li>Example for balancing spacing and testing effects</li>
+</ul>
+</blockquote>
+<p>[<a href="https://drive.google.com/file/d/0B8zQ4O1-JvDrVGROTUluUDRRQlE/view?usp=sharing">link</a>] <strong>Anderson, J. and Schooler, L.</strong> - Reflections of the Environment in Memory</p>
+<blockquote>
+<ul>
+<li>Basis for Pavlik &amp; Anderson models</li>
+</ul>
+</blockquote>
+<p>[<a href="https://drive.google.com/file/d/0B8zQ4O1-JvDrVzBhN1U0bzVqMlk/view?usp=sharing">link</a>] <strong>Raaijmakers, J.</strong> - Spacing and repetition effects in human memory:  application of the SAM model</p>
+<blockquote>
+<ul>
+<li>Describes the SAM model</li>
+</ul>
+</blockquote>
+<p>[<a href="https://drive.google.com/file/d/0B8zQ4O1-JvDraGphNEdVYmZOTU0/view?usp=sharing">link</a>] <strong>Anderson, J. et al.</strong> - An Integrated Theory of the Mind</p>
+<blockquote>
+<ul>
+<li>Source for describing the “ACT-R cognitive modelling architecture”</li>
+</ul>
+</blockquote>
+<p>[<a href="https://drive.google.com/file/d/0B8zQ4O1-JvDrWV85QnVvMm5LWms/view?usp=sharing">link</a>] <strong>Pavlik, P.</strong> - Understanding and applying the dynamics of test practice and study practice</p>
+<blockquote>
+<ul>
+<li>Source for beta-parameter extension to activation formula</li>
+</ul>
+</blockquote>
+<p>[<a href="https://drive.google.com/file/d/0B8zQ4O1-JvDrYTFVTlJkRW1pYTg/view?usp=sharing">link</a>] <strong>Nijboer, M.</strong> - Optimal Fact Learning:  Applying Presentation Scheduling to Realistic Conditions</p>
+<blockquote>
+<ul>
+<li>Masters thesis</li>
+<li>Contains good explanation of how to adjust alpha values based on reaction times (p20-21)</li>
+<li>Contains graphs that demonstrate how spacing affects activation in ACT-R (p18)</li>
+<li>Contains formulas for estimated reading times of sentences (p23, p51)</li>
+<li>Describes improvements to the “psychological time” explanation for a slowed rate of forgetting between sessions (p27-28)</li>
+</ul>
+</blockquote>
+<p>[<a href="https://drive.google.com/file/d/0B8zQ4O1-JvDrZEFYbFdrU2MtODA/view?usp=sharing">link</a>] <strong>van Woudenberg, M.</strong> - Optimal Word Pair Learning in the Short Term:  Using an Activation Based Spacing Model</p>
+<blockquote>
+<ul>
+<li>Uses very basic formula for adjusting alpha based on reaction times</li>
+</ul>
+</blockquote>
+<hr>
+<h3 id="reaction-timing">Reaction Timing</h3>
+<p><em>Folder of papers: <a href="https://drive.google.com/drive/folders/0B_kzRS5tOgsXQkJ3am8xakRpdFk?usp=sharing">link</a></em></p>
+<p>[x][<a href="https://drive.google.com/file/d/0B_kzRS5tOgsXZG9GbmNVa3llSG8/view?usp=sharing">link</a>] <strong>van Thiel, W.</strong> - Optimize Learning with Reaction Time-based Spacing</p>
+<blockquote>
+<ul>
+<li>Contains a lot of formulas for optimizing predicted activation based on reaction times</li>
+<li>Serves as a strong basis for any experiments employing the measuring of reaction times</li>
+</ul>
+</blockquote>
+<hr>
+<h3 id="vocab-learning">Vocab Learning</h3>
+<p><em>Folder of papers: <a href="https://drive.google.com/drive/folders/0B8zQ4O1-JvDrOUhnS1Zmd1RzYXc?usp=sharing">link</a></em></p>
+<p>[x][<a href="https://drive.google.com/file/d/0B8zQ4O1-JvDrTnNSU1pYd04wdU0/view?usp=sharing">link</a>] <strong>Gu, Y. and Johnson, R.</strong> - Vocabulary Learning Strategies and Language Learning Outcomes</p>
+<blockquote>
+<ul>
+<li>Contains a survey of Chinese students learning English, asking about their vocabulary studying habits, correlating their responses to their test results and vocabulary sizes</li>
+<li>Indicates which techniques are most well-correlated with success (p26)</li>
+<li>Most important:  Self-initiation and context</li>
+</ul>
+</blockquote>
+<p>[x][<a href="https://drive.google.com/file/d/0B8zQ4O1-JvDrM3psZXlHOGNUTVU/view?usp=sharing">link</a>] <strong>Oxford, R. and Scarcella, R.</strong> - Second Language Vocabulary Learning Among Adults:  State of hte Art in Vocabulary Instruction</p>
+<blockquote>
+<ul>
+<li>Provides guidance on effective vocabulary learning strategies, but doesn’t offer many sources for their assertions</li>
+<li>Suggests that it is helpful to learn “themes” or “semantic groupings” of words together, but should be cautious to not teach words that are TOO related together (p9)</li>
+<li>Antonyms often appear in the same contexts, and can confound their acquisition if learned simultaneously</li>
+</ul>
+</blockquote>
+<p>[<a href="https://drive.google.com/file/d/0B8zQ4O1-JvDrZk5hdVVmX2Y2NUU/view?usp=sharing">link</a>] <strong>Atkinson, R. and Paulson, J.</strong> - An approach to the Psychology of Instruction</p>
+<p>[<a href="https://drive.google.com/file/d/0B8zQ4O1-JvDrSXNiNjQxeEhKemM/view?usp=sharing">link</a>] <strong>Atkinson, R.</strong> - Optimizing the Learning of a Second-Language Vocabulary</p>
+<hr>
+<h3 id="context-presentation">Context Presentation</h3>
+<p><em>Folder of papers: <a href="https://drive.google.com/drive/folders/0B_kzRS5tOgsXYVA4QzZrTkF2eW8?usp=sharing">link</a></em></p>
+<p>[x][<a href="https://drive.google.com/file/d/0B_kzRS5tOgsXZmZvalhVcWx3ODQ/view?usp=sharing">link</a>] <strong>Knoop, S. and Wilske, S.</strong> - Wordgap: Automatic Generation of Gap-Filling Vocabulary Exercises for Mobile Learning</p>
+<blockquote>
+<ul>
+<li>Provides succinct explanation on how to implement generation of cloze exercises.</li>
+</ul>
+</blockquote>
+<p>[x][<a href="https://drive.google.com/file/d/0B_kzRS5tOgsXYlFXbXBZOVpEQzg/view?usp=sharing">link</a>] <strong>Knoop, S.</strong> - Automatic Generation of Multiple-Choice Cloze Exercises for the Android Smartphone</p>
+<blockquote>
+<ul>
+<li>Example bachelor’s thesis</li>
+<li>Cites papers discussing general vocabulary acquisition (p7)</li>
+<li>Cites papers discussing learning vocabulary in context (p7)</li>
+<li>Cites papers discussing benefits of cloze exercises (p8)</li>
+<li>Discusses good distractors in cloze exercises (p9)</li>
+<li>Lists previous related work (p21)</li>
+<li>Lists useful libraries/tools (p25)</li>
+</ul>
+</blockquote>
+<p>[<a href="https://drive.google.com/file/d/0B8zQ4O1-JvDrZVNiZm1aNllKSk0/view?usp=sharing">link</a>] <strong>Prince, P.</strong> - Second Language Vocabulary Learning:  The Role of Context versus Translations as a Function of Proficiency</p>
+<p>[<a href="https://drive.google.com/file/d/0B8zQ4O1-JvDrU0ExbUtJdEowNHM/view?usp=sharing">link</a>] <strong>Nagy, W.</strong> - On the Role of Context in First- and Second-Language Vocabulary Learning</p>
+<hr>
+<h3 id="scaffolding">Scaffolding</h3>
+<p><em>Folder of papers: <a href="https://drive.google.com/drive/folders/0B8zQ4O1-JvDramZOWmNnalgxLTQ?usp=sharing">link</a></em></p>
+<p><em>More papers: <a href="http://link.springer.com/article/10.1007%2Fs11423-007-9064-3?LI=true">link</a></em></p>
+<p><em>About scaffolding: <a href="http://www.tllg.unisa.edu.au/lib_guide/gllt_ch3_sec6.pdf">link</a></em></p>
+<p>[x][<a href="https://drive.google.com/file/d/0B8zQ4O1-JvDrWk9IaU1aS0dzRkU/view?usp=sharing">link</a>] <strong>Azevedo, et al.</strong> - Adaptive human scaffolding facilitates adolescents’ self-regulated learning with hypermedia</p>
+<blockquote>
+<ul>
+<li>Provides references to several types of scaffolding (p6)</li>
+<li>Describes scaffolding in an experiment, but uses a human tutor to accomplish this.  As a result, this paper may be of limited usefulness</li>
+</ul>
+</blockquote>
+<p>[x][<a href="https://drive.google.com/file/d/0B8zQ4O1-JvDrSHJHd3BhOEthYjA/view?usp=sharing">link</a>] <strong>Wood, D.</strong> - Scaffolding, Contingent Tutoring and Computer-supported Learning</p>
+<blockquote>
+<ul>
+<li>References papers that have applied scaffolding in varied contexts (p2)</li>
+<li>Doesn’t seem to provide any details about implementation, and mostly seems useless</li>
+</ul>
+</blockquote>
+<hr>
+<h3 id="feedback">Feedback</h3>
+<p><em>Folder of papers: <a href="https://drive.google.com/drive/folders/0B8zQ4O1-JvDrYVVJUC14WWF0NGs?usp=sharing">link</a></em></p>
+<p>[x][<a href="https://drive.google.com/file/d/0B8zQ4O1-JvDrTjZsaHY3T1g3bkk/view?usp=sharing">link</a>] <strong>Narciss, S. and Huth, K</strong> - How to design informative tutoring feedback for multi-media learning</p>
+<blockquote>
+<ul>
+<li>Discusses value of feedback in a learning system, but cautions that simply adding more and more feedback does not necessarily lead to better outcomes (p3)</li>
+<li>References detailed description of ‘selection and specification of informative feedback content’ (p6)</li>
+<li>Lists criteria for effect feedback, including: “Do not immediately combine elaborated feedback components with the correct response or solution” (p8-9)</li>
+<li>Serves as a good source for how to think about planning the feedback procedure</li>
+</ul>
+</blockquote>
+<p>[x][<a href="https://drive.google.com/file/d/0B8zQ4O1-JvDrQll6R2o3U0x5YjQ/view?usp=sharing">link</a>] <strong>Clariana, Roy</strong> - A review of multiple-try feedback</p>
+<blockquote>
+<ul>
+<li>Refers to multiple choice questions and the power of multiple-try feedback for them (p7)</li>
+</ul>
+</blockquote>
+<hr>
+<h3 id="ramscar">Ramscar</h3>
+<p><em>Folder of papers: <a href="https://drive.google.com/drive/folders/0B8zQ4O1-JvDrQzM3QV9fY21FZUk?usp=sharing">link</a></em></p>
+<p>[x][<a href="https://drive.google.com/file/d/0B8zQ4O1-JvDrbWRybHp0dU5KanM/view?usp=sharing">link</a>] <strong>Dye, Milin, Futrell, &amp; Ramscar</strong> - Cute Little Puppies and Nice Cold Beers:  An Information Theoretic Analysis of Prenominal Adjectives</p>
+<blockquote>
+<ul>
+<li>Suggests that it may improve learning to utilize appropriate adjectives in front of nouns to learn</li>
+<li>May also suggest beyond nouns that looking for common preceding words may help learning of succeeding words</li>
+<li>Very new paper, may have to inquire about citing it</li>
+</ul>
+</blockquote>
+<p>[<a href="https://drive.google.com/file/d/0B8zQ4O1-JvDrS25iOFFQUGMweEU/view?usp=sharing">link</a>] <strong>Arnon, I. and Ramscar, M.</strong> - Granularity and the acquisition of grammatical gender:  How order-of-acquisition affects what gets learned</p>
+<p>[<a href="https://drive.google.com/file/d/0B8zQ4O1-JvDrSExTT2JaNDE0dDA/view?usp=sharing">link</a>] <strong>Dye, Milin, Futrell, &amp; Ramscar</strong> - A Functional Theory of Gender Paradigms</p>
+<p>[<a href="https://drive.google.com/file/d/0B8zQ4O1-JvDrcHJDai12aVlOX28/view?usp=sharing">link</a>] <strong>Ramscar, M. and Dye, M. and McCauley, S.</strong> - Expectation and error distribution in language learning:  The curious absence of “mouses” in adult speech</p>
+<p>[<a href="https://drive.google.com/file/d/0B8zQ4O1-JvDrWE9EN2lwS196NWM/view?usp=sharing">link</a>] <strong>Ramscar, M. et al.</strong> - The effects of Feature-Label-Order and Their Implications for Symbolic Learning</p>
+<hr>
+<h3 id="icall">ICALL</h3>
+<p>[<a href="https://drive.google.com/file/d/0B8zQ4O1-JvDrbGJIaE5tM2Z1NW8/view?usp=sharing">link</a>] <strong>Grace, C.</strong> - Retention of Word Meanings Inferred from Context and Sentence-Level Translations: Implications for the Design of Beginning-Level CALL Software</p>
+<blockquote>
+<ul>
+<li>Describes a system that combines presenting words in context to allow users to infer their meaning, along with L1 translations for verification</li>
+<li>Has good results</li>
+</ul>
+</blockquote>
+<p>[x][<a href="https://drive.google.com/file/d/0B8zQ4O1-JvDrdTdfamVFT3FQclU/view?usp=sharing">link</a>] <strong>Meurers, D. and Amaral, A.</strong> - On Using Intelligent Computer-Assisted Language Learning in Real-Life Foreign Language Teaching and Learning</p>
+<blockquote>
+<ul>
+<li>Discusses many common problems with language-learning systems</li>
+<li>Demonstrates a full-fledged language application</li>
+</ul>
+</blockquote>
+<p>[<a href="https://drive.google.com/file/d/0B8zQ4O1-JvDrLXkyM09YOV9hVUU/view?usp=sharing">link</a>] <strong>Graeser, A., et al.</strong> - Intelligent Tutoring Systems with Conversational Dialogue</p>
+<p>[<a href="https://drive.google.com/file/d/0B8zQ4O1-JvDramEwcGxLZHFKbnM/view?usp=sharing">link</a>] <strong>Self, J.</strong> - Bypassing the Intractable Problem of Student Modelling</p>
+<blockquote>
+<ul>
+<li>Suggests that building a student model is of great importance in developing computer tutoring systems</li>
+</ul>
+</blockquote>
+<p>[<a href="https://drive.google.com/file/d/0B8zQ4O1-JvDrT1MyYlVFTDR5UzQ/view?usp=sharing">link</a>] <strong>Chen, C., Lee, H., and Chen, Y</strong> - Personalized e-learning system using Item Response Theory</p>
+<p>[<a href="https://drive.google.com/file/d/0B8zQ4O1-JvDremJVUmdsb3FlVTA/view?usp=sharing">link</a>] <strong>Nerbonne, J.</strong> - Computer-assisted Language Learning and Natural Language Processing</p>
+<p>[<a href="https://drive.google.com/file/d/0B8zQ4O1-JvDra3NXWFhMSlE1dU0/view?usp=sharing">link</a>] <strong>Segler, T., Pain, H., and Sorace, A.</strong> - Second Language Vocabulary Acquisition and Learning Strategies in ICALL Environments</p>
+<blockquote>
+<ul>
+<li>Vocab learning ICALL example</li>
+</ul>
+</blockquote>
+<hr>
+<h3 id="spacing-effect">Spacing Effect</h3>
+<p><em>Folder of papers: <a href="https://drive.google.com/drive/folders/0B8zQ4O1-JvDrVDQ1SGdacXllZXM?usp=sharing">link</a></em></p>
+<p>[<a href="https://drive.google.com/file/d/0B8zQ4O1-JvDrWVhMMDltaFBPam8/view?usp=sharing">link</a>] <strong>Ebbinghaus, H.</strong> - Memory:  A Contribution to Experimental Psychology</p>
+<blockquote>
+<ul>
+<li>Original paper describing the spacing effect</li>
+</ul>
+</blockquote>
+<p>[<a href="https://drive.google.com/file/d/0B8zQ4O1-JvDrcmRxM2xYZVpjak0/view?usp=sharing">link</a>] <strong>Bahrick, P. et al.</strong> - Maintenance of Foreign Language Vocabulary and the Spacing Effect</p>
+<p>[<a href="https://drive.google.com/file/d/0B8zQ4O1-JvDrOHR3b0xQa1lyZzQ/view?usp=sharing">link</a>] <strong>Janiszewski, C. and Noel, H.</strong> - A Meta-Analysis of the Spacing Effect in Verbal Learning:  Implications for Research on Advertising Repetition and Consumer</p>
+<blockquote>
+<ul>
+<li>Spacing effect in advertising</li>
+</ul>
+</blockquote>
+<p>[<a href="https://drive.google.com/file/d/0B8zQ4O1-JvDrem1tcHBmOUtBa3M/view?usp=sharing">link</a>] <strong>Bjork, R. and Allen, T.</strong> - The Spacing Effect:  Consolidation or Differential Encoding?</p>
+<blockquote>
+<ul>
+<li>Suggests that differential encoding is the likely driver of the spacing effect</li>
+</ul>
+</blockquote>
+<p>[<a href="https://drive.google.com/file/d/0B8zQ4O1-JvDrRGZ4Y1BfT25LWFE/view?usp=sharing">link</a>] <strong>Bahrick, H. and Hall, L.</strong> - The importance of retrieval failures to long-term retention:  A metacognitive explanation of the spacing effect</p>
+<blockquote>
+<ul>
+<li>Argues for encoding theory of explaining spacing effect</li>
+</ul>
+</blockquote>
+<p>[<a href="https://drive.google.com/file/d/0B8zQ4O1-JvDrY1htMjFtTGNlbm8/view?usp=sharing">link</a>] <strong>Glenberg, A.</strong> - Component-levels theory of the effects of spacing of repetitions on recall and recognition</p>
+<p>[<a href="https://drive.google.com/file/d/0B8zQ4O1-JvDrclVPSHFFaWxnR28/view?usp=sharing">link</a>] <strong>Bloom, K. and Shuell, T.</strong> - Effects of Massed and Distributed Practice on the Learning and Retention of Second-Language Vocabulary</p>
+<blockquote>
+<ul>
+<li>Example of spacing effect in vocab learning</li>
+</ul>
+</blockquote>
+<p>[<a href="https://drive.google.com/file/d/0B8zQ4O1-JvDrMFNZajFhY3BBQTQ/view?usp=sharing">link</a>] <strong>Rohrer, D. and Taylor, K.</strong> - The Effects of Overlearning and Distributed Practise on the Retention of Mathematics Knowledge</p>
+<blockquote>
+<ul>
+<li>Example of spacing effect in math learning</li>
+</ul>
+</blockquote>
+<p>[<a href="https://drive.google.com/file/d/0B8zQ4O1-JvDrQjVOQ29mQlhDWDg/view?usp=sharing">link</a>] <strong>Greeno, J.</strong> - Conservation of Information-Processing Capacity in Paired-Associate Memorizing</p>
+<blockquote>
+<ul>
+<li>Discusses “diminished processing” theory of spacing effect</li>
+</ul>
+</blockquote>
+<p>[<a href="https://drive.google.com/file/d/0B8zQ4O1-JvDrN1cxcWtNMEZTWnc/view?usp=sharing">link</a>] <strong>Hintzman, D. et al.</strong> - Voluntary attention and the spacing effect</p>
+<blockquote>
+<ul>
+<li>Discusses “diminished processing” theory of spacing effect</li>
+</ul>
+</blockquote>
+<p>[<a href="https://drive.google.com/file/d/0B8zQ4O1-JvDrblMyQmlWWFdQTlk/view?usp=sharing">link</a>] <strong>Melton, A.</strong> - The Situation with Respect to the Spacing of Repetitions and Memory</p>
+<blockquote>
+<ul>
+<li>Discusses “variable encoding” theory of spacing effect</li>
+</ul>
+</blockquote>
+<p>[<a href="https://drive.google.com/file/d/0B8zQ4O1-JvDrdFBOdVRQaENLSEU/view?usp=sharing">link</a>] <strong>Cepeda, N. et al.</strong> - Optimizing Distributed Practice:  Theoretical Analysis and Practical Implications</p>
+<blockquote>
+<ul>
+<li>Provides evidence that too much spacing has negative consequences</li>
+</ul>
+</blockquote>
+<hr>
+<h3 id="machine-learning">Machine Learning</h3>
+<p><em>Folder of papers: <a href="https://drive.google.com/drive/folders/0B8zQ4O1-JvDrQ3pLYzVHS3l5cnc?usp=sharing">link</a></em></p>
+<p>[<a href="https://drive.google.com/file/d/0B8zQ4O1-JvDranNzWi1pbjJ4WUU/view?usp=sharing">link</a>] <strong>James, G. et al.</strong> - An Introduction to Statistical Learning, with Applications in R</p>
+<blockquote>
+<ul>
+<li>Basics of machine/statistical learning</li>
+</ul>
+</blockquote>
+<p>[<a href="https://drive.google.com/file/d/0B8zQ4O1-JvDrd2NhaDNkVUx5SGs/view?usp=sharing">link</a>] <strong>MacKay, D.</strong> - Information Theory, Inference, and Learning Algorithms</p>
+<p>[<a href="https://drive.google.com/file/d/0B8zQ4O1-JvDralpQanZCOHVWalE/view?usp=sharing">link</a>] <strong>Hastie, T., Tibshirani, R., and Friedman, J.</strong> - The Elements of Statistical Learning:  Data Mining, Inference, and Prediction</p>
+<p><strong>Blogs:</strong><br>
+[<a href="http://neuralnetworksanddeeplearning.com/chap1.html">link</a>] Neural networks and deep learning</p>
+<hr>
+<h3 id="miscellaneous">Miscellaneous</h3>
+<p><em>Folder of papers:  <a href="https://drive.google.com/drive/folders/0B8zQ4O1-JvDrakZSWFpySU1VaDg?usp=sharing">link</a></em></p>
+<p>[x][<a href="https://drive.google.com/file/d/0B8zQ4O1-JvDrSXFKSGtTVE1WMmM/view?usp=sharing">link</a>] <strong>Gais, Lucas, and Born</strong> - Sleep after learning aids memory recall</p>
+<blockquote>
+<ul>
+<li>Provides evidence of the positive effects of sleep more closely following a learning session</li>
+</ul>
+</blockquote>
+<p>[<a href="https://drive.google.com/file/d/0B8zQ4O1-JvDrSFRRa19xR0NCMWc/view?usp=sharing">link</a>] <strong>Rescorla, R. and Wagner, A.</strong> - A Theory of Pavlovian Conditioning:  Variations in the Effectiveness of Reinforcement and Nonreinforcement</p>
+<p>[<a href="https://drive.google.com/file/d/0B8zQ4O1-JvDrbnRRblRac1djX2M/view?usp=sharing">link</a>] <strong>Carrier, M. and Pashler, H.</strong> - The influence of retrieval on retention</p>
+<p>[<a href="https://drive.google.com/file/d/0B8zQ4O1-JvDrYzdRS1RWWTFEWFk/view?usp=sharing">link</a>] <strong>Ullman, M.</strong> - Contributions of memory circuits to language:  the declarative/procedural model</p>
+<blockquote>
+<ul>
+<li>Explains declarative and procedural memory</li>
+</ul>
+</blockquote>
+<p>[<a href="https://drive.google.com/file/d/0B8zQ4O1-JvDrdHdsVGRVdDNyMEU/view?usp=sharing">link</a>] <strong>Anderson, J., Fincham, J., and Douglass, S.</strong> - Practice and Retention:  A Unifying Analysis</p>
+<blockquote>
+<ul>
+<li>Claims that the rate of forgetting slows between study sessions</li>
+</ul>
+</blockquote>
+<hr>
+<blockquote>
+<p>Written with <a href="https://stackedit.io/">StackEdit</a>.</p>
+</blockquote>
+</div>
+</body>
+
+</html>
