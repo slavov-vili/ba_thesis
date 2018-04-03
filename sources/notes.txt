@@ -1,0 +1,179 @@
+anderson_bothell_2004
+  - C: Source for describing the “ACT-R cognitive modelling architecture”
+
+  - V: 
+
+
+
+anderson_schooler_1991
+  - C: Basis for Pavlik & Anderson models
+
+  - V: 
+
+
+
+koelewijn_2010
+  - C: Cites many articles establishing the background of learning, and computer learning specifically (p5)
+  - C: Is very similar to the van Thiel paper
+  - C: Tests the user’s reaction time right away to determine baseline reaction time value individually
+  - C: Also uses the median of all initial trials as an indicator of the initial alpha value, rather than setting a fixed alpha (p13), but has middling results (p33).
+  - C: Compares directly with the van Thiel paper
+  - C: Contains both laboratory and real-world experiments and results
+  - C: In addition to using initial tested reaction time, base reaction time value (f) can also be optimized for by finding the greatest standard deviation of activation (alpha). (p21)
+  - C: Warns about overlearning (p36)
+
+  - V: 
+
+
+
+lindsey_2009
+  - C: Example for balancing spacing and testing effects
+
+  - V: 
+
+
+
+lindsey_2014
+  - C: Doesn’t contain much useful information not otherwise discussed in other papers
+
+  - V: 
+
+
+
+nijboer_2011
+  - C: Masters thesis
+  - C: Contains good explanation of how to adjust alpha values based on reaction times (p20-21)
+  - C: Contains graphs that demonstrate how spacing affects activation in ACT-R (p18)
+  - C: Contains formulas for estimated reading times of sentences (p23, p51)
+  - C: Describes improvements to the “psychological time” explanation for a slowed rate of forgetting between sessions (p27-28)
+
+  - V: 
+
+
+
+pavlik_2006
+  - C: Source for beta-parameter extension to activation formula
+
+  - V: 
+
+
+
+pavlik_anderson_2005
+  - C: Paper that serves as basis for most other papers linked here for learning scheduling
+  - C: Mentions other possible models for modeling learning/forgetting other than the power-based function used by all of these papers, and provides their rationale for choosing a power function (p3)
+  - C: Contains interesting figures demonstrating the spacing effect (p7)
+  - C: Describes a formula for assigning a probability of recall based on activation (p10)
+  - C: Describes scaling of the passage of time outside an experiment as “psychological time” (p10-11)
+  - C: Theorizes about biological explanations for the observed learning/forgetting processes
+
+  - V: 
+
+
+
+pavlik_anderson_2008
+  - C: Serves as basis for most other papers linked here for learning scheduling
+  - C: Contents are mostly covered by other papers that heavily refer to it
+
+  - V: 
+
+
+
+raaijmakers_2003
+  - C: Describes the SAM model
+
+  - V: 
+
+
+
+ramscar_arnon_2011
+  - C:
+
+  - V: 
+
+
+
+ramscap_et_al_2010
+  - C: 
+
+  - V: 
+
+
+
+ramscar_et_al_2013
+  - C: 
+
+  - V: 
+
+
+
+ramscar_et_al_2016
+  - C: 
+
+  - V: 
+
+
+
+ramscar_et_al_2017
+  - C: Suggests that it may improve learning to utilize appropriate adjectives in front of nouns to learn
+  - C: May also suggest beyond nouns that looking for common preceding words may help learning of succeeding words
+  - C: Very new paper, may have to inquire about citing it
+
+  - V: 
+
+
+
+sense_2015
+  - C: Includes formulas for activation and decay
+  - C: Includes flowchart for ideal item selection
+
+  - V: 
+
+
+
+sense_2016
+  - C: Cites many articles describing the success of the spacing and testing effects (p2-3)
+  - C: Is very similar to above article
+
+  - V: 
+
+
+
+settles_meeder_2016
+  - C: Paper from Duolingo
+  - C: Contains a different method of determining the probability of recall for a word as a function of time
+  - C: Serves as a look into a real-world application of these methods on a large scale
+  - C: Includes link to code (p9)
+
+  - V: 
+
+
+
+steeter
+  - C: Paper from Duolingo
+  - C: Really dense math, difficult to follow
+
+  - V: 
+
+
+
+van_rijn_van_maanen_van_woudenberg_2009
+  - C: Claims that the Pavlik/Anderson model is based on the work of Anderson/Schooler (1991)
+  - C: Describes using new encounters to adjust activation by a fixed amount in the correct direction, rather than doing a hard recalculation, due to noise being large. (p3-4 - Subsymbolic Model Tracing)
+  - C: Only adjusts activation based on reaction time if the difference between expected and observed reaction time is >0.5s (p4 - Algorithm 4)
+
+  - V: 
+
+
+
+van_thiel_2010
+  - C: Contains a lot of formulas for optimizing predicted activation based on reaction times
+  - C: Serves as a strong basis for any experiments employing the measuring of reaction times
+
+  - V: 
+
+
+
+van_woudenberg_2008
+  - C: Uses very basic formula for adjusting alpha based on reaction times
+
+  - V: 
