@@ -1,0 +1,50 @@
+// NEXT PAPER: Anderson_Schooler_1991
+// NEXT PAPER: Raaijmakers_2003
+
+
+
+pavlik_anderson_2005
+0. Abstract
+    - investigates effects of practice and spacing on retention of Japanese-English vocabulary pairs
+    - takes into account rate of decay
+    - compared to the Raaijmakers_2003 model
+1. Introduction
+    - practice and forgetting
+    - how does repetition improve recall
+    - how does increased temporal spacing improve recall
+    - how does increased retention interval improve recall
+    - explains Contextual Fluctuation Theory (Raaijmakers' theory):
+        * practice   = encoding data with context
+        * forgetting = fluctuation in context
+        * spacing    = prevents overlap
+    - suggests Wickens_1999 for important parts of forgetting function
+    - rate of forgetting decreases with time
+2. Experiment
+    - deduced that forgetting is slower after a series of spaced presentations
+    - deduced that effects of spacing are greater when there are more practice trials
+4. Discussion of model and theory
+    - mentions Anderson_Schooler_1991, because attempts to extend ACT-R (Adaptive Character of Thought-Rational) to include spacing effect
+5. General discussion
+    - wide spacing of practice beneficial with more practice
+    - people forget less when presentation is spaced
+    - extends ACT-R activation by adding decay
+
+
+
+pavlik_anderson_2008
+0. Abstract
+    - how to schedule practice to maximize learning and retention
+1. Introduction
+    - spacing is important to take into account when learning
+    - too wide spacing can result in slower learning, because of forgetting
+    - discusses a modeling approach which supposedly tries to create or adjust a practice schedule
+2. Atkinson's experiment
+    - he says that once a pair has been learned, it cannot be forgotten
+4. The Experiment
+    - mentions pavlik_2007 when comparing conditions with maximal spacing
+5. Experiment Design
+    - describes the three algorithms which were tested
+10. Results and Discussion
+    - turns out item betas don't affect learning that much
+12. General discussion
+    - still unknwon how much spacing is best
