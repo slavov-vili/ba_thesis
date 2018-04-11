@@ -1,4 +1,4 @@
-// NEXT PAPER: Anderson_Schooler_1991
+// NEXT PAPER: Pavlik_2007
 // NEXT PAPER: Raaijmakers_2003
 
 
@@ -31,6 +31,20 @@ pavlik_anderson_2005
 
 
 
+anderson_schooler_1991
+1. Instroduction
+    - aim to see if memory performs well when retrieving past information
+    - examine availability of memory given past use (how often, how long ago, etc.)
+    - examine probability that sth is needed given past use (how often, how long ago, etc.)
+7. Environmental Explanation
+    - no successful mechanistic explanations for practice, retention and the spacing effect
+    - need probability, because memories vary in when they are most needed
+    - the memory system tries to only get the most needed memories
+15. Summary and Conclusions
+    - sets the basic formula for studying which takes into account the spacing effect
+
+
+
 pavlik_anderson_2008
 0. Abstract
     - how to schedule practice to maximize learning and retention
@@ -41,7 +55,7 @@ pavlik_anderson_2008
 2. Atkinson's experiment
     - he says that once a pair has been learned, it cannot be forgotten
 4. The Experiment
-    - mentions pavlik_2007 when comparing conditions with maximal spacing
+    - mentions Pavlik_2007 when comparing conditions with maximal spacing
 5. Experiment Design
     - describes the three algorithms which were tested
 10. Results and Discussion
