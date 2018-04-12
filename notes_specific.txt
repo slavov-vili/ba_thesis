@@ -1,4 +1,3 @@
-// NEXT PAPER: Pavlik_2007
 // NEXT PAPER: Raaijmakers_2003
 
 
@@ -62,3 +61,21 @@ pavlik_anderson_2008
     - turns out item betas don't affect learning that much
 12. General discussion
     - still unknwon how much spacing is best
+
+
+
+Pavlik_2007
+0. Abstract
+    - tries to apply test and study practice in order to improve learning
+1. Introduction
+    - pavlik_anderson_2005 expanded the ACT-R model to take into account spacing, but did not account for the difference between study practice and test practice
+    - studying and testing both contribute to learning, but what are the differences ?
+    - amount of learning is unrelated to the time it takes to recall
+    - two spaced out study sessions are better than one long one
+    - is one type of studying better because it provides better encoding or because it prevents forgetting ?
+4. Memory model
+    - ACT-R captures the recency and frequency effects (stuff is better remember the more recently/frequently it is encountered)
+    - the pavlik_anderson_2005 model extends ACT-R to take into account spacing, but does not distinguish between study and test practice nor does it take into account the duration of the study session
+6. General discussion
+    - failed test trials do not contribute to learning
+    - forgetting rate for new learning is controlled by interaction with prior learning
