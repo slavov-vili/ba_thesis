@@ -1,4 +1,5 @@
-// NEXT PAPER: Raaijmakers_2003
+// NEXT PAPER: van_thiel_2010
+// NEXT PAPER: van_woundenberg_2009
 
 
 
@@ -27,6 +28,24 @@ pavlik_anderson_2005
     - wide spacing of practice beneficial with more practice
     - people forget less when presentation is spaced
     - extends ACT-R activation by adding decay
+
+
+
+raaijmakers_2003
+0. Abstract
+    - presents a new model for spacing based on the SAM model of memory development
+    - assumes that on a second presentation, more info is added to an item if the memory image for the item is retrieved
+      if the memory is not retrieved, a new image is created
+1. Introduction
+    - repetition increases performance, but how ?
+    - acknowledges the spacing effect
+2. Summary of SAM
+    - assumes that memory is stored as images and recall depends on the strengths of the cues
+3. Glenberg's Component Levels Theory
+    - words and also their context is stored in memory traces
+    - context drifts off with each presentation
+    - more presentations = more contextual, structural and descriptive components stored in memory
+    - performance also depends on cues at time of retrieval
 
 
 
@@ -64,11 +83,11 @@ pavlik_anderson_2008
 
 
 
-Pavlik_2007
+pavlik_2007
 0. Abstract
     - tries to apply test and study practice in order to improve learning
 1. Introduction
-    - pavlik_anderson_2005 expanded the ACT-R model to take into account spacing, but did not account for the difference between study practice and test practice
+    - Pavlik_Anderson_2005 expanded the ACT-R model to take into account spacing, but did not account for the difference between study practice and test practice
     - studying and testing both contribute to learning, but what are the differences ?
     - amount of learning is unrelated to the time it takes to recall
     - two spaced out study sessions are better than one long one
@@ -79,3 +98,11 @@ Pavlik_2007
 6. General discussion
     - failed test trials do not contribute to learning
     - forgetting rate for new learning is controlled by interaction with prior learning
+
+
+
+nijboer_2011
+0. Abstract
+    - tests model in real conditions
+    - proves that schedule using a cognitive model improves performace
+2.
