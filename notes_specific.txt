@@ -1,4 +1,4 @@
-// NEXT PAPER: van_woundenberg_2009
+// NEXT PAPER: 
 
 
 
@@ -115,4 +115,12 @@ van_thiel_2010
 1. Introduction
     - ISI(Inter-Study Interval) = interval between study sessions of same material
     - RI(Retention Interval)    = time separating last study session and test
+
+
+
+van_woundenberg_2009
+0. Abstract
+    - tries to invent a learning model which works with shorter learning sessions and short-term retention
+4. Discussion
+    - suggests fixed learning time and # of word pairs to be learned since this affects the number of rehearsals
     - 
