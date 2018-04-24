@@ -1,4 +1,3 @@
-// NEXT PAPER: van_thiel_2010
 // NEXT PAPER: van_woundenberg_2009
 
 
@@ -79,7 +78,7 @@ pavlik_anderson_2008
 10. Results and Discussion
     - turns out item betas don't affect learning that much
 12. General discussion
-    - still unknwon how much spacing is best
+    - still unknown how much spacing is best
 
 
 
@@ -104,5 +103,16 @@ pavlik_2007
 nijboer_2011
 0. Abstract
     - tests model in real conditions
-    - proves that schedule using a cognitive model improves performace
+    - proves that schedule using a cognitive model improves performance
 2.
+
+
+
+van_thiel_2010
+0. Abstract
+    - adaptive model which takes into account primacy, recency and spacing
+    - based on Van_Woundenberg_2008 and Pavlik_and_Anderson_2008
+1. Introduction
+    - ISI(Inter-Study Interval) = interval between study sessions of same material
+    - RI(Retention Interval)    = time separating last study session and test
+    - 
