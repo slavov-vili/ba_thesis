@@ -123,4 +123,14 @@ van_woundenberg_2009
     - tries to invent a learning model which works with shorter learning sessions and short-term retention
 4. Discussion
     - suggests fixed learning time and # of word pairs to be learned since this affects the number of rehearsals
-    - 
+
+
+
+van_rijn_van_maanen_van_woudenberg_2009
+0. Abstract
+    - spacing effect = larger intervals between study sessions
+    - testing effect = short enough intervals in order to be able to recall data
+1. Introduction
+    - tries to settle the conflicts between the spacing and testing effects
+    - research usually tries to reach best performance in long-term remembering
+    - this paper tries to figure out a situation applicable in real life
