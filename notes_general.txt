@@ -33,13 +33,6 @@ lindsey_2009
 
 
 
-lindsey_2014
-  - C: Doesn’t contain much useful information not otherwise discussed in other papers
-
-  - V: 
-
-
-
 nijboer_2011
   - C: Masters thesis
   - C: Contains good explanation of how to adjust alpha values based on reaction times (p20-21)

@@ -1,4 +1,8 @@
-// NEXT PAPER: 
+// NEXT PAPER: anderson_bothell_2004
+// NEXT PAPER: koelewijn_2010
+// NEXT PAPER: lindsey_2009
+// NEXT PAPER: ramscar_papers
+// NEXT PAPER: sense_papers
 
 
 
@@ -134,3 +138,15 @@ van_rijn_van_maanen_van_woudenberg_2009
     - tries to settle the conflicts between the spacing and testing effects
     - research usually tries to reach best performance in long-term remembering
     - this paper tries to figure out a situation applicable in real life
+
+
+
+settles_meeder_2016
+- HLR model: combines psycholinguistics with machine learning
+- Just a machine learning algorithm that tries to make a schedule based on probability of recall
+
+
+
+ramscar_et_al_2017
+0. Abstract
+    - 
