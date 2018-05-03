@@ -149,4 +149,7 @@ settles_meeder_2016
 
 ramscar_et_al_2017
 0. Abstract
-    - 
+    - German prepositions provide disambiguation
+    - for English its adjectives
+    - so German has more diverse nouns
+    - and English has more adjectives
