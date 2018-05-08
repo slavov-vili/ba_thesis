@@ -153,3 +153,15 @@ ramscar_et_al_2017
     - for English its adjectives
     - so German has more diverse nouns
     - and English has more adjectives
+
+
+
+ramscar_et_al_2016
+0. Abstract
+    - Tries to find the purpose of gender in German
+3. Noun Class and Entropy Reduction
+    - More plural nouns than singular ones, because no gender marking
+    - Semantically similar nouns with ...
+        * high frequency are spread     across genders
+        * low  frequency are concentrated in 1 gender
+    - 
