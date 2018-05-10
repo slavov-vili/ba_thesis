@@ -1,7 +1,7 @@
 from bunch import Bunch
 import datetime
 import matplotlib.pyplot as plt
-import numpy as np
+import numpy             as np
 import random
 
 
@@ -68,23 +68,73 @@ def learn(items, items_info):
     Simulates learning process by adding new encounters of words.
     """
     
-    # TODO: implement
-    # get next word
-    # add encounter to its list
-    # try to guess it
+    # TODO: 2 sessions, separated by 24 hours
+    # TODO: each session lasts 30 mins
+    # TODO: each encounter lasts between 0 and 15 seconds
+
+    # store time of the current encounter
+    cur_time = datetime.datetime.now()
+    # add 15 seconds to the current time (useful when checking if below threshold)
+    cur_time = cur_time.timedelta(seconds=15)
+    # the index of the next NEW item which needs to be learned
+    next_new_item_idx = 0
+
+    # get the next item to be presented
+    item, item_act, next_new_item_idx = get_next_item(items, next_new_item_idx, items_info, cur_time)
+    # calculate the item's recall probability
+    item_rec = calc_recall_prob(item_act)
+    # try to guess the item
+    guessed = guess_item(item_rec)
+
     # adjust values depending on outcome
-    # if incorrect - increase counter
+    if guessed:
+        items_info[item].alpha -= 0.001
+    else:
+        items_info[item].alpha += 0.001
+        items_info[item].incorrect++
+
+    # add the current encounter to the item's encounter list
+    items_info[item].encounters.append(cur_time)
     return
 
 
 
-def get_next_word(items, items_info):
+def get_next_item(items, next_new_item_idx, items_info, time):
     """
-    Returns the next item to be presented based on activation and probability of recall.
+    Returns the next item to be presented based on activation.
     """
 
-    # TODO: implement
-    return next_item
+    # maps an item to its activation
+    item_to_act = {}
+    # calculate each item's activation
+    for item in items:
+        item_to_act[item] = calc_activation(item, items_info, time)
+
+    # stores all items below the retention threshold
+    endangered_items = []
+    # for each item and its activation
+    for k,v in item_to_act.items():
+        # if the item's activation is BELOW the forgetting threshold
+        if v < model_params["tau"]:
+            # add it to the endangered list
+            endangered_items.append(k)
+
+    # if there ARE items BELOW the threshold
+    if len(endangered_items) != 0:
+        # find the endangered item with lowest activation
+        next_item = min(endangered_items, key=item_to_act.get)
+    # if ALL items are ABOVE the threshold
+    # AND there ARE NEW items available
+    elif next_new_item_idx < len(items):
+        # select the next new item to be presented
+        next_item = items[next_new_item_idx]
+    # if NO items BELOW treshold
+    # AND NO NEW items
+    else:
+        # find the item with the lowest activation
+        next_item = min(item_to_act, key=item_to_act.get)
+
+    return next_item, item_to_act[next_item], next_new_item_idx+1
 
 
 
@@ -131,7 +181,7 @@ def calc_recall_prob(activation):
 
 
 
-def guess_word(recall_prob):
+def guess_item(recall_prob):
     """
     Guesses the word given a recall probability.
 
@@ -139,4 +189,4 @@ def guess_word(recall_prob):
     recall_prob -- the probablity that the given word can be recalled
     """
 
-    return "Correct" if random.random() < recall_prob else "Incorrect"
+    return True if random.random() < recall_prob else False
