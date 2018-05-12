@@ -119,10 +119,10 @@ def learn(items, items_info, sesh_count, sesh_length):
             # adjust values depending on outcome
             if guessed:
                 if items_info[item].alpha_model > model_params["alpha_min"]:
-                    items_info[item].alpha_model -= 0.08
+                    items_info[item].alpha_model -= 0.05
             else:
                 if items_info[item].alpha_model < model_params["alpha_max"]:
-                    items_info[item].alpha_model += 0.08
+                    items_info[item].alpha_model += 0.05
                 items_info[item].incorrect += 1
 
             # increment the current time to account for the length of the encounter
@@ -140,9 +140,6 @@ def learn(items, items_info, sesh_count, sesh_length):
         print("Alpha:", items_info[item].alpha_model)
         print("Encounters:", len(items_info[item].encounters))
         print("Incorrect:", items_info[item].incorrect)
-
-    print("Cur time:", cur_time)
-    print("Learn start:", learn_start)
     return learn_start
 
 
@@ -259,20 +256,15 @@ def calc_decay(item, items_info, enc_idx):
     enc_idx    -- index of the encounter, at which the decay should be calculated
     """
 
-    # stores the item's alpha value
-    alpha = 0.0
     # get the item's activation at the encounter
     item_act = items_info[item].encounters[enc_idx].activation
     # if the activation is -infinity (the item hasn't been encountered before)
     if np.isneginf(item_act):
         # the alpha is the default value
-        alpha = model_params["alpha_d"]
+        d = model_params["alpha_d"]
     else:
-        # the alpha is the item's alpha
-        alpha = items_info[item].alpha_real
-
-    # calculate the decay
-    d = model_params["c"] * np.exp(item_act) + alpha
+        # calculate the decay
+        d = model_params["c"] * np.exp(item_act) + items_info[item].alpha_real
 
     return d
 
@@ -286,7 +278,7 @@ def calc_recall_prob(activation):
     activation -- the activation of the item, whose recall probability is being calculated.
     """
 
-    Pr = np.divide(1, 1 + np.exp( np.divide(model_params["tau"] - activation, model_params["s"])))
+    Pr = 1 / (1 + np.exp(((model_params["tau"] - activation) / model_params["s"])))
     return Pr
 
 
