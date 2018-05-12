@@ -27,7 +27,8 @@ for item in items:
 
 def print_item_info(item):
     print("Item:", item)
-    print("Alpha:", items_info[item].alpha)
+    print("Real Alpha:", items_info[item].alpha_real)
+    print("Model Alpha:", items_info[item].alpha_model)
     print("Encounters(", len(items_info[item].encounters),"):")
     for i, enc in enumerate(items_info[item].encounters):
         print("Encounter", i, "time:", enc.time)
@@ -45,16 +46,28 @@ def graph_item_activation(item, items_info, learn_start):
     learn_start -- the time when the learning process started
     """
 
+    plot_bounds = (0, 6000)
+    first_seen = (items_info[item].encounters[0].time - learn_start).total_seconds()
     x = []
     y = []
+    # for each second where the item was seen
+    for i in range(int(first_seen), plot_bounds[1]):
+        cur_act = calc_activation(item, items_info, (learn_start + datetime.timedelta(seconds=i)))
+        x.append(i)
+        y.append(cur_act)
 
-    # for each of the item's encounters
-    for enc in items_info[item].encounters:
-        # Calculate how far into the session the encounter happened
-        time_diff = (enc.time - learn_start).total_seconds()
-        x.append(time_diff)
-        y.append(enc.activation)
-    plt.plot(x, y)
+    # plot the recall threshold
+    plt.plot([plot_bounds[0], plot_bounds[1]],[0.8, 0.8], color='k', linestyle='--')
+
+    # plot the actual data
+    plt.plot(x, y, color='g')
+
+    # Set plot information
+    plt.title("Plot for \'" + item + "\'")
+    plt.xlabel("Elapsed Session Time (seconds)")
+    plt.ylabel("Item Activation")
+    plt.axis([plot_bounds[0], plot_bounds[1],-1.5,1.5])
+    # show the plot
     plt.show()
     return
 
@@ -105,11 +118,11 @@ def learn(items, items_info, sesh_count, sesh_length):
 
             # adjust values depending on outcome
             if guessed:
-                if items_info[item].alpha > model_params["alpha_min"]:
-                    items_info[item].alpha -= 0.05
+                if items_info[item].alpha_model > model_params["alpha_min"]:
+                    items_info[item].alpha_model -= 0.08
             else:
-                if items_info[item].alpha < model_params["alpha_max"]:
-                    items_info[item].alpha += 0.05
+                if items_info[item].alpha_model < model_params["alpha_max"]:
+                    items_info[item].alpha_model += 0.08
                 items_info[item].incorrect += 1
 
             # increment the current time to account for the length of the encounter
@@ -124,7 +137,7 @@ def learn(items, items_info, sesh_count, sesh_length):
     print("\nFinal results:")
     for item in items:
         print("Item:'", item, "'")
-        print("Alpha:", items_info[item].alpha)
+        print("Alpha:", items_info[item].alpha_model)
         print("Encounters:", len(items_info[item].encounters))
         print("Incorrect:", items_info[item].incorrect)
 
@@ -144,10 +157,9 @@ def get_next_item(items, next_new_item_idx, items_info, time):
 
     # maps an item to its activation
     item_to_act = {}
-    # calculate each SEEN item's activation
+    # calculate each SEEN items' activations
     for item in items[:next_new_item_idx_inc]:
         item_to_act[item] = calc_activation(item, items_info, time)
-    # print("Items seen:", len(item_to_act))
 
     # stores all items below the retention threshold
     endangered_items = []
@@ -156,9 +168,6 @@ def get_next_item(items, next_new_item_idx, items_info, time):
     for k,v in item_to_act.items():
         # calculate the item's probability of recall
         item_rec_prob = calc_recall_prob(v)
-        # print("Item:", k)
-        # print("Activation:",v)
-        # print("Recall prob:", item_rec_prob)
         # if the item's probability of recall is BELOW the forgetting threshold
         if v < model_params["tau"]:
             # add it to the endangered list
@@ -166,14 +175,12 @@ def get_next_item(items, next_new_item_idx, items_info, time):
 
     # if there ARE items BELOW the threshold
     if len(endangered_items) != 0:
-        # print("Showing item BELOW threshold!")
         # find the endangered item with lowest activation
         next_item = min(endangered_items, key=item_to_act.get)
         print("Item BELOW threshold!")
     # if ALL items are ABOVE the threshold
     # AND there ARE NEW items available
     elif next_new_item_idx_inc < len(items):
-        # print("Showing NEW item")
         # select the next new item to be presented
         next_item = items[next_new_item_idx_inc]
         # increment the index of the next new item
@@ -182,7 +189,6 @@ def get_next_item(items, next_new_item_idx, items_info, time):
     # if NO items BELOW treshold
     # AND NO NEW items
     else:
-        # print("Showing OLD item")
         # find the item with the lowest activation
         next_item = min(item_to_act, key=item_to_act.get)
         print("Item has LOWEST activation!")
@@ -206,22 +212,22 @@ def calc_activation(item, items_info, cur_time):
 
     encounters = list(items_info[item].encounters)
     # stores the index of the previous encounter
-    prev_enc_idx = -1
+    last_enc_idx = -1
     # for each encounter
     for enc_idx, enc_bunch in enumerate(encounters):
         # if the encounter was BEFORE the current time
         if enc_bunch.time < cur_time:
             # store the encounter's index
-            prev_enc_idx = enc_idx
+            last_enc_idx = enc_idx
 
     # if there are NO previous encounters
-    if prev_enc_idx == -1:
+    if last_enc_idx == -1:
         m = np.NINF
     else:
         # stores the sum of time differences
         sum = 0.0
         # take only encounters which occurred before this one
-        encounters = encounters[:(prev_enc_idx+1)]
+        encounters = encounters[:(last_enc_idx+1)]
         # for each previous encounter
         for enc_idx, enc_bunch in enumerate(encounters):
             # calculate the time used in the activation formula
@@ -263,7 +269,7 @@ def calc_decay(item, items_info, enc_idx):
         alpha = model_params["alpha_d"]
     else:
         # the alpha is the item's alpha
-        alpha = items_info[item].alpha
+        alpha = items_info[item].alpha_real
 
     # calculate the decay
     d = model_params["c"] * np.exp(item_act) + alpha
@@ -293,4 +299,4 @@ def guess_item(recall_prob):
     recall_prob -- the probablity that the given word can be recalled
     """
 
-    return True if random.random() < recall_prob else False
+    return True if random.uniform(0,1) < recall_prob else False
