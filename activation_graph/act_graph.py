@@ -28,8 +28,6 @@ for item in items:
 
 
 
-
-
 def learn(items, items_info, sesh_count, sesh_length):
     """
     Simulates learning process by adding new encounters of words.
@@ -56,28 +54,30 @@ def learn(items, items_info, sesh_count, sesh_length):
         while cur_time <= (sesh_start + datetime.timedelta(seconds=sesh_length)):
             # get the next item to be presented
             item, item_act, next_new_item_idx = get_next_item(items, next_new_item_idx, items_info, cur_time)
-            # print("Encountered '", item, "' at", cur_time)
-            # print("Encounters:", len(items_info[item].encounters))
-            # print("Activation:", item_act)
+            print("\nEncountered '", item, "' at", cur_time)
+            print("Encounters:", len(items_info[item].encounters))
+            print("Activation:", item_act)
 
             # calculate the item's recall probability
             item_rec = calc_recall_prob(item_act)
-            # print("Recall prob:", item_rec)
+            print("Recall prob:", item_rec)
             # try to guess the item
             guessed = guess_item(item_rec)
-            # print("Guessed item:", guessed)
+            print("Guessed item:", guessed)
 
+            # add the current encounter to the item's encounter list
+            items_info[item].encounters.append(Bunch(time=cur_time, activation=item_act, alpha=items_info[item].alpha))
+
+            # TODO: adjust alpha based on prob_recall & guessed
             # adjust values depending on outcome
             if guessed:
                 if items_info[item].alpha > model_params["alpha_min"]:
-                    items_info[item].alpha -= 0.005
+                    items_info[item].alpha -= 0.05
             else:
                 if items_info[item].alpha < model_params["alpha_max"]:
-                    items_info[item].alpha += 0.005
+                    items_info[item].alpha += 0.05
                 items_info[item].incorrect += 1
 
-            # add the current encounter to the item's encounter list
-            items_info[item].encounters.append(cur_time)
             # increment the current time to account for the length of the encounter
             cur_time += datetime.timedelta(seconds=random.randint(3, 15))
 
@@ -97,22 +97,24 @@ def learn(items, items_info, sesh_count, sesh_length):
 
 
 
-# TODO: fix this, not working for some reason
-# NOTE: maybe problem is in correction of alphas ?
 def get_next_item(items, next_new_item_idx, items_info, time):
     """
     Returns the next item to be presented based on activation.
     """
 
+    # store the index of the next new item
+    next_new_item_idx_inc = next_new_item_idx
+
     # maps an item to its activation
     item_to_act = {}
-    # calculate each item's activation
-    for item in items[:next_new_item_idx]:
+    # calculate each SEEN item's activation
+    for item in items[:next_new_item_idx_inc]:
         item_to_act[item] = calc_activation(item, items_info, time)
-    print("Items seen:", len(item_to_act))
+    # print("Items seen:", len(item_to_act))
 
     # stores all items below the retention threshold
     endangered_items = []
+    print("\nFinding next word:")
     # for each item and its activation
     for k,v in item_to_act.items():
         # calculate the item's probability of recall
@@ -121,31 +123,36 @@ def get_next_item(items, next_new_item_idx, items_info, time):
         # print("Activation:",v)
         # print("Recall prob:", item_rec_prob)
         # if the item's probability of recall is BELOW the forgetting threshold
-        if item_rec_prob < model_params["tau"]:
+        if v < model_params["tau"]:
             # add it to the endangered list
             endangered_items.append(k)
 
     # if there ARE items BELOW the threshold
     if len(endangered_items) != 0:
-        # print("Yes, endangered!")
+        # print("Showing item BELOW threshold!")
         # find the endangered item with lowest activation
         next_item = min(endangered_items, key=item_to_act.get)
+        print("Item BELOW threshold!")
     # if ALL items are ABOVE the threshold
     # AND there ARE NEW items available
-    elif next_new_item_idx < len(items):
-        # print("New item")
+    elif next_new_item_idx_inc < len(items):
+        # print("Showing NEW item")
         # select the next new item to be presented
-        next_item = items[next_new_item_idx]
+        next_item = items[next_new_item_idx_inc]
+        # increment the index of the next new item
+        next_new_item_idx_inc += 1
+        print("Item is NEW word!")
     # if NO items BELOW treshold
     # AND NO NEW items
     else:
-        # print("Old, but old")
+        # print("Showing OLD item")
         # find the item with the lowest activation
         next_item = min(item_to_act, key=item_to_act.get)
+        print("Item has LOWEST activation!")
 
     next_item_act = np.NINF if next_item not in item_to_act else item_to_act[next_item]
 
-    return next_item, next_item_act, next_new_item_idx+1
+    return next_item, next_item_act, next_new_item_idx_inc
 
 
 
@@ -164,9 +171,9 @@ def calc_activation(item, items_info, cur_time):
     # stores the index of the previous encounter
     prev_enc_idx = -1
     # for each encounter
-    for enc_idx, enc_time in enumerate(encounters):
-        # if the encounter was AFTER the current time
-        if enc_time < cur_time:
+    for enc_idx, enc_bunch in enumerate(encounters):
+        # if the encounter was BEFORE the current time
+        if enc_bunch.time < cur_time:
             # store the encounter's index
             prev_enc_idx = enc_idx
 
@@ -179,16 +186,16 @@ def calc_activation(item, items_info, cur_time):
         # take only encounters which occurred before this one
         encounters = encounters[:(prev_enc_idx+1)]
         # for each previous encounter
-        for enc_time in encounters:
+        for enc_bunch in encounters:
             # calculate the time used in the activation formula
             future_time = cur_time + datetime.timedelta(seconds=15);
             # calculate the time difference with the current time
-            time_diff = future_time - enc_time
+            time_diff = future_time - enc_bunch.time
             # convert the difference into seconds
             time_diff = time_diff.total_seconds()
 
             # calculate the decay for the item at the current encounter
-            decay = calc_decay(item, items_info, enc_time)
+            decay = calc_decay(item, items_info, enc_bunch.time)
             # SCALE the difference by the decay and ADD it to the sum
             sum += np.power(time_diff, -decay)
 
