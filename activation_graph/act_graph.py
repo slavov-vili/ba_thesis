@@ -11,7 +11,8 @@ model_params = {"alpha_d":   0.3,   # default alpha for all items
                 "alpha_max": 0.5,   # maximum possible alpha
                 "c":         0.21,  # decay scaling factor
                 "tau":      -0.8,   # activation threshold
-                "s":         0.255} # recall probability noise reduction factor
+                "s":         0.255, # recall probability noise reduction factor
+                "delta":     0.025} # factor to scale down intersession time
 
 
 
@@ -21,84 +22,83 @@ items = ["noodles", "where", "many", "way", "market", "castle", "group", "restau
 
 
 # maps each item to its values
-items_info = {items[0]:  Bunch(alpha=model_params["alpha_d"], encounters=[], incorrect=0),
-              items[1]:  Bunch(alpha=model_params["alpha_d"], encounters=[], incorrect=0),
-              items[2]:  Bunch(alpha=model_params["alpha_d"], encounters=[], incorrect=0),
-              items[3]:  Bunch(alpha=model_params["alpha_d"], encounters=[], incorrect=0),
-              items[4]:  Bunch(alpha=model_params["alpha_d"], encounters=[], incorrect=0),
-              items[5]:  Bunch(alpha=model_params["alpha_d"], encounters=[], incorrect=0),
-              items[6]:  Bunch(alpha=model_params["alpha_d"], encounters=[], incorrect=0),
-              items[7]:  Bunch(alpha=model_params["alpha_d"], encounters=[], incorrect=0),
-              items[8]:  Bunch(alpha=model_params["alpha_d"], encounters=[], incorrect=0),
-              items[9]:  Bunch(alpha=model_params["alpha_d"], encounters=[], incorrect=0),
-              items[10]: Bunch(alpha=model_params["alpha_d"], encounters=[], incorrect=0),
-              items[11]: Bunch(alpha=model_params["alpha_d"], encounters=[], incorrect=0),
-              items[12]: Bunch(alpha=model_params["alpha_d"], encounters=[], incorrect=0),
-              items[13]: Bunch(alpha=model_params["alpha_d"], encounters=[], incorrect=0),
-              items[14]: Bunch(alpha=model_params["alpha_d"], encounters=[], incorrect=0),
-              items[15]: Bunch(alpha=model_params["alpha_d"], encounters=[], incorrect=0),
-              items[16]: Bunch(alpha=model_params["alpha_d"], encounters=[], incorrect=0),
-              items[17]: Bunch(alpha=model_params["alpha_d"], encounters=[], incorrect=0),
-              items[18]: Bunch(alpha=model_params["alpha_d"], encounters=[], incorrect=0),
-              items[19]: Bunch(alpha=model_params["alpha_d"], encounters=[], incorrect=0),
-              items[20]: Bunch(alpha=model_params["alpha_d"], encounters=[], incorrect=0),
-              items[21]: Bunch(alpha=model_params["alpha_d"], encounters=[], incorrect=0),
-              items[22]: Bunch(alpha=model_params["alpha_d"], encounters=[], incorrect=0),
-              items[23]: Bunch(alpha=model_params["alpha_d"], encounters=[], incorrect=0),
-              items[24]: Bunch(alpha=model_params["alpha_d"], encounters=[], incorrect=0),
-              items[25]: Bunch(alpha=model_params["alpha_d"], encounters=[], incorrect=0),
-              items[26]: Bunch(alpha=model_params["alpha_d"], encounters=[], incorrect=0),
-              items[27]: Bunch(alpha=model_params["alpha_d"], encounters=[], incorrect=0),
-              items[28]: Bunch(alpha=model_params["alpha_d"], encounters=[], incorrect=0),
-              items[29]: Bunch(alpha=model_params["alpha_d"], encounters=[], incorrect=0),
-              items[30]: Bunch(alpha=model_params["alpha_d"], encounters=[], incorrect=0),
-              items[31]: Bunch(alpha=model_params["alpha_d"], encounters=[], incorrect=0),
-              items[32]: Bunch(alpha=model_params["alpha_d"], encounters=[], incorrect=0),
-              items[33]: Bunch(alpha=model_params["alpha_d"], encounters=[], incorrect=0),
-              items[34]: Bunch(alpha=model_params["alpha_d"], encounters=[], incorrect=0),
-              items[35]: Bunch(alpha=model_params["alpha_d"], encounters=[], incorrect=0),
-              items[36]: Bunch(alpha=model_params["alpha_d"], encounters=[], incorrect=0)}  # end item map
+items_info = {}
+for item in items:
+    items_info[item] = Bunch(alpha=model_params["alpha_d"], encounters=[], incorrect=0)
 
 
 
 
 
-def learn(items, items_info):
+def learn(items, items_info, sesh_count, sesh_length):
     """
     Simulates learning process by adding new encounters of words.
+    Arguments:
+    items       -- the items which need to be learned
+    items_info  -- the information related to each item
+    sesh_count  -- the number of sessions to be performed
+    sesh_length -- the length of each session(in seconds)
     """
-    
-    # TODO: 2 sessions, separated by 24 hours
-    # TODO: each session lasts 30 mins
-    # TODO: each encounter lasts between 0 and 15 seconds
 
-    # store time of the current encounter
+    # store the current time
     cur_time = datetime.datetime.now()
-    # add 15 seconds to the current time (useful when checking if below threshold)
-    cur_time = cur_time.timedelta(seconds=15)
-    # the index of the next NEW item which needs to be learned
+    # store the index of the next NEW item which needs to be learned
     next_new_item_idx = 0
 
-    # get the next item to be presented
-    item, item_act, next_new_item_idx = get_next_item(items, next_new_item_idx, items_info, cur_time)
-    # calculate the item's recall probability
-    item_rec = calc_recall_prob(item_act)
-    # try to guess the item
-    guessed = guess_item(item_rec)
+    # for each session
+    for sesh_id in range(sesh_count):
+        # set the session's starting time
+        sesh_start = cur_time
+        print("\n")
+        print("Session", sesh_id, "start:", sesh_start)
 
-    # adjust values depending on outcome
-    if guessed:
-        items_info[item].alpha -= 0.001
-    else:
-        items_info[item].alpha += 0.001
-        items_info[item].incorrect++
+        # while there is time in the session
+        while cur_time <= (sesh_start + datetime.timedelta(seconds=sesh_length)):
+            # get the next item to be presented
+            item, item_act, next_new_item_idx = get_next_item(items, next_new_item_idx, items_info, cur_time)
+            # print("Encountered '", item, "' at", cur_time)
+            # print("Encounters:", len(items_info[item].encounters))
+            # print("Activation:", item_act)
 
-    # add the current encounter to the item's encounter list
-    items_info[item].encounters.append(cur_time)
+            # calculate the item's recall probability
+            item_rec = calc_recall_prob(item_act)
+            # print("Recall prob:", item_rec)
+            # try to guess the item
+            guessed = guess_item(item_rec)
+            # print("Guessed item:", guessed)
+
+            # adjust values depending on outcome
+            if guessed:
+                if items_info[item].alpha > model_params["alpha_min"]:
+                    items_info[item].alpha -= 0.005
+            else:
+                if items_info[item].alpha < model_params["alpha_max"]:
+                    items_info[item].alpha += 0.005
+                items_info[item].incorrect += 1
+
+            # add the current encounter to the item's encounter list
+            items_info[item].encounters.append(cur_time)
+            # increment the current time to account for the length of the encounter
+            cur_time += datetime.timedelta(seconds=random.randint(3, 15))
+
+        # increment the current time to account for the intersession time
+        scaled_intersesh_time = (24 * model_params["delta"]) * 3600
+        cur_time += datetime.timedelta(seconds=scaled_intersesh_time)
+
+
+
+    print("\nFinal results:")
+    for item in items:
+        print("Item:'", item, "'")
+        print("Alpha:", items_info[item].alpha)
+        print("Encounters:", len(items_info[item].encounters))
+        print("Incorrect:", items_info[item].incorrect)
     return
 
 
 
+# TODO: fix this, not working for some reason
+# NOTE: maybe problem is in correction of alphas ?
 def get_next_item(items, next_new_item_idx, items_info, time):
     """
     Returns the next item to be presented based on activation.
@@ -107,63 +107,124 @@ def get_next_item(items, next_new_item_idx, items_info, time):
     # maps an item to its activation
     item_to_act = {}
     # calculate each item's activation
-    for item in items:
+    for item in items[:next_new_item_idx]:
         item_to_act[item] = calc_activation(item, items_info, time)
+    print("Items seen:", len(item_to_act))
 
     # stores all items below the retention threshold
     endangered_items = []
     # for each item and its activation
     for k,v in item_to_act.items():
-        # if the item's activation is BELOW the forgetting threshold
-        if v < model_params["tau"]:
+        # calculate the item's probability of recall
+        item_rec_prob = calc_recall_prob(v)
+        # print("Item:", k)
+        # print("Activation:",v)
+        # print("Recall prob:", item_rec_prob)
+        # if the item's probability of recall is BELOW the forgetting threshold
+        if item_rec_prob < model_params["tau"]:
             # add it to the endangered list
             endangered_items.append(k)
 
     # if there ARE items BELOW the threshold
     if len(endangered_items) != 0:
+        # print("Yes, endangered!")
         # find the endangered item with lowest activation
         next_item = min(endangered_items, key=item_to_act.get)
     # if ALL items are ABOVE the threshold
     # AND there ARE NEW items available
     elif next_new_item_idx < len(items):
+        # print("New item")
         # select the next new item to be presented
         next_item = items[next_new_item_idx]
     # if NO items BELOW treshold
     # AND NO NEW items
     else:
+        # print("Old, but old")
         # find the item with the lowest activation
         next_item = min(item_to_act, key=item_to_act.get)
 
-    return next_item, item_to_act[next_item], next_new_item_idx+1
+    next_item_act = np.NINF if next_item not in item_to_act else item_to_act[next_item]
+
+    return next_item, next_item_act, next_new_item_idx+1
 
 
 
-def calc_activation(item, items_info, time):
+def calc_activation(item, items_info, cur_time):
     """
     Calculate the activation for a given item at a given timestamp.
     Takes into account all previous encounters of the item through the calculation of decay.
 
     Arguments:
-    item -- the item whose activation should be calculated
-    time -- the timestamp at which the activation should be calculated
+    item       -- the item whose activation should be calculated
+    items_info -- the information related to each item
+    time       -- the timestamp at which the activation should be calculated
     """
 
-    # TODO: implement calculation algorithm
+    encounters = list(items_info[item].encounters)
+    # stores the index of the previous encounter
+    prev_enc_idx = -1
+    # for each encounter
+    for enc_idx, enc_time in enumerate(encounters):
+        # if the encounter was AFTER the current time
+        if enc_time < cur_time:
+            # store the encounter's index
+            prev_enc_idx = enc_idx
+
+    # if there are NO previous encounters
+    if prev_enc_idx == -1:
+        m = np.NINF
+    else:
+        # stores the sum of time differences
+        sum = 0.0
+        # take only encounters which occurred before this one
+        encounters = encounters[:(prev_enc_idx+1)]
+        # for each previous encounter
+        for enc_time in encounters:
+            # calculate the time used in the activation formula
+            future_time = cur_time + datetime.timedelta(seconds=15);
+            # calculate the time difference with the current time
+            time_diff = future_time - enc_time
+            # convert the difference into seconds
+            time_diff = time_diff.total_seconds()
+
+            # calculate the decay for the item at the current encounter
+            decay = calc_decay(item, items_info, enc_time)
+            # SCALE the difference by the decay and ADD it to the sum
+            sum += np.power(time_diff, -decay)
+
+        # calculate the activation given the sum of scaled time differences
+        m = np.log(sum)
+
     return m
 
 
 
-def calc_decay(item, items_info, time):
+def calc_decay(item, items_info, cur_time):
     """
     Calculate the activation decay of the given item at a given timestamp.
     Takes into account all previous encounters of the item.
     
     Argument:
-    item -- the item, whose decay should be calculated
-    time -- the timestamp at which the decay should be calculated
+    item       -- the item, whose decay should be calculated
+    items_info -- the information related to each item
+    time       -- the timestamp at which the decay should be calculated
     """
 
-    # TODO: implement 
+    # stores the item's alpha value
+    alpha = 0.0
+    # calculate the item's activation at current time
+    item_act = calc_activation(item, items_info, cur_time)
+    # if the activation is -infinity (the item hasn't been encountered before)
+    if np.isneginf(item_act):
+        # the alpha is the default value
+        alpha = model_params["alpha_d"]
+    else:
+        # the alpha is the item's alpha
+        alpha = items_info[item].alpha
+
+    # calculate the decay
+    d = model_params["c"] * np.exp(item_act) + alpha
+
     return d
 
 
