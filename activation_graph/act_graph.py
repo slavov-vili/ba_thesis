@@ -15,16 +15,48 @@ model_params = {"alpha_d":   0.3,   # default alpha for all items
                 "delta":     0.025} # factor to scale down intersession time
 
 
-
 # list all items to be learned
 items = ["noodles", "where", "many", "way", "market", "castle", "group", "restaurant", "amazing", "to visit", "each", "tree", "British", "adult", "a day", "open(from...to...)", "furniture", "a year", "open", "free time", "canal", "Chinese", "stall", "playing field", "fancy", "a week", "to enjoy", "best", "wonderful", "expensive", "to add", "boat", "to join in", "view", "canoeing", "flower", "area"] # end items list
-
 
 
 # maps each item to its values
 items_info = {}
 for item in items:
-    items_info[item] = Bunch(alpha=model_params["alpha_d"], encounters=[], incorrect=0)
+    items_info[item] = Bunch(alpha_real=random.uniform(0.1, 0.5), alpha_model=model_params["alpha_d"], encounters=[], incorrect=0)
+
+
+def print_item_info(item):
+    print("Item:", item)
+    print("Alpha:", items_info[item].alpha)
+    print("Encounters(", len(items_info[item].encounters),"):")
+    for i, enc in enumerate(items_info[item].encounters):
+        print("Encounter", i, "time:", enc.time)
+        print("Encounter", i, "activation:", enc.activation)
+        print("Encounter", i, "recall prob:", calc_recall_prob(enc.activation))
+        print("Encounter", i, "was guessed:", enc.was_guessed)
+        print("Encounter", i, "alpha:", enc.alpha)
+    print("Incorrect:", items_info[item].incorrect)
+
+
+def graph_item_activation(item, items_info, learn_start):
+    """
+    Graphs the activation of the item throughout the learning process.
+    item        -- the item, whose information is being graphed
+    learn_start -- the time when the learning process started
+    """
+
+    x = []
+    y = []
+
+    # for each of the item's encounters
+    for enc in items_info[item].encounters:
+        # Calculate how far into the session the encounter happened
+        time_diff = (enc.time - learn_start).total_seconds()
+        x.append(time_diff)
+        y.append(enc.activation)
+    plt.plot(x, y)
+    plt.show()
+    return
 
 
 
@@ -36,10 +68,13 @@ def learn(items, items_info, sesh_count, sesh_length):
     items_info  -- the information related to each item
     sesh_count  -- the number of sessions to be performed
     sesh_length -- the length of each session(in seconds)
+    Returns:
+    the datetime when the learning process started
     """
 
     # store the current time
     cur_time = datetime.datetime.now()
+    learn_start = cur_time
     # store the index of the next NEW item which needs to be learned
     next_new_item_idx = 0
 
@@ -66,9 +101,8 @@ def learn(items, items_info, sesh_count, sesh_length):
             print("Guessed item:", guessed)
 
             # add the current encounter to the item's encounter list
-            items_info[item].encounters.append(Bunch(time=cur_time, activation=item_act, alpha=items_info[item].alpha))
+            items_info[item].encounters.append(Bunch(time=cur_time, activation=item_act, was_guessed=guessed, alpha=items_info[item].alpha_model))
 
-            # TODO: adjust alpha based on prob_recall & guessed
             # adjust values depending on outcome
             if guessed:
                 if items_info[item].alpha > model_params["alpha_min"]:
@@ -93,7 +127,10 @@ def learn(items, items_info, sesh_count, sesh_length):
         print("Alpha:", items_info[item].alpha)
         print("Encounters:", len(items_info[item].encounters))
         print("Incorrect:", items_info[item].incorrect)
-    return
+
+    print("Cur time:", cur_time)
+    print("Learn start:", learn_start)
+    return learn_start
 
 
 
@@ -186,16 +223,16 @@ def calc_activation(item, items_info, cur_time):
         # take only encounters which occurred before this one
         encounters = encounters[:(prev_enc_idx+1)]
         # for each previous encounter
-        for enc_bunch in encounters:
+        for enc_idx, enc_bunch in enumerate(encounters):
             # calculate the time used in the activation formula
             future_time = cur_time + datetime.timedelta(seconds=15);
-            # calculate the time difference with the current time
+            # calculate the time difference with the previous encounter
             time_diff = future_time - enc_bunch.time
             # convert the difference into seconds
             time_diff = time_diff.total_seconds()
 
             # calculate the decay for the item at the current encounter
-            decay = calc_decay(item, items_info, enc_bunch.time)
+            decay = calc_decay(item, items_info, enc_idx)
             # SCALE the difference by the decay and ADD it to the sum
             sum += np.power(time_diff, -decay)
 
@@ -206,21 +243,20 @@ def calc_activation(item, items_info, cur_time):
 
 
 
-def calc_decay(item, items_info, cur_time):
+def calc_decay(item, items_info, enc_idx):
     """
-    Calculate the activation decay of the given item at a given timestamp.
-    Takes into account all previous encounters of the item.
+    Calculate the activation decay of the given item at a given encounter.
     
     Argument:
     item       -- the item, whose decay should be calculated
     items_info -- the information related to each item
-    time       -- the timestamp at which the decay should be calculated
+    enc_idx    -- index of the encounter, at which the decay should be calculated
     """
 
     # stores the item's alpha value
     alpha = 0.0
-    # calculate the item's activation at current time
-    item_act = calc_activation(item, items_info, cur_time)
+    # get the item's activation at the encounter
+    item_act = items_info[item].encounters[enc_idx].activation
     # if the activation is -infinity (the item hasn't been encountered before)
     if np.isneginf(item_act):
         # the alpha is the default value
