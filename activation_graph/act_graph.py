@@ -52,14 +52,11 @@ def graph_item_activation(item, items_info, learn_start):
     y = []
     # for each second where the item was seen
     for i in range(int(first_seen), plot_bounds[1]):
-        # add the accuracy at time i
-        cur_act = calc_activation(item, items_info, (learn_start + datetime.timedelta(seconds=i, milliseconds=0)))
-        x.append(i)
-        y.append(cur_act)
-        # add the accuracy at time i+0.5
-        cur_act = calc_activation(item, items_info, (learn_start + datetime.timedelta(seconds=i, milliseconds=500)))
-        x.append(i)
-        y.append(cur_act)
+        for ii in range(0, 900000, 100000):
+            # add the accuracy at time i seconds and y microseconds
+            cur_act = calc_activation(item, items_info, (learn_start + datetime.timedelta(seconds=i, microseconds=ii)))
+            x.append(i)
+            y.append(cur_act)
 
     # plot the recall threshold
     plt.plot([plot_bounds[0], plot_bounds[1]], [-0.8, -0.8], color='k', linestyle='--')
@@ -212,7 +209,10 @@ def calc_activation(item, items_info, cur_time):
     time       -- the timestamp at which the activation should be calculated
     """
 
+    # store all of the item's previous encounters
     encounters = list(items_info[item].encounters)
+    # clear the item's encounter list()
+
     # stores the index of the previous encounter
     last_enc_idx = -1
     # for each encounter
