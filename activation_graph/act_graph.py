@@ -124,10 +124,10 @@ def learn(items, items_info, sesh_count, sesh_length):
             # adjust values depending on outcome
             if guessed:
                 if items_info[item].alpha_model > model_params["alpha_min"]:
-                    items_info[item].alpha_model -= 0.05
+                    items_info[item].alpha_model -= item_rec / 10
             else:
                 if items_info[item].alpha_model < model_params["alpha_max"]:
-                    items_info[item].alpha_model += 0.05
+                    items_info[item].alpha_model += item_rec / 10
                 items_info[item].incorrect += 1
 
             # increment the current time to account for the length of the encounter
