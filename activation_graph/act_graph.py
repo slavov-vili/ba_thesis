@@ -53,11 +53,11 @@ def graph_item_activation(item, items_info, learn_start):
     # for each second where the item was seen
     for i in range(int(first_seen), plot_bounds[1]):
         # add the accuracy at time i
-        cur_act = calc_activation(item, items_info, (learn_start + datetime.timedelta(seconds=i)))
+        cur_act = calc_activation(item, items_info, (learn_start + datetime.timedelta(seconds=i, milliseconds=0)))
         x.append(i)
         y.append(cur_act)
         # add the accuracy at time i+0.5
-        cur_act = calc_activation(item, items_info, (learn_start + datetime.timedelta(seconds=i+0.5)))
+        cur_act = calc_activation(item, items_info, (learn_start + datetime.timedelta(seconds=i, milliseconds=500)))
         x.append(i)
         y.append(cur_act)
 

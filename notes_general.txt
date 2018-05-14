@@ -47,7 +47,7 @@ nijboer_2011
 pavlik_2007
   - C: Source for beta-parameter extension to activation formula
 
-  - V: Exmplains the pavlik_anderson_2005 model better
+  - V: Explains the pavlik_anderson_2005 model better
   - V: 
 
 
