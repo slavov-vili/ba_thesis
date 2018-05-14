@@ -109,14 +109,14 @@ def learn(items, items_info, sesh_count, sesh_length):
             print("Activation:", item_act)
 
             # calculate the item's recall probability
-            item_rec = calc_recall_prob(item_act)
+            item_rec = calc_recall_prob(item, items_info, time)
             print("Recall prob:", item_rec)
             # try to guess the item
             guessed = guess_item(item_rec)
             print("Guessed item:", guessed)
 
             # add the current encounter to the item's encounter list
-            items_info[item].encounters.append(Bunch(time=cur_time, activation=item_act, was_guessed=guessed, alpha=items_info[item].alpha_model))
+            items_info[item].encounters.append(Bunch(time=cur_time, was_guessed=guessed, alpha=items_info[item].alpha_model))
 
             # adjust values depending on outcome
             if guessed:
@@ -198,22 +198,20 @@ def get_next_item(items, next_new_item_idx, items_info, time):
 
 
 
-def calc_activation(item, items_info, cur_time):
+def calc_activation(item, alpha, encounters, activations, cur_time):
     """
     Calculate the activation for a given item at a given timestamp.
     Takes into account all previous encounters of the item through the calculation of decay.
 
     Arguments:
-    item       -- the item whose activation should be calculated
-    items_info -- the information related to each item
-    time       -- the timestamp at which the activation should be calculated
+    item        -- the item whose activation should be calculated
+    alpha       -- the alpha value of the item which should be used in the calculation
+    encounters  -- the list of all of the item's encounters
+    activations -- the list of old activations corresponding to each encounter
+    cur_time    -- the timestamp at which the activation should be calculated
     """
 
-    # store all of the item's previous encounters
-    encounters = list(items_info[item].encounters)
-    # clear the item's encounter list()
-
-    # stores the index of the previous encounter
+    # stores the index of the last encounter before the current timestamp
     last_enc_idx = -1
     # for each encounter
     for enc_idx, enc_bunch in enumerate(encounters):
@@ -251,7 +249,7 @@ def calc_activation(item, items_info, cur_time):
 
 
 
-def calc_decay(item, items_info, enc_idx):
+def calc_decay(item, alpha, prev_encounter_idx, encounters, activations, cur_time):
     """
     Calculate the activation decay of the given item at a given encounter.
     
@@ -262,27 +260,39 @@ def calc_decay(item, items_info, enc_idx):
     """
 
     # get the item's activation at the encounter
-    item_act = items_info[item].encounters[enc_idx].activation
+    item_act = 0.0
+    # if the previous encounter's activation WAS cached
+    if prev_encounter_idx >=0 && prev_encounter_idx < len(activations):
+        item_act = activations[prev_encounter_idx]
+    # if it was NOT cached
+    else:
+        calc_activation(item, alpha, encounters, activations, cur_time)
     # if the activation is -infinity (the item hasn't been encountered before)
     if np.isneginf(item_act):
         # the alpha is the default value
         d = model_params["alpha_d"]
     else:
         # calculate the decay
-        d = model_params["c"] * np.exp(item_act) + items_info[item].alpha_real
+        d = model_params["c"] * np.exp(item_act) + alpha
 
     return d
 
 
 
-def calc_recall_prob(activation):
+def calc_recall_prob(item, alpha, encounters, cur_time):
     """
-    Calculates the probability of recall given a specific activation.
+    Calculates an item's probability of recall given a timestamp and its real alpha.
 
     Arguments:
-    activation -- the activation of the item, whose recall probability is being calculated.
+    item       -- the item whose activation should be calculated
+    alpha      -- the alpha value of the item which should be used in the calculation
+    encounters -- the list of all of the item's encounters
+    cur_time   -- the timestamp at which the activation should be calculated
     """
 
+    # calculate the item's activation at the current time
+    activation = calc_activation(item, alpha, encounters, cur_time)
+    # calculate the probability of recall
     Pr = 1 / (1 + np.exp(((model_params["tau"] - activation) / model_params["s"])))
     return Pr
 
