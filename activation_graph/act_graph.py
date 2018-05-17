@@ -52,11 +52,10 @@ def graph_item_activation(item, items_info, learn_start):
     y = []
     # for each second where the item was seen
     for i in range(int(first_seen), plot_bounds[1]):
-        for ii in range(0, 900000, 100000):
-            # add the accuracy at time i seconds and y microseconds
-            cur_act = calc_activation(item, items_info[item].alpha_model, items_info[item].encounters, [], (learn_start + datetime.timedelta(seconds=i, microseconds=ii)))
-            x.append(i)
-            y.append(cur_act)
+        # add the accuracy at time i seconds and y microseconds
+        cur_act = calc_activation(item, items_info[item].alpha_model, items_info[item].encounters, [], (learn_start + datetime.timedelta(seconds=i)))
+        x.append(i)
+        y.append(cur_act)
 
     # plot the recall threshold
     plt.plot([plot_bounds[0], plot_bounds[1]], [-0.8, -0.8], color='k', linestyle='--')
@@ -88,8 +87,8 @@ def learn(items, items_info, sesh_count, sesh_length):
     """
 
     # store the current time
-    cur_time = datetime.datetime.now()
-    learn_start = cur_time
+    learn_start = datetime.datetime.now()
+    cur_time    = learn_start
     # store the index of the next NEW item which needs to be learned
     next_new_item_idx = 0
 
@@ -116,7 +115,7 @@ def learn(items, items_info, sesh_count, sesh_length):
             print("Guessed item:", guessed)
 
             # add the current encounter to the item's encounter list
-            items_info[item].encounters.append(Bunch(time=cur_time, was_guessed=guessed, alpha=items_info[item].alpha_model))
+            items_info[item].encounters.append(Bunch(time=cur_time, alpha=items_info[item].alpha_model, activation=item_act, was_guessed=guessed))
 
             # adjust values depending on outcome
             if guessed:
