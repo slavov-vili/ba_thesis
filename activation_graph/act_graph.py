@@ -31,10 +31,10 @@ def print_item_info(item, items_info):
     print("Model Alpha:", items_info[item].alpha_model)
     print("Encounters(", len(items_info[item].encounters),"):")
     for i, enc in enumerate(items_info[item].encounters):
-        print("Encounter", i, "time:", enc.time)
-        enc_activation = calc_activation(item, items_info[item].alpha_model, items_info[item].encounters, [], enc.time)
-        print("Encounter", i, "activation:", enc_activation)
-        print("Encounter", i, "recall prob:", calc_recall_prob(enc_activation))
+        print("Encounter", i, "time:",        enc.time)
+        print("Encounter", i, "alpha:",       enc.alpha)
+        print("Encounter", i, "activation:",  enc.activation)
+        print("Encounter", i, "recall prob:", calc_recall_prob(enc.activation))
         print("Encounter", i, "was guessed:", enc.was_guessed)
     print("Incorrect:", items_info[item].incorrect)
 
@@ -47,19 +47,34 @@ def graph_item_activation(item, items_info, learn_start):
     """
 
     plot_bounds = (0, 6000)
-    first_seen = (items_info[item].encounters[0].time - learn_start).total_seconds()
     x = []
     y = []
-    # for each second where the item was seen
-    for i in range(int(first_seen), plot_bounds[1]):
-        # add the accuracy at time i seconds and y microseconds
-        cur_act = calc_activation(item, items_info[item].alpha_model, items_info[item].encounters, [], (learn_start + datetime.timedelta(seconds=i)))
-        x.append(i)
-        y.append(cur_act)
+    item_encounters = items_info[item].encounters
+    # add the first encounter's information
+    x.append((item_encounters[0].time - learn_start).total_seconds())
+    y.append(item_encounters[0].activation)
+    # for each two consecutive encounters
+    for i in range(0, len(item_encounters)-1):
+        prev_enc = item_encounters[i]
+        next_enc = item_encounters[i+1]
+
+        secs = 1
+        # for each second between the two encounters
+        while secs < (next_enc.time - prev_enc.time).total_seconds():
+            cur_time = prev_enc.time + datetime.timedelta(seconds=secs)
+            # calculate the item's activation and add it to the graphing lists
+            cur_act = calc_activation(item, prev_enc.alpha, item_encounters, [], cur_time)
+            x.append((cur_time - learn_start).total_seconds())
+            y.append(cur_act)
+            # increment the second counter
+            secs += 1
+        # add the next encounter's information
+        x.append((next_enc.time - learn_start).total_seconds())
+        y.append(next_enc.activation)
 
     # plot the recall threshold
     plt.plot([plot_bounds[0], plot_bounds[1]], [-0.8, -0.8], color='k', linestyle='--')
-
+    # TODO: mark every encounter
     # plot the actual data
     plt.plot(x, y, color='g')
 
@@ -114,9 +129,6 @@ def learn(items, items_info, sesh_count, sesh_length):
             guessed = guess_item(item_rec)
             print("Guessed item:", guessed)
 
-            # add the current encounter to the item's encounter list
-            items_info[item].encounters.append(Bunch(time=cur_time, alpha=items_info[item].alpha_model, activation=item_act, was_guessed=guessed))
-
             # adjust values depending on outcome
             if guessed:
                 if items_info[item].alpha_model > model_params["alpha_min"]:
@@ -125,6 +137,9 @@ def learn(items, items_info, sesh_count, sesh_length):
                 if items_info[item].alpha_model < model_params["alpha_max"]:
                     items_info[item].alpha_model += item_rec / 10
                 items_info[item].incorrect += 1
+
+            # add the current encounter to the item's encounter list
+            items_info[item].encounters.append(Bunch(time=cur_time, alpha=items_info[item].alpha_model, activation=item_act, was_guessed=guessed))
 
             # increment the current time to account for the length of the encounter
             cur_time += datetime.timedelta(seconds=random.randint(3, 15))
@@ -230,13 +245,12 @@ def calc_activation(item, alpha, encounters, activations, cur_time):
             # store the encounter's information
             enc_time  = enc_bunch.time
             enc_act   = 0.0
-            enc_decay = 0.0
             # if the encounter's activation has ALREADY been calculated
             if enc_idx < len(activations):
                 enc_act = activations[enc_idx]
-            # if the encounter's activations has NO been calculated
+            # if the encounter's activations has NOT been calculated
             else:
-                # calculate the activation of the item at the encounter
+                # calculate the activation of the item at the time of the encounter
                 enc_act = calc_activation(item, alpha, encounters, activations, enc_time)
                 # add the encounter's activation to the list
                 activations.append(enc_act)
@@ -272,7 +286,7 @@ def calc_decay(activation, alpha):
 
     # if the activation is -infinity (the item hasn't been encountered before)
     if np.isneginf(activation):
-        # the alpha is the default value
+        # the decay is the default alpha value
         d = model_params["alpha_d"]
     else:
         # calculate the decay
