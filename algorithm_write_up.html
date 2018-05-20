@@ -1,0 +1,608 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Thesis Research</title>
+  <link rel="stylesheet" href="https://stackedit.io/style.css" />
+</head>
+
+<body class="stackedit">
+  <div class="stackedit__left">
+    <div class="stackedit__toc">
+      
+<ul>
+<li><a href="#algorithm">Algorithm</a></li>
+<li><a href="#simulation-walkthrough">Simulation walkthrough</a></li>
+<li><a href="#the-simulation-loop">The simulation loop</a>
+<ul>
+<li><a href="#recalculate-activation-for-all-items-at-the-current-time-using-all-current-alpha-values-default-0.3">1. Recalculate activation for all items at the “current” time using all current alpha values (default 0.3)</a></li>
+<li><a href="#follow-the-flowchart-figure-3.2-to-determine-the-next-item-to-present">2. Follow the flowchart (figure 3.2) to determine the next item to present</a></li>
+<li><a href="#test-session-boundaries">3. Test session boundaries</a></li>
+<li><a href="#calculate-current-activation-for-item-both-real-and-modelled">4. Calculate “current” activation for item, both “real” and modelled</a></li>
+<li><a href="#get-example-context-sentence-to-present-with-word-and-simulate-a-reaction-time">5. Get example context sentence to present with word and simulate a reaction time</a></li>
+<li><a href="#generate-encounter-result-based-on-recall-probability">6. Generate encounter result based on recall probability</a></li>
+<li><a href="#generate-new-encounter-object">7. Generate new encounter object</a></li>
+<li><a href="#advance-the-current-time">8. Advance the current time</a></li>
+<li><a href="#add-the-encounter-to-the-models-encounter-history-and-recalculate-alpha">9. Add the encounter to the model’s encounter history and recalculate alpha</a></li>
+<li><a href="#wrap-the-encounter-in-a-simulation-specific-encounter-object-and-store-it">10. Wrap the encounter in a simulation-specific encounter object and store it</a></li>
+<li><a href="#go-to-step-1">11.  Go to step 1</a></li>
+</ul>
+</li>
+<li><a href="#post-simulation">Post-simulation</a></li>
+</ul>
+
+    </div>
+  </div>
+  <div class="stackedit__right">
+    <div class="stackedit__html">
+      <h1 id="algorithm">Algorithm</h1>
+<p>The main activation formula used corresponds with formula 3.4 from the thesis.  Technically the beta-variables are implemented, but their values never change from 0, and so basically don’t exist.  The only other thing that disguishes this formula from the basic formula (3.1) is the usage of b_j for scaling based on exercise type.</p>
+<p>For adjusting alpha, the system described by formulas 3.9 to 3.12 is utilized, with an additional failsafe mechanism for preventing calculations that would result in imaginary numbers.  This is only useful for adjustments that factor in reaction time, though.</p>
+<h1 id="simulation-walkthrough">Simulation walkthrough</h1>
+<p>Start the simulation by generating a couple session objects, which in this case simply contain just a starting and ending timestamp.  Add those sessions to the model.  Note:  “Session” is essentially interchangeable terminology with “Event”.</p>
+<p>For all words available to be presented, randomly choose a “real” alpha:</p>
+<pre class=" language-java"><code class="prism  language-java"><span class="token keyword">for</span> <span class="token punctuation">(</span>VocObject voc <span class="token operator">:</span> dbManager<span class="token punctuation">.</span><span class="token function">getWordsByBookChapter</span><span class="token punctuation">(</span>book<span class="token punctuation">,</span> chapter<span class="token punctuation">,</span> unit<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    targetAlphas<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span>voc<span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token keyword">float</span><span class="token punctuation">)</span> r<span class="token punctuation">.</span><span class="token function">nextGaussian</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">*</span> <span class="token number">0.08f</span><span class="token punctuation">)</span> <span class="token operator">+</span> ModelMath<span class="token punctuation">.</span>ALPHA_DEFAULT<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<blockquote>
+<ul>
+<li>In this thesis app, words are represented by <code>VocObject</code>s… not my name choice xD</li>
+<li>Also just in this app, there is no list of words generated to belong to session, there is simply a broad pool of words to choose from, and the model doesn’t care which ones end up in which sessions.  Words are only filtered by the in-app options for selecting the book, chapter, and unit from the selection of textbooks we were borrowing words from.</li>
+<li>To generate the random alpha, I used <code>Random.nextGaussian()</code> to get a normal distribution of alpha values.  This distribution has a mean of 0.3, and a standard deviation of 0.08.</li>
+<li><code>targetAlphas</code> is a Map&lt;VocObject, Float&gt;#</li>
+</ul>
+</blockquote>
+<p>Then the simulation loop is started with the “current” time being the start of the first session.</p>
+<h1 id="the-simulation-loop">The simulation loop</h1>
+<p>The loop works as follows:</p>
+<h2 id="recalculate-activation-for-all-items-at-the-current-time-using-all-current-alpha-values-default-0.3">1. Recalculate activation for all items at the “current” time using all current alpha values (default 0.3)</h2>
+<pre class=" language-java"><code class="prism  language-java"><span class="token keyword">for</span> <span class="token punctuation">(</span>Map<span class="token punctuation">.</span>Entry<span class="token operator">&lt;</span>VocObject<span class="token punctuation">,</span> List<span class="token operator">&lt;</span>InterxObject<span class="token operator">&gt;&gt;</span> entry <span class="token operator">:</span> interactions<span class="token punctuation">.</span><span class="token function">entrySet</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">float</span> activation <span class="token operator">=</span> ModelMath<span class="token punctuation">.</span><span class="token function">activation</span><span class="token punctuation">(</span>eTime<span class="token punctuation">,</span> entry<span class="token punctuation">.</span><span class="token function">getKey</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> entry<span class="token punctuation">.</span><span class="token function">getValue</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+                                            sessions<span class="token punctuation">,</span> entry<span class="token punctuation">.</span><span class="token function">getKey</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getAlpha</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    entry<span class="token punctuation">.</span><span class="token function">getKey</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">setActivation</span><span class="token punctuation">(</span>activation<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<blockquote>
+<ul>
+<li>‘interactions’ is map of all words to a list of their previous encounters… essentially what we would now call a HistoryCollection.  The term “encounter” is essentially interchangable with “interaction”, I’ve simply changed my terminology with time.  “Interx” is an abbreviation for interaction.</li>
+<li>This ‘interactions’ map is initially populated with all potential words mapping to empty encounter lists</li>
+<li>‘eTime’ is the “current” time</li>
+<li>See next code segment to make sense of the arguments to .activation()</li>
+<li>The current activation for the word is stored in the word object for comparison later (probably not a good design pattern, but whatever)</li>
+</ul>
+</blockquote>
+<pre class=" language-java"><code class="prism  language-java"><span class="token comment">/**
+ * The activation of a word at the given time (m_i(t)) based on the word's
+ * parameters, and all previous interactions with the word.  The lookahead time parameter
+ * is added to the given time for the purposes of the calculation.
+ *
+ * @param time         The time to calculate activation in reference to.
+ * @param word         The word to calculate activation for.
+ * @param interactions List of all interactions with the word, in temporal order.
+ * @param sessions     List of all study sessions, in order to scale the time between them.
+ * @param alpha        The alpha value of the word to use for calculations.
+ *                     This must be passed as an argument rather than simply reading the word
+ *                     object in order to allow calculating with different alphas.
+ * @return The activation of the item at the given time
+ */</span>
+<span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">float</span> <span class="token function">activation</span><span class="token punctuation">(</span>Date time<span class="token punctuation">,</span> VocObject word<span class="token punctuation">,</span> List<span class="token operator">&lt;</span>InterxObject<span class="token operator">&gt;</span> interactions<span class="token punctuation">,</span>
+                               List<span class="token operator">&lt;</span>SessionObject<span class="token operator">&gt;</span> sessions<span class="token punctuation">,</span> <span class="token keyword">float</span> alpha<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+
+    <span class="token comment">// Calculate the activation at this time</span>
+    <span class="token keyword">float</span> activation <span class="token operator">=</span> <span class="token function">activationRecursion</span><span class="token punctuation">(</span><span class="token function">lookaheadTime</span><span class="token punctuation">(</span>time<span class="token punctuation">)</span><span class="token punctuation">,</span> word<span class="token punctuation">,</span> interactions<span class="token punctuation">,</span> sessions<span class="token punctuation">,</span>
+                                           <span class="token boolean">true</span><span class="token punctuation">,</span> alpha<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment">// Clear all cached activation values</span>
+    <span class="token function">clearCachedActivation</span><span class="token punctuation">(</span>interactions<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment">// Return the calculated activation</span>
+    <span class="token keyword">return</span> activation<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<blockquote>
+<ul>
+<li>The timestamp given is automatically advanced by the lookahead time (15s) for the purposes of activation calculation</li>
+<li>After the activation calculation is complete, all cached activation values are cleared so that they don’t interfere with any future calculations</li>
+</ul>
+</blockquote>
+<pre class=" language-java"><code class="prism  language-java"><span class="token comment">/**
+ * Calculates the activation for the given word at the given time, based on the
+ * given interactions.  Must recursively calculate activation for all previous
+ * encounters.
+ * &lt;p&gt;
+ * The 'doLast' parameter is for when calculating the sum up to interaction n-1.
+ * When false, the last interaction will be entirely ignored, while still using
+ * the given time.  This is used as part of the
+ * {@link ModelMath#latestAlpha(InterxObject, List, List)} calculations.  This
+ * being false also signals that the extra activation parameters (betas) should
+ * not be counted.
+ * &lt;/p&gt;&lt;p&gt;
+ * This method caches activation calculations inside the given InterxObjects,
+ * and does &lt;b&gt;NOT&lt;/b&gt; clear the caches afterwards.  This must be done manually
+ * with {@link ModelMath#clearCachedActivation(List)}.
+ * &lt;/p&gt;
+ *
+ * @param time         The time to calculate activation in reference to.
+ * @param word         The word to calculate activation for.
+ * @param interactions List of all interactions with the word, in chronological
+ *                     order.
+ * @param sessions     List of all study sessions, in order to scale the time
+ *                     between them.
+ * @param doLast       Whether or not the last interaction should be counted
+ * @param alpha        The alpha value of the word to use for calculations.
+ *                     This must be passed as an argument rather than simply
+ *                     reading the word object in order to allow calculating
+ *                     with different alphas.
+ * @return The activation of the item at the given time
+ */</span>
+<span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">float</span> <span class="token function">activationRecursion</span><span class="token punctuation">(</span>Date time<span class="token punctuation">,</span> VocObject word<span class="token punctuation">,</span>
+                                         List<span class="token operator">&lt;</span>InterxObject<span class="token operator">&gt;</span> interactions<span class="token punctuation">,</span>
+                                         List<span class="token operator">&lt;</span>SessionObject<span class="token operator">&gt;</span> sessions<span class="token punctuation">,</span>
+                                         <span class="token keyword">boolean</span> doLast<span class="token punctuation">,</span> <span class="token keyword">float</span> alpha<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment">// Base case for recursion: if there are no previous encounters,</span>
+    <span class="token comment">// activation is -infinity.</span>
+    <span class="token comment">// Used !before() here instead of after(), so that it acts like &gt;=</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>interactions<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">0</span> <span class="token operator">||</span>
+        <span class="token operator">!</span>interactions<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getTimestamp</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">before</span><span class="token punctuation">(</span>time<span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token keyword">return</span> Float<span class="token punctuation">.</span>NEGATIVE_INFINITY<span class="token punctuation">;</span>
+
+    <span class="token comment">// Initialize the running sum</span>
+    <span class="token keyword">float</span> runningSum <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">int</span> limit <span class="token operator">=</span> interactions<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">// - (doLast ? 0 : 1);</span>
+
+    <span class="token comment">// Iterate through all interactions before the current time</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+         i <span class="token operator">&lt;</span> limit <span class="token operator">&amp;&amp;</span> interactions<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getTimestamp</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">before</span><span class="token punctuation">(</span>time<span class="token punctuation">)</span><span class="token punctuation">;</span>
+         i<span class="token operator">++</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>doLast <span class="token operator">&amp;&amp;</span> <span class="token punctuation">(</span>i <span class="token operator">&gt;=</span> limit <span class="token operator">-</span> <span class="token number">1</span> <span class="token operator">||</span>
+                        <span class="token operator">!</span>interactions<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>i <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getTimestamp</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">before</span><span class="token punctuation">(</span>time<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+            <span class="token keyword">break</span><span class="token punctuation">;</span>
+
+        InterxObject interx <span class="token operator">=</span> interactions<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token comment">// Get the values for b_j and (t - t_j)</span>
+        <span class="token keyword">float</span> exerciseScalar <span class="token operator">=</span> <span class="token function">getExerciseScalar</span><span class="token punctuation">(</span>interx<span class="token punctuation">.</span><span class="token function">getExerciseType</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">double</span> timeDifference <span class="token operator">=</span> <span class="token function">effectiveTimeDifference</span><span class="token punctuation">(</span>interx<span class="token punctuation">.</span><span class="token function">getTimestamp</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+                                                        time<span class="token punctuation">,</span> sessions<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token comment">// If this interaction does not have a cached activation value,</span>
+        <span class="token comment">// calculate and store it</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>interx<span class="token punctuation">.</span><span class="token function">hasActivation</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+            interx<span class="token punctuation">.</span><span class="token function">storeActivationValue</span><span class="token punctuation">(</span>
+                    <span class="token function">activationRecursion</span><span class="token punctuation">(</span>interx<span class="token punctuation">.</span><span class="token function">getTimestamp</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+                                        word<span class="token punctuation">,</span> interactions<span class="token punctuation">,</span> sessions<span class="token punctuation">,</span>
+                                        <span class="token boolean">true</span><span class="token punctuation">,</span> alpha<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token comment">// b_j( t - t_j )^(-d_i,j)</span>
+        <span class="token keyword">float</span> decay <span class="token operator">=</span> <span class="token function">decay</span><span class="token punctuation">(</span>interx<span class="token punctuation">.</span><span class="token function">retrieveActivation</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> alpha<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        runningSum <span class="token operator">+=</span> exerciseScalar <span class="token operator">*</span>
+                      <span class="token punctuation">(</span><span class="token keyword">float</span><span class="token punctuation">)</span> Math<span class="token punctuation">.</span><span class="token function">pow</span><span class="token punctuation">(</span>timeDifference<span class="token punctuation">,</span> <span class="token operator">-</span>decay<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">// m_i(t) = beta_s + beta_s,i + beta_i + ln( sum(...) )</span>
+    <span class="token keyword">return</span> doLast
+           <span class="token operator">?</span> <span class="token function">activationModifiers</span><span class="token punctuation">(</span>word<span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token punctuation">(</span><span class="token keyword">float</span><span class="token punctuation">)</span> Math<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>runningSum<span class="token punctuation">)</span>
+           <span class="token operator">:</span> runningSum<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<blockquote>
+<ul>
+<li>This stuff with <code>doLast</code> can be ignored… was a bit of hackiness to be able to use this formula both for normal activation calculation and for the alpha adjustment from formula 3.10/3.11.  For normal usage, <code>doLast</code> is always true.</li>
+<li><code>activationModifiers()</code> is where beta parameters would be applied… but they don’t actually change anything here.</li>
+<li><code>getExerciseScalar()</code> returns 1f for testing exercises, 0.8f for training exercises</li>
+<li><code>effectiveTimeDifference()</code> handles the scaling of intersession time</li>
+</ul>
+</blockquote>
+<h2 id="follow-the-flowchart-figure-3.2-to-determine-the-next-item-to-present">2. Follow the flowchart (figure 3.2) to determine the next item to present</h2>
+<pre class=" language-java"><code class="prism  language-java"><span class="token comment">/**
+ * Allows the model to choose the next word to present based on the current state of the model.
+ * &lt;p&gt;
+ * The given words are ignored and will not be selected.  This is to allow moving onto the
+ * next word without having to wait for the post-interaction computation to complete.  This
+ * argument is entirely optional.
+ * &lt;p&gt;
+ * &lt;br/&gt;&lt;br/&gt;
+ * This does NOT force a recalculation of activation values, and should only be used after
+ * doing so for the selection to be meaningful.
+ *
+ * @param ignoreWords Words to ignore (not select), even if they are optimal.  Optional.
+ * @return The word most optimal to present, according to the model.
+ */</span>
+<span class="token keyword">public</span> VocObject <span class="token function">getNextWord</span><span class="token punctuation">(</span>Collection<span class="token operator">&lt;</span>VocObject<span class="token operator">&gt;</span> ignoreWords<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment">// Check that the model has been initialized, otherwise throw</span>
+    <span class="token comment">// runtime exception</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>initialized<span class="token punctuation">)</span>
+        <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">ModelNotInitializedException</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    VocObject min <span class="token operator">=</span> null<span class="token punctuation">;</span>
+    VocObject newWord <span class="token operator">=</span> null<span class="token punctuation">;</span>
+
+    <span class="token keyword">for</span> <span class="token punctuation">(</span>VocObject word <span class="token operator">:</span> interactions<span class="token punctuation">.</span><span class="token function">keySet</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token comment">// If the word does not meet the requirements for presentation,</span>
+        <span class="token comment">// ignore it</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token function">meetsRestrictions</span><span class="token punctuation">(</span>word<span class="token punctuation">)</span> <span class="token operator">||</span> ignoreWords<span class="token punctuation">.</span><span class="token function">contains</span><span class="token punctuation">(</span>word<span class="token punctuation">)</span><span class="token punctuation">)</span>
+            <span class="token keyword">continue</span><span class="token punctuation">;</span>
+        <span class="token comment">// If the word has an activation greater than 0, ignore it</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>word<span class="token punctuation">.</span><span class="token function">getActivation</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">!=</span> null <span class="token operator">&amp;&amp;</span> word<span class="token punctuation">.</span><span class="token function">getActivation</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&gt;</span> <span class="token number">0</span><span class="token punctuation">)</span>
+            <span class="token keyword">continue</span><span class="token punctuation">;</span>
+
+        <span class="token comment">// Note the first new word encountered, in case a new word needs</span>
+        <span class="token comment">// to be presented.</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>word<span class="token punctuation">.</span><span class="token function">isNew</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>newWord <span class="token operator">==</span> null<span class="token punctuation">)</span>
+                newWord <span class="token operator">=</span> word<span class="token punctuation">;</span>
+            <span class="token keyword">continue</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>min <span class="token operator">==</span> null <span class="token operator">||</span> word<span class="token punctuation">.</span><span class="token function">getActivation</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&lt;</span> min<span class="token punctuation">.</span><span class="token function">getActivation</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+            min <span class="token operator">=</span> word<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">// Selection criteria:</span>
+    <span class="token comment">// 1. Lowest word below activation threshold</span>
+    <span class="token comment">// 2. If no words below threshold, then a new word</span>
+    <span class="token comment">// 3. If there are no new words, the word with the lowest</span>
+    <span class="token comment">//      activation</span>
+
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>min <span class="token operator">==</span> null<span class="token punctuation">)</span> <span class="token comment">// Only happens if no words meet requirements</span>
+        <span class="token keyword">return</span> newWord<span class="token punctuation">;</span>
+    <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>min<span class="token punctuation">.</span><span class="token function">getActivation</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&lt;</span> ModelMath<span class="token punctuation">.</span>THRESHOLD <span class="token operator">||</span> newWord <span class="token operator">==</span> null<span class="token punctuation">)</span>
+        <span class="token keyword">return</span> min<span class="token punctuation">;</span>
+    <span class="token keyword">else</span>
+        <span class="token keyword">return</span> newWord<span class="token punctuation">;</span>
+
+<span class="token punctuation">}</span>
+</code></pre>
+<blockquote>
+<ul>
+<li>In the loop, finds the word with the lowest activation, while also keeping track of one new word in case all previously encountered words are above the forgetting threshold</li>
+</ul>
+</blockquote>
+<h2 id="test-session-boundaries">3. Test session boundaries</h2>
+<p>Test if the current time falls within a session boundary.  If not, advance the “current” time to the start of the next session.  If there is no next session, end the simulation (go to post-simulation tasks)</p>
+<p>This probably should have been done before recalculating all activations.  That’s a “woops” in retrospect &gt;_&gt;</p>
+<h2 id="calculate-current-activation-for-item-both-real-and-modelled">4. Calculate “current” activation for item, both “real” and modelled</h2>
+<p>This is different than the previous activation calculation because it <em>doesn’t</em> use the lookahead time… it wants to get a snapshot of activation NOW.  The “real” activation value is used for determining whether the simulation gives a correct answer or not, the modelled activation is calculated <em>just for the purposes of graphing the data later, and is not used by any actual model system</em>.</p>
+<pre class=" language-java"><code class="prism  language-java"><span class="token keyword">float</span> actualActivation <span class="token operator">=</span> model<span class="token punctuation">.</span><span class="token function">recalcSingleActivation</span><span class="token punctuation">(</span>
+        ModelMath<span class="token punctuation">.</span><span class="token function">advanceMilliseconds</span><span class="token punctuation">(</span>cal<span class="token punctuation">.</span><span class="token function">getTime</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token operator">-</span>ModelMath<span class="token punctuation">.</span>LOOKAHEAD_TIME<span class="token punctuation">)</span><span class="token punctuation">,</span>
+        vocObject<span class="token punctuation">,</span>
+        targetAlphas<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>vocObject<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">float</span> measuredActivation <span class="token operator">=</span> model<span class="token punctuation">.</span><span class="token function">recalcSingleActivation</span><span class="token punctuation">(</span>
+        ModelMath<span class="token punctuation">.</span><span class="token function">advanceMilliseconds</span><span class="token punctuation">(</span>cal<span class="token punctuation">.</span><span class="token function">getTime</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token operator">-</span>ModelMath<span class="token punctuation">.</span>LOOKAHEAD_TIME<span class="token punctuation">)</span><span class="token punctuation">,</span>
+        vocObject<span class="token punctuation">,</span>
+        vocObject<span class="token punctuation">.</span><span class="token function">getAlpha</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">final</span> <span class="token keyword">float</span> preAlpha <span class="token operator">=</span> vocObject<span class="token punctuation">.</span><span class="token function">getAlpha</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<blockquote>
+<ul>
+<li><code>.recalcSingleActivation()</code> is simply a different wrapper over the above-detailed activation calculation</li>
+<li>The model’s alpha estimate before the encounter is stored here for later as ‘preAlpha’</li>
+</ul>
+</blockquote>
+<h2 id="get-example-context-sentence-to-present-with-word-and-simulate-a-reaction-time">5. Get example context sentence to present with word and simulate a reaction time</h2>
+<p>Obviously, for you, this can be ignored.</p>
+<pre class=" language-java"><code class="prism  language-java">currentWord <span class="token operator">=</span> vocObject<span class="token punctuation">;</span>
+currExerciseType <span class="token operator">=</span> vocObject<span class="token punctuation">.</span><span class="token function">isNew</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+                   <span class="token operator">?</span> InterxObject<span class="token punctuation">.</span>EXERCISE_TRAIN
+                   <span class="token operator">:</span> InterxObject<span class="token punctuation">.</span>EXERCISE_TEST<span class="token punctuation">;</span>
+<span class="token keyword">int</span> sentenceLength <span class="token operator">=</span> dbManager<span class="token punctuation">.</span><span class="token function">getExampleLearnerSentence</span><span class="token punctuation">(</span>vocObject<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getSentence</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">length</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">float</span> predictedRT <span class="token operator">=</span> ModelMath<span class="token punctuation">.</span><span class="token function">predictedRT</span><span class="token punctuation">(</span>sentenceLength<span class="token punctuation">,</span>
+                                          actualActivation<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">float</span> minRT <span class="token operator">=</span> ModelMath<span class="token punctuation">.</span><span class="token function">reactionTimeCharDiscount</span><span class="token punctuation">(</span>sentenceLength<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">float</span> latency <span class="token operator">=</span> predictedRT <span class="token operator">+</span> <span class="token punctuation">(</span><span class="token keyword">float</span><span class="token punctuation">)</span> <span class="token punctuation">(</span>r<span class="token punctuation">.</span><span class="token function">nextGaussian</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+                                       <span class="token operator">*</span> Math<span class="token punctuation">.</span><span class="token function">min</span><span class="token punctuation">(</span>RT_STDDEV<span class="token punctuation">,</span>
+                                                  minRT<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+latency <span class="token operator">=</span> Math<span class="token punctuation">.</span><span class="token function">max</span><span class="token punctuation">(</span>minRT<span class="token punctuation">,</span> latency<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<blockquote>
+<ul>
+<li>Randomness in reaction times is also generated as a normal distribution, with a mean centered on the predicted reaction time (formula 3.5), with a standard deviation of 300ms, with a lower bound determined by the length of the context sentence (formula 3.16).</li>
+</ul>
+</blockquote>
+<h2 id="generate-encounter-result-based-on-recall-probability">6. Generate encounter result based on recall probability</h2>
+<pre class=" language-java"><code class="prism  language-java"><span class="token keyword">float</span> correctProb <span class="token operator">=</span> ModelMath<span class="token punctuation">.</span><span class="token function">recallProbability</span><span class="token punctuation">(</span>actualActivation<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">float</span> guess <span class="token operator">=</span> r<span class="token punctuation">.</span><span class="token function">nextFloat</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+
+String result <span class="token operator">=</span> currExerciseType<span class="token punctuation">.</span><span class="token function">equals</span><span class="token punctuation">(</span>InterxObject<span class="token punctuation">.</span>EXERCISE_TRAIN<span class="token punctuation">)</span>
+                <span class="token operator">||</span> guess <span class="token operator">&lt;=</span> correctProb
+                <span class="token operator">?</span> InterxObject<span class="token punctuation">.</span>RESULT_SUCCESS
+                <span class="token operator">:</span> InterxObject<span class="token punctuation">.</span>RESULT_FAILURE<span class="token punctuation">;</span>
+</code></pre>
+<blockquote>
+<ul>
+<li>‘.recallProbability()’ is calculated using formula 3.3 (see code below)</li>
+<li>An answer for a testing exercise is considered correct if a uniformly-random number between 0 and 1 is less than or equal to the recall probability.</li>
+</ul>
+</blockquote>
+<pre class=" language-java"><code class="prism  language-java"><span class="token comment">/**
+ * The probability of the item being recalled (p_r(m_i)) based on the activation of the
+ * item (m_i).
+ *
+ * @param activation Activation of the item, m_i.
+ * @return The probability that the item will be recalled, p_r(m_i).
+ */</span>
+<span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">float</span> <span class="token function">recallProbability</span><span class="token punctuation">(</span><span class="token keyword">float</span> activation<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>Float<span class="token punctuation">.</span><span class="token function">isInfinite</span><span class="token punctuation">(</span>activation<span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+
+    <span class="token comment">// p_r(m_i) = 1 / ( 1 + e^((tau - m_i) / s) )</span>
+    <span class="token keyword">return</span> <span class="token number">1</span> <span class="token operator">/</span> <span class="token punctuation">(</span><span class="token number">1</span> <span class="token operator">+</span> <span class="token punctuation">(</span><span class="token keyword">float</span><span class="token punctuation">)</span> Math<span class="token punctuation">.</span><span class="token function">exp</span><span class="token punctuation">(</span><span class="token punctuation">(</span>THRESHOLD <span class="token operator">-</span> activation<span class="token punctuation">)</span> <span class="token operator">/</span> RECALL_PROB_NOISE_REDUCTION<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+</code></pre>
+<h2 id="generate-new-encounter-object">7. Generate new encounter object</h2>
+<p>This will obviously look much different for you… this is where a <code>LearnEncounter</code> will be created, and your specific <code>LearnEncounter</code> subclass can have fields for the current event or for alpha/activation, etc, up to you.  Mine from the thesis just looks like this:</p>
+<pre class=" language-java"><code class="prism  language-java"><span class="token keyword">final</span> InterxObject interx <span class="token operator">=</span>
+        <span class="token keyword">new</span> <span class="token class-name">InterxBuilder</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+		        <span class="token punctuation">.</span><span class="token function">setCharCount</span><span class="token punctuation">(</span>sentenceLength<span class="token punctuation">)</span>
+		        <span class="token punctuation">.</span><span class="token function">setSession</span><span class="token punctuation">(</span>currSimSession<span class="token punctuation">)</span>
+		        <span class="token punctuation">.</span><span class="token function">setWord</span><span class="token punctuation">(</span>vocObject<span class="token punctuation">)</span>
+		        <span class="token punctuation">.</span><span class="token function">setTimestamp</span><span class="token punctuation">(</span>cal<span class="token punctuation">.</span><span class="token function">getTime</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+		        <span class="token punctuation">.</span><span class="token function">setExerciseType</span><span class="token punctuation">(</span>currExerciseType<span class="token punctuation">)</span>
+		        <span class="token punctuation">.</span><span class="token function">setLatency</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">)</span> latency<span class="token punctuation">)</span>
+		        <span class="token punctuation">.</span><span class="token function">setResult</span><span class="token punctuation">(</span>result<span class="token punctuation">)</span>
+		        <span class="token punctuation">.</span><span class="token function">setPreAlpha</span><span class="token punctuation">(</span>preAlpha<span class="token punctuation">)</span>
+		        <span class="token punctuation">.</span><span class="token function">setPreActivation</span><span class="token punctuation">(</span>measuredActivation<span class="token punctuation">)</span>
+		        <span class="token punctuation">.</span><span class="token function">buildWithoutInserting</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<blockquote>
+<ul>
+<li><code>.buildWithoutInserting()</code> means the object isn’t automatically entered into the local database… since its just for the simulation</li>
+</ul>
+</blockquote>
+<h2 id="advance-the-current-time">8. Advance the current time</h2>
+<pre class=" language-java"><code class="prism  language-java"><span class="token keyword">int</span> advanceTime <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">)</span> latency <span class="token operator">+</span> INPUT_TIME<span class="token punctuation">;</span>
+<span class="token keyword">if</span> <span class="token punctuation">(</span>currExerciseType<span class="token punctuation">.</span><span class="token function">equals</span><span class="token punctuation">(</span>InterxObject<span class="token punctuation">.</span>EXERCISE_TEST<span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    advanceTime <span class="token operator">+=</span> <span class="token punctuation">(</span>result<span class="token punctuation">.</span><span class="token function">equals</span><span class="token punctuation">(</span>InterxObject<span class="token punctuation">.</span>RESULT_SUCCESS<span class="token punctuation">)</span>
+                    <span class="token operator">?</span> EXERCISE_CORRECT_WAIT_DELAY
+                    <span class="token operator">:</span> EXERCISE_INCORRECT_WAIT_DELAY<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+cal<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>Calendar<span class="token punctuation">.</span>MILLISECOND<span class="token punctuation">,</span> advanceTime<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<blockquote>
+<ul>
+<li><code>INPUT_TIME</code> represents some average amount of time it takes for the user to type in the answer (which delays the appearance of the next word)</li>
+<li>Also, testing exercises give feedback on correctness, which is displayed for a period of time that needs to be factored in</li>
+</ul>
+</blockquote>
+<h2 id="add-the-encounter-to-the-models-encounter-history-and-recalculate-alpha">9. Add the encounter to the model’s encounter history and recalculate alpha</h2>
+<p>This is factoring in reaction times.  Since you are not using reaction times, you would plug in your own alpha-recalculation methodology here.</p>
+<pre class=" language-java"><code class="prism  language-java">VocObject word <span class="token operator">=</span> interx<span class="token punctuation">.</span><span class="token function">getWord</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// If the word is not yet in the model, add it</span>
+<span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>interactions<span class="token punctuation">.</span><span class="token function">containsKey</span><span class="token punctuation">(</span>word<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    interactions<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span>word<span class="token punctuation">,</span> <span class="token keyword">new</span> <span class="token class-name">ArrayList</span><span class="token operator">&lt;</span>InterxObject<span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// Add the interaction to the model</span>
+interactions<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>word<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>interx<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">if</span> <span class="token punctuation">(</span>interactions<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>word<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">!=</span> <span class="token number">1</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">float</span> newAlpha <span class="token operator">=</span> ModelMath<span class="token punctuation">.</span><span class="token function">newAlpha</span><span class="token punctuation">(</span>interx<span class="token punctuation">,</span> interactions<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>word<span class="token punctuation">)</span><span class="token punctuation">,</span> sessions<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    word<span class="token punctuation">.</span><span class="token function">setAlpha</span><span class="token punctuation">(</span>newAlpha<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    interx<span class="token punctuation">.</span><span class="token function">setPostAlpha</span><span class="token punctuation">(</span>newAlpha<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">else</span>
+    interx<span class="token punctuation">.</span><span class="token function">setPostAlpha</span><span class="token punctuation">(</span>interx<span class="token punctuation">.</span><span class="token function">getPreAlpha</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<blockquote>
+<ul>
+<li>The alpha value that was calculated for the item after the encounter is also stored in the encounter object</li>
+<li><code>.newAlpha()</code> (and the methods it references, <code>reactionTimeError()</code> and <code>latestAlpha()</code>) uses formulas 3.9-3.12 (see code below)</li>
+</ul>
+</blockquote>
+<pre class=" language-java"><code class="prism  language-java"><span class="token comment">/**
+ * The alpha value that best fits the data, adjusting the existing value to account for the
+ * latest interaction.
+ *
+ * @param latest       The latest interaction.  This item should be the final item in the given
+ *                     list.
+ * @param interactions The list of all interactions for the word
+ * @param sessions     List of all study sessions, in order to scale the time between them.
+ * @return The new alpha value that best fits the word's interactions
+ */</span>
+<span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">float</span> <span class="token function">newAlpha</span><span class="token punctuation">(</span>InterxObject latest<span class="token punctuation">,</span> List<span class="token operator">&lt;</span>InterxObject<span class="token operator">&gt;</span> interactions<span class="token punctuation">,</span>
+                             List<span class="token operator">&lt;</span>SessionObject<span class="token operator">&gt;</span> sessions<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    VocObject word <span class="token operator">=</span> latest<span class="token punctuation">.</span><span class="token function">getWord</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment">// Get the two alpha values to search between.</span>
+    <span class="token keyword">float</span> oldAlpha <span class="token operator">=</span> word<span class="token punctuation">.</span><span class="token function">getAlpha</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">float</span> latestAlpha <span class="token operator">=</span> <span class="token function">latestAlpha</span><span class="token punctuation">(</span>latest<span class="token punctuation">,</span> interactions<span class="token punctuation">,</span> sessions<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment">// Use these to define the lower and upper bounds for the alpha</span>
+    <span class="token keyword">float</span> lower <span class="token operator">=</span> Math<span class="token punctuation">.</span><span class="token function">min</span><span class="token punctuation">(</span>oldAlpha<span class="token punctuation">,</span> latestAlpha<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">float</span> upper <span class="token operator">=</span> Math<span class="token punctuation">.</span><span class="token function">max</span><span class="token punctuation">(</span>oldAlpha<span class="token punctuation">,</span> latestAlpha<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">float</span> mid <span class="token operator">=</span> <span class="token punctuation">(</span>lower <span class="token operator">+</span> upper<span class="token punctuation">)</span> <span class="token operator">/</span> <span class="token number">2</span><span class="token punctuation">;</span>
+
+    <span class="token comment">// Conduct several iterations of a binary search to converge on the optimal alpha value</span>
+    <span class="token comment">// between the calculated bounds.</span>
+
+    <span class="token comment">// Iterate a finite number of times, defined by a constant</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> ALPHA_CONVERGENCE_ITERATIONS<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token comment">// Calculate the total error for each alpha value</span>
+        <span class="token keyword">float</span> lowerError <span class="token operator">=</span> <span class="token function">reactionTimeError</span><span class="token punctuation">(</span>word<span class="token punctuation">,</span> interactions<span class="token punctuation">,</span> sessions<span class="token punctuation">,</span> lower<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">float</span> upperError <span class="token operator">=</span> <span class="token function">reactionTimeError</span><span class="token punctuation">(</span>word<span class="token punctuation">,</span> interactions<span class="token punctuation">,</span> sessions<span class="token punctuation">,</span> upper<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token comment">// Adjust the search space based on which error was lower</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>lowerError <span class="token operator">&lt;</span> upperError<span class="token punctuation">)</span>
+            upper <span class="token operator">=</span> mid<span class="token punctuation">;</span>
+        <span class="token keyword">else</span>
+            lower <span class="token operator">=</span> mid<span class="token punctuation">;</span>
+
+        mid <span class="token operator">=</span> <span class="token punctuation">(</span>lower <span class="token operator">+</span> upper<span class="token punctuation">)</span> <span class="token operator">/</span> <span class="token number">2</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+
+    <span class="token comment">// Return the optimized alpha value</span>
+    <span class="token keyword">return</span> <span class="token function">bindValue</span><span class="token punctuation">(</span>mid<span class="token punctuation">,</span> ALPHA_MIN<span class="token punctuation">,</span> ALPHA_MAX<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token punctuation">}</span>
+
+
+
+
+<span class="token comment">/**
+ * The alpha value that best fits the last interaction based on it's observed reaction time.
+ *
+ * @param latest       The latest interaction.  This item should be the final item in the given
+ *                     list.
+ * @param interactions The list of all interactions for the word
+ * @param sessions     List of all study sessions, in order to scale the time between them.
+ * @return The alpha value that fits the latest interaction
+ */</span>
+<span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">float</span> <span class="token function">latestAlpha</span><span class="token punctuation">(</span>InterxObject latest<span class="token punctuation">,</span> List<span class="token operator">&lt;</span>InterxObject<span class="token operator">&gt;</span> interactions<span class="token punctuation">,</span>
+                                List<span class="token operator">&lt;</span>SessionObject<span class="token operator">&gt;</span> sessions<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>interactions<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&lt;=</span> <span class="token number">2</span><span class="token punctuation">)</span>
+        <span class="token keyword">return</span> ModelMath<span class="token punctuation">.</span>ALPHA_DEFAULT<span class="token punctuation">;</span>
+
+    <span class="token comment">// Use a lookahead time for reference</span>
+    Date time <span class="token operator">=</span> latest<span class="token punctuation">.</span><span class="token function">getTimestamp</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    Date previousTime <span class="token operator">=</span> interactions<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>interactions<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getTimestamp</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    VocObject word <span class="token operator">=</span> latest<span class="token punctuation">.</span><span class="token function">getWord</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment">// Calculate the activation as if the latest interaction didn't occur</span>
+    <span class="token keyword">float</span> activationWithoutLatest <span class="token operator">=</span> <span class="token function">activationRecursion</span><span class="token punctuation">(</span>time<span class="token punctuation">,</span> word<span class="token punctuation">,</span> interactions<span class="token punctuation">,</span> sessions<span class="token punctuation">,</span>
+                                                        <span class="token boolean">false</span><span class="token punctuation">,</span> word<span class="token punctuation">.</span><span class="token function">getAlpha</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+
+    <span class="token comment">// Calculate the observed level of activation based on the measured reaction time</span>
+    <span class="token keyword">float</span> observedActivation <span class="token operator">=</span> <span class="token function">observedActivation</span><span class="token punctuation">(</span>latest<span class="token punctuation">.</span><span class="token function">getCharCount</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">effectiveRT</span><span class="token punctuation">(</span>latest<span class="token punctuation">)</span><span class="token punctuation">)</span>
+                               <span class="token operator">-</span> <span class="token function">activationModifiers</span><span class="token punctuation">(</span>word<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment">// Should activation modifiers be included here?</span>
+
+    <span class="token comment">// Calculate the decay value for the latest interaction</span>
+    <span class="token keyword">double</span> timeDifference <span class="token operator">=</span> <span class="token function">effectiveTimeDifference</span><span class="token punctuation">(</span>previousTime<span class="token punctuation">,</span> time<span class="token punctuation">,</span> sessions<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">double</span> activationDifference <span class="token operator">=</span> Math<span class="token punctuation">.</span><span class="token function">exp</span><span class="token punctuation">(</span>observedActivation<span class="token punctuation">)</span> <span class="token operator">-</span> activationWithoutLatest<span class="token punctuation">;</span>
+
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>activationDifference <span class="token operator">&lt;=</span> <span class="token number">0</span><span class="token punctuation">)</span>
+        <span class="token keyword">return</span> ALPHA_MAX<span class="token punctuation">;</span>
+
+    <span class="token keyword">float</span> lastDecay <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token keyword">float</span><span class="token punctuation">)</span> <span class="token operator">-</span><span class="token function">logN</span><span class="token punctuation">(</span>activationDifference<span class="token punctuation">,</span> timeDifference<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment">// Clear activation cache in interactions list here?  Probably not</span>
+
+    <span class="token comment">// Calculate the activation for the word in the instant before the latest encounter</span>
+    <span class="token keyword">float</span> activationBeforePrevious <span class="token operator">=</span> <span class="token function">activationRecursion</span><span class="token punctuation">(</span>previousTime<span class="token punctuation">,</span>
+                                                         word<span class="token punctuation">,</span>
+                                                         interactions<span class="token punctuation">,</span> sessions<span class="token punctuation">,</span>
+                                                         <span class="token boolean">true</span><span class="token punctuation">,</span> word<span class="token punctuation">.</span><span class="token function">getAlpha</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment">// Clear the stored activation values</span>
+    <span class="token function">clearCachedActivation</span><span class="token punctuation">(</span>interactions<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment">// Calculate the alpha that fits the latest interaction</span>
+    <span class="token keyword">return</span> lastDecay <span class="token operator">-</span> <span class="token punctuation">(</span><span class="token keyword">float</span><span class="token punctuation">)</span> <span class="token punctuation">(</span>DECAY_SCALAR <span class="token operator">*</span> Math<span class="token punctuation">.</span><span class="token function">exp</span><span class="token punctuation">(</span>activationBeforePrevious<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+
+
+
+ <span class="token comment">/**
+ * The total reaction time error for the word across all of the given reactions using
+ * the given alpha.  This is equivalent to sum of the differences between the predicted
+ * and observed reaction times for all encounters.
+ *
+ * @param word         The word to calculate the error for
+ * @param interactions List of all interactions for the word
+ * @param sessions     List of all study sessions, in order to scale the time between them.
+ * @param alpha        The alpha value to use (instead of whatever value is stored by the word)
+ * @return The total reaction time error.
+ */</span>
+<span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">float</span> <span class="token function">reactionTimeError</span><span class="token punctuation">(</span>VocObject word<span class="token punctuation">,</span> List<span class="token operator">&lt;</span>InterxObject<span class="token operator">&gt;</span> interactions<span class="token punctuation">,</span>
+                                      List<span class="token operator">&lt;</span>SessionObject<span class="token operator">&gt;</span> sessions<span class="token punctuation">,</span> <span class="token keyword">float</span> alpha<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment">// Initialize running sum</span>
+    <span class="token keyword">float</span> totalError <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token comment">// Iterate through all interactions</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span>InterxObject interx <span class="token operator">:</span> interactions<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token comment">// Calculate the level of activation at the instant before the encounter</span>
+        <span class="token keyword">float</span> activation <span class="token operator">=</span> <span class="token function">activationRecursion</span><span class="token punctuation">(</span>interx<span class="token punctuation">.</span><span class="token function">getTimestamp</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> word<span class="token punctuation">,</span> interactions<span class="token punctuation">,</span>
+                                               sessions<span class="token punctuation">,</span> <span class="token boolean">true</span><span class="token punctuation">,</span> alpha<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token comment">// Clear cached activation values</span>
+        <span class="token function">clearCachedActivation</span><span class="token punctuation">(</span>interactions<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token comment">// If this was the first encounter, ignore it</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>Float<span class="token punctuation">.</span><span class="token function">isInfinite</span><span class="token punctuation">(</span>activation<span class="token punctuation">)</span><span class="token punctuation">)</span>
+            <span class="token keyword">continue</span><span class="token punctuation">;</span>
+
+        <span class="token comment">// Calculate the predicted reaction time based on the calculated activation</span>
+        <span class="token keyword">float</span> predicted <span class="token operator">=</span> <span class="token function">predictedRT</span><span class="token punctuation">(</span>interx<span class="token punctuation">.</span><span class="token function">getCharCount</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> activation<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token comment">// Find the difference between the measured reaction time and the predicted reaction</span>
+        <span class="token comment">// time, and add it to the running total.</span>
+        totalError <span class="token operator">+=</span> Math<span class="token punctuation">.</span><span class="token function">abs</span><span class="token punctuation">(</span><span class="token function">effectiveRT</span><span class="token punctuation">(</span>interx<span class="token punctuation">)</span> <span class="token operator">-</span> predicted<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">// Return the total error</span>
+    <span class="token keyword">return</span> totalError<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<blockquote>
+<ul>
+<li><code>bindValue()</code> returns the first argument if it is within the bounds defined by the second and third arguments.  If it isn’t, then returns the lower bound if its below, or the upper bound if above.  This function just ensures the value falls within an allowed range.</li>
+<li><code>effectiveRT()</code> modifies the measured reaction time based on the correctness on the encounter and the bounds that limit reaction time (see code below)</li>
+<li><code>latestAlpha()</code> (shown above) implements formulas 3.11 and 3.12 directly</li>
+<li>In <code>latestAlpha()</code>, the lines <code>if (activationDifference &lt;= 0) return ALPHA_MAX;</code> represent the failsafe to prevent taking the logarithm of a negative number.  <code>ALPHA_MAX</code> is 0.5; alpha values in general cannot exceed this value (an arbitrary choice by me).</li>
+<li><code>predictedRT()</code> implements formula 3.9</li>
+</ul>
+</blockquote>
+<pre class=" language-java"><code class="prism  language-java"><span class="token comment">/**
+ * The modified reaction time based on the result of the presentation.
+ *
+ * @param charCount The number of characters in the context
+ * @param latency   The measured reaction time, in milliseconds.
+ * @param result    String describing the result, {@link InterxObject#RESULT_SUCCESS} or
+ *                  {@link InterxObject#RESULT_FAILURE}.
+ * @return The modified effective reaction time for the presentation, in milliseconds.
+ */</span>
+<span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">float</span> <span class="token function">effectiveRT</span><span class="token punctuation">(</span><span class="token keyword">int</span> charCount<span class="token punctuation">,</span> <span class="token keyword">float</span> latency<span class="token punctuation">,</span> String result<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">float</span> reactionTimeCharDiscount <span class="token operator">=</span> <span class="token function">reactionTimeCharDiscount</span><span class="token punctuation">(</span>charCount<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">float</span> maxRT <span class="token operator">=</span> <span class="token function">maxRT</span><span class="token punctuation">(</span>charCount<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">switch</span> <span class="token punctuation">(</span>result<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">case</span> InterxObject<span class="token punctuation">.</span>RESULT_FAILURE<span class="token operator">:</span>
+            <span class="token keyword">return</span> maxRT<span class="token punctuation">;</span>
+        <span class="token keyword">case</span> InterxObject<span class="token punctuation">.</span>RESULT_SUCCESS<span class="token operator">:</span>
+        <span class="token keyword">default</span><span class="token operator">:</span>
+            <span class="token keyword">return</span> Math<span class="token punctuation">.</span><span class="token function">min</span><span class="token punctuation">(</span>maxRT<span class="token punctuation">,</span> Math<span class="token punctuation">.</span><span class="token function">max</span><span class="token punctuation">(</span>latency<span class="token punctuation">,</span> reactionTimeCharDiscount <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<blockquote>
+<ul>
+<li><code>reactionTimeCharDiscount()</code> implements formula 3.16.</li>
+</ul>
+</blockquote>
+<h2 id="wrap-the-encounter-in-a-simulation-specific-encounter-object-and-store-it">10. Wrap the encounter in a simulation-specific encounter object and store it</h2>
+<p>This simulation-specific encounter object simply stores the “real” alpha along with all other interaction data, and is just used for rendering the data later.</p>
+<h2 id="go-to-step-1">11.  Go to step 1</h2>
+<h1 id="post-simulation">Post-simulation</h1>
+<p>Writes all interactions and sessions to CSV files to be read by Python script for graphing.</p>
+
+    </div>
+  </div>
+</body>
+
+</html>
