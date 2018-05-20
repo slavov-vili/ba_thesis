@@ -26,11 +26,20 @@ for item in items:
 
 
 def print_item_info(item, items_info):
+    """
+    Prints out all the information for a specific item.
+    Arguments:
+    item       -- the item, whose information will be printed
+    items_info -- the map, containing each item's information
+    Returns:
+    nothing, prints to stdout
+    """
     print("Item:", item)
-    print("Real Alpha:", items_info[item].alpha_real)
+    print("Real Alpha:",  items_info[item].alpha_real)
     print("Model Alpha:", items_info[item].alpha_model)
-    print("Encounters(", len(items_info[item].encounters),"):")
-    for i, enc in enumerate(items_info[item].encounters):
+    item_encounters = items_info[item].encounters
+    print("Encounters(", len(item_encounters),"):")
+    for i, enc in enumerate(item_encounters):
         print("Encounter", i, "time:",        enc.time)
         print("Encounter", i, "alpha:",       enc.alpha)
         print("Encounter", i, "activation:",  enc.activation)
@@ -42,25 +51,32 @@ def print_item_info(item, items_info):
 def graph_item_activation(item, items_info, learn_start):
     """
     Graphs the activation of the item throughout the learning process.
-    item        -- the item, whose information is being graphed
+    Arguments:
+    item        -- the item, whose activation is being graphed
+    items_info  -- the map, containing each item's information
     learn_start -- the time when the learning process started
+    Returns:
+    nothing, shows the graph
     """
 
-    plot_bounds = (0, 6000)
+    plot_bounds_x = (0, 6000)
+    plot_bounds_y = (-1.5, 1.5)
     x = []
     y = []
     item_encounters = items_info[item].encounters
     # add the first encounter's information
     x.append((item_encounters[0].time - learn_start).total_seconds())
     y.append(item_encounters[0].activation)
+
     # for each two consecutive encounters
     for i in range(0, len(item_encounters)-1):
         prev_enc = item_encounters[i]
         next_enc = item_encounters[i+1]
+        time_between_encounters = (next_enc.time - prev_enc.time).total_seconds()
 
         secs = 1
         # for each second between the two encounters
-        while secs < (next_enc.time - prev_enc.time).total_seconds():
+        while secs < time_between_encounters:
             cur_time = prev_enc.time + datetime.timedelta(seconds=secs)
             # calculate the item's activation and add it to the graphing lists
             cur_act = calc_activation(item, prev_enc.alpha, item_encounters, [], cur_time)
@@ -68,13 +84,13 @@ def graph_item_activation(item, items_info, learn_start):
             y.append(cur_act)
             # increment the second counter
             secs += 1
+
         # add the next encounter's information
         x.append((next_enc.time - learn_start).total_seconds())
         y.append(next_enc.activation)
 
     # plot the recall threshold
-    plt.plot([plot_bounds[0], plot_bounds[1]], [-0.8, -0.8], color='k', linestyle='--')
-    # TODO: mark every encounter
+    plt.plot([plot_bounds_x[0], plot_bounds_x[1]], [model_params["tau"], model_params["tau"]], color='k', linestyle='--')
     # plot the actual data
     plt.plot(x, y, color='g')
 
@@ -82,7 +98,7 @@ def graph_item_activation(item, items_info, learn_start):
     plt.title("Plot for \'" + item + "\'")
     plt.xlabel("Elapsed Session Time (seconds)")
     plt.ylabel("Item Activation")
-    plt.axis([plot_bounds[0], plot_bounds[1],-1.5,1.5])
+    plt.axis([plot_bounds_x[0], plot_bounds_x[1], plot_bounds_y[0], plot_bounds_y[1]])
     # show the plot
     plt.show()
     return
@@ -111,13 +127,14 @@ def learn(items, items_info, sesh_count, sesh_length):
     for sesh_id in range(sesh_count):
         # set the session's starting time
         sesh_start = cur_time
+        sesh_end   = sesh_start + datetime.timedelta(seconds=sesh_length)
         print("\n")
         print("Session", sesh_id, "start:", sesh_start)
 
         # while there is time in the session
-        while cur_time <= (sesh_start + datetime.timedelta(seconds=sesh_length)):
+        while cur_time < sesh_end:
             # get the next item to be presented
-            item, item_act, next_new_item_idx = get_next_item(items, next_new_item_idx, items_info, cur_time)
+            item, item_act, next_new_item_idx = get_next_item(items, items_info, cur_time, next_new_item_idx)
             print("\nEncountered '", item, "' at", cur_time)
             print("Encounters:", len(items_info[item].encounters))
             print("Activation:", item_act)
@@ -160,9 +177,16 @@ def learn(items, items_info, sesh_count, sesh_length):
 
 
 
-def get_next_item(items, next_new_item_idx, items_info, time):
+def get_next_item(items, items_info, time, next_new_item_idx):
     """
-    Returns the next item to be presented based on activation.
+    Finds the next item to be presented based on their activation.
+    Arguments:
+    items             -- the items to be considered when choosing the next item
+    items_info        -- the map, containing each item's information
+    time              -- the time, at which the next item should be presented
+    next_new_item_idx -- the index of the next NEW item from the list
+    Returns:
+    the next item to be presented, its activation and the index of the next NEW item
     """
 
     # store the index of the next new item
@@ -170,6 +194,7 @@ def get_next_item(items, next_new_item_idx, items_info, time):
 
     # maps an item to its activation
     item_to_act = {}
+    # TODO: calculate activation for 15 seconds in future
     # recalculate each SEEN item's activation at current time with their updated alphas
     for item in items[:next_new_item_idx_inc]:
         item_to_act[item] = calc_activation(item, items_info[item].alpha_model, items_info[item].encounters, [], time)
@@ -210,6 +235,7 @@ def get_next_item(items, next_new_item_idx, items_info, time):
 
 
 
+# TODO: remove time + 15 seconds
 def calc_activation(item, alpha, encounters, activations, cur_time):
     """
     Calculate the activation for a given item at a given timestamp.
