@@ -165,3 +165,21 @@ ramscar_et_al_2016
         * high frequency are spread     across genders
         * low  frequency are concentrated in 1 gender
     - 
+
+
+
+sense_2017_phd_thesis
+0. Chapter 1
+    - summary of what's to follow
+    - Part I
+        * Chapter 2 describes an adaptive user-specific learning model
+        * Chapter 3 zooms in on the decay parameter
+            : How reliably can we estimate the parameter
+            : "An individual’s rate of forgetting is stable over time but differs across materials"
+        * Chapter 4 shows a very high, negative correlation between the estimated rate of forgetting and subsequent delayed recall performance
+        * 
+    - Part II
+        * Tries to figure out which parts of memory take part in the encoding process
+        * Final Chapter discusses in more detail how the estimated rate of forgetting relates to delayed recall performance
+1. Chapter 2
+    

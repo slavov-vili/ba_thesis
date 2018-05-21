@@ -149,17 +149,17 @@ def learn(items, items_info, sesh_count, sesh_length):
             # adjust values depending on outcome
             if guessed:
                 if items_info[item].alpha_model > model_params["alpha_min"]:
-                    items_info[item].alpha_model -= item_rec / 10
+                    items_info[item].alpha_model -= (1 - item_rec) / 40
             else:
                 if items_info[item].alpha_model < model_params["alpha_max"]:
-                    items_info[item].alpha_model += item_rec / 10
+                    items_info[item].alpha_model += item_rec / 40
                 items_info[item].incorrect += 1
 
             # add the current encounter to the item's encounter list
             items_info[item].encounters.append(Bunch(time=cur_time, alpha=items_info[item].alpha_model, activation=item_act, was_guessed=guessed))
 
             # increment the current time to account for the length of the encounter
-            cur_time += datetime.timedelta(seconds=random.randint(3, 15))
+            cur_time += datetime.timedelta(seconds=random.randint(3, 10))
 
         # increment the current time to account for the intersession time
         scaled_intersesh_time = (24 * model_params["delta"]) * 3600
@@ -170,7 +170,8 @@ def learn(items, items_info, sesh_count, sesh_length):
     print("\nFinal results:")
     for item in items:
         print("Item:'", item, "'")
-        print("Alpha:", items_info[item].alpha_model)
+        print("Alpha Real:", items_info[item].alpha_real)
+        print("Alpha Model:", items_info[item].alpha_model)
         print("Encounters:", len(items_info[item].encounters))
         print("Incorrect:", items_info[item].incorrect)
     return learn_start
