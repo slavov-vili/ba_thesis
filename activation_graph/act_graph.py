@@ -22,7 +22,7 @@ items = ["noodles", "where", "many", "way", "market", "castle", "group", "restau
 # maps each item to its values
 items_info = {}
 for item in items:
-    items_info[item] = Bunch(alpha_real=random.uniform(0.1, 0.5), alpha_model=model_params["alpha_d"], encounters=[], incorrect=0)
+    items_info[item] = Bunch(alpha_real=random.uniform(model_params["alpha_min"], model_params["alpha_max"]), alpha_model=model_params["alpha_d"], encounters=[], incorrect=0)
 
 
 def print_item_info(item, items_info):
@@ -48,7 +48,7 @@ def print_item_info(item, items_info):
     print("Incorrect:", items_info[item].incorrect)
 
 
-def graph_item_activation(item, items_info, learn_start):
+def graph_item_info(item, items_info, learn_start):
     """
     Graphs the activation of the item throughout the learning process.
     Arguments:
@@ -59,14 +59,21 @@ def graph_item_activation(item, items_info, learn_start):
     nothing, shows the graph
     """
 
-    plot_bounds_x = (0, 6000)
-    plot_bounds_y = (-1.5, 1.5)
-    x = []
-    y = []
+    # set the graph bounds
+    plot_bounds_x_time  = (0, 6000)
+    plot_bounds_y_act   = (-1.5, 1.5)
+    plot_bounds_y_alpha = (model_params["alpha_min"], model_params["alpha_max"])
+
+    # store the x and y values for activations and alphas
+    x_act = []
+    y_act = []
+    y_alpha = []
+
     item_encounters = items_info[item].encounters
     # add the first encounter's information
-    x.append(calc_time_diff(item_encounters[0].time, learn_start))
-    y.append(item_encounters[0].activation)
+    x_act.append(calc_time_diff(item_encounters[0].time, learn_start))
+    y_act.append(item_encounters[0].activation)
+    y_alpha.append(item_encounters[0].alpha)
 
     # for each two consecutive encounters
     for i in range(0, len(item_encounters)-1):
@@ -78,24 +85,42 @@ def graph_item_activation(item, items_info, learn_start):
         while cur_time < next_enc.time:
             # calculate the item's activation and add it to the graphing lists
             cur_act = calc_activation(item, prev_enc.alpha, [enc for enc in item_encounters if enc.time < cur_time], [], cur_time)
-            x.append(calc_time_diff(cur_time, learn_start))
-            y.append(cur_act)
+            # add the encounter's activation and alpha at its specific time
+            x_act.append(calc_time_diff(cur_time, learn_start))
+            y_act.append(cur_act)
+            y_alpha.append(prev_enc.alpha)
+            # increment the current time
             cur_time += datetime.timedelta(seconds=1)
 
         # add the next encounter's information
-        x.append(calc_time_diff(next_enc.time, learn_start))
-        y.append(next_enc.activation)
+        x_act.append(calc_time_diff(next_enc.time, learn_start))
+        y_act.append(next_enc.activation)
+        y_alpha.append(next_enc.alpha)
 
+    # create a subplot for activations
+    plt.subplot(2,1,1)
     # plot the recall threshold
-    plt.plot([plot_bounds_x[0], plot_bounds_x[1]], [model_params["tau"], model_params["tau"]], color='k', linestyle='--')
-    # plot the actual data
-    plt.plot(x, y, color='g')
-
+    plt.plot([plot_bounds_x_time[0], plot_bounds_x_time[1]], [model_params["tau"], model_params["tau"]], color='r', linestyle='--')
+    # plot the item's activations
+    plt.plot(x_act, y_act, color='g')
     # Set plot information
     plt.title("Plot for \'" + item + "\'")
-    plt.xlabel("Elapsed Session Time (seconds)")
     plt.ylabel("Item Activation")
-    plt.axis([plot_bounds_x[0], plot_bounds_x[1], plot_bounds_y[0], plot_bounds_y[1]])
+    # set the plot's axes
+    plt.axis([plot_bounds_x_time[0], plot_bounds_x_time[1], plot_bounds_y_act[0], plot_bounds_y_act[1]])
+
+    # create a subplot for alphas
+    plt.subplot(2,1,2)
+    # plot the item's actual alpha
+    plt.plot([plot_bounds_x_time[0], plot_bounds_x_time[1]], [items_info[item].alpha_real, items_info[item].alpha_real], color='k', linestyle='--')
+    # plot the item's alphas
+    plt.plot(x_act, y_alpha, color='b')
+    # Set plot information
+    plt.xlabel("Elapsed Session Time (seconds)")
+    plt.ylabel("Item Alpha")
+    # set the plot's axes
+    plt.axis([plot_bounds_x_time[0], plot_bounds_x_time[1], plot_bounds_y_alpha[0], plot_bounds_y_alpha[1]])
+
     # show the plot
     plt.show()
     return
