@@ -65,28 +65,25 @@ def graph_item_activation(item, items_info, learn_start):
     y = []
     item_encounters = items_info[item].encounters
     # add the first encounter's information
-    x.append((item_encounters[0].time - learn_start).total_seconds())
+    x.append(calc_time_diff(item_encounters[0].time, learn_start))
     y.append(item_encounters[0].activation)
 
     # for each two consecutive encounters
     for i in range(0, len(item_encounters)-1):
         prev_enc = item_encounters[i]
         next_enc = item_encounters[i+1]
-        time_between_encounters = (next_enc.time - prev_enc.time).total_seconds()
 
-        secs = 1
+        cur_time = prev_enc.time + datetime.timedelta(seconds=1)
         # for each second between the two encounters
-        while secs < time_between_encounters:
-            cur_time = prev_enc.time + datetime.timedelta(seconds=secs)
+        while cur_time < next_enc.time:
             # calculate the item's activation and add it to the graphing lists
             cur_act = calc_activation(item, prev_enc.alpha, [enc for enc in item_encounters if enc.time < cur_time], [], cur_time)
-            x.append((cur_time - learn_start).total_seconds())
+            x.append(calc_time_diff(cur_time, learn_start))
             y.append(cur_act)
-            # increment the second counter
-            secs += 1
+            cur_time += datetime.timedelta(seconds=1)
 
         # add the next encounter's information
-        x.append((next_enc.time - learn_start).total_seconds())
+        x.append(calc_time_diff(next_enc.time, learn_start))
         y.append(next_enc.activation)
 
     # plot the recall threshold
@@ -277,7 +274,7 @@ def calc_activation(item, alpha, encounters, activations, cur_time):
 
             # calculate the time difference between the current time and the previous encounter
             # AND convert it to seconds
-            time_diff = (cur_time - enc_bunch.time).total_seconds()
+            time_diff = calc_time_diff(cur_time, enc_bunch.time)
             # calculate the item's decay at the encounter
             enc_decay = calc_decay(enc_act, alpha)
 
@@ -325,6 +322,15 @@ def calc_recall_prob(activation):
     # calculate the probability of recall
     Pr = 1 / (1 + np.exp(((model_params["tau"] - activation) / model_params["s"])))
     return Pr
+
+
+
+def calc_time_diff(cur_time, start_time):
+    """
+    Calculates the difference between a starting time and the current time.
+    The time difference is represented in total seconds.
+    """
+    return (cur_time - start_time).total_seconds()
 
 
 
