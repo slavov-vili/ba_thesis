@@ -14,6 +14,10 @@ model_params = {"alpha_d":   0.3,   # default alpha for all items
                 "delta":     0.025} # factor to scale down intersession time
 
 
+act_call_count  = 0
+act_in_progress = False
+
+
 # list all items to be learned
 items = ["noodles", "where", "many", "way", "market", "castle", "group", "restaurant", "amazing", "to visit", "each", "tree", "British", "adult", "a day", "open(from...to...)", "furniture", "a year", "open", "free time", "canal", "Chinese", "stall", "playing field", "fancy", "a week", "to enjoy", "best", "wonderful", "expensive", "to add", "boat", "to join in", "view", "canoeing", "flower", "area"] # end items list
 
@@ -22,6 +26,46 @@ items = ["noodles", "where", "many", "way", "market", "castle", "group", "restau
 items_info = {}
 for item in items:
     items_info[item] = Bunch(alpha_real=random.uniform(model_params["alpha_min"], model_params["alpha_max"]), alpha_model=model_params["alpha_d"], encounters=[], incorrect=0)
+
+
+
+def test_act_call_count(item, items_info, enc_count):
+    """
+    Prints how many times the activation function will be called given a number of encounters.
+    NOTE: ALWAYS do learning before trying to count the calls
+    """
+
+    encounters    = items_info[item].encounters[:enc_count]
+    last_enc_time = encounters[enc_count-1].time
+
+    start = datetime.datetime.now()
+    _, act_count = calc_activation(item, items_info[item].alpha_model, encounters, [], last_enc_time + datetime.timedelta(seconds=5))
+    end   = datetime.datetime.now()
+
+    print("\n")
+    print("Item:", item)
+    print("Encounters:", enc_count)
+    print("The activation function was called", act_count, "times")
+    print("Time taken:", (end - start).total_seconds())
+
+
+
+def test_learn_duration(items, item_count, items_info, sesh_count, sesh_length):
+    """
+    Prints how much time it takes for learning to finish given a number of items.
+    """
+
+    start = datetime.datetime.now()
+    learn(items[:item_count], items_info, sesh_count, sesh_length)
+    end   = datetime.datetime.now()
+
+    enc_count = sum([len(items_info[item].encounters) for item in items[:item_count]])
+
+    print("\n")
+    print("Item count:", item_count)
+    print("Total encounters:", enc_count)
+    print("Duration:", (end - start).total_seconds())
+
 
 
 def print_item_info(item, items_info):
@@ -81,7 +125,7 @@ def learn(items, items_info, sesh_count, sesh_length):
             print("\nEncountered '", item, "' at", cur_time)
 
             # calculate the item's recall probability with its REAL alpha
-            item_rec = calc_recall_prob(calc_activation(item, items_info[item].alpha_real, items_info[item].encounters, [], cur_time))
+            item_rec = calc_recall_prob(calc_activation(item, items_info[item].alpha_real, items_info[item].encounters, [], cur_time)[0])
             # try to guess the item
             guessed = guess_item(item_rec)
 
@@ -137,7 +181,7 @@ def get_next_item(items, items_info, time, next_new_item_idx):
     future_time = time + datetime.timedelta(seconds=15)
     # recalculate each SEEN item's activation at future time with their updated alphas
     for item in seen_items:
-        item_to_act[item] = calc_activation(item, items_info[item].alpha_model, [enc for enc in items_info[item].encounters if enc.time < future_time], [], future_time)
+        item_to_act[item] = calc_activation(item, items_info[item].alpha_model, [enc for enc in items_info[item].encounters if enc.time < future_time], [], future_time)[0]
 
     print("\nFinding next word!")
 
@@ -152,7 +196,6 @@ def get_next_item(items, items_info, time, next_new_item_idx):
         next_item = items[next_new_item_idx]
         # increment the index of the next new item
         next_new_item_idx_inc += 1
-        print("Item is NEW word!")
     # if the lowest activation is ABOVE the retrieval threshold
     # AND
     # there ARE NEW items available
@@ -166,13 +209,13 @@ def get_next_item(items, items_info, time, next_new_item_idx):
     # NOTE: (regardless of whether it is below the retrieval threshold)
 
     # store the next item's activation based on whether it is a NEW item or NOT
-    next_item_act = calc_activation(next_item, items_info[next_item].alpha_model, [enc for enc in items_info[next_item].encounters if enc.time < time], [], time) if next_item not in item_to_act else item_to_act[next_item]
+    next_item_act = calc_activation(next_item, items_info[next_item].alpha_model, [enc for enc in items_info[next_item].encounters if enc.time < time], [], time)[0] if next_item not in item_to_act else item_to_act[next_item]
 
     return next_item, next_item_act, next_new_item_idx_inc
 
 
 
-def calc_activation(item, alpha, encounters, activations, cur_time):
+def calc_activation(item, alpha, encounters, activations, cur_time, call_count=1):
     """
     Calculates the activation for a given item at a given timestamp.
     Takes into account all previous encounters of the item through the calculation of decay.
@@ -185,6 +228,9 @@ def calc_activation(item, alpha, encounters, activations, cur_time):
     Returns:
     the activation of the item at the given timestamp
     """
+
+    # stores the incremented call count when the function is called recursively
+    call_count_inc = call_count
 
     # if there are NO previous encounters
     if len(encounters) == 0:
@@ -203,10 +249,11 @@ def calc_activation(item, alpha, encounters, activations, cur_time):
             # if the encounter's activation has ALREADY been calculated
             if enc_idx < len(activations):
                 enc_act = activations[enc_idx]
-            # if the encounter's activation has NOT been calculated
+            # if the encounter's activation has NOT been calculated yet
             else:
                 # calculate the activation of the item at the time of the encounter
-                enc_act = calc_activation(item, alpha, [enc for enc in encounters if enc.time < enc_bunch.time], activations, enc_bunch.time)
+                enc_act, call_count_inc = calc_activation(item, alpha, [enc for enc in encounters if enc.time < enc_bunch.time], activations, enc_bunch.time, call_count_inc)
+                call_count_inc += 1
                 # add the encounter's activation to the list
                 activations.append(enc_act)
 
@@ -222,7 +269,7 @@ def calc_activation(item, alpha, encounters, activations, cur_time):
         # calculate the activation given the sum of scaled time differences
         m = np.log(sum)
 
-    return m
+    return m, call_count_inc
 
 
 
