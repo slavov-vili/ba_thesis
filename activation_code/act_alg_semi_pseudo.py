@@ -14,10 +14,6 @@ model_params = {"alpha_d":   0.3,   # default alpha for all items
                 "delta":     0.025} # factor to scale down intersession time
 
 
-act_call_count  = 0
-act_in_progress = False
-
-
 # list all items to be learned
 items = ["noodles", "where", "many", "way", "market", "castle", "group", "restaurant", "amazing", "to visit", "each", "tree", "British", "adult", "a day", "open(from...to...)", "furniture", "a year", "open", "free time", "canal", "Chinese", "stall", "playing field", "fancy", "a week", "to enjoy", "best", "wonderful", "expensive", "to add", "boat", "to join in", "view", "canoeing", "flower", "area"] # end items list
 
@@ -92,6 +88,8 @@ def print_item_info(item, items_info):
 
 
 
+# TODO: note down all things which are only here for the simulation
+# TODO: Think about how new items are acquired. Just index in array or more complicated?
 def learn(items, items_info, sesh_count, sesh_length):
     """
     Simulates the learning process by adding new encounters of words.
@@ -105,8 +103,7 @@ def learn(items, items_info, sesh_count, sesh_length):
     """
 
     # store the current time
-    learn_start = datetime.datetime.now()
-    cur_time    = learn_start
+    cur_time    = datetime.datetime.now()
     # store the index of the next NEW item which needs to be learned
     next_new_item_idx = 0
 
@@ -115,8 +112,7 @@ def learn(items, items_info, sesh_count, sesh_length):
         # set the session's starting time
         sesh_start = cur_time
         sesh_end   = sesh_start + datetime.timedelta(seconds=sesh_length)
-        print("\n")
-        print("Session", sesh_id, "start:", sesh_start)
+        print("\nSession", sesh_id, "start:", sesh_start)
 
         # while there is time in the session
         while cur_time < sesh_end:
@@ -129,6 +125,8 @@ def learn(items, items_info, sesh_count, sesh_length):
             # try to guess the item
             guessed = guess_item(item_rec)
 
+            # NOTE: The values for adjusting the alpha were selected through a bunch of testing and fitting
+            # NOTE: in order for the results, produced by this simple simulation, to somewhat make sense.
             # adjust values depending on outcome
             if guessed:
                 if items_info[item].alpha_model > model_params["alpha_min"]:
@@ -157,7 +155,6 @@ def learn(items, items_info, sesh_count, sesh_length):
         print("Alpha Model:", items_info[item].alpha_model)
         print("Encounters:", len(items_info[item].encounters))
         print("Incorrect:", items_info[item].incorrect)
-    return learn_start
 
 
 
@@ -185,6 +182,7 @@ def get_next_item(items, items_info, time, next_new_item_idx):
 
     print("\nFinding next word!")
 
+    # TODO: try to optimize this whole section and in general - finding out whether an item is new
     # the default next item is the one with the lowest activation
     next_item = "" if len(seen_items) == 0 else min(seen_items, key=item_to_act.get)
     # stores the index of the next new item
