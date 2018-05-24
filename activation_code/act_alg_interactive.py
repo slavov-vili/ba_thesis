@@ -243,17 +243,17 @@ def calc_activation(item, alpha, encounters, activations, cur_time, call_count=1
         # for each encounter
         for enc_idx, enc_bunch in enumerate(encounters):
             # stores the encounter's activation
-            enc_act   = 0.0
-            # if the encounter's activation has ALREADY been calculated
-            if enc_idx < len(activations):
-                enc_act = activations[enc_idx]
-            # if the encounter's activation has NOT been calculated yet
-            else:
+            # enc_act   = 0.0
+            # # if the encounter's activation has ALREADY been calculated
+            # if enc_idx < len(activations):
+                # enc_act = activations[enc_idx]
+            # # if the encounter's activation has NOT been calculated yet
+            # else:
                 # calculate the activation of the item at the time of the encounter
-                enc_act, call_count_inc = calc_activation(item, alpha, [enc for enc in encounters if enc.time < enc_bunch.time], activations, enc_bunch.time, call_count_inc)
-                call_count_inc += 1
+            enc_act, call_count_inc = calc_activation(item, alpha, [enc for enc in encounters if enc.time < enc_bunch.time], activations, enc_bunch.time, call_count_inc)
+            call_count_inc += 1
                 # add the encounter's activation to the list
-                activations.append(enc_act)
+                # activations.append(enc_act)
 
             # calculate the time difference between the current time and the previous encounter
             # AND convert it to seconds
