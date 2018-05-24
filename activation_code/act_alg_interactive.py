@@ -79,17 +79,18 @@ def print_item_info(item, items_info):
     item_encounters = items_info[item].encounters
     print("Encounters(", len(item_encounters),"):")
     for i, enc in enumerate(item_encounters):
+        prev_encounters = [prev_enc for prev_enc in item_encounters if prev_enc.time < enc.time]
         print("Encounter", i, "time:",        enc.time)
         print("Encounter", i, "alpha:",       enc.alpha)
-        print("Encounter", i, "activation:",  enc.activation)
-        print("Encounter", i, "recall prob:", calc_recall_prob(enc.activation))
+        enc_activation = calc_activation(item, enc.alpha, prev_encounters, [], enc.time)[0]
+        print("Encounter", i, "activation:",  enc_activation)
+        print("Encounter", i, "recall prob:", calc_recall_prob(enc_activation))
         print("Encounter", i, "was guessed:", enc.was_guessed)
     print("Incorrect:", items_info[item].incorrect)
 
 
 
 # TODO: note down all things which are only here for the simulation
-# TODO: Think about how new items are acquired. Just index in array or more complicated?
 def learn(items, items_info, sesh_count, sesh_length):
     """
     Simulates the learning process by adding new encounters of words.
@@ -103,11 +104,13 @@ def learn(items, items_info, sesh_count, sesh_length):
     """
 
     # store the current time
-    cur_time    = datetime.datetime.now()
+    cur_time = datetime.datetime.now()
     # store the index of the next NEW item which needs to be learned
+    # NOTE: if the new items are in a separate list, this does NOT need to be here
     next_new_item_idx = 0
 
     # for each session
+    # NOTE: Only needed for simulating full learning process. Otherwise all learning takes place in a single session.
     for sesh_id in range(sesh_count):
         # set the session's starting time
         sesh_start = cur_time
@@ -117,10 +120,11 @@ def learn(items, items_info, sesh_count, sesh_length):
         # while there is time in the session
         while cur_time < sesh_end:
             # get the next item to be presented
-            item, item_act, next_new_item_idx = get_next_item(items, items_info, cur_time, next_new_item_idx)
+            item, next_new_item_idx = get_next_item(items, items_info, cur_time, next_new_item_idx)
             print("\nEncountered '", item, "' at", cur_time)
 
             # calculate the item's recall probability with its REAL alpha
+            # NOTE: Only needed to simulate user interaction
             item_rec = calc_recall_prob(calc_activation(item, items_info[item].alpha_real, items_info[item].encounters, [], cur_time)[0])
             # try to guess the item
             guessed = guess_item(item_rec)
@@ -137,12 +141,14 @@ def learn(items, items_info, sesh_count, sesh_length):
                 items_info[item].incorrect += 1
 
             # add the current encounter to the item's encounter list
-            items_info[item].encounters.append(Bunch(time=cur_time, alpha=items_info[item].alpha_model, activation=item_act, was_guessed=guessed))
+            items_info[item].encounters.append(Bunch(time=cur_time, alpha=items_info[item].alpha_model, was_guessed=guessed))
 
             # increment the current time to account for the length of the encounter
+            # NOTE: Only here to simulate the duration if interactions.
             cur_time += datetime.timedelta(seconds=random.randint(3, 10))
 
         # increment the current time to account for the intersession time
+        # NOTE: Only here to simulate learning during multiple sessions.
         scaled_intersesh_time = (24 * model_params["delta"]) * 3600
         cur_time += datetime.timedelta(seconds=scaled_intersesh_time)
 
@@ -171,6 +177,7 @@ def get_next_item(items, items_info, time, next_new_item_idx):
     """
 
     # extract all SEEN items
+    # NOTE: If the SEEN and UNSEEN items were separate, this would NOT be needed
     seen_items = items[:next_new_item_idx]
     # maps an item to its activation
     item_to_act = {}
@@ -182,7 +189,6 @@ def get_next_item(items, items_info, time, next_new_item_idx):
 
     print("\nFinding next word!")
 
-    # TODO: try to optimize this whole section and in general - finding out whether an item is new
     # the default next item is the one with the lowest activation
     next_item = "" if len(seen_items) == 0 else min(seen_items, key=item_to_act.get)
     # stores the index of the next new item
@@ -206,10 +212,7 @@ def get_next_item(items, items_info, time, next_new_item_idx):
     # NOTE: in ALL other cases, the item with the lowest activation is selected
     # NOTE: (regardless of whether it is below the retrieval threshold)
 
-    # store the next item's activation based on whether it is a NEW item or NOT
-    next_item_act = calc_activation(next_item, items_info[next_item].alpha_model, [enc for enc in items_info[next_item].encounters if enc.time < time], [], time)[0] if next_item not in item_to_act else item_to_act[next_item]
-
-    return next_item, next_item_act, next_new_item_idx_inc
+    return next_item, next_new_item_idx_inc
 
 
 
@@ -227,6 +230,7 @@ def calc_activation(item, alpha, encounters, activations, cur_time, call_count=1
     the activation of the item at the given timestamp
     """
 
+    # NOTE: only here to count recursive function calls
     # stores the incremented call count when the function is called recursively
     call_count_inc = call_count
 
@@ -243,17 +247,18 @@ def calc_activation(item, alpha, encounters, activations, cur_time, call_count=1
         # for each encounter
         for enc_idx, enc_bunch in enumerate(encounters):
             # stores the encounter's activation
-            # enc_act   = 0.0
-            # # if the encounter's activation has ALREADY been calculated
-            # if enc_idx < len(activations):
-                # enc_act = activations[enc_idx]
-            # # if the encounter's activation has NOT been calculated yet
-            # else:
+            enc_act   = 0.0
+            # if the encounter's activation has ALREADY been calculated
+            if enc_idx < len(activations):
+                enc_act = activations[enc_idx]
+            # if the encounter's activation has NOT been calculated yet
+            else:
                 # calculate the activation of the item at the time of the encounter
-            enc_act, call_count_inc = calc_activation(item, alpha, [enc for enc in encounters if enc.time < enc_bunch.time], activations, enc_bunch.time, call_count_inc)
-            call_count_inc += 1
+                enc_act, call_count_inc = calc_activation(item, alpha, [enc for enc in encounters if enc.time < enc_bunch.time], activations, enc_bunch.time, call_count_inc)
+                # NOTE: only here to count recursive function calls
+                call_count_inc += 1
                 # add the encounter's activation to the list
-                # activations.append(enc_act)
+                activations.append(enc_act)
 
             # calculate the time difference between the current time and the previous encounter
             # AND convert it to seconds
