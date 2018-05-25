@@ -182,4 +182,13 @@ sense_2017_phd_thesis
         * Tries to figure out which parts of memory take part in the encoding process
         * Final Chapter discusses in more detail how the estimated rate of forgetting relates to delayed recall performance
 1. Chapter 2
-    
+    - Results:
+        * On average flashcards present more words than the adaptive method
+        * The adaptive method produced high results though
+        * Participants, who were presented more words showed better long-term retention
+        * The adaptive method identifies participants capable of handling more words and presents more words to them
+          and finds participants which handle a smaller amount of words and shows them the appropriate amount.
+          This leads to less errors during learning.
+        * The adaptive method produced better results with regards to correct responses during learning
+          as well as correct responses to test at certain retention intervals.
+2. Chapter 3
