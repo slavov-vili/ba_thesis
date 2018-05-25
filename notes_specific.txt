@@ -169,19 +169,19 @@ ramscar_et_al_2016
 
 
 sense_2017_phd_thesis
-0. Chapter 1
+1. Chapter 1
     - summary of what's to follow
-    - Part I
+    - Part I:
         * Chapter 2 describes an adaptive user-specific learning model
         * Chapter 3 zooms in on the decay parameter
             : How reliably can we estimate the parameter
             : "An individual’s rate of forgetting is stable over time but differs across materials"
         * Chapter 4 shows a very high, negative correlation between the estimated rate of forgetting and subsequent delayed recall performance
         * 
-    - Part II
+    - Part II:
         * Tries to figure out which parts of memory take part in the encoding process
         * Final Chapter discusses in more detail how the estimated rate of forgetting relates to delayed recall performance
-1. Chapter 2
+2. Chapter 2
     - Results:
         * On average flashcards present more words than the adaptive method
         * The adaptive method produced high results though
@@ -191,4 +191,34 @@ sense_2017_phd_thesis
           This leads to less errors during learning.
         * The adaptive method produced better results with regards to correct responses during learning
           as well as correct responses to test at certain retention intervals.
-2. Chapter 3
+3. Chapter 3
+    - Main factors that affect learning: spacing and testing effects
+    - Systems usually estimate user-specific characteristics to optimize learning, but do not keep them between sessions
+    - Chapter 3 investigates how stable such characteristics are over time and across different materials
+    - Rates of forgetting have been tested in single sessions and only in one domain
+    - The stability of an individual's rate of forgetting is assumed, but has not yet been proven
+    - Chapter 3 tries to find the rate of forgetting over the course of 3 weeks and across 4 different types of declarative memory
+    - Three sessions, 1 week apart. First part - learning Swahili; second part - 1/3 of the other types of declarative memory
+    - Results:
+        * First graph of overall performance is shown to prove that the subjects did indeed manage to learn the words
+        * Rate of forgetting is represented by the alpha parameter, which starts at 0.3 and is adjusted based on performance
+        * Average rate of forgetting is calculated for each participant
+        * It is expected that low rate of forgetting = better performance at final test and vice versa
+        * Table 3.1 shows correlation between rates of forgetting across materials (vocabulary trials have high correlation)
+        * Rate of forgetting doesn't change significantly between sessions
+        * Rate of forgetting in vocabulary trials is significantly different than non-vocabulary trials
+    - Additional analysis:
+        * Tried to estimate rate of forgetting within a session based on rate of forgetting in previous sessions
+        * Vocabulary block in 3rd session was predicted based on the 4 blocks in the previous 2 sessions
+          in a backwards regression analysis
+        * Expected that same trial types and more recent trials would be better predictors
+        * Best fitting model only included the rates of forgetting in the 2nd and 1st vocabulary trials
+        * The results of other types of trials did not improve the fitting of the model
+        * The results of the more recent vocabulary task are a 3 times better predictor (beta = .64, t(64) = 7.3, p < .001)
+          than those of the earlier one (beta = .24, t(64) = 3.0, p = .004)
+    - Discussion:
+        * Estimated rates of forgetting do not differ significantly over time (across sessions)
+        * Rates of forgetting differ, however, when the type of information differs across sessions
+        * Since someone's rate of forgetting is constant for the same type of material, it can be stored and reused
+          the next time the same material is learned
+4. Chapter 4
