@@ -253,7 +253,7 @@ def get_next_item(items, items_info, time, next_new_item_idx):
         print("Item has LOWEST activation!")
 
     # store the next item's activation based on whether it is a NEW item or NOT
-    next_item_act = calc_activation(next_item, items_info[next_item].alpha_model, [enc for enc in items_info[next_item].encounters if enc.time < time], [], time) if next_item not in item_to_act else item_to_act[next_item]
+    next_item_act = calc_activation(next_item, items_info[next_item].alpha_model, [enc for enc in items_info[next_item].encounters if enc.time < time], [], future_time) if next_item not in item_to_act else item_to_act[next_item]
 
     return next_item, next_item_act, next_new_item_idx_inc
 
