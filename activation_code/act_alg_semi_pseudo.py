@@ -30,6 +30,8 @@ encounter_sample = Bunch(time=datetime.datetime,
 
 
 
+
+
 def learn(items_seen, items_new, session_length):
     """
     Goes through a single learning session.
@@ -66,6 +68,8 @@ def learn(items_seen, items_new, session_length):
 
         # Adjust the alpha value depending on the result of the current encounter
         items_seen[cur_item].cur_alpha = calc_new_alpha(cur_item_alpha, calc_recall_prob(cur_item_act), cur_enc_result)
+
+
 
 
 
@@ -126,6 +130,41 @@ def get_next_item(items_seen, items_new, cur_time):
 
 
 
+
+
+# Execution DEPENDS on values of arguments
+#
+# NOTE: WITHOUT caching, the function is recursively called a total of 2 ^ N times
+# NOTE: WITH    caching, the function is recursively called a total of 1 + N times
+# NOTE: triang_num = factorial, but using ADDITION
+#
+# N   = len(encounters)
+# T   = 5                                                        // Instructions, when calculating the TIME DIFFERENCE
+# D   = 4 | 5                                                    // Instructions, when calculating the DECAY
+# A   = N                                                        // Instructions, when APPENDING an encounter's activation to CACHE
+# S   = triang_num(N) = [create new list,                        // Instructions, when SLICING off previous encounters
+#                        add all prev encounters]
+# 
+# B   = 2 = [declare activation, return activation]              // BASIC instructions, ALWAYS executed by the function
+# BC  = 4 = B + 2 = B + [if, assign activation]                  // BASIC instructions, ALWAYS executed when the BASE CASE is reached
+# E_1 = 5 = [if, elif, declare sum, log, assign activation]      // BASIC instructions, ALWAYS executed in the FIRST ELSE statement
+# F   = 18|19 = 9 + 5 + 4|5 = [assign enc_idx, assign enc_bunch, // BASIC instructions, ALWAYS executed in the FOR loop
+#                              assign enc_time, declare enc_act,
+#                              assign time_diff, assign decay,
+#                              pow, +, assign sum] + T + D
+# I_2 = 2 = [if, assign enc_act]                                 // BASIC instructions, ALWAYS executed in the SECOND IF statement
+# E_2 = 2 = [if, S, assign enc_act, A]                           // BASIC instructions, ALWAYS executed in the SECOND IF statement
+# 
+# |======================================================================================================================|
+# |        CONDITIONS        |              INSTR COUNT             |    CUR INSTR LIST    |  TOTAL INSTR COUNT          |
+# |======================================================================================================================|
+# | N != 0 &                 |       B + 3                          | [if, if,             |          5                  |
+# | last_enc.time > cur_time |                                      |  raise error]        |                             |
+# |--------------------------|--------------------------------------|----------------------|-----------------------------|
+# | else                     | B + E_1 + (N*F) + BC +               | []                   | 2^(N+1) + (20|21)*N +       |
+# |                          | (((2^N) - (1+N)) * I_2) +            |                      | triang_num(N) + 9           |
+# |                          | (N * (I_2 + assign enc_act)) + S + A |                      |                             |
+# |======================================================================================================================|
 def calc_activation(item, cur_alpha, encounters, activations, cur_time):
     """
     Calculates the activation for a given item at a given timestamp.
@@ -168,7 +207,7 @@ def calc_activation(item, cur_alpha, encounters, activations, cur_time):
             # If the encounter's activation has NOT been calculated yet
             else:
                 # Calculate the activation of the item at the time of the encounter
-                enc_act = calc_activation(item, cur_alpha, [prev_enc for prev_enc in encounters if prev_enc.time < enc_time], activations, enc_time)
+                enc_act = calc_activation(item, cur_alpha, encounters[:enc_idx], activations, enc_time)
                 # Add the current encounter's activation to the list
                 activations.append(enc_act)
 
@@ -179,7 +218,7 @@ def calc_activation(item, cur_alpha, encounters, activations, cur_time):
             enc_decay = calc_decay(enc_act, alpha)
 
             # SCALE the difference by the decay and ADD it to the sum
-            sum += np.power(time_diff, -enc_decay)
+            sum = sum + np.power(time_diff, -enc_decay)
 
         # calculate the activation given the sum of scaled time differences
         activation = np.log(sum)
@@ -188,6 +227,20 @@ def calc_activation(item, cur_alpha, encounters, activations, cur_time):
 
 
 
+
+
+# Execution DEPENDS on values of arguments
+#
+# B = 2 = [declare decay, return decay]    // The number of basic instructions, executed no matter what
+#
+# |=========================================================================================|
+# |       CONDITIONS        |    INSTR COUNT   |    CUR INSTR LIST    |   TOTAL INSTR COUNT |
+# |=========================================================================================|
+# | is_neg_inf              |       B + 2      | [if, assign decay]   |          4          |
+# |-------------------------|------------------|----------------------|---------------------|
+# | else                    |       B + 4      | [if, *, +,           |          6          |
+# |                         |                  |  assign decay]       |                     |
+# |=========================================================================================|
 def calc_decay(activation, cur_alpha):
     """
     Calculate the activation decay of an item given its activation at the time of an encounter and its alpha.
@@ -212,12 +265,12 @@ def calc_decay(activation, cur_alpha):
 
 
 
-# Executes in constant time
-# |=========================================================================================|
-# |       CONDITIONS        |    INSTR COUNT   |    CUR INSTR LIST    |   TOTAL INSTR COUNT |
-# |=========================================================================================|
-# | Base count              |         5        | [-, /, exp, +, /]    |          5          |
-# |=========================================================================================|
+
+
+# Executes in CONSTANT time
+#
+# B = 5 = [-, /, exp, +, /]    // The number of basic instructions, executed no matter what
+#
 def calc_recall_prob(activation):
     """
     Calculates an item's probability of recall given its activation.
@@ -231,17 +284,18 @@ def calc_recall_prob(activation):
 
 
 
-# Execution depends on values of arguments
+
+
+# Execution DEPENDS on values of arguments
+#
+# B = 3 = [assign time_diff, calc_total_seconds, return time_diff]    // The number of basic instructions, executed no matter what
+#
 # |=========================================================================================|
 # |       CONDITIONS        |    INSTR COUNT   |    CUR INSTR LIST    |   TOTAL INSTR COUNT |
 # |=========================================================================================|
-# | Base count              |         3        | [assign time_diff,   |          3          |
-# |                         |                  |  calc_total_seconds, |                     |
-# |                         |                  |  return result]      |                     |
-# |=========================================================================================|
-# | time_a > time_b         | base count + 2   | [if, -]              |          5          |
+# | time_a > time_b         |       B + 2      | [if, -]              |          5          |
 # |-------------------------|------------------|----------------------|---------------------|
-# | else                    | base count + 2   | [if, -]              |          5          |
+# | else                    |       B + 2      | [if, -]              |          5          |
 # |=========================================================================================|
 # NOTE: This calculation gets more complicated once sessions come into play
 def calc_time_diff(time_a, time_b):
@@ -261,7 +315,12 @@ def calc_time_diff(time_a, time_b):
 
 
 
-# For simplicity, this executes 1 INSTRUCTION
+
+
+# Executes in CONSTANT time
+#
+# B = 1 = [return result]    // The number of basic instructions, executed no matter what
+#
 # NOTE: This calculation depends on what the item encounters consist of
 def encounter_item(item):
     """
@@ -276,25 +335,27 @@ def encounter_item(item):
 
 
 
-# Execution depends on values of arguments
+
+
+# Execution DEPENDS on values of arguments
+#
+# B = 2 = [assign new_alpha, return new_alpha]    // The number of basic instructions, executed no matter what
+#
 # |=========================================================================================|
 # |       CONDITIONS        |    INSTR COUNT   |    CUR INSTR LIST    |   TOTAL INSTR COUNT |
 # |=========================================================================================|
-# | Base count              |         2        | [assign new_alpha,   |          2          |
-# |                         |                  |  return result]      |                     |
+# | "skipped"               |      B + 2       | [if, elif]           |          4          |
 # |=========================================================================================|
-# | "skipped"               | base count + 2   | [if, elif]           |          4          |
-# |=========================================================================================|
-# | "guessed" &             | base count + 6   | [if, if, -, /, -,    |          8          |
+# | "guessed" &             |      B + 6       | [if, if, -, /, -,    |          8          |
 # | > alpha_min             |                  |  assign new_alpha]   |                     |
 # |-------------------------|------------------|----------------------|---------------------|
-# | "guessed" &             | base count + 2   | [if, if]             |          4          |
+# | "guessed" &             |      B + 2       | [if, if]             |          4          |
 # | < alpha_min             |                  |                      |                     |
 # |=========================================================================================|
-# | "not_guessed" &         | base count + 6   | [if, elif, if, /, +, |          8          |
+# | "not_guessed" &         |      B + 6       | [if, elif, if, /, +, |          8          |
 # | < alpha_max             |                  |  assign new_alpha]   |                     |
 # |-------------------------|------------------|----------------------|---------------------|
-# | "not_guessed" &         | base count + 3   | [if, elif, if]       |          5          |
+# | "not_guessed" &         |      B + 3       | [if, elif, if]       |          5          |
 # | > alpha_max             |                  |                      |                     |
 # |=========================================================================================|
 # NOTE: This calculation may get more complicated depending on how the alpha is adjusted

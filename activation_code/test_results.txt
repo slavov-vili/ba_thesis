@@ -5,6 +5,13 @@
 
 
 
+    *** NOTE ***
+    Absolute values should obviously not be taken seriously, but just as a comparison.
+    They were also received pre-optimization of the part where the list of encouters
+    is recursively passed to the activation function.
+
+
+
     *** TEST RESULTS (LEARN DURATION)***
     |======================================================================================|
     |  test_id  |  item_count  |  encounters  |  avg_enc_per_word  |  duration  |  cached  |
