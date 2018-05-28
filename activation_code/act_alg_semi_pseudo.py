@@ -212,6 +212,12 @@ def calc_decay(activation, cur_alpha):
 
 
 
+# Executes in constant time
+# |=========================================================================================|
+# |       CONDITIONS        |    INSTR COUNT   |    CUR INSTR LIST    |   TOTAL INSTR COUNT |
+# |=========================================================================================|
+# | Base count              |         5        | [-, /, exp, +, /]    |          5          |
+# |=========================================================================================|
 def calc_recall_prob(activation):
     """
     Calculates an item's probability of recall given its activation.
@@ -225,7 +231,19 @@ def calc_recall_prob(activation):
 
 
 
-# NOTE: this calculation gets more complicated once sessions come into play
+# Execution depends on values of arguments
+# |=========================================================================================|
+# |       CONDITIONS        |    INSTR COUNT   |    CUR INSTR LIST    |   TOTAL INSTR COUNT |
+# |=========================================================================================|
+# | Base count              |         3        | [assign time_diff,   |          3          |
+# |                         |                  |  calc_total_seconds, |                     |
+# |                         |                  |  return result]      |                     |
+# |=========================================================================================|
+# | time_a > time_b         | base count + 2   | [if, -]              |          5          |
+# |-------------------------|------------------|----------------------|---------------------|
+# | else                    | base count + 2   | [if, -]              |          5          |
+# |=========================================================================================|
+# NOTE: This calculation gets more complicated once sessions come into play
 def calc_time_diff(time_a, time_b):
     """
     Calculates the difference between two timestamp.
@@ -243,6 +261,8 @@ def calc_time_diff(time_a, time_b):
 
 
 
+# For simplicity, this executes 1 INSTRUCTION
+# NOTE: This calculation depends on what the item encounters consist of
 def encounter_item(item):
     """
     Presents the item to the user and records the outcome of the encounter
@@ -256,6 +276,28 @@ def encounter_item(item):
 
 
 
+# Execution depends on values of arguments
+# |=========================================================================================|
+# |       CONDITIONS        |    INSTR COUNT   |    CUR INSTR LIST    |   TOTAL INSTR COUNT |
+# |=========================================================================================|
+# | Base count              |         2        | [assign new_alpha,   |          2          |
+# |                         |                  |  return result]      |                     |
+# |=========================================================================================|
+# | "skipped"               | base count + 2   | [if, elif]           |          4          |
+# |=========================================================================================|
+# | "guessed" &             | base count + 6   | [if, if, -, /, -,    |          8          |
+# | > alpha_min             |                  |  assign new_alpha]   |                     |
+# |-------------------------|------------------|----------------------|---------------------|
+# | "guessed" &             | base count + 2   | [if, if]             |          4          |
+# | < alpha_min             |                  |                      |                     |
+# |=========================================================================================|
+# | "not_guessed" &         | base count + 6   | [if, elif, if, /, +, |          8          |
+# | < alpha_max             |                  |  assign new_alpha]   |                     |
+# |-------------------------|------------------|----------------------|---------------------|
+# | "not_guessed" &         | base count + 3   | [if, elif, if]       |          5          |
+# | > alpha_max             |                  |                      |                     |
+# |=========================================================================================|
+# NOTE: This calculation may get more complicated depending on how the alpha is adjusted
 def calc_new_alpha(old_alpha, item_recall_prob, last_enc_result):
     """
     Calculates the new alpha value, based on the result of the last encounter with the item and the item's recall_probability
@@ -272,13 +314,13 @@ def calc_new_alpha(old_alpha, item_recall_prob, last_enc_result):
     # If the last encounter was SUCCESSFUL
     if last_enc_result == "guessed":
         if old_alpha > model_params["alpha_min"]:
-            new_alpha -= (1 - item_recall_prob) / 40
+            new_alpha = new_alpha - (1 - item_recall_prob) / 40
 
     # If the last encounter was NOT SUCCESSFUL
     elif last_enc_result == "not_guessed":
         if old_alpha < model_params["alpha_max"]:
-            new_alpha += item_recall_prob / 40
+            new_alpha = new_alpha + item_recall_prob / 40
 
-    # If the last encounter was SKIPPED, the alpha stays the same
+    # NOTE: If the last encounter was SKIPPED, the alpha stays the same
 
     return new_alpha
