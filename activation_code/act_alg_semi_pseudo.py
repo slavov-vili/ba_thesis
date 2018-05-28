@@ -32,6 +32,26 @@ encounter_sample = Bunch(time=datetime.datetime,
 
 
 
+# Execution DEPENDS on values of arguments
+#
+# B   = 4 = [get current time, assign session start, +, assign session end] // BASIC instructions, always executed by the FUNCTION
+# SNS = len(known items seen this session)
+# AEC                                                                       // Average ENCOUNTER count for SEEN ITEMS
+# NNS = len(new items seen this session)
+# A   = SNS + NNS                                                           // Instructions, executed when APPENDING encounters
+# SL                                                                        // The session LENGTH
+# AEL                                                                       // AVERAGE encounter LENGTH (same unit as session length)
+# NI                                                                        // Instructions, when finding NEXT ITEM
+# ENC                                                                       // Instructions, when ENCOUNTERING an item
+# RP                                                                        // Instructions, when calculating RECALL PROBABILITY
+# NA                                                                        // Instructions, when calculating NEW ALPHA
+# W   = 9 + NI + A + RP + NA = [get current time, assign current time, if,  // BASIC instructions, ALWAYS executed in the WHILE loop
+#                               assign new item, ENC, store encounter result,
+#                               store current alpha, create new Bunch,
+#                               assign new alpha] + NI + A + RP + NA
+#
+# INSTR_COUNT = B + ((SL / AEL) + 1) * ()
+#
 def learn(items_seen, items_new, session_length):
     """
     Goes through a single learning session.
@@ -141,7 +161,7 @@ def get_next_item(items_seen, items_new, cur_time):
 # N   = len(encounters)
 # T   = 5                                                        // Instructions, when calculating the TIME DIFFERENCE
 # D   = 4 | 5                                                    // Instructions, when calculating the DECAY
-# A   = N                                                        // Instructions, when APPENDING an encounter's activation to CACHE
+# A   = 1                                                        // Instructions, when APPENDING an encounter's activation to CACHE
 # S   = triang_num(N) = [create new list,                        // Instructions, when SLICING off previous encounters
 #                        add all prev encounters]
 # 
@@ -161,7 +181,7 @@ def get_next_item(items_seen, items_new, cur_time):
 # | N != 0 &                 |       B + 3                          | [if, if,             |          5                  |
 # | last_enc.time > cur_time |                                      |  raise error]        |                             |
 # |--------------------------|--------------------------------------|----------------------|-----------------------------|
-# | else                     | B + E_1 + (N*F) + BC +               | []                   | 2^(N+1) + (20|21)*N +       |
+# | else                     | B + E_1 + (N*F) + BC +               | []                   | 2^(N+1) + (19|20)*N +       |
 # |                          | (((2^N) - (1+N)) * I_2) +            |                      | triang_num(N) + 9           |
 # |                          | (N * (I_2 + assign enc_act)) + S + A |                      |                             |
 # |======================================================================================================================|
@@ -231,7 +251,7 @@ def calc_activation(item, cur_alpha, encounters, activations, cur_time):
 
 # Execution DEPENDS on values of arguments
 #
-# B = 2 = [declare decay, return decay]    // The number of basic instructions, executed no matter what
+# B = 2 = [declare decay, return decay]    // BASIC instructions, ALWAYS executed by the function
 #
 # |=========================================================================================|
 # |       CONDITIONS        |    INSTR COUNT   |    CUR INSTR LIST    |   TOTAL INSTR COUNT |
@@ -269,7 +289,7 @@ def calc_decay(activation, cur_alpha):
 
 # Executes in CONSTANT time
 #
-# B = 5 = [-, /, exp, +, /]    // The number of basic instructions, executed no matter what
+# B = 5 = [-, /, exp, +, /]    // BASIC instructions, ALWAYS executed by the function
 #
 def calc_recall_prob(activation):
     """
@@ -288,7 +308,7 @@ def calc_recall_prob(activation):
 
 # Execution DEPENDS on values of arguments
 #
-# B = 3 = [assign time_diff, calc_total_seconds, return time_diff]    // The number of basic instructions, executed no matter what
+# B = 3 = [assign time_diff, calc_total_seconds, return time_diff]    // BASIC instructions, ALWAYS executed by the function
 #
 # |=========================================================================================|
 # |       CONDITIONS        |    INSTR COUNT   |    CUR INSTR LIST    |   TOTAL INSTR COUNT |
@@ -319,7 +339,7 @@ def calc_time_diff(time_a, time_b):
 
 # Executes in CONSTANT time
 #
-# B = 1 = [return result]    // The number of basic instructions, executed no matter what
+# B = 1 = [return result]    // BASIC instructions, ALWAYS executed by the function
 #
 # NOTE: This calculation depends on what the item encounters consist of
 def encounter_item(item):
@@ -339,7 +359,7 @@ def encounter_item(item):
 
 # Execution DEPENDS on values of arguments
 #
-# B = 2 = [assign new_alpha, return new_alpha]    // The number of basic instructions, executed no matter what
+# B = 2 = [assign new_alpha, return new_alpha]    // BASIC instructions, ALWAYS executed by the function
 #
 # |=========================================================================================|
 # |       CONDITIONS        |    INSTR COUNT   |    CUR INSTR LIST    |   TOTAL INSTR COUNT |
