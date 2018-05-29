@@ -177,7 +177,6 @@ sense_2017_phd_thesis
             : How reliably can we estimate the parameter
             : "An individual’s rate of forgetting is stable over time but differs across materials"
         * Chapter 4 shows a very high, negative correlation between the estimated rate of forgetting and subsequent delayed recall performance
-        * 
     - Part II:
         * Tries to figure out which parts of memory take part in the encoding process
         * Final Chapter discusses in more detail how the estimated rate of forgetting relates to delayed recall performance
@@ -210,7 +209,7 @@ sense_2017_phd_thesis
     - Additional analysis:
         * Tried to estimate rate of forgetting within a session based on rate of forgetting in previous sessions
         * Vocabulary block in 3rd session was predicted based on the 4 blocks in the previous 2 sessions
-          in a backwards regression analysis
+          in a BACKWARDS REGRESSION ANALYSIS
         * Expected that same trial types and more recent trials would be better predictors
         * Best fitting model only included the rates of forgetting in the 2nd and 1st vocabulary trials
         * The results of other types of trials did not improve the fitting of the model
