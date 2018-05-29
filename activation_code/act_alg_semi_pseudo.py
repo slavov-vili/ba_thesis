@@ -34,23 +34,22 @@ encounter_sample = Bunch(time=datetime.datetime,
 
 # Execution DEPENDS on values of arguments
 #
+# N   = len(items seen this session)
 # B   = 4 = [get current time, assign session start, +, assign session end] // BASIC instructions, always executed by the FUNCTION
-# SNS = len(known items seen this session)
-# AEC                                                                       // Average ENCOUNTER count for SEEN ITEMS
-# NNS = len(new items seen this session)
-# A   = SNS + NNS                                                           // Instructions, executed when APPENDING encounters
 # SL                                                                        // The session LENGTH
-# AEL                                                                       // AVERAGE encounter LENGTH (same unit as session length)
+# AEL = sum(all encounter lengths) / N                                      // AVERAGE encounter LENGTH (same unit as session length)
 # NI                                                                        // Instructions, when finding NEXT ITEM
-# ENC                                                                       // Instructions, when ENCOUNTERING an item
-# RP                                                                        // Instructions, when calculating RECALL PROBABILITY
-# NA                                                                        // Instructions, when calculating NEW ALPHA
-# W   = 9 + NI + A + RP + NA = [get current time, assign current time, if,  // BASIC instructions, ALWAYS executed in the WHILE loop
-#                               assign new item, ENC, store encounter result,
-#                               store current alpha, create new Bunch,
-#                               assign new alpha] + NI + A + RP + NA
+# ENC = 1                                                                   // Instructions, when ENCOUNTERING an item
+# RP  = 5                                                                   // Instructions, when calculating RECALL PROBABILITY
+# NA  = 4 | 5 | 8                                                           // Instructions, when calculating NEW ALPHA
+# W   = 9 + NI + ENC + RP + NA = [get current time, assign current time,    // BASIC instructions, ALWAYS executed in the WHILE loop
+#                                 if, assign new item, store encounter result,
+#                                 store current alpha, create new encounter,
+#                                 add new encounter, assign new alpha] +
+#                                NI + ENC + RP + NA
 #
-# INSTR_COUNT = B + ((SL / AEL) + 1) * ()
+# INSTR_COUNT = B + (SL / AEL) * W + [get cur time, store cur time, if, break] =
+#             = 
 #
 def learn(items_seen, items_new, session_length):
     """
@@ -93,6 +92,40 @@ def learn(items_seen, items_new, session_length):
 
 
 
+# TODO: expand ACT(N) functions to get final instruction count
+# Execution DEPENDS on values of arguments
+# 
+# N        = len(items seen)
+# AEC      = sum(len(encounters) for each item) / N                          // Average encounter count
+# ACT(AEC) =                                                                 // Instructions, when calculating an item's activation
+# F        = N * (3 + ACT(AEC))                                              // Instructions, in the FOR loop
+#          = N * ([get cur item, store cur item, store item act] + ACT(AEC))
+# B        = 5 + F = [declare dictionary, calc future time                   // BASIC instructions, always executed by the FUNCTION
+#                     store future time, assign min_item,
+#                     declare next_item, assign next_item,
+#                     declare next_item_act, return values] + F
+#
+# |========================================================================================================================|
+# |        CONDITIONS        |             INSTR COUNT              |   CUR INSTR LIST       |     TOTAL INSTR COUNT       |
+# |========================================================================================================================|
+# | N == 0                   |       B + 7 + ACT(0)                 | [if, if, if, remove,   |            ...              |
+# |                          |                                      |  create new enc list,  |                             |
+# |                          |                                      |  assign new enc list,  |                             |
+# |                          |                                      |  assign next_item_act] |                             |
+# |                          |                                      |  + ACT(0)              |                             |
+# |========================================================================================================================|
+# | N != 0 &                 |       B + 11 + ACT(0)                | [if, min, if, elif,    |            ...              |
+# | len(items_new) != 0 &    |                                      |  >, !=, if, remove,    |                             |
+# | min_item.act > threshold |                                      |  create new enc list,  |                             |
+# |                          |                                      |  assign new enc list,  |                             |
+# |                          |                                      |  assign next_item_act] |                             |
+# |                          |                                      |  + ACT(0)              |                             |
+# |========================================================================================================================|
+# | N != 0 &                 |       B + 7                          | [if, min, if, elif,    |            ...              |
+# | min_item.act < threshold |                                      |  >, !=, if,            |                             |
+# |                          |                                      |  assign next_item_act] |                             |
+# |========================================================================================================================|
+#
 def get_next_item(items_seen, items_new, cur_time):
     """
     Finds the next item to be presented based on their activation.
@@ -113,11 +146,14 @@ def get_next_item(items_seen, items_new, cur_time):
     for item in items_seen:
         item_to_act[item] = calc_activation(item, items_seen[item].cur_alpha, [enc for enc in items_seen[item].encounters if enc.time < future_time], [], future_time)
 
-    # The default next item is the one with the lowest activation
-    next_item = "" if len(seen_items) == 0 else min(items_seen, key=item_to_act.get)
+    # Get the item with the lowest activation
+    min_item = "" if len(seen_items) == 0 else min(items_seen, key=item_to_act.get)
+
+    # Stores the next item to be presented
+    next_item = ""
 
     # If ALL items are NEW
-    if next_item == "":
+    if min_item == "":
         # Select the next NEW item to be presented
         next_item = items_new[0]
     # If the lowest activation is ABOVE the retrieval threshold
@@ -126,9 +162,11 @@ def get_next_item(items_seen, items_new, cur_time):
     elif item_to_act[next_item] > model_params["threshold"] and len(items_new) != 0:
         # select the next new item to be presented
         next_item = items_new[0]
+    # In ALL other cases, the item with the lowest activation is selected
+    # (regardless of whether it is below the retrieval threshold)
+    else:
+        next_item = min_item
 
-    # NOTE: In ALL other cases, the item with the lowest activation is selected
-    # NOTE: (regardless of whether it is below the retrieval threshold)
 
     # Stores the next item's activation
     next_item_act = 0.0
@@ -146,7 +184,7 @@ def get_next_item(items_seen, items_new, cur_time):
         # Calculate the item's activation
         next_item_act = calc_activation(next_item, items_seen[next_item].cur_alpha, [], [], future_time)
 
-    return next_item, next_item_act
+    return next_item, next_item_act, items_new
 
 
 
@@ -182,9 +220,10 @@ def get_next_item(items_seen, items_new, cur_time):
 # | last_enc.time > cur_time |                                      |  raise error]        |                             |
 # |--------------------------|--------------------------------------|----------------------|-----------------------------|
 # | else                     | B + E_1 + (N*F) + BC +               | []                   | 2^(N+1) + (19|20)*N +       |
-# |                          | (((2^N) - (1+N)) * I_2) +            |                      | triang_num(N) + 9           |
+# |                          | (((2^N) - (1+N)) * I_2) +            |                      | triang_num(N) + 10          |
 # |                          | (N * (I_2 + assign enc_act)) + S + A |                      |                             |
 # |======================================================================================================================|
+#
 def calc_activation(item, cur_alpha, encounters, activations, cur_time):
     """
     Calculates the activation for a given item at a given timestamp.
@@ -261,6 +300,7 @@ def calc_activation(item, cur_alpha, encounters, activations, cur_time):
 # | else                    |       B + 4      | [if, *, +,           |          6          |
 # |                         |                  |  assign decay]       |                     |
 # |=========================================================================================|
+#
 def calc_decay(activation, cur_alpha):
     """
     Calculate the activation decay of an item given its activation at the time of an encounter and its alpha.
