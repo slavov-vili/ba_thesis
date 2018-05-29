@@ -193,15 +193,14 @@ def get_next_item(items_seen, items_new, cur_time):
 # Execution DEPENDS on values of arguments
 #
 # NOTE: WITHOUT caching, the function is recursively called a total of 2 ^ N times
-# NOTE: WITH    caching, the function is recursively called a total of 1 + N times
+# NOTE: WITH    caching, the function is recursively called a total of 1 + N times = base case + N
 # NOTE: triang_num = factorial, but using ADDITION
 #
 # N   = len(encounters)
 # T   = 5                                                        // Instructions, when calculating the TIME DIFFERENCE
 # D   = 4 | 5                                                    // Instructions, when calculating the DECAY
 # A   = 1                                                        // Instructions, when APPENDING an encounter's activation to CACHE
-# S   = triang_num(N) = [create new list,                        // Instructions, when SLICING off previous encounters
-#                        add all prev encounters]
+# S   = 1                                                        // Instructions, when SLICING off previous encounters
 # 
 # B   = 2 = [declare activation, return activation]              // BASIC instructions, ALWAYS executed by the function
 # BC  = 4 = B + 2 = B + [if, assign activation]                  // BASIC instructions, ALWAYS executed when the BASE CASE is reached
@@ -213,16 +212,17 @@ def get_next_item(items_seen, items_new, cur_time):
 # I_2 = 2 = [if, assign enc_act]                                 // BASIC instructions, ALWAYS executed in the SECOND IF statement
 # E_2 = 2 = [if, S, assign enc_act, A]                           // BASIC instructions, ALWAYS executed in the SECOND IF statement
 # 
-# |======================================================================================================================|
-# |        CONDITIONS        |              INSTR COUNT             |    CUR INSTR LIST    |  TOTAL INSTR COUNT          |
-# |======================================================================================================================|
-# | N != 0 &                 |       B + 3                          | [if, if,             |          5                  |
-# | last_enc.time > cur_time |                                      |  raise error]        |                             |
-# |--------------------------|--------------------------------------|----------------------|-----------------------------|
-# | else                     | B + E_1 + (N*F) + BC +               | []                   | 2^(N+1) + (19|20)*N +       |
-# |                          | (((2^N) - (1+N)) * I_2) +            |                      | triang_num(N) + 10          |
-# |                          | (N * (I_2 + assign enc_act)) + S + A |                      |                             |
-# |======================================================================================================================|
+# |=======================================================================================================================|
+# |        CONDITIONS        |              INSTR COUNT              |    CUR INSTR LIST    |  TOTAL INSTR COUNT          |
+# |=======================================================================================================================|
+# | N != 0 &                 |       B + 3                           | [if, elif,           |          5                  |
+# | last_enc.time > cur_time |                                       |  raise error]        |                             |
+# |--------------------------|---------------------------------------|----------------------|-----------------------------|
+# | else                     | BC                              +     | []                   | 2^(N+1) + 9*N + 2 +         |
+# |                          | triang_num(N) * F               +     |                      | ((18|19) * triang_num(N))   |
+# |                          | ((2^N) - 1) * I_2               +     |                      |                             |
+# |                          | (N * (B + E_1 + S + A))               |                      |                             |
+# |=======================================================================================================================|
 #
 def calc_activation(item, cur_alpha, encounters, activations, cur_time):
     """
