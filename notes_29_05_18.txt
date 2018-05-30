@@ -1,0 +1,33 @@
+Next meeting: 12.06 15:00
+
+
+
+# How well can we approximate development of m without online syncing
+
+
+
+# Complexity analysis - chapter of thesis
+  - Original complexity, caching complexity
+  - Algorithmic improvements
+
+
+
+# Improvements
+
+  - Don't change alpha, use cached values when calculating m next time
+
+  - Use same alpha throughout whole session
+
+  - After session check how much end activation diverges from reality (by syncing with server) and adjust alpha
+
+  - compare results of regular calculation and new model (for the whole session and maybe for every step of the computations)
+
+
+
+MAYBE: compare alpha change each step during session vs average
+
+MAYBE: rank comparison, how often does change affect the ranks of next words
+
+MAYBE: check how much (quantity) activation history actually makes a difference
+
+MAYBE: cluster items into buckets of alphas
