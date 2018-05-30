@@ -2,6 +2,10 @@ Next meeting: 12.06 15:00
 
 
 
+# Cannot remove unnecessary computations from algorithm
+
+
+
 # How well can we approximate development of m without online syncing
 
 
