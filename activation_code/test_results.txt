@@ -1,10 +1,3 @@
-    *** TEST CONDITIONS: ***
-        - 2 sessions
-        - session length = 30 minutes (1800 seconds)
-        - time between sessions = 24 hours
-
-
-
     *** NOTE ***
     Absolute values should obviously not be taken seriously, but just as a comparison.
     They were also received pre-optimization of the part where the list of encouters
@@ -12,7 +5,40 @@
 
 
 
+    TODO: arrange results into table
+    *** TEST RESULTS (Alpha Adjustment) ***
+    0.01, 2 sesh, 1800s each, avg: 0.0660
+    0.01, 4 sesh, 1800s each, avg: 0.0745
+    0.01, 2 sesh, 3600s each, avg: 0.1352
+    0.01, 4 sesh, 3600s each, avg: 0.1833
+
+    0.03, 2 sesh, 1800s each, avg: 0.0692
+    0.03, 4 sesh, 1800s each, avg: 0.1064
+    0.03, 2 sesh, 3600s each, avg: 0.1131
+    0.03, 4 sesh, 3600s each, avg: 0.2199
+
+    0.05, 2 sesh, 1800s each, avg: 0.0632
+    0.05, 4 sesh, 1800s each, avg: 0.0992
+    0.05, 2 sesh, 3600s each, avg: 0.1265
+    0.05, 4 sesh, 3600s each, avg: 0.2069
+
+    0.08, 2 sesh, 1800s each, avg: 0.0605
+    0.08, 4 sesh, 1800s each, avg: 0.0866
+    0.08, 2 sesh, 3600s each, avg: 0.1149
+    0.08, 4 sesh, 3600s each, avg: 0.2037
+
+    0.10, 2 sesh, 1800s each, avg: 0.0653
+    0.10, 4 sesh, 1800s each, avg: 0.1073
+    0.10, 2 sesh, 3600s each, avg: 0.1197
+    0.10, 4 sesh, 3600s each, avg: 0.1928
+
+
+
     *** TEST RESULTS (LEARN DURATION) ***
+    *** CONDITIONS:                   ***
+        - 2 sessions
+        - session length = 30 minutes (1800 seconds)
+        - time between sessions = 24 hours
     |======================================================================================|
     |  test_id  |  item_count  |  encounters  |  avg_enc_per_word  |  duration  |  cached  |
     |======================================================================================|
@@ -30,6 +56,10 @@
 
 
     *** TEST RESULTS (ACTIVATION FUNCTION CALLS ) ***
+    *** CONDITIONS:                               ***
+        - 2 sessions
+        - session length = 30 minutes (1800 seconds)
+        - time between sessions = 24 hours
     |=====================================================================================|
     |  learn_test_id  |      item      |  enc_count  |  encs_used  |  calls  |  avg_time  |
     |=====================================================================================|

@@ -19,10 +19,51 @@ model_params = {"alpha_d":   0.3,   # default alpha for all items
 items = ["noodles", "where", "many", "way", "market", "castle", "group", "restaurant", "amazing", "to visit", "each", "tree", "British", "adult", "a day", "open(from...to...)", "furniture", "a year", "open", "free time", "canal", "Chinese", "stall", "playing field", "fancy", "a week", "to enjoy", "best", "wonderful", "expensive", "to add", "boat", "to join in", "view", "canoeing", "flower", "area"] # end items list
 
 
+def initialize_items_info(items):
+    items_info = {}
+    for item in items:
+        items_info[item] = Bunch(alpha_real=random.uniform(model_params["alpha_min"], model_params["alpha_max"]), alpha_model=model_params["alpha_d"], encounters=[], incorrect=0)
+    return items_info
 # maps each item to its values
-items_info = {}
-for item in items:
-    items_info[item] = Bunch(alpha_real=random.uniform(model_params["alpha_min"], model_params["alpha_max"]), alpha_model=model_params["alpha_d"], encounters=[], incorrect=0)
+items_info = initialize_items_info(items)
+
+
+
+def test_alpha_adjustment(items):
+    values       = [0.01, 0.03, 0.05, 0.08, 0.1]
+    sesh_counts  = [2, 4]
+    sesh_lengths = [1800, 3600]
+    ids_to_results = {}
+    cur_test_id = 0
+
+    # For each alpha adjustment value
+    for val in values:
+        # For each option for session count
+        for sesh_count in sesh_counts:
+            # For each option for session length
+            for sesh_length in sesh_lengths:
+                # Conduct a test
+                items_info = initialize_items_info(items)
+                learn_start = learn(items, items_info, sesh_count, sesh_length)
+                aad = calc_avg_alpha_difference(items, items_info)
+                # Add the test results to the map
+                ids_to_results[cur_test_id] = Bunch(adjustment=val, sessions=sesh_count, length=sesh_length, avg_alpha_diff=aad)
+                cur_test_id += 1
+
+    for test_id in ids_to_results:
+        print("\n")
+        print("Test ID:       ", test_id)
+        print("Adjustment:    ", ids_to_results[test_id].adjustment)
+        print("Session count: ", ids_to_results[test_id].sessions)
+        print("Session length:", ids_to_results[test_id].length)
+        print("AVG Alpha Diff:", ids_to_results[test_id].avg_alpha_diff)
+
+
+def calc_avg_alpha_difference(items, items_info):
+    sum = 0
+    for item in items:
+        sum += np.abs(items_info[item].alpha_real - items_info[item].alpha_model)
+    return sum / len(items)
 
 
 def print_item_info(item, items_info):
@@ -168,17 +209,17 @@ def learn(items, items_info, sesh_count, sesh_length):
             guessed = guess_item(item_rec)
             print("Guessed item:", guessed)
 
+            # add the current encounter to the item's encounter list
+            items_info[item].encounters.append(Bunch(time=cur_time, alpha=items_info[item].alpha_model, activation=item_act, was_guessed=guessed))
+
             # adjust values depending on outcome
             if guessed:
                 if items_info[item].alpha_model > model_params["alpha_min"]:
-                    items_info[item].alpha_model -= (1 - item_rec) / 40
+                    items_info[item].alpha_model -= 0.08
             else:
                 if items_info[item].alpha_model < model_params["alpha_max"]:
-                    items_info[item].alpha_model += item_rec / 40
+                    items_info[item].alpha_model += 0.08
                 items_info[item].incorrect += 1
-
-            # add the current encounter to the item's encounter list
-            items_info[item].encounters.append(Bunch(time=cur_time, alpha=items_info[item].alpha_model, activation=item_act, was_guessed=guessed))
 
             # increment the current time to account for the length of the encounter
             cur_time += datetime.timedelta(seconds=random.randint(3, 10))

@@ -434,12 +434,12 @@ def calc_new_alpha(old_alpha, item_recall_prob, last_enc_result):
     # If the last encounter was SUCCESSFUL
     if last_enc_result == "guessed":
         if old_alpha > model_params["alpha_min"]:
-            new_alpha = new_alpha - (1 - item_recall_prob) / 40
+            new_alpha = new_alpha - 0.08
 
     # If the last encounter was NOT SUCCESSFUL
     elif last_enc_result == "not_guessed":
         if old_alpha < model_params["alpha_max"]:
-            new_alpha = new_alpha + item_recall_prob / 40
+            new_alpha = new_alpha + 0.08
 
     # NOTE: If the last encounter was SKIPPED, the alpha stays the same
 

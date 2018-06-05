@@ -33,7 +33,7 @@ for item in items:
 
 
 
-def test_act_call_count(item, items_info, enc_count):
+def test_act_call_count(item, items_info, enc_count, cached):
     """
     Prints how many times the activation function will be called given a number of encounters.
     NOTE: ALWAYS do learning before trying to count the calls
@@ -54,7 +54,7 @@ def test_act_call_count(item, items_info, enc_count):
 
 
 
-def test_learn_duration(items, item_count, items_info, sesh_count, sesh_length):
+def test_learn_duration(items, item_count, items_info, sesh_count, sesh_length, cached):
     """
     Prints how much time it takes for learning to finish given a number of items.
     """
@@ -98,7 +98,7 @@ def print_item_info(item, items_info):
 
 
 
-def learn(items, items_info, sesh_count, sesh_length):
+def learn(items, items_info, sesh_count, sesh_length, cached):
     """
     Simulates the learning process by adding new encounters of words.
     Arguments:
@@ -106,6 +106,8 @@ def learn(items, items_info, sesh_count, sesh_length):
     items_info  -- the information related to each item
     sesh_count  -- the number of sessions to be performed
     sesh_length -- the length of each session(in seconds)
+    cached      -- whether to use the cached activations for each encounter
+                   in the activation calculation OR to recalculate them again
     Returns:
     the datetime when the learning process started
     """
@@ -127,31 +129,31 @@ def learn(items, items_info, sesh_count, sesh_length):
         # while there is time in the session
         while cur_time < sesh_end:
             # get the next item to be presented
-            item, item_act_model, next_new_item_idx = get_next_item(items, items_info, cur_time, next_new_item_idx)
+            item, item_act_model, next_new_item_idx = get_next_item(items, items_info, cur_time, next_new_item_idx, cached)
             print("\nEncountered '", item, "' at", cur_time)
 
             # NOTE: Only needed to simulate user interaction
+            # NOTE: NEVER use cached activations when calculating REAL activation
             # calculate the item's activation with its REAL alpha
-            # TODO: ternary operator based on parameter whether to use cached activations or not!
             item_act_real = calc_activation(item, items_info[item].alpha_real, items_info[item].encounters, [], cur_time)[0]
             # calculate the 
             item_rec = calc_recall_prob(item_act_real)
             # try to guess the item
             guessed = guess_item(item_rec)
 
+            # add the current encounter to the item's encounter list
+            items_info[item].encounters.append(Bunch(time=cur_time, alpha=items_info[item].alpha_model, activation=item_act_model, was_guessed=guessed))
+
             # NOTE: The values for adjusting the alpha were selected through a bunch of testing and fitting
             # NOTE: in order for the results, produced by this simple simulation, to somewhat make sense.
             # adjust values depending on outcome
             if guessed:
                 if items_info[item].alpha_model > model_params["alpha_min"]:
-                    items_info[item].alpha_model -= (1 - item_rec) / 40
+                    items_info[item].alpha_model -= 0.08
             else:
                 if items_info[item].alpha_model < model_params["alpha_max"]:
-                    items_info[item].alpha_model += item_rec / 40
+                    items_info[item].alpha_model += 0.08
                 items_info[item].incorrect += 1
-
-            # add the current encounter to the item's encounter list
-            items_info[item].encounters.append(Bunch(time=cur_time, alpha=items_info[item].alpha_model, activation=item_act_model, was_guessed=guessed))
 
             # increment the current time to account for the length of the encounter
             # NOTE: Only here to simulate the duration if interactions.
@@ -174,7 +176,7 @@ def learn(items, items_info, sesh_count, sesh_length):
 
 
 
-def get_next_item(items, items_info, time, next_new_item_idx):
+def get_next_item(items, items_info, time, next_new_item_idx, cached):
     """
     Finds the next item to be presented based on their activation.
     Arguments:
@@ -182,6 +184,8 @@ def get_next_item(items, items_info, time, next_new_item_idx):
     items_info        -- the map, containing each item's information
     time              -- the time, at which the next item should be presented
     next_new_item_idx -- the index of the next NEW item from the list
+    cached            -- whether to use the cached activations for each encounter
+                         in the activation calculation OR to recalculate them again
     Returns:
     the next item to be presented, its activation and the index of the next NEW item
     """
@@ -195,7 +199,11 @@ def get_next_item(items, items_info, time, next_new_item_idx):
     future_time = time + datetime.timedelta(seconds=15)
     # recalculate each SEEN item's activation at future time with their updated alphas
     for item in seen_items:
-        item_to_act[item] = calc_activation(item, items_info[item].alpha_model, [enc for enc in items_info[item].encounters if enc.time < future_time], [], future_time)[0]
+        # Extract all encounters, which happened before future time
+        prev_encounters  = [enc for enc in items_info[item].encounters if enc.time < future_time]
+        # Store each previous encounter's activation
+        prev_activations = [] if not cached else [enc.activation for enc in prev_encounters]
+        item_to_act[item] = calc_activation(item, items_info[item].alpha_model, prev_encounters, prev_activations, future_time)[0]
 
     print("\nFinding next word!")
 
@@ -222,7 +230,10 @@ def get_next_item(items, items_info, time, next_new_item_idx):
     # NOTE: in ALL other cases, the item with the lowest activation is selected
     # NOTE: (regardless of whether it is below the retrieval threshold)
 
-    return next_item, next_new_item_idx_inc
+    # Store the next item's activation based on whether it is a NEW item or NOT
+    next_item_act = item_to_act[next_item] if next_item in item_to_act else calc_activation(next_item, items_info[next_item].alpha_model, [enc for enc in items_info[next_item].encounters if enc.time < time], [], future_time)[0]
+
+    return next_item, next_item_act, next_new_item_idx_inc
 
 
 
