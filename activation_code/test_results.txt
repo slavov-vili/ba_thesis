@@ -5,6 +5,12 @@
 
 
 
+    TODO: conduct tests
+    TODO: arrange results into table
+    *** TEST RESULTS (Cached vs Uncached) ***
+
+
+
     TODO: arrange results into table
     *** TEST RESULTS (Alpha Adjustment) ***
     0.01, 2 sesh, 1800s each, avg: 0.0660

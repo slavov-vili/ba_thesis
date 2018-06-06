@@ -22,21 +22,53 @@ model_params = {"alpha_d":   0.3,   # default alpha for all items
 items = ["noodles", "where", "many", "way", "market", "castle", "group", "restaurant", "amazing", "to visit", "each", "tree", "British", "adult", "a day", "open(from...to...)", "furniture", "a year", "open", "free time", "canal", "Chinese", "stall", "playing field", "fancy", "a week", "to enjoy", "best", "wonderful", "expensive", "to add", "boat", "to join in", "view", "canoeing", "flower", "area"] # end items list
 
 
+def initialize_items_info(items):
+    items_info = {}
+    for item in items:
+        items_info[item] = Bunch(alpha_real=random.uniform(model_params["alpha_min"], model_params["alpha_max"]), alpha_model=model_params["alpha_d"], encounters=[], incorrect=0)
+    return items_info
+
+
 # maps each item to its values
-items_info_uncached = {}
-items_info_cached   = {}
-for item in items:
-    # Fill in the uncached info for the item
-    items_info_uncached[item] = Bunch(alpha_real=random.uniform(model_params["alpha_min"], model_params["alpha_max"]), alpha_model=model_params["alpha_d"], encounters=[], incorrect=0)
-    # Fill in the cached info for the item
-    items_info_cached[item]   = Bunch(alpha_real=random.uniform(model_params["alpha_min"], model_params["alpha_max"]), alpha_model=model_params["alpha_d"], encounters=[], incorrect=0)
+items_info_uncached = initialize_items_info(items)
+items_info_cached   = initialize_items_info(items)
 
 
 
-def test_act_call_count(item, items_info, enc_count, cached):
+# TODO: fix so it prints comparison
+def test_learning(items, items_info, sesh_count, sesh_length, learn_count):
+    """
+    Gets average values for learning 
+    Prints a comparison between doing learning using the cached activations of each encounter
+    and recalculating the activation each time an item needs to be presented.
+    learn_count  -- how many times should learning sessions be conducted when getting the average values
+    """
+
+    cached_options = [True, False]
+
+    start = datetime.datetime.now()
+    learn(items, items_info, sesh_count, sesh_length, cached)
+    end   = datetime.datetime.now()
+
+    enc_count = sum(len(items_info[item].encounters) for item in items)
+
+    print("\n")
+    print("\n")
+    print("Cache used:",               cached)
+    print("Duration:",                 (end - start).total_seconds(), "s")
+    print("Total encounters:",         enc_count)
+    print("Average encounter count:",  enc_count / len(items))
+    print("Average alpha difference:", calc_avg_alpha_difference(items, items_info))
+
+    test_act_call_count("noodles", items_info, len(items_info["noodles"].encounters))
+    test_act_call_count("many",    items_info, len(items_info["many"].encounters))
+    test_act_call_count("market",  items_info, len(items_info["market"].encounters))
+
+
+def test_act_call_count(item, items_info, enc_count):
     """
     Prints how many times the activation function will be called given a number of encounters.
-    NOTE: ALWAYS do learning before trying to count the calls
+    NOTE: ALWAYS do learning before trying to count the calls in order to get a list of encounters
     """
 
     encounters    = items_info[item].encounters[:enc_count]
@@ -53,22 +85,11 @@ def test_act_call_count(item, items_info, enc_count, cached):
     print("Time taken:", (end - start).total_seconds())
 
 
-
-def test_learn_duration(items, item_count, items_info, sesh_count, sesh_length, cached):
-    """
-    Prints how much time it takes for learning to finish given a number of items.
-    """
-
-    start = datetime.datetime.now()
-    learn(items[:item_count], items_info, sesh_count, sesh_length)
-    end   = datetime.datetime.now()
-
-    enc_count = sum([len(items_info[item].encounters) for item in items[:item_count]])
-
-    print("\n")
-    print("Item count:", item_count)
-    print("Total encounters:", enc_count)
-    print("Duration:", (end - start).total_seconds())
+def calc_avg_alpha_difference(items, items_info):
+    sum = 0
+    for item in items:
+        sum += np.abs(items_info[item].alpha_real - items_info[item].alpha_model)
+    return sum / len(items)
 
 
 
@@ -90,9 +111,8 @@ def print_item_info(item, items_info):
         prev_encounters = [prev_enc for prev_enc in item_encounters if prev_enc.time < enc.time]
         print("Encounter", i, "time:",        enc.time)
         print("Encounter", i, "alpha:",       enc.alpha)
-        enc_activation = calc_activation(item, enc.alpha, prev_encounters, [], enc.time)[0]
-        print("Encounter", i, "activation:",  enc_activation)
-        print("Encounter", i, "recall prob:", calc_recall_prob(enc_activation))
+        print("Encounter", i, "activation:",  enc.activation)
+        print("Encounter", i, "recall prob:", calc_recall_prob(enc.activation))
         print("Encounter", i, "was guessed:", enc.was_guessed)
     print("Incorrect:", items_info[item].incorrect)
 
@@ -149,10 +169,10 @@ def learn(items, items_info, sesh_count, sesh_length, cached):
             # adjust values depending on outcome
             if guessed:
                 if items_info[item].alpha_model > model_params["alpha_min"]:
-                    items_info[item].alpha_model -= 0.08
+                    items_info[item].alpha_model -= 0.05
             else:
                 if items_info[item].alpha_model < model_params["alpha_max"]:
-                    items_info[item].alpha_model += 0.08
+                    items_info[item].alpha_model += 0.05
                 items_info[item].incorrect += 1
 
             # increment the current time to account for the length of the encounter
@@ -201,8 +221,9 @@ def get_next_item(items, items_info, time, next_new_item_idx, cached):
     for item in seen_items:
         # Extract all encounters, which happened before future time
         prev_encounters  = [enc for enc in items_info[item].encounters if enc.time < future_time]
-        # Store each previous encounter's activation
+        # Store each previous encounter's activation if cached values should be used
         prev_activations = [] if not cached else [enc.activation for enc in prev_encounters]
+        # Map each item to its activation
         item_to_act[item] = calc_activation(item, items_info[item].alpha_model, prev_encounters, prev_activations, future_time)[0]
 
     print("\nFinding next word!")
