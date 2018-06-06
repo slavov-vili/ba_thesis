@@ -11,6 +11,7 @@
 
 
 
+    TODO: redo tests, but this time keep real alpha the same for all learning sessions
     TODO: arrange results into table
     *** TEST RESULTS (Alpha Adjustment) ***
     0.01, 2 sesh, 1800s each, avg: 0.0660
