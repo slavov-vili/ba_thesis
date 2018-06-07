@@ -25,7 +25,6 @@ items = ["noodles", "where", "many", "way", "market", "castle", "group", "restau
 def initialize_items_info(items):
     items_info = {}
     for item in items:
-        # NOTE: ALL fields, which start with "avg_" are ONLY used for comparison between cached and uncached learning
         items_info[item] = Bunch(alpha_real=random.uniform(model_params["alpha_min"], model_params["alpha_max"]),
                                  alpha_model=model_params["alpha_d"],
                                  encounters=[],
@@ -42,12 +41,11 @@ def initialize_avg_items_info(items):
     avg_items_info = {}
     for item in items:
         avg_items_info[item] = Bunch(avg_enc_count   = 0.0,
-                                     avg_incorr_perc = 0.0,
-                                     avg_alpha_diff  = 0.0)
+                                     avg_perc_incorr = 0.0,
+                                     avg_alpha_err   = 0.0)
     return avg_items_info
 
 
-# TODO: double check function again to make sure everything is ok
 # TODO: maybe implement encounter-specific information to track performance more closely
 def test_learning(items, items_info, sesh_count, sesh_length, learn_count):
     """
@@ -61,26 +59,27 @@ def test_learning(items, items_info, sesh_count, sesh_length, learn_count):
 
     # Store the average values for learning sessions
     averages_cached   = Bunch(cache_used=True,
-                              avg_duration   = 0,
-                              avg_enc_count  = 0,
+                              avg_duration   = 0.0,
+                              avg_enc_count  = 0.0,
                               avg_items_info = initialize_avg_items_info(items))
     averages_uncached = Bunch(cache_used=False,
-                              avg_duration   = 0,
-                              avg_enc_count  = 0,
+                              avg_duration   = 0.0,
+                              avg_enc_count  = 0.0,
                               avg_items_info = initialize_avg_items_info(items))
 
 
+    # For both CACHED and UNCACHED learning
     for cache in [True, False]:
-        # Do learning using UNCACHED values
-        for i in range(learn_count+1):
-            # Clear the session-relevant item information
-            for item in items:
-                items_info[item].alpha_model     = model_params["alpha_d"]
-                items_info[item].encounters      = []
-                items_info[item].incorrect       = 0
+        # Store the appropriate variable based on what type of learning is being done
+        averages = averages_cached if cache else averages_uncached
 
-            # Store the appropriate averages bunch
-            averages = averages_cached if cache else averages_uncached
+        # Conduct learning sessions
+        for i in range(learn_count+1):
+            # Reset the session-relevant item information
+            for item in items:
+                items_info[item].alpha_model = model_params["alpha_d"]
+                items_info[item].encounters  = []
+                items_info[item].incorrect   = 0
 
             # Conduct a learning session
             start = datetime.datetime.now()
@@ -88,10 +87,10 @@ def test_learning(items, items_info, sesh_count, sesh_length, learn_count):
             end   = datetime.datetime.now()
 
             # Add the session's DURATION to the averages
-            learn_duration  = (end-start).total_seconds()
+            learn_duration = (end - start).total_seconds()
             averages.avg_duration += learn_duration
             # Add the session's ENCOUNTER COUNT to the averages
-            learn_enc_count = sum(len(items_info[item].encounters) for item in items)
+            learn_enc_count = sum([len(items_info[item].encounters) for item in items])
             averages.avg_enc_count += learn_enc_count
 
             # Add each item
@@ -100,43 +99,58 @@ def test_learning(items, items_info, sesh_count, sesh_length, learn_count):
                 # Add the item's ENCOUNTER COUNT to the averages
                 averages.avg_items_info[item].avg_enc_count   += item_enc_count
                 # Add the item's INCORRECT PERCENTAGE to the averages
-                averages.avg_items_info[item].avg_incorr_perc += (items_info[item].incorrect / item_enc_count) * 100
+                averages.avg_items_info[item].avg_perc_incorr += (items_info[item].incorrect / item_enc_count) * 100
                 # Add the item's ALPHA DIFFERENCE to the averages
-                averages.avg_items_info[item].avg_alpha_diff  += items_info[item].alpha_real - items_info[item].alpha_model
+                averages.avg_items_info[item].avg_alpha_err  += items_info[item].alpha_real - items_info[item].alpha_model
 
 
     # Calculate the averages
     for cache in [True, False]:
-        # Store the appropriate averages bunch
+        # Store the appropriate variable
         averages = averages_cached if cache else averages_uncached
 
         averages.avg_duration  /= learn_count
         averages.avg_enc_count /= learn_count
         for item in items:
             averages.avg_items_info[item].avg_enc_count   /= learn_count
-            averages.avg_items_info[item].avg_incorr_perc /= learn_count
-            averages.avg_items_info[item].avg_alpha_diff  /= learn_count
+            averages.avg_items_info[item].avg_perc_incorr /= learn_count
+            averages.avg_items_info[item].avg_alpha_err  /= learn_count
 
 
     print("\n")
     print("\n")
     print("\n")
-    print("Differences:")
-    print("Average Duration (UNCACHED) = ", averages_uncached.avg_duration)
-    print("Average Duration (CACHED)   = ", averages_cached.avg_duration)
-    print("Average Encounter Count (UNCACHED) = ", averages_uncached.avg_enc_count)
-    print("Average Encounter Count (CACHED)   = ", averages_cached.avg_enc_count)
+    print("AVERAGE Differences (UNCACHED vs CACHED):")
+    print("Average Duration Difference         = ", averages_uncached.avg_duration  - averages_cached.avg_duration,  "SECONDS")
+    print("Average Total Encounters Difference = ", averages_uncached.avg_enc_count - averages_cached.avg_enc_count, "ENCOUNTERS")
+    sum_avg_enc_count   = 0
+    sum_avg_perc_incorr = 0
+    sum_avg_alpha_error = 0
     for item in items:
-        print("\n")
-        avg_items_info_uncached = averages_uncached.avg_items_info[item]
-        avg_items_info_cached   = averages_cached.avg_items_info[item]
+        sum_avg_enc_count += averages_uncached.avg_items_info[item].avg_enc_count - averages_cached.avg_items_info[item].avg_enc_count
+        sum_avg_perc_incorr += averages_uncached.avg_items_info[item].avg_perc_incorr - averages_cached.avg_items_info[item].avg_perc_incorr
+        sum_avg_alpha_error += averages_uncached.avg_items_info[item].avg_alpha_err - averages_cached.avg_items_info[item].avg_alpha_err
+    print("Average Encounter Count Difference      (Per Item) = ", sum_avg_enc_count / len(items),   "ENCOUNTERS")
+    print("Average Percentage Incorrect Difference (Per Item) = ", sum_avg_perc_incorr / len(items), "PERCENT")
+    print("Average Alpha Error Difference          (Per Item) = ", sum_avg_alpha_error / len(items))
+
+
+    print("\n")
+    print("FULL Differences:")
+    print("Average Duration (UNCACHED) = ", averages_uncached.avg_duration, "SECONDS")
+    print("Average Duration (CACHED)   = ", averages_cached.avg_duration,   "SECONDS")
+    print("Average Encounter Count (UNCACHED) = ", averages_uncached.avg_enc_count, "ENCOUNTERS")
+    print("Average Encounter Count (CACHED)   = ", averages_cached.avg_enc_count,   "ENCOUNTERS")
+    for item in items:
+        avg_item_info_uncached = averages_uncached.avg_items_info[item]
+        avg_item_info_cached   = averages_cached.avg_items_info[item]
         print("Item:", item)
-        print("Average Encounter Count (UNCACHED)   = ", avg_items_info_uncached.avg_enc_count)
-        print("Average Encounter Count (CACHED)     = ", avg_items_info_cached.avg_enc_count)
-        print("Average Incorr Percentage (UNCACHED) = ", avg_items_info_uncached.avg_incorr_perc)
-        print("Average Incorr Percentage (CACHED)   = ", avg_items_info_cached.avg_incorr_perc)
-        print("Average Alpha Difference (UNCACHED)  = ", avg_items_info_uncached.avg_alpha_diff)
-        print("Average Alpha Difference (CACHED)    = ", avg_items_info_cached.avg_alpha_diff)
+        print("Average Encounter Count   (UNCACHED) = ", avg_item_info_uncached.avg_enc_count,   "ENCOUNTERS")
+        print("Average Encounter Count   (CACHED)   = ", avg_item_info_cached.avg_enc_count,     "ENCOUNTERS")
+        print("Average Percentage Incorr (UNCACHED) = ", avg_item_info_uncached.avg_perc_incorr, "PERCENT")
+        print("Average Percentage Incorr (CACHED)   = ", avg_item_info_cached.avg_perc_incorr,   "PERCENT")
+        print("Average Alpha Error       (UNCACHED) = ", avg_item_info_uncached.avg_alpha_err)
+        print("Average Alpha Error       (CACHED)   = ", avg_item_info_cached.avg_alpha_err)
 
 
 
@@ -196,6 +210,7 @@ def print_item_info(item, items_info):
 def learn(items, items_info, sesh_count, sesh_length, cached):
     """
     Simulates the learning process by adding new encounters of words.
+
     Arguments:
     items       -- the items which need to be learned
     items_info  -- the information related to each item
@@ -225,13 +240,13 @@ def learn(items, items_info, sesh_count, sesh_length, cached):
         while cur_time < sesh_end:
             # get the next item to be presented
             item, item_act_model, next_new_item_idx = get_next_item(items, items_info, cur_time, next_new_item_idx, cached)
-            print("\nEncountered '", item, "' at", cur_time)
+            print("Encountered '", item, "' at", cur_time)
 
             # NOTE: Only needed to simulate user interaction
-            # NOTE: NEVER use cached activations when calculating REAL activation
             # calculate the item's activation with its REAL alpha
+            # NOTE: NEVER use cached activations when calculating the item's REAL activation
             item_act_real = calc_activation(item, items_info[item].alpha_real, items_info[item].encounters, [], cur_time)[0]
-            # calculate the 
+            # calculate the item's recall probability, based on the its real activation
             item_rec = calc_recall_prob(item_act_real)
             # try to guess the item
             guessed = guess_item(item_rec)
@@ -277,6 +292,7 @@ def learn(items, items_info, sesh_count, sesh_length, cached):
 def get_next_item(items, items_info, time, next_new_item_idx, cached):
     """
     Finds the next item to be presented based on their activation.
+
     Arguments:
     items             -- the items to be considered when choosing the next item
     items_info        -- the map, containing each item's information
@@ -330,6 +346,7 @@ def get_next_item(items, items_info, time, next_new_item_idx, cached):
     # NOTE: (regardless of whether it is below the retrieval threshold)
 
     # Store the next item's activation based on whether it is a NEW item or NOT
+    # NOTE: IF the activation needs to be RECALCULATED, NO CACHED values for activations are passed, SINCE the item would be NEW
     next_item_act = item_to_act[next_item] if next_item in item_to_act else calc_activation(next_item, items_info[next_item].alpha_model, [enc for enc in items_info[next_item].encounters if enc.time < time], [], future_time)[0]
 
     return next_item, next_item_act, next_new_item_idx_inc
@@ -340,6 +357,7 @@ def calc_activation(item, alpha, encounters, activations, cur_time, call_count=1
     """
     Calculates the activation for a given item at a given timestamp.
     Takes into account all previous encounters of the item through the calculation of decay.
+
     Arguments:
     item        -- the item whose activation should be calculated
     alpha       -- the alpha value of the item which should be used in the calculation
