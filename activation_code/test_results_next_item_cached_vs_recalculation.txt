@@ -17,7 +17,7 @@
 
 
 
-    TODO: conduct rest of tests
+    TODO: conduct tests AGAIN and enter results AGAIN
     TODO: arrange results into table
     *** TEST RESULTS (Uncached vs Cached) ***
     |=======================================================================================================|
@@ -26,15 +26,19 @@
     | learn_sessions |  duration  |  total_encs  |  enc_count_diff  |  %_incorrect_diff  |  alpha_err_diff  |
     |      count     | difference |  difference  |    (per_item)    |     (per_item)     |     (per_item)   |
     |=======================================================================================================|
-    |        5       | 9.242272 s |      5.6     | 0.1513513513513  | 1.3960392205841599 | -0.0183783783784 |
+    |        5       | 9.242272 s |      5.6     |  0.1513513513513 |  1.39603922058416  | -0.0183783783784 |
     |-------------------------------------------------------------------------------------------------------|
-    |        10      |            |              |                  |                    |                  |
+    |        10      | 8.063016 s |      1.0     |  0.0270270270270 |  0.567165129383711 | -0.0041891891891 |
     |-------------------------------------------------------------------------------------------------------|
-    |        15      |            |              |                  |                    |                  |
+    |        15      | 8.037178 s | -0.466666666 | -0.0126126126126 | -0.55689091190818  |  0.0038738738739 |
     |-------------------------------------------------------------------------------------------------------|
-    |        20      |            |              |                  |                    |                  |
+    |        20      | 9.204574 s |      3.78    |  0.1027102710271 |  0.867806214624771 | -0.0120270270270 |
     |-------------------------------------------------------------------------------------------------------|
-    |        25      |            |              |                  |                    |                  |
+    |        25      | 9.227262 s |      0.56    |  0.0151351351351 |  0.775249171814184 |  0.0117297297297 |
+    |-------------------------------------------------------------------------------------------------------|
+    |        50      | 9.414422 s |     -0.5     | -0.0135135135135 |  0.366538622990333 |  0.0058378378378 |
+    |-------------------------------------------------------------------------------------------------------|
+    |        100     | 7.87877 s  |     -2.69    | -0.0727027027027 |  0.605189420262931 | -0.0088378378783 |
     |=======================================================================================================|
 
 
@@ -46,13 +50,17 @@
     |======================================================================================|
     |        5       | 11.7279074 s   | 2.4856352 s    |      669.2      |      663.6      |
     |--------------------------------------------------------------------------------------|
-    |        10      |                |                |                 |                 |
+    |        10      | 10.3650957 s   | 2.3020793 s    |      611.2      |      610.2      |
     |--------------------------------------------------------------------------------------|
-    |        15      |                |                |                 |                 |
+    |        15      | 10.273353533 s | 2.2361756666 s |      592.73     |      593.2      |
     |--------------------------------------------------------------------------------------|
-    |        20      |                |                |                 |                 |
+    |        20      | 11.521047 s    | 2.3164734 s    |      585.15     |      581.35     |
     |--------------------------------------------------------------------------------------|
-    |        25      |                |                |                 |                 |
+    |        25      | 11.41892764 s  | 2.1916652 s    |      577.32     |      576.76     |
+    |--------------------------------------------------------------------------------------|
+    |        50      | 11.79375012 s  | 2.37932866 s   |      565.18     |      565.68     |
+    |--------------------------------------------------------------------------------------|
+    |        100     | 10.37129218 s  | 2.49252243 s   |      558.29     |      560.98     |
     |======================================================================================|
 
 
@@ -61,302 +69,3 @@
 
     *** ITEM-SPECIFIC results ***
     - LEARN_SESH_COUNT = 5
-    Item: noodles
-    Average Encounter Count   (UNCACHED) =  17.6 ENCOUNTERS
-    Average Encounter Count   (CACHED)   =  18.4 ENCOUNTERS
-    Average Percentage Incorr (UNCACHED) =  49.74187903599668 PERCENT
-    Average Percentage Incorr (CACHED)   =  48.00752508361204 PERCENT
-    Average Alpha Error       (UNCACHED) =  0.12688258452810527
-    Average Alpha Error       (CACHED)   =  0.14688258452810526
-    
-    Item: where
-    Average Encounter Count   (UNCACHED) =  19.2 ENCOUNTERS
-    Average Encounter Count   (CACHED)   =  17.2 ENCOUNTERS
-    Average Percentage Incorr (UNCACHED) =  50.90847310584153 PERCENT
-    Average Percentage Incorr (CACHED)   =  48.07142857142857 PERCENT
-    Average Alpha Error       (UNCACHED) =  0.14206222821131087
-    Average Alpha Error       (CACHED)   =  0.16206222821131086
-    
-    Item: many
-    Average Encounter Count   (UNCACHED) =  22.2 ENCOUNTERS
-    Average Encounter Count   (CACHED)   =  22.0 ENCOUNTERS
-    Average Percentage Incorr (UNCACHED) =  54.63638262322472 PERCENT
-    Average Percentage Incorr (CACHED)   =  54.42233033564302 PERCENT
-    Average Alpha Error       (UNCACHED) =  0.17876191558764848
-    Average Alpha Error       (CACHED)   =  0.18876191558764852
-    
-    Item: way
-    Average Encounter Count   (UNCACHED) =  23.0 ENCOUNTERS
-    Average Encounter Count   (CACHED)   =  23.2 ENCOUNTERS
-    Average Percentage Incorr (UNCACHED) =  53.970397007010284 PERCENT
-    Average Percentage Incorr (CACHED)   =  54.77527151211361 PERCENT
-    Average Alpha Error       (UNCACHED) =  0.17908295300995714
-    Average Alpha Error       (CACHED)   =  0.16908295300995713
-    
-    Item: market
-    Average Encounter Count   (UNCACHED) =  11.2 ENCOUNTERS
-    Average Encounter Count   (CACHED)   =  14.0 ENCOUNTERS
-    Average Percentage Incorr (UNCACHED) =  36.077922077922075 PERCENT
-    Average Percentage Incorr (CACHED)   =  39.61002886002886 PERCENT
-    Average Alpha Error       (UNCACHED) =  0.10115266064450952
-    Average Alpha Error       (CACHED)   =  0.1211526606445095
-    
-    Item: castle
-    Average Encounter Count   (UNCACHED) =  26.4 ENCOUNTERS
-    Average Encounter Count   (CACHED)   =  28.2 ENCOUNTERS
-    Average Percentage Incorr (UNCACHED) =  57.2089947089947 PERCENT
-    Average Percentage Incorr (CACHED)   =  57.57142857142858 PERCENT
-    Average Alpha Error       (UNCACHED) =  0.18049140986352236
-    Average Alpha Error       (CACHED)   =  0.18049140986352236
-    
-    Item: group
-    Average Encounter Count   (UNCACHED) =  9.4 ENCOUNTERS
-    Average Encounter Count   (CACHED)   =  11.8 ENCOUNTERS
-    Average Percentage Incorr (UNCACHED) =  24.88095238095238 PERCENT
-    Average Percentage Incorr (CACHED)   =  35.93939393939394 PERCENT
-    Average Alpha Error       (UNCACHED) =  0.08362748633611417
-    Average Alpha Error       (CACHED)   =  0.05362748633611416
-    
-    Item: restaurant
-    Average Encounter Count   (UNCACHED) =  10.0 ENCOUNTERS
-    Average Encounter Count   (CACHED)   =  9.8 ENCOUNTERS
-    Average Percentage Incorr (UNCACHED) =  25.015873015873012 PERCENT
-    Average Percentage Incorr (CACHED)   =  26.746031746031747 PERCENT
-    Average Alpha Error       (UNCACHED) =  0.04788649858172866
-    Average Alpha Error       (CACHED)   =  0.037886498581728656
-    
-    Item: amazing
-    Average Encounter Count   (UNCACHED) =  20.2 ENCOUNTERS
-    Average Encounter Count   (CACHED)   =  25.0 ENCOUNTERS
-    Average Percentage Incorr (UNCACHED) =  53.37876176111471 PERCENT
-    Average Percentage Incorr (CACHED)   =  56.25172532781228 PERCENT
-    Average Alpha Error       (UNCACHED) =  0.2158371734059036
-    Average Alpha Error       (CACHED)   =  0.18583717340590358
-    
-    Item: to visit
-    Average Encounter Count   (UNCACHED) =  11.0 ENCOUNTERS
-    Average Encounter Count   (CACHED)   =  9.4 ENCOUNTERS
-    Average Percentage Incorr (UNCACHED) =  33.5 PERCENT
-    Average Percentage Incorr (CACHED)   =  24.68253968253968 PERCENT
-    Average Alpha Error       (UNCACHED) =  -0.007079341437489764
-    Average Alpha Error       (CACHED)   =  0.04292065856251024
-    
-    Item: each
-    Average Encounter Count   (UNCACHED) =  27.0 ENCOUNTERS
-    Average Encounter Count   (CACHED)   =  25.6 ENCOUNTERS
-    Average Percentage Incorr (UNCACHED) =  56.74313319530711 PERCENT
-    Average Percentage Incorr (CACHED)   =  56.14913436423734 PERCENT
-    Average Alpha Error       (UNCACHED) =  0.193424945574796
-    Average Alpha Error       (CACHED)   =  0.203424945574796
-    
-    Item: tree
-    Average Encounter Count   (UNCACHED) =  11.6 ENCOUNTERS
-    Average Encounter Count   (CACHED)   =  11.2 ENCOUNTERS
-    Average Percentage Incorr (UNCACHED) =  36.6060606060606 PERCENT
-    Average Percentage Incorr (CACHED)   =  33.136752136752136 PERCENT
-    Average Alpha Error       (UNCACHED) =  0.03480010240122561
-    Average Alpha Error       (CACHED)   =  0.05480010240122561
-    
-    Item: British
-    Average Encounter Count   (UNCACHED) =  20.6 ENCOUNTERS
-    Average Encounter Count   (CACHED)   =  20.4 ENCOUNTERS
-    Average Percentage Incorr (UNCACHED) =  53.85010414422179 PERCENT
-    Average Percentage Incorr (CACHED)   =  52.7266081871345 PERCENT
-    Average Alpha Error       (UNCACHED) =  0.16048462905483024
-    Average Alpha Error       (CACHED)   =  0.19048462905483024
-    
-    Item: adult
-    Average Encounter Count   (UNCACHED) =  30.0 ENCOUNTERS
-    Average Encounter Count   (CACHED)   =  26.2 ENCOUNTERS
-    Average Percentage Incorr (UNCACHED) =  58.23360378634212 PERCENT
-    Average Percentage Incorr (CACHED)   =  56.52779049071955 PERCENT
-    Average Alpha Error       (UNCACHED) =  0.16067684625104425
-    Average Alpha Error       (CACHED)   =  0.19067684625104425
-    
-    Item: a day
-    Average Encounter Count   (UNCACHED) =  11.0 ENCOUNTERS
-    Average Encounter Count   (CACHED)   =  10.8 ENCOUNTERS
-    Average Percentage Incorr (UNCACHED) =  33.79653679653679 PERCENT
-    Average Percentage Incorr (CACHED)   =  30.3015873015873 PERCENT
-    Average Alpha Error       (UNCACHED) =  0.010357348153507025
-    Average Alpha Error       (CACHED)   =  0.04035734815350703
-    
-    Item: open(from...to...)
-    Average Encounter Count   (UNCACHED) =  16.2 ENCOUNTERS
-    Average Encounter Count   (CACHED)   =  16.0 ENCOUNTERS
-    Average Percentage Incorr (UNCACHED) =  48.542568542568546 PERCENT
-    Average Percentage Incorr (CACHED)   =  45.82692307692308 PERCENT
-    Average Alpha Error       (UNCACHED) =  0.13179495366335855
-    Average Alpha Error       (CACHED)   =  0.16179495366335855
-    
-    Item: furniture
-    Average Encounter Count   (UNCACHED) =  34.2 ENCOUNTERS
-    Average Encounter Count   (CACHED)   =  33.2 ENCOUNTERS
-    Average Percentage Incorr (UNCACHED) =  62.96996662958843 PERCENT
-    Average Percentage Incorr (CACHED)   =  59.07601979860044 PERCENT
-    Average Alpha Error       (UNCACHED) =  0.21830442281621137
-    Average Alpha Error       (CACHED)   =  0.2483044228162114
-    
-    Item: a year
-    Average Encounter Count   (UNCACHED) =  11.2 ENCOUNTERS
-    Average Encounter Count   (CACHED)   =  12.4 ENCOUNTERS
-    Average Percentage Incorr (UNCACHED) =  35.54545454545455 PERCENT
-    Average Percentage Incorr (CACHED)   =  37.34920634920635 PERCENT
-    Average Alpha Error       (UNCACHED) =  0.057999085586896815
-    Average Alpha Error       (CACHED)   =  0.05799908558689683
-    
-    Item: open
-    Average Encounter Count   (UNCACHED) =  13.4 ENCOUNTERS
-    Average Encounter Count   (CACHED)   =  12.0 ENCOUNTERS
-    Average Percentage Incorr (UNCACHED) =  39.47008547008547 PERCENT
-    Average Percentage Incorr (CACHED)   =  37.60606060606061 PERCENT
-    Average Alpha Error       (UNCACHED) =  0.08900278903064973
-    Average Alpha Error       (CACHED)   =  0.09900278903064971
-    
-    Item: free time
-    Average Encounter Count   (UNCACHED) =  33.0 ENCOUNTERS
-    Average Encounter Count   (CACHED)   =  31.0 ENCOUNTERS
-    Average Percentage Incorr (UNCACHED) =  62.32127728901922 PERCENT
-    Average Percentage Incorr (CACHED)   =  58.74112388250319 PERCENT
-    Average Alpha Error       (UNCACHED) =  0.19415041804809047
-    Average Alpha Error       (CACHED)   =  0.23415041804809045
-    
-    Item: canal
-    Average Encounter Count   (UNCACHED) =  10.8 ENCOUNTERS
-    Average Encounter Count   (CACHED)   =  9.6 ENCOUNTERS
-    Average Percentage Incorr (UNCACHED) =  33.11111111111111 PERCENT
-    Average Percentage Incorr (CACHED)   =  26.82539682539682 PERCENT
-    Average Alpha Error       (UNCACHED) =  0.041366430089326514
-    Average Alpha Error       (CACHED)   =  0.061366430089326504
-    
-    Item: Chinese
-    Average Encounter Count   (UNCACHED) =  11.8 ENCOUNTERS
-    Average Encounter Count   (CACHED)   =  9.8 ENCOUNTERS
-    Average Percentage Incorr (UNCACHED) =  40.54545454545454 PERCENT
-    Average Percentage Incorr (CACHED)   =  29.01587301587302 PERCENT
-    Average Alpha Error       (UNCACHED) =  0.04685053978759476
-    Average Alpha Error       (CACHED)   =  0.10685053978759478
-    
-    Item: stall
-    Average Encounter Count   (UNCACHED) =  17.6 ENCOUNTERS
-    Average Encounter Count   (CACHED)   =  14.6 ENCOUNTERS
-    Average Percentage Incorr (UNCACHED) =  52.937405731523384 PERCENT
-    Average Percentage Incorr (CACHED)   =  43.40734265734266 PERCENT
-    Average Alpha Error       (UNCACHED) =  0.09254700193081436
-    Average Alpha Error       (CACHED)   =  0.18254700193081433
-    
-    Item: playing field
-    Average Encounter Count   (UNCACHED) =  11.8 ENCOUNTERS
-    Average Encounter Count   (CACHED)   =  12.8 ENCOUNTERS
-    Average Percentage Incorr (UNCACHED) =  40.21212121212121 PERCENT
-    Average Percentage Incorr (CACHED)   =  40.2983682983683 PERCENT
-    Average Alpha Error       (UNCACHED) =  0.09756871079693698
-    Average Alpha Error       (CACHED)   =  0.10756871079693697
-    
-    Item: fancy
-    Average Encounter Count   (UNCACHED) =  20.4 ENCOUNTERS
-    Average Encounter Count   (CACHED)   =  20.6 ENCOUNTERS
-    Average Percentage Incorr (UNCACHED) =  54.684845598158304 PERCENT
-    Average Percentage Incorr (CACHED)   =  53.127881921999574 PERCENT
-    Average Alpha Error       (UNCACHED) =  0.16316002756786852
-    Average Alpha Error       (CACHED)   =  0.1831600275678685
-    
-    Item: a week
-    Average Encounter Count   (UNCACHED) =  11.6 ENCOUNTERS
-    Average Encounter Count   (CACHED)   =  11.8 ENCOUNTERS
-    Average Percentage Incorr (UNCACHED) =  36.44444444444444 PERCENT
-    Average Percentage Incorr (CACHED)   =  35.80341880341881 PERCENT
-    Average Alpha Error       (UNCACHED) =  0.08352196880866092
-    Average Alpha Error       (CACHED)   =  0.0935219688086609
-    
-    Item: to enjoy
-    Average Encounter Count   (UNCACHED) =  14.0 ENCOUNTERS
-    Average Encounter Count   (CACHED)   =  15.8 ENCOUNTERS
-    Average Percentage Incorr (UNCACHED) =  43.77564102564103 PERCENT
-    Average Percentage Incorr (CACHED)   =  46.886446886446876 PERCENT
-    Average Alpha Error       (UNCACHED) =  0.13420179506336102
-    Average Alpha Error       (CACHED)   =  0.12420179506336101
-    
-    Item: best
-    Average Encounter Count   (UNCACHED) =  10.0 ENCOUNTERS
-    Average Encounter Count   (CACHED)   =  10.6 ENCOUNTERS
-    Average Percentage Incorr (UNCACHED) =  27.43145743145743 PERCENT
-    Average Percentage Incorr (CACHED)   =  30.968253968253965 PERCENT
-    Average Alpha Error       (UNCACHED) =  0.04629610982786293
-    Average Alpha Error       (CACHED)   =  0.03629610982786293
-    
-    Item: wonderful
-    Average Encounter Count   (UNCACHED) =  11.4 ENCOUNTERS
-    Average Encounter Count   (CACHED)   =  11.2 ENCOUNTERS
-    Average Percentage Incorr (UNCACHED) =  35.39393939393939 PERCENT
-    Average Percentage Incorr (CACHED)   =  33.666666666666664 PERCENT
-    Average Alpha Error       (UNCACHED) =  0.07255549780190178
-    Average Alpha Error       (CACHED)   =  0.08255549780190177
-    
-    Item: expensive
-    Average Encounter Count   (UNCACHED) =  33.4 ENCOUNTERS
-    Average Encounter Count   (CACHED)   =  34.0 ENCOUNTERS
-    Average Percentage Incorr (UNCACHED) =  62.91740633139651 PERCENT
-    Average Percentage Incorr (CACHED)   =  62.043648426682715 PERCENT
-    Average Alpha Error       (UNCACHED) =  0.21041748609478553
-    Average Alpha Error       (CACHED)   =  0.2404174860947855
-    
-    Item: to add
-    Average Encounter Count   (UNCACHED) =  18.4 ENCOUNTERS
-    Average Encounter Count   (CACHED)   =  18.6 ENCOUNTERS
-    Average Percentage Incorr (UNCACHED) =  53.29971988795518 PERCENT
-    Average Percentage Incorr (CACHED)   =  51.31438985850751 PERCENT
-    Average Alpha Error       (UNCACHED) =  0.1676998619292857
-    Average Alpha Error       (CACHED)   =  0.1976998619292857
-    
-    Item: boat
-    Average Encounter Count   (UNCACHED) =  21.8 ENCOUNTERS
-    Average Encounter Count   (CACHED)   =  21.4 ENCOUNTERS
-    Average Percentage Incorr (UNCACHED) =  56.20687748783723 PERCENT
-    Average Percentage Incorr (CACHED)   =  52.82395382395382 PERCENT
-    Average Alpha Error       (UNCACHED) =  0.1732578419130518
-    Average Alpha Error       (CACHED)   =  0.21325784191305175
-    
-    Item: to join in
-    Average Encounter Count   (UNCACHED) =  22.2 ENCOUNTERS
-    Average Encounter Count   (CACHED)   =  20.0 ENCOUNTERS
-    Average Percentage Incorr (UNCACHED) =  55.514529914529916 PERCENT
-    Average Percentage Incorr (CACHED)   =  52.73809523809524 PERCENT
-    Average Alpha Error       (UNCACHED) =  0.15061597692042233
-    Average Alpha Error       (CACHED)   =  0.20061597692042238
-    
-    Item: view
-    Average Encounter Count   (UNCACHED) =  14.6 ENCOUNTERS
-    Average Encounter Count   (CACHED)   =  14.2 ENCOUNTERS
-    Average Percentage Incorr (UNCACHED) =  45.29157117392411 PERCENT
-    Average Percentage Incorr (CACHED)   =  44.84382284382285 PERCENT
-    Average Alpha Error       (UNCACHED) =  0.16753663770681562
-    Average Alpha Error       (CACHED)   =  0.16753663770681562
-    
-    Item: canoeing
-    Average Encounter Count   (UNCACHED) =  20.4 ENCOUNTERS
-    Average Encounter Count   (CACHED)   =  22.0 ENCOUNTERS
-    Average Percentage Incorr (UNCACHED) =  55.192466460268314 PERCENT
-    Average Percentage Incorr (CACHED)   =  53.830532212885146 PERCENT
-    Average Alpha Error       (UNCACHED) =  0.1790878487003163
-    Average Alpha Error       (CACHED)   =  0.20908784870031627
-    
-    Item: flower
-    Average Encounter Count   (UNCACHED) =  13.8 ENCOUNTERS
-    Average Encounter Count   (CACHED)   =  15.6 ENCOUNTERS
-    Average Percentage Incorr (UNCACHED) =  44.748584748584754 PERCENT
-    Average Percentage Incorr (CACHED)   =  46.244949494949495 PERCENT
-    Average Alpha Error       (UNCACHED) =  0.10851459416426916
-    Average Alpha Error       (CACHED)   =  0.09851459416426915
-    
-    Item: area
-    Average Encounter Count   (UNCACHED) =  26.8 ENCOUNTERS
-    Average Encounter Count   (CACHED)   =  23.2 ENCOUNTERS
-    Average Percentage Incorr (UNCACHED) =  60.07430830039525 PERCENT
-    Average Percentage Incorr (CACHED)   =  56.16890959282264 PERCENT
-    Average Alpha Error       (UNCACHED) =  0.20530569433547222
-    Average Alpha Error       (CACHED)   =  0.24530569433547217
-
-
-
-    - LEARN_SESH_COUNT = 10

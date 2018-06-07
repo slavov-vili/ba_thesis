@@ -31,7 +31,6 @@ def initialize_items_info(items):
                                  incorrect=0)
     return items_info
 
-
 # maps each item to its values
 items_info = initialize_items_info(items)
 
@@ -74,7 +73,7 @@ def test_learning(items, items_info, sesh_count, sesh_length, learn_count):
         averages = averages_cached if cache else averages_uncached
 
         # Conduct learning sessions
-        for i in range(learn_count+1):
+        for i in range(learn_count):
             # Reset the session-relevant item information
             for item in items:
                 items_info[item].alpha_model = model_params["alpha_d"]
@@ -114,7 +113,7 @@ def test_learning(items, items_info, sesh_count, sesh_length, learn_count):
         for item in items:
             averages.avg_items_info[item].avg_enc_count   /= learn_count
             averages.avg_items_info[item].avg_perc_incorr /= learn_count
-            averages.avg_items_info[item].avg_alpha_err  /= learn_count
+            averages.avg_items_info[item].avg_alpha_err   /= learn_count
 
 
     print("\n")
@@ -127,9 +126,9 @@ def test_learning(items, items_info, sesh_count, sesh_length, learn_count):
     sum_avg_perc_incorr = 0
     sum_avg_alpha_error = 0
     for item in items:
-        sum_avg_enc_count += averages_uncached.avg_items_info[item].avg_enc_count - averages_cached.avg_items_info[item].avg_enc_count
+        sum_avg_enc_count   += averages_uncached.avg_items_info[item].avg_enc_count   - averages_cached.avg_items_info[item].avg_enc_count
         sum_avg_perc_incorr += averages_uncached.avg_items_info[item].avg_perc_incorr - averages_cached.avg_items_info[item].avg_perc_incorr
-        sum_avg_alpha_error += averages_uncached.avg_items_info[item].avg_alpha_err - averages_cached.avg_items_info[item].avg_alpha_err
+        sum_avg_alpha_error += averages_uncached.avg_items_info[item].avg_alpha_err   - averages_cached.avg_items_info[item].avg_alpha_err
     print("Average Encounter Count Difference      (Per Item) = ", sum_avg_enc_count / len(items),   "ENCOUNTERS")
     print("Average Percentage Incorrect Difference (Per Item) = ", sum_avg_perc_incorr / len(items), "PERCENT")
     print("Average Alpha Error Difference          (Per Item) = ", sum_avg_alpha_error / len(items))
@@ -144,7 +143,7 @@ def test_learning(items, items_info, sesh_count, sesh_length, learn_count):
     for item in items:
         avg_item_info_uncached = averages_uncached.avg_items_info[item]
         avg_item_info_cached   = averages_cached.avg_items_info[item]
-        print("Item:", item)
+        print("\nItem:", item)
         print("Average Encounter Count   (UNCACHED) = ", avg_item_info_uncached.avg_enc_count,   "ENCOUNTERS")
         print("Average Encounter Count   (CACHED)   = ", avg_item_info_cached.avg_enc_count,     "ENCOUNTERS")
         print("Average Percentage Incorr (UNCACHED) = ", avg_item_info_uncached.avg_perc_incorr, "PERCENT")
