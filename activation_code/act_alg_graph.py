@@ -24,46 +24,17 @@ def initialize_items_info(items):
     for item in items:
         items_info[item] = Bunch(alpha_real=random.uniform(model_params["alpha_min"], model_params["alpha_max"]), alpha_model=model_params["alpha_d"], encounters=[], incorrect=0)
     return items_info
+
 # maps each item to its values
 items_info = initialize_items_info(items)
 
 
 
-def test_alpha_adjustment(items):
-    values       = [0.01, 0.03, 0.05, 0.08, 0.1]
-    sesh_counts  = [2, 4]
-    sesh_lengths = [1800, 3600]
-    ids_to_results = {}
-    cur_test_id = 0
-
-    # For each alpha adjustment value
-    for val in values:
-        # For each option for session count
-        for sesh_count in sesh_counts:
-            # For each option for session length
-            for sesh_length in sesh_lengths:
-                # Conduct a test
-                items_info = initialize_items_info(items)
-                learn_start = learn(items, items_info, sesh_count, sesh_length)
-                aad = calc_avg_alpha_difference(items, items_info)
-                # Add the test results to the map
-                ids_to_results[cur_test_id] = Bunch(adjustment=val, sessions=sesh_count, length=sesh_length, avg_alpha_diff=aad)
-                cur_test_id += 1
-
-    for test_id in ids_to_results:
-        print("\n")
-        print("Test ID:       ", test_id)
-        print("Adjustment:    ", ids_to_results[test_id].adjustment)
-        print("Session count: ", ids_to_results[test_id].sessions)
-        print("Session length:", ids_to_results[test_id].length)
-        print("AVG Alpha Diff:", ids_to_results[test_id].avg_alpha_diff)
-
-
 def calc_avg_alpha_difference(items, items_info):
-    sum = 0
+    sum_alpha_diff = 0
     for item in items:
-        sum += np.abs(items_info[item].alpha_real - items_info[item].alpha_model)
-    return sum / len(items)
+        sum_alpha_diff += np.abs(items_info[item].alpha_real - items_info[item].alpha_model)
+    return sum_alpha_diff / len(items)
 
 
 def print_item_info(item, items_info):

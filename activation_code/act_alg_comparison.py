@@ -178,10 +178,10 @@ def test_act_call_count(item, items_info, enc_count, cached):
 
 
 def calc_avg_alpha_difference(items, items_info):
-    sum = 0
+    sum_alpha_diff = 0
     for item in items:
-        sum += np.abs(items_info[item].alpha_real - items_info[item].alpha_model)
-    return sum / len(items)
+        sum_alpha_diff += np.abs(items_info[item].alpha_real - items_info[item].alpha_model)
+    return sum_alpha_diff / len(items)
 
 
 
