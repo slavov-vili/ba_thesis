@@ -31,6 +31,12 @@ def initialize_items_info(items):
                                  incorrect=0)
     return items_info
 
+def reset_items_info(items_info):
+    for item in items_info:
+        items_info[item].alpha_model = model_params["alpha_d"]
+        items_info[item].encounters  = []
+        items_info[item].incorrect   = 0
+
 # maps each item to its values
 items_info = initialize_items_info(items)
 
@@ -58,13 +64,13 @@ def test_learning(items, items_info, sesh_count, sesh_length, learn_count):
 
     # Store the average values for learning sessions
     averages_cached   = Bunch(cache_used=True,
-                              avg_duration   = 0.0,
-                              avg_enc_count  = 0.0,
-                              avg_items_info = initialize_avg_items_info(items))
+                              avg_duration         = 0.0,
+                              avg_enc_count        = 0.0,
+                              avg_items_info       = initialize_avg_items_info(items))
     averages_uncached = Bunch(cache_used=False,
-                              avg_duration   = 0.0,
-                              avg_enc_count  = 0.0,
-                              avg_items_info = initialize_avg_items_info(items))
+                              avg_duration         = 0.0,
+                              avg_enc_count        = 0.0,
+                              avg_items_info       = initialize_avg_items_info(items))
 
 
     # For both CACHED and UNCACHED learning
@@ -75,10 +81,7 @@ def test_learning(items, items_info, sesh_count, sesh_length, learn_count):
         # Conduct learning sessions
         for i in range(learn_count):
             # Reset the session-relevant item information
-            for item in items:
-                items_info[item].alpha_model = model_params["alpha_d"]
-                items_info[item].encounters  = []
-                items_info[item].incorrect   = 0
+            reset_items_info(items_info)
 
             # Conduct a learning session
             start = datetime.datetime.now()
@@ -100,14 +103,14 @@ def test_learning(items, items_info, sesh_count, sesh_length, learn_count):
                 # Add the item's INCORRECT PERCENTAGE to the averages
                 averages.avg_items_info[item].avg_perc_incorr += (items_info[item].incorrect / item_enc_count) * 100
                 # Add the item's ALPHA DIFFERENCE to the averages
-                averages.avg_items_info[item].avg_alpha_err  += items_info[item].alpha_real - items_info[item].alpha_model
+                averages.avg_items_info[item].avg_alpha_err   += items_info[item].alpha_real - items_info[item].alpha_model
 
 
-    # Calculate the averages
+    # For each caching option
     for cache in [True, False]:
         # Store the appropriate variable
         averages = averages_cached if cache else averages_uncached
-
+        # Calculate the averages
         averages.avg_duration  /= learn_count
         averages.avg_enc_count /= learn_count
         for item in items:
@@ -122,9 +125,9 @@ def test_learning(items, items_info, sesh_count, sesh_length, learn_count):
     print("AVERAGE Differences (UNCACHED vs CACHED):")
     print("Average Duration Difference         = ", averages_uncached.avg_duration  - averages_cached.avg_duration,  "SECONDS")
     print("Average Total Encounters Difference = ", averages_uncached.avg_enc_count - averages_cached.avg_enc_count, "ENCOUNTERS")
-    sum_avg_enc_count   = 0
-    sum_avg_perc_incorr = 0
-    sum_avg_alpha_error = 0
+    sum_avg_enc_count       = 0.0
+    sum_avg_perc_incorr     = 0.0
+    sum_avg_alpha_error     = 0.0
     for item in items:
         sum_avg_enc_count   += averages_uncached.avg_items_info[item].avg_enc_count   - averages_cached.avg_items_info[item].avg_enc_count
         sum_avg_perc_incorr += averages_uncached.avg_items_info[item].avg_perc_incorr - averages_cached.avg_items_info[item].avg_perc_incorr
@@ -153,17 +156,18 @@ def test_learning(items, items_info, sesh_count, sesh_length, learn_count):
 
 
 
-def test_act_call_count(item, items_info, enc_count):
+def test_act_call_count(item, items_info, enc_count, cached):
     """
     Prints how many times the activation function will be called given a number of encounters.
     NOTE: ALWAYS do learning before trying to count the calls in order to get a list of encounters
     """
 
     encounters    = items_info[item].encounters[:enc_count]
+    activations   = [] if not cached else [enc.activation for enc in encounters]
     last_enc_time = encounters[enc_count-1].time
 
     start = datetime.datetime.now()
-    _, act_count = calc_activation(item, items_info[item].alpha_model, encounters, [], last_enc_time + datetime.timedelta(seconds=5))
+    _, act_count = calc_activation(item, items_info[item].alpha_model, encounters, activations, last_enc_time + datetime.timedelta(seconds=5))
     end   = datetime.datetime.now()
 
     print("\n")
