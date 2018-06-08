@@ -1,0 +1,63 @@
+    *** Tests the DIFFERENCE between:
+        - adjusting the alpha after each encounter
+        - adjusting the alpha only after a session has ended
+
+
+
+    *** NOTE ***
+    Absolute values should obviously not be taken seriously, but just as a comparison.
+
+
+
+    *** DESCRIPTION ***
+    - Takes the average values of N LEARNING sessions in which alphas are adjusted after each encounter with an item
+    - Does the same, but adjusts the alphas only after the session is over
+    - Compares the average values.
+    - NOTE: the actual alphas of words stay the same between ALL LEARNING sessions and between ALL TESTS
+
+
+
+    *** TEST RESULTS (Uncached vs Cached) ***
+    |=============================================================================================================================|
+    |                                                  AVERAGE DIFFERENCES                                                        |
+    |=============================================================================================================================|
+    | learn_sessions | alpha_adjust | alpha_adjust |  duration  | total_encs | enc_count_diff | %_incorrect_diff | alpha_err_diff |
+    |      count     |    (when)    |   (value)    | difference | difference |   (per_item)   |    (per_item)    |    (per_item)  |
+    |=============================================================================================================================|
+    |        50      | immediately  |     0.05     | 9.452251 s |   -1.16    | -0.0313513513  |  0.904987449071  | -0.01337837837 |
+    |-----------------------------------------------------------------------------------------------------------------------------|
+    |        50      | post-session |     0.05     | 9.452251 s |   -1.16    | -0.0313513513  |  0.904987449071  | -0.01337837837 |
+    |-----------------------------------------------------------------------------------------------------------------------------|
+    |        100     | immediately  |     0.05     | 8.648978 s |   -0.77    | -0.0208108108  |  0.356581033080  | -0.00695945945 |
+    |-----------------------------------------------------------------------------------------------------------------------------|
+    |        100     | post-session |     0.05     | 8.648978 s |   -0.77    | -0.0208108108  |  0.356581033080  | -0.00695945945 |
+    |=============================================================================================================================|
+
+
+    |====================================================================================================================|
+    |                                                   FULL DIFFERENCES                                                 |
+    |====================================================================================================================|
+    | learn_sessions | alpha_adjust | alpha_adjust |  avg_duration  |  avg_duration  |  avg_enc_count  |  avg_enc_count  |
+    |      count     |    (when)    |   (value)    |   (UNCACHED)   |    (CACHED)    |   (UNCACHED)    |    (CACHED)     |
+    |====================================================================================================================|
+    |        50      | immediately  |     0.05     | 12.235026 s    | 2.7827747 s    |      554.94     |      556.10     |
+    |--------------------------------------------------------------------------------------------------------------------|
+    |        50      | post-session |     0.05     | 12.235026 s    | 2.7827747 s    |      554.94     |      556.10     |
+    |--------------------------------------------------------------------------------------------------------------------|
+    |        100     | immediately  |     0.05     | 11.432043 s    | 2.7830645 s    |      554.90     |      555.67     |
+    |--------------------------------------------------------------------------------------------------------------------|
+    |        100     | post-session |     0.05     | 11.432043 s    | 2.7830645 s    |      554.90     |      555.67     |
+    |====================================================================================================================|
+
+
+
+
+
+    *** ITEM-SPECIFIC results ***
+        - LEARN_SESH_COUNT = 50,  ALPHA_ADJUST = immediately,  ADJUST_VALUE = 0.05
+
+        - LEARN_SESH_COUNT = 50,  ALPHA_ADJUST = post_session, ADJUST_VALUE = 0.05
+
+        - LEARN_SESH_COUNT = 100, ALPHA_ADJUST = immediately,  ADJUST_VALUE = 0.05
+
+        - LEARN_SESH_COUNT = 100, ALPHA_ADJUST = post_session, ADJUST_VALUE = 0.05

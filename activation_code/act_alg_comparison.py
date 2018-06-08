@@ -52,7 +52,7 @@ def initialize_avg_items_info(items):
 
 
 # TODO: maybe implement encounter-specific information to track performance more closely
-def test_learning(items, items_info, sesh_count, sesh_length, learn_count):
+def test_learning(items, items_info, sesh_count, sesh_length, learn_count, immediate_alpha):
     """
     Gets average values for learning both when using the cached and the uncached activations for each encounter
     Prints a comparison between the two averages.
@@ -60,17 +60,15 @@ def test_learning(items, items_info, sesh_count, sesh_length, learn_count):
     learn_count  -- how many times should learning sessions be conducted when getting the average values
     """
 
-    # Generate bunches for each item with the respective information
-
     # Store the average values for learning sessions
-    averages_cached   = Bunch(cache_used=True,
-                              avg_duration         = 0.0,
-                              avg_enc_count        = 0.0,
-                              avg_items_info       = initialize_avg_items_info(items))
-    averages_uncached = Bunch(cache_used=False,
-                              avg_duration         = 0.0,
-                              avg_enc_count        = 0.0,
-                              avg_items_info       = initialize_avg_items_info(items))
+    averages_cached   = Bunch(cache_used     = True,
+                              avg_duration   = 0.0,
+                              avg_enc_count  = 0.0,
+                              avg_items_info = initialize_avg_items_info(items))
+    averages_uncached = Bunch(cache_used     = False,
+                              avg_duration   = 0.0,
+                              avg_enc_count  = 0.0,
+                              avg_items_info = initialize_avg_items_info(items))
 
 
     # For both CACHED and UNCACHED learning
@@ -85,7 +83,7 @@ def test_learning(items, items_info, sesh_count, sesh_length, learn_count):
 
             # Conduct a learning session
             start = datetime.datetime.now()
-            learn(items, items_info, sesh_count, sesh_length, cache)
+            learn(items, items_info, sesh_count, sesh_length, cache, immediate_alpha)
             end   = datetime.datetime.now()
 
             # Add the session's DURATION to the averages
@@ -210,7 +208,7 @@ def print_item_info(item, items_info):
 
 
 
-def learn(items, items_info, sesh_count, sesh_length, cached):
+def learn(items, items_info, sesh_count, sesh_length, cached, immediate_alpha_adjustment):
     """
     Simulates the learning process by adding new encounters of words.
 
@@ -260,20 +258,48 @@ def learn(items, items_info, sesh_count, sesh_length, cached):
                                                      activation=item_act_model,
                                                      was_guessed=guessed))
 
-            # NOTE: The values for adjusting the alpha were selected through a bunch of testing and fitting
-            # NOTE: in order for the results, produced by this simple simulation, to somewhat make sense.
-            # adjust values depending on outcome
-            if guessed:
-                if items_info[item].alpha_model > model_params["alpha_min"]:
-                    items_info[item].alpha_model -= 0.05
-            else:
-                if items_info[item].alpha_model < model_params["alpha_max"]:
-                    items_info[item].alpha_model += 0.05
-                items_info[item].incorrect += 1
+                # NOTE: The values for adjusting the alpha were selected through a bunch of testing and fitting
+                # NOTE: in order for the results, produced by this simple simulation, to somewhat make sense.
+                # adjust values depending on outcome
+                if guessed:
+                    # If the alpha values should be adjusted IMMEDIATELY after an encounter
+                    if immediate_alpha_adjustment:
+                        if items_info[item].alpha_model > model_params["alpha_min"]:
+                            items_info[item].alpha_model -= 0.05
+                else:
+                    # If the alpha values should be adjusted IMMEDIATELY after an encounter
+                    if immediate_alpha_adjustment:
+                        if items_info[item].alpha_model < model_params["alpha_max"]:
+                            items_info[item].alpha_model += 0.05
+                    items_info[item].incorrect += 1
 
             # increment the current time to account for the length of the encounter
             # NOTE: Only here to simulate the duration if interactions.
             cur_time += datetime.timedelta(seconds=random.randint(3, 10))
+
+        # If the alphas should be updated AFTER the end of the SESSIONS
+        if not immediate_alpha_adjustment:
+            # For each item
+            for item in items:
+                # calculate the item's activation based on its REAL ALPHA
+                act_real  = calc_activation(item, items_info[item].alpha_real,
+                                            items_info[item].encounters, [],
+                                            datetime.datetime.wow())[0]
+                # calculate the item's activation based on the MODEL'S ALPHA
+                act_model = calc_activation(item, items_info[item].alpha_model,
+                                            items_info[item].encounters, [],
+                                            datetime.datetime.now())[0]
+                # If the model predicts a HIGHER activation
+                if act_real < act_model:
+                    # Adjust the alpha to INCREASE the decay
+                    if items_info[item].alpha_model < model_params["alpha_max"]:
+                        items_info[item].alpha_model += 0.05
+                # If the model predicts a LOWER activation
+                elif act_real > act_model:
+                    # Adjust the alpha to DECREASE the decay
+                    if items_info[item].alpha_model > model_params["alpha_min"]:
+                        items_info[item].alpha_model -= 0.05
+
 
         # increment the current time to account for the intersession time
         # NOTE: Only here to simulate learning during multiple sessions.
