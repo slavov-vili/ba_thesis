@@ -21,8 +21,10 @@ items = ["noodles", "where", "many", "way", "market", "castle", "group", "restau
 # maps each item to its values
 items_info = {}
 for item in items:
-    items_info[item] = Bunch(alpha_real=random.uniform(model_params["alpha_min"], model_params["alpha_max"]), alpha_model=model_params["alpha_d"], encounters=[], incorrect=0)
-
+        items_info[item] = Bunch(alpha_real=random.gauss(0.3, 0.08),
+                                 alpha_model=model_params["alpha_d"],
+                                 encounters=[],
+                                 incorrect=0)
 
 
 def test_act_call_count(item, items_info, enc_count):

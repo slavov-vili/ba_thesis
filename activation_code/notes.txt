@@ -1,0 +1,5 @@
+recalculate history for 1 item (the one whose alpha was changed)
+
+recalculate whole history after session
+
+finer alpha adjustments

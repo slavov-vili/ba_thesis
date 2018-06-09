@@ -25,7 +25,7 @@ items = ["noodles", "where", "many", "way", "market", "castle", "group", "restau
 def initialize_items_info(items):
     items_info = {}
     for item in items:
-        items_info[item] = Bunch(alpha_real=random.uniform(model_params["alpha_min"], model_params["alpha_max"]),
+        items_info[item] = Bunch(alpha_real=random.gauss(0.3, 0.08),
                                  alpha_model=model_params["alpha_d"],
                                  encounters=[],
                                  incorrect=0)
@@ -47,12 +47,12 @@ def initialize_avg_items_info(items):
     for item in items:
         avg_items_info[item] = Bunch(avg_enc_count   = 0.0,
                                      avg_perc_incorr = 0.0,
-                                     avg_alpha_err   = 0.0)
+                                     avg_alpha       = 0.0)
     return avg_items_info
 
 
 # TODO: maybe implement encounter-specific information to track performance more closely
-def test_learning(items, items_info, sesh_count, sesh_length, learn_count, immediate_alpha, later_alpha_adjust_value):
+def test_learning(items, items_info, sesh_count, sesh_length, learn_count, immediate_alpha, alpha_adjust_value):
     """
     Gets average values for learning both when using the cached and the uncached activations for each encounter
     Prints a comparison between the two averages.
@@ -85,7 +85,7 @@ def test_learning(items, items_info, sesh_count, sesh_length, learn_count, immed
 
             # Conduct a learning session
             start = datetime.datetime.now()
-            learn(items, items_info, sesh_count, sesh_length, cache, immediate_alpha, later_alpha_adjust_value)
+            learn(items, items_info, sesh_count, sesh_length, cache, immediate_alpha, alpha_adjust_value)
             end   = datetime.datetime.now()
 
             # Add the session's DURATION to the averages
@@ -102,8 +102,8 @@ def test_learning(items, items_info, sesh_count, sesh_length, learn_count, immed
                 averages.avg_items_info[item].avg_enc_count   += item_enc_count
                 # Add the item's INCORRECT PERCENTAGE to the averages
                 averages.avg_items_info[item].avg_perc_incorr += (items_info[item].incorrect / item_enc_count) * 100
-                # Add the item's ALPHA DIFFERENCE to the ITEM-SPECIFIC averages
-                averages.avg_items_info[item].avg_alpha_err   += items_info[item].alpha_real - items_info[item].alpha_model
+                # Add the item's ALPHA to the ITEM-SPECIFIC averages
+                averages.avg_items_info[item].avg_alpha       += items_info[item].alpha_model
 
 
     # For each caching option
@@ -116,9 +116,9 @@ def test_learning(items, items_info, sesh_count, sesh_length, learn_count, immed
         for item in items:
             averages.avg_items_info[item].avg_enc_count   /= learn_count
             averages.avg_items_info[item].avg_perc_incorr /= learn_count
-            averages.avg_items_info[item].avg_alpha_err   /= learn_count
+            averages.avg_items_info[item].avg_alpha       /= learn_count
             # Add the item's calculated average alpha error to the session's average
-            averages.avg_alpha_err += averages.avg_items_info[item].avg_alpha_err
+            averages.avg_alpha_err += np.abs(items_info[item].alpha_real - averages.avg_items_info[item].avg_alpha)
         averages.avg_alpha_err /= len(items)
 
     print("\n")
@@ -126,16 +126,16 @@ def test_learning(items, items_info, sesh_count, sesh_length, learn_count, immed
     print("Average Duration Difference         = ", averages_uncached.avg_duration  - averages_cached.avg_duration,  "SECONDS")
     print("Average Total Encounters Difference = ", averages_uncached.avg_enc_count - averages_cached.avg_enc_count, "ENCOUNTERS")
     print("Average Alpha Error Difference      = ", averages_uncached.avg_alpha_err - averages_cached.avg_alpha_err)
+    sum_avg_alpha_diff       = 0.0
     sum_avg_enc_count_diff   = 0.0
     sum_avg_perc_incorr_diff = 0.0
-    sum_avg_alpha_error_diff = 0.0
     for item in items:
-        sum_avg_enc_count_diff   += averages_uncached.avg_items_info[item].avg_enc_count   - averages_cached.avg_items_info[item].avg_enc_count
-        sum_avg_perc_incorr_diff += averages_uncached.avg_items_info[item].avg_perc_incorr - averages_cached.avg_items_info[item].avg_perc_incorr
-        sum_avg_alpha_error_diff += averages_uncached.avg_items_info[item].avg_alpha_err   - averages_cached.avg_items_info[item].avg_alpha_err
-    print("Average Encounter Count Difference      (Per Item) = ", sum_avg_enc_count_diff / len(items),   "ENCOUNTERS")
+        sum_avg_alpha_diff       += np.abs(averages_uncached.avg_items_info[item].avg_alpha       - averages_cached.avg_items_info[item].avg_alpha)
+        sum_avg_enc_count_diff   += np.abs(averages_uncached.avg_items_info[item].avg_enc_count   - averages_cached.avg_items_info[item].avg_enc_count)
+        sum_avg_perc_incorr_diff += np.abs(averages_uncached.avg_items_info[item].avg_perc_incorr - averages_cached.avg_items_info[item].avg_perc_incorr)
+    print("Average Encounter Count Difference      (Per Item) = ", sum_avg_enc_count_diff   / len(items),   "ENCOUNTERS")
     print("Average Percentage Incorrect Difference (Per Item) = ", sum_avg_perc_incorr_diff / len(items), "PERCENT")
-    print("Average Alpha Error Difference          (Per Item) = ", sum_avg_alpha_error_diff / len(items))
+    print("Average Alpha Difference                (Per Item) = ", sum_avg_alpha_diff       / len(items))
 
 
     print("\n")
@@ -154,8 +154,9 @@ def test_learning(items, items_info, sesh_count, sesh_length, learn_count, immed
         print("Average Encounter Count   (CACHED)   = ", avg_item_info_cached.avg_enc_count,     "ENCOUNTERS")
         print("Average Percentage Incorr (UNCACHED) = ", avg_item_info_uncached.avg_perc_incorr, "PERCENT")
         print("Average Percentage Incorr (CACHED)   = ", avg_item_info_cached.avg_perc_incorr,   "PERCENT")
-        print("Average Alpha Error       (UNCACHED) = ", avg_item_info_uncached.avg_alpha_err)
-        print("Average Alpha Error       (CACHED)   = ", avg_item_info_cached.avg_alpha_err)
+        print("Alpha         (Real)                 = ", items_info[item].alpha_real)
+        print("Average Alpha (Model)     (UNCACHED) = ", avg_item_info_uncached.avg_alpha)
+        print("Average Alpha (Model)     (CACHED)   = ", avg_item_info_cached.avg_alpha)
 
 
 
@@ -213,7 +214,7 @@ def print_item_info(item, items_info):
 
 
 
-def learn(items, items_info, sesh_count, sesh_length, cached, immediate_alpha_adjustment, later_alpha_adjust_value):
+def learn(items, items_info, sesh_count, sesh_length, cached, immediate_alpha_adjustment, alpha_adjust_value):
     """
     Simulates the learning process by adding new encounters of words.
 
@@ -270,12 +271,12 @@ def learn(items, items_info, sesh_count, sesh_length, cached, immediate_alpha_ad
                 # If the alpha values should be adjusted IMMEDIATELY after an encounter
                 if immediate_alpha_adjustment:
                     if items_info[item].alpha_model > model_params["alpha_min"]:
-                        items_info[item].alpha_model -= 0.05
+                        items_info[item].alpha_model -= alpha_adjust_value
             else:
                 # If the alpha values should be adjusted IMMEDIATELY after an encounter
                 if immediate_alpha_adjustment:
                     if items_info[item].alpha_model < model_params["alpha_max"]:
-                        items_info[item].alpha_model += 0.05
+                        items_info[item].alpha_model += alpha_adjust_value
                 items_info[item].incorrect += 1
 
             # increment the current time to account for the length of the encounter
@@ -299,12 +300,12 @@ def learn(items, items_info, sesh_count, sesh_length, cached, immediate_alpha_ad
                 if act_real < act_model:
                     # Adjust the alpha to INCREASE the decay
                     if items_info[item].alpha_model < model_params["alpha_max"]:
-                        items_info[item].alpha_model += later_alpha_adjust_value
+                        items_info[item].alpha_model += alpha_adjust_value
                 # If the model predicts a LOWER activation
                 elif act_real > act_model:
                     # Adjust the alpha to DECREASE the decay
                     if items_info[item].alpha_model > model_params["alpha_min"]:
-                        items_info[item].alpha_model -= later_alpha_adjust_value
+                        items_info[item].alpha_model -= alpha_adjust_value
 
 
         # increment the current time to account for the intersession time
@@ -314,13 +315,13 @@ def learn(items, items_info, sesh_count, sesh_length, cached, immediate_alpha_ad
 
 
 
-    # print("\nFinal results:")
-    # for item in items:
-        # print("Item:'", item, "'")
-        # print("Alpha Real:", items_info[item].alpha_real)
-        # print("Alpha Model:", items_info[item].alpha_model)
-        # print("Encounters:", len(items_info[item].encounters))
-        # print("Incorrect:", items_info[item].incorrect)
+    print("\nFinal results:")
+    for item in items:
+        print("Item:'", item, "'")
+        print("Alpha Real:", items_info[item].alpha_real)
+        print("Alpha Model:", items_info[item].alpha_model)
+        print("Encounters:", len(items_info[item].encounters))
+        print("Incorrect:", items_info[item].incorrect)
 
 
 
@@ -345,7 +346,7 @@ def get_next_item(items, items_info, time, next_new_item_idx, cached):
     # maps an item to its activation
     item_to_act = {}
     # add 15 seconds to the time in order to catch items before they fall below the retrieval threshold
-    future_time = time + datetime.timedelta(seconds=15)
+    future_time = calc_future_time(time)
     # recalculate each SEEN item's activation at future time with their updated alphas
     for item in seen_items:
         # Extract all encounters, which happened before future time
@@ -493,6 +494,14 @@ def calc_time_diff(cur_time, start_time):
 
 
 
+def calc_future_time(time):
+    """
+    Adds a given amount to the time
+    """
+    return time + datetime.timedelta(seconds=15)
+
+
+
 def guess_item(recall_prob):
     """
     Guesses the word given a recall probability.
@@ -502,38 +511,37 @@ def guess_item(recall_prob):
     True if the word was guessed, False otherwise
     """
 
-    return True if random.uniform(0,1) < recall_prob else False
+    return True if random.random() < recall_prob else False
 
 
 
 
 
-def main():
-    alpha_adjust_values     = [0.05] #[0.01, 0.03, 0.05, 0.08, 0.1]
+# def main():
+    # alpha_adjust_values     = [0.01, 0.03, 0.05, 0.08, 0.1]
 
-    study_sesh_counts       = [2] #, 4, 8]
-    sesh_lengths            = [1800] #, 3600]
-    immediate_alpha_adjusts = [True, False]
+    # study_sesh_counts       = [2] #, 4, 8]
+    # sesh_lengths            = [1800] #, 3600]
+    # immediate_alpha_adjusts = [True, False]
 
-    # For all possible session lengths
-    for sesh_length in sesh_lengths:
-        # For all possible values of alpha adjusting
-        for alpha_adjust_value in alpha_adjust_values:
-            # For all possible numbers of study sessions
-            for sesh_count in study_sesh_counts:
-                # For all possible ways of adjusting the alpha
-                for immediate_alpha_adjust in immediate_alpha_adjusts:
-                    reset_items_info(items_info)
+    # # For all possible session lengths
+    # for sesh_length in sesh_lengths:
+        # # For all possible values of alpha adjusting
+        # for alpha_adjust_value in alpha_adjust_values:
+            # # For all possible numbers of study sessions
+            # for sesh_count in study_sesh_counts:
+                # # For all possible ways of adjusting the alpha
+                # for immediate_alpha_adjust in immediate_alpha_adjusts:
+                    # reset_items_info(items_info)
 
-                    print("\n\n\n\n")
-                    print("Testing learning:")
-                    print("study sessions               =", sesh_count)
-                    print("session length               =", sesh_length)
-                    print("learn_count                  = 50")
-                    print("Immediate alpha adjust       =", immediate_alpha_adjust)
-                    print("IMMEDIATE alpha adjust value = 0.05")
-                    print("LATER     alpha adjust value =", alpha_adjust_value)
+                    # print("\n\n\n\n")
+                    # print("Testing learning:")
+                    # print("study sessions         =", sesh_count)
+                    # print("session length         =", sesh_length)
+                    # print("learn_count            = 50")
+                    # print("Immediate alpha adjust =", immediate_alpha_adjust)
+                    # print("Alpha adjust value     =", alpha_adjust_value)
 
-                    test_learning(items, items_info, sesh_count, sesh_length, 50, immediate_alpha_adjust, alpha_adjust_value)
+                    # test_learning(items, items_info, sesh_count, sesh_length, 50, immediate_alpha_adjust, alpha_adjust_value)
 
-main()
+# main()
