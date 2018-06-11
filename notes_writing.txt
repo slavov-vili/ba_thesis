@@ -3,8 +3,9 @@
 2. Chapter about optimization
     - optimizing the algorithm itself
     - caching to relieve recursive calls
-    - using cached history when next item is needed
-    - like ^, but updating history after session
-    - updating alpha after encounter vs after session
-    - how much to adjust alpha by if adjusted after session
-    - how above things work with more sessions and session lengths
+    - my implementation is different than Chris', so I had to figure out alpha adjustment (most papers say 0.5, but I tested and scaled by recall probability (according to the model))
+    - updating alpha after encounter vs after session (tested average alpha error, duration, item encounters)
+        - For ^ after session, get % correct vs incorrect outcomes, take average recall probability to calculate
+        - using cached history when next item is needed (tested average duration)
+            - like ^, but updating history after session ()
+    - how does ^ perform with more/longer sessions

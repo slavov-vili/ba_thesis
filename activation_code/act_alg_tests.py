@@ -1,8 +1,9 @@
 from bunch import Bunch
 import datetime
-import numpy             as np
+import numpy     as np
 import random
 
+# TODO: update learning from comparison files
 
 
 model_params = {"alpha_d":   0.3,   # default alpha for all items

@@ -1,6 +1,6 @@
 from bunch import Bunch
 import datetime
-import numpy             as np
+import numpy    as np
 
 
 
