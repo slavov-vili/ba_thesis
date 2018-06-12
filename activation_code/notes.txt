@@ -1,3 +1,5 @@
+NEXT MEETING: 26.06 15:00
+
 TODO: test different session counts and lengths
 TODO: test new encounter duration calculation
 TODO: test other alpha update values
@@ -26,3 +28,7 @@ best average = 50
 
 
         after best adjustment is found, test different study_sesh_counts and different study_sesh_lengths
+
+TODO: limit number of items to see if fixes alpha
+
+TODO: 
