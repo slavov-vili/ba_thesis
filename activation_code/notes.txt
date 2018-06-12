@@ -1,11 +1,12 @@
-recalculate history for 1 item (the one whose alpha was changed)
-
-recalculate whole history after session
-
+TODO: test different session counts and lengths
+TODO: test new encounter duration calculation
+TODO: test other alpha update values
 
 
 
 TODO: figure out better alpha adjustment scale function
+
+TODO: compare real item order vs model's
 
 TODO: update graph file
 TODO: run below tests again after history update is implemented

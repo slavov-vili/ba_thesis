@@ -1,0 +1,8 @@
+- Had problems with alpha update, fixed them (kinda)
+  Does alpha adjustment make sense ?
+- Tested post-session vs after encounter alpha update
+  Post-session sucked
+  - Tested after encounter without cache vs with cache + cache updating
+  - Performed quite well, cache performs a lot faster
+  - Results are around the same, but idk how much is due to chance
+  - Want to conduct more tests with more/longer sessions
