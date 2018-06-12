@@ -5,6 +5,7 @@ recalculate whole history after session
 
 
 
+TODO: figure out better alpha adjustment scale function
 
 TODO: update graph file
 TODO: run below tests again after history update is implemented
@@ -12,12 +13,15 @@ TODO: run below tests again after history update is implemented
 find best average learning sesh count (relatively accurate and also doesn't take too much time)
 best average = 50
 
-    after best average is found, test immediate vs post-session alpha adjustment (as well as different adjustment values)
-    - immediate adjustment by 0.03 wins
-      * tested for 0.02 and 0.04, they were worse, 0.02 was 0.001 off so its also a possible choice
-    - post-session adjustment by 0.05 also performed well
-      * tested for 0.04 and 0.06, 0.06 was better than 0.05
+    - WITHOUT cache update
+        test immediate vs post-session alpha adjustment (as well as different adjustment values)
+        - immediate adjustment by 0.03 wins, but avg alpha error is 0.036
+          * tested for 0.02 and 0.04, 0.02 performs quit a bit better (by 0,03)
+        - post-session adjustment performed quite bad
         
-        after best adjustment is found, test them while upating the history
+    - WITH cache update
+        test immediate vs post-session alpha adjustment (with and without cache update)
+
+
 
         after best adjustment is found, test different study_sesh_counts and different study_sesh_lengths

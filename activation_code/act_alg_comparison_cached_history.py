@@ -94,6 +94,8 @@ def test_learning(items, items_info, sesh_count, sesh_length, learn_count, immed
             # Add the session's ENCOUNTER COUNT to the averages
             learn_enc_count = sum([len(items_info[item].encounters) for item in items])
             averages.avg_enc_count += learn_enc_count
+            # Add the session's ALPHA ERROR to the averages
+            averages.avg_alpha_err += calc_avg_alpha_error(items_info)
 
             # Add each item
             for item in items:
@@ -113,13 +115,11 @@ def test_learning(items, items_info, sesh_count, sesh_length, learn_count, immed
         # Calculate the averages
         averages.avg_duration  /= learn_count
         averages.avg_enc_count /= learn_count
+        averages.avg_alpha_err /= learn_count
         for item in items:
             averages.avg_items_info[item].avg_enc_count   /= learn_count
             averages.avg_items_info[item].avg_perc_incorr /= learn_count
             averages.avg_items_info[item].avg_alpha       /= learn_count
-            # Add the item's calculated average alpha error to the session's average
-            averages.avg_alpha_err += np.abs(items_info[item].alpha_real - averages.avg_items_info[item].avg_alpha)
-        averages.avg_alpha_err /= len(items)
 
     print("\n")
     print("AVERAGE Differences (UNCACHED vs CACHED):")
@@ -181,11 +181,11 @@ def test_act_call_count(item, items_info, enc_count, cached):
     print("Time taken:", (end - start).total_seconds())
 
 
-def calc_avg_alpha_difference(items, items_info):
-    sum_alpha_diff = 0
-    for item in items:
-        sum_alpha_diff += np.abs(items_info[item].alpha_real - items_info[item].alpha_model)
-    return sum_alpha_diff / len(items)
+def calc_avg_alpha_error(items_info):
+    sum_alpha_err = 0
+    for item in items_info:
+        sum_alpha_err += np.abs(items_info[item].alpha_real - items_info[item].alpha_model)
+    return sum_alpha_err / len(items)
 
 
 
@@ -530,33 +530,33 @@ def guess_item(recall_prob):
 
 
 
-# def main():
-    # learn_sesh_counts       = [50] # [5, 10, 15, 20, 25, 50, 100]
-    # study_sesh_counts       = [4] #[2, 4, 8]
-    # study_sesh_lengths      = [1800, 3600]
-    # alpha_adjust_values     = [0.03] #[0.01, 0.03, 0.05, 0.08, 0.1]
-    # immediate_alpha_adjusts = [True] #, False]
+def main():
+    learn_sesh_counts       = [50] # [5, 10, 15, 20, 25, 50, 100]
+    study_sesh_counts       = [2] #[2, 4, 8]
+    study_sesh_lengths      = [1800] #, 3600]
+    alpha_adjust_values     = [0.02, 0.04] #[0.01, 0.03, 0.05, 0.08, 0.1]
+    immediate_alpha_adjusts = [True] #, False]
 
-    # # For all possible numbers of learning sessions
-    # for learn_sesh_count in learn_sesh_counts:
-        # # For all possible numbers of study sessions
-        # for study_sesh_count in study_sesh_counts:
-            # # For all possible session lengths
-            # for study_sesh_length in study_sesh_lengths:
-                # # For all possible values of alpha adjusting
-                # for alpha_adjust_value in alpha_adjust_values:
-                    # # For all possible ways of adjusting the alpha
-                    # for immediate_alpha_adjust in immediate_alpha_adjusts:
-                        # reset_items_info(items_info)
+    # For all possible numbers of learning sessions
+    for learn_sesh_count in learn_sesh_counts:
+        # For all possible numbers of study sessions
+        for study_sesh_count in study_sesh_counts:
+            # For all possible session lengths
+            for study_sesh_length in study_sesh_lengths:
+                # For all possible values of alpha adjusting
+                for alpha_adjust_value in alpha_adjust_values:
+                    # For all possible ways of adjusting the alpha
+                    for immediate_alpha_adjust in immediate_alpha_adjusts:
+                        reset_items_info(items_info)
 
-                        # print("\n\n\n\n")
-                        # print("Testing learning:")
-                        # print("Learn sessions         =", learn_sesh_count)
-                        # print("Study sessions         =", study_sesh_count)
-                        # print("Study session length   =", study_sesh_length)
-                        # print("Immediate alpha adjust =", immediate_alpha_adjust)
-                        # print("Alpha adjust value     =", alpha_adjust_value)
+                        print("\n\n\n\n")
+                        print("Testing learning:")
+                        print("Learn sessions         =", learn_sesh_count)
+                        print("Study sessions         =", study_sesh_count)
+                        print("Study session length   =", study_sesh_length)
+                        print("Immediate alpha adjust =", immediate_alpha_adjust)
+                        print("Alpha adjust value     =", alpha_adjust_value)
 
-                        # test_learning(items, items_info, study_sesh_count, study_sesh_length, learn_sesh_count, immediate_alpha_adjust, alpha_adjust_value)
+                        test_learning(items, items_info, study_sesh_count, study_sesh_length, learn_sesh_count, immediate_alpha_adjust, alpha_adjust_value)
 
-# main()
+main()
