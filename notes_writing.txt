@@ -1,11 +1,13 @@
 1. Chapter explaining the algorithm
 
 2. Chapter about optimization
-    - optimizing the algorithm itself
-    - caching to relieve recursive calls
-    - my implementation is different than Chris', so I had to figure out alpha adjustment (most papers say 0.5, but I tested and scaled by recall probability (according to the model))
+    - Optimizing the algorithm itself
+    - Caching to relieve recursive calls
+    - My implementation is different than Chris', so I had to figure out alpha adjustment (most papers say 0.5, but I tested and scaled by recall probability (according to the model))
     - updating alpha after encounter vs after session (tested average alpha error, duration, item encounters)
         - For ^ after session, get % correct vs incorrect outcomes, take average recall probability to calculate
         - using cached history when next item is needed (tested average duration)
             - like ^, but updating history after session ()
+        - alpha update after encounter worked best, but idk about alpha adjustment
+        - using cached activations produced a lot faster results and pretty much the same
     - how does ^ perform with more/longer sessions
