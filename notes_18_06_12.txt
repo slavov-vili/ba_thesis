@@ -1,3 +1,7 @@
+NEXT MEETING: 26.06 15:00
+
+
+
 - Had problems with alpha update, fixed them (kinda)
   Does alpha adjustment make sense ?
 - Tested post-session vs after encounter alpha update
@@ -6,3 +10,7 @@
   - Performed quite well, cache performs a lot faster
   - Results are around the same, but idk how much is due to chance
   - Want to conduct more tests with more/longer sessions
+
+
+
+TODO: limit number of items to see if fixes alpha

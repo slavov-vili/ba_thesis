@@ -292,7 +292,7 @@ def learn(items, items_info, sesh_count, sesh_length, cached, immediate_alpha_ad
 
             # NOTE: Only here to simulate the duration if interactions.
             # Encounter duration = time it takes to start typing + average time to type a word
-            enc_duration = datetime.timedelta(seconds = calc_reaction_time(item_act_model)) + datetime.timedelta(seconds = 1.5)
+            enc_duration = datetime.timedelta(seconds = calc_reaction_time(item_act_model)) + datetime.timedelta(seconds = 3)
             # increment the current time to account for the length of the encounter
             cur_time    += enc_duration
 
@@ -540,51 +540,51 @@ def guess_item(recall_prob):
 
 
 
-# def main():
-    # learn_sesh_counts       = [50] # [5, 10, 15, 20, 25, 50, 100]
-    # study_sesh_counts       = [2] #, 4, 8]
-    # study_sesh_lengths      = [1800] #, 3600]
-    # alpha_adjust_values     = [0.02] #[0.01, 0.03, 0.05, 0.08, 0.1]
-    # immediate_alpha_adjusts = [True] #, False]
+def main():
+    learn_sesh_counts       = [50] # [5, 10, 15, 20, 25, 50, 100]
+    study_sesh_counts       = [2] #, 4, 8]
+    study_sesh_lengths      = [1800] #, 3600]
+    alpha_adjust_values     = [0.02] #[0.01, 0.03, 0.05, 0.08, 0.1]
+    immediate_alpha_adjusts = [True] #, False]
 
-    # # For all possible options of USING the CACHED HISTORY
-    # for cached in [False, True]:
-        # # For all possible NUMBERS of LEARNING SESSIONS
-        # for learn_sesh_count in learn_sesh_counts:
-            # # For all possible NUMBERS of STUDY SESSIONS
-            # for study_sesh_count in study_sesh_counts:
-                # # For all possible SESSION LENGTHS
-                # for study_sesh_length in study_sesh_lengths:
-                    # # For all possible VALUES for ALPHA ADJUSTING
-                    # for alpha_adjust_value in alpha_adjust_values:
-                        # # For all possible WAYS of ADJUSTING the ALPHA
-                        # for immediate_alpha_adjust in immediate_alpha_adjusts:
-                            # # For all possible options of updating cached history
-                            # for cache_update in ["", "immediately", "post-session"]:
-                                # reset_items_info(items_info)
+    # For all possible options of USING the CACHED HISTORY
+    for cached in [False, True]:
+        # For all possible NUMBERS of LEARNING SESSIONS
+        for learn_sesh_count in learn_sesh_counts:
+            # For all possible NUMBERS of STUDY SESSIONS
+            for study_sesh_count in study_sesh_counts:
+                # For all possible SESSION LENGTHS
+                for study_sesh_length in study_sesh_lengths:
+                    # For all possible VALUES for ALPHA ADJUSTING
+                    for alpha_adjust_value in alpha_adjust_values:
+                        # For all possible WAYS of ADJUSTING the ALPHA
+                        for immediate_alpha_adjust in immediate_alpha_adjusts:
+                            # For all possible options of updating cached history
+                            for cache_update in ["", "immediately", "post-session"]:
+                                reset_items_info(items_info)
 
-                                # # NOTE: these are here to avoid useless tests
-                                # # Since cache is NOT used, there is no use updating it
-                                # if not cached and cache_update != "":
-                                    # continue
-                                # # Since alpha is adjusted POST-SESSION, there is no use updating the cache immediately
-                                # if not immediate_alpha_adjust and cache_update == "immediately":
-                                    # continue
+                                # NOTE: these are here to avoid useless tests
+                                # Since cache is NOT used, there is no use updating it
+                                if not cached and cache_update != "":
+                                    continue
+                                # Since alpha is adjusted POST-SESSION, there is no use updating the cache immediately
+                                if not immediate_alpha_adjust and cache_update == "immediately":
+                                    continue
 
-                                # alpha_adjust_value = 0.02 if immediate_alpha_adjust else 0.05
+                                alpha_adjust_value = 0.02 if immediate_alpha_adjust else 0.05
 
-                                # print("\n\n\n")
-                                # print("Testing learning:")
-                                # print("Learn sessions         =", learn_sesh_count)
-                                # print("Study sessions         =", study_sesh_count)
-                                # print("Study session length   =", study_sesh_length)
-                                # print("Immediate alpha adjust =", immediate_alpha_adjust)
-                                # print("Alpha adjust value     =", alpha_adjust_value)
-                                # print("Cache used             =", cached)
-                                # print("Cache updated          =", cache_update)
+                                print("\n\n\n")
+                                print("Testing learning:")
+                                print("Learn sessions         =", learn_sesh_count)
+                                print("Study sessions         =", study_sesh_count)
+                                print("Study session length   =", study_sesh_length)
+                                print("Immediate alpha adjust =", immediate_alpha_adjust)
+                                print("Alpha adjust value     =", alpha_adjust_value)
+                                print("Cache used             =", cached)
+                                print("Cache updated          =", cache_update)
 
-                                # test_learning(items, items_info, study_sesh_count, study_sesh_length, learn_sesh_count, cached, immediate_alpha_adjust, alpha_adjust_value, cache_update)
+                                test_learning(items, items_info, study_sesh_count, study_sesh_length, learn_sesh_count, cached, immediate_alpha_adjust, alpha_adjust_value, cache_update)
 
 
 
-# main()
+main()

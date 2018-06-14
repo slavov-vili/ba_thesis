@@ -1,4 +1,3 @@
-NEXT MEETING: 26.06 15:00
 
 TODO: test different session counts and lengths
 TODO: test new encounter duration calculation
@@ -11,7 +10,6 @@ TODO: figure out better alpha adjustment scale function
 TODO: compare real item order vs model's
 
 TODO: update graph file
-TODO: run below tests again after history update is implemented
 
 find best average learning sesh count (relatively accurate and also doesn't take too much time)
 best average = 50
@@ -25,10 +23,5 @@ best average = 50
     - WITH cache update
         test immediate vs post-session alpha adjustment (with and without cache update)
 
-
-
         after best adjustment is found, test different study_sesh_counts and different study_sesh_lengths
 
-TODO: limit number of items to see if fixes alpha
-
-TODO: 
