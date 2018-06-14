@@ -15,7 +15,9 @@ model_params = {"alpha_d":   0.3,   # default alpha for all items
                 "c":         0.21,  # decay scaling factor
                 "tau":      -0.8,   # activation threshold
                 "s":         0.255, # recall probability noise reduction factor
-                "delta":     0.025} # factor to scale down intersession time
+                "delta":     0.025, # factor to scale down intersession time
+                "F":         1,     # scaling factor for the reaction time
+                "f":         0.3}     # base reaction time
 
 
 # list all items to be learned
@@ -288,11 +290,11 @@ def learn(items, items_info, sesh_count, sesh_length, cached, immediate_alpha_ad
             # increment the session's encounter count
             sesh_enc_counts[item] += 1
 
-            # TODO: change upper bound ???
-            # TODO: use reaction time formula to get encounter duration
-            # increment the current time to account for the length of the encounter
             # NOTE: Only here to simulate the duration if interactions.
-            cur_time += datetime.timedelta(seconds=random.randint(3, 10))
+            # Encounter duration = time it takes to start typing + average time to type a word
+            enc_duration = datetime.timedelta(seconds = calc_reaction_time(item_act_model)) + datetime.timedelta(seconds = 1.5)
+            # increment the current time to account for the length of the encounter
+            cur_time    += enc_duration
 
         # If the alphas should be updated AFTER the end of the SESSION
         if not immediate_alpha_adjustment:
@@ -494,6 +496,16 @@ def calc_recall_prob(activation):
     """
 
     return 1 / (1 + np.exp(((model_params["tau"] - activation) / model_params["s"])))
+
+
+
+def calc_reaction_time(activation):
+    """
+    Calculates the predicted reaction time based on an item's activation
+    """
+    reaction_time = 3.788 if np.isneginf(activation) else model_params["F"] * np.exp(np.negative(activation)) + model_params["f"]
+
+    return reaction_time
 
 
 
