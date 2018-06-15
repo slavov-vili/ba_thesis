@@ -1,0 +1,2640 @@
+
+
+
+
+Testing learning:
+Writing time           = 1.0
+Learn sessions         = 50
+Study sessions         = 2
+Study session length   = 1800
+Immediate alpha adjust = True
+Alpha adjust value     = 0.02
+Cache used             = True
+Cache updated          = post-session
+
+
+Average Duration        =  16.865162620000007 SECONDS
+Average Encounter Count =  1362.28 ENCOUNTERS
+Average Alpha Error     =  0.031869320954164095
+
+Item: noodles
+Average Encounter Count   =  20.28 ENCOUNTERS
+Average Percentage Incorr =  10.938882071576984 PERCENT
+Alpha         (Real)      =  0.15041238061331177
+Average Alpha (Model)     =  0.22145804093380986
+
+Item: where
+Average Encounter Count   =  38.24 ENCOUNTERS
+Average Percentage Incorr =  17.380713484041312 PERCENT
+Alpha         (Real)      =  0.3333408884659153
+Average Alpha (Model)     =  0.32309361871663783
+
+Item: many
+Average Encounter Count   =  24.26 ENCOUNTERS
+Average Percentage Incorr =  13.534831974657672 PERCENT
+Alpha         (Real)      =  0.22149256906384937
+Average Alpha (Model)     =  0.2504219788360439
+
+Item: way
+Average Encounter Count   =  25.74 ENCOUNTERS
+Average Percentage Incorr =  14.585957472178766 PERCENT
+Alpha         (Real)      =  0.25043712405940277
+Average Alpha (Model)     =  0.2580175007583243
+
+Item: market
+Average Encounter Count   =  27.22 ENCOUNTERS
+Average Percentage Incorr =  15.319879204447625 PERCENT
+Alpha         (Real)      =  0.25725772360375077
+Average Alpha (Model)     =  0.26860755495428984
+
+Item: castle
+Average Encounter Count   =  62.72 ENCOUNTERS
+Average Percentage Incorr =  17.512731579456666 PERCENT
+Alpha         (Real)      =  0.4266520666573219
+Average Alpha (Model)     =  0.4073784623616206
+
+Item: group
+Average Encounter Count   =  25.76 ENCOUNTERS
+Average Percentage Incorr =  14.617493573254722 PERCENT
+Alpha         (Real)      =  0.23893202695047272
+Average Alpha (Model)     =  0.26073028310984375
+
+Item: restaurant
+Average Encounter Count   =  78.44 ENCOUNTERS
+Average Percentage Incorr =  16.94115208628917 PERCENT
+Alpha         (Real)      =  0.446923386391809
+Average Alpha (Model)     =  0.4518750266786284
+
+Item: amazing
+Average Encounter Count   =  28.68 ENCOUNTERS
+Average Percentage Incorr =  15.712346676289826 PERCENT
+Alpha         (Real)      =  0.27774385426810805
+Average Alpha (Model)     =  0.27685657999930313
+
+Item: to visit
+Average Encounter Count   =  43.78 ENCOUNTERS
+Average Percentage Incorr =  17.789976846697986 PERCENT
+Alpha         (Real)      =  0.36220346747583215
+Average Alpha (Model)     =  0.34956869091985543
+
+Item: each
+Average Encounter Count   =  24.94 ENCOUNTERS
+Average Percentage Incorr =  13.999417026313528 PERCENT
+Alpha         (Real)      =  0.22647284796617861
+Average Alpha (Model)     =  0.25544830282590053
+
+Item: tree
+Average Encounter Count   =  38.66 ENCOUNTERS
+Average Percentage Incorr =  17.31156903278153 PERCENT
+Alpha         (Real)      =  0.3373873274784439
+Average Alpha (Model)     =  0.3248424952215572
+
+Item: British
+Average Encounter Count   =  51.88 ENCOUNTERS
+Average Percentage Incorr =  17.661350011220936 PERCENT
+Alpha         (Real)      =  0.39194127004071005
+Average Alpha (Model)     =  0.3752084985750047
+
+Item: adult
+Average Encounter Count   =  23.0 ENCOUNTERS
+Average Percentage Incorr =  12.99507418706786 PERCENT
+Alpha         (Real)      =  0.21687824157608487
+Average Alpha (Model)     =  0.24132230601192936
+
+Item: a day
+Average Encounter Count   =  34.86 ENCOUNTERS
+Average Percentage Incorr =  16.907316981493405 PERCENT
+Alpha         (Real)      =  0.3112368606189476
+Average Alpha (Model)     =  0.31063896305339983
+
+Item: open(from...to...)
+Average Encounter Count   =  33.42 ENCOUNTERS
+Average Percentage Incorr =  16.506819754552158 PERCENT
+Alpha         (Real)      =  0.3086606534579481
+Average Alpha (Model)     =  0.3041831687739157
+
+Item: furniture
+Average Encounter Count   =  23.1 ENCOUNTERS
+Average Percentage Incorr =  12.719839780613436 PERCENT
+Alpha         (Real)      =  0.21277816140663913
+Average Alpha (Model)     =  0.24150890556258428
+
+Item: a year
+Average Encounter Count   =  36.42 ENCOUNTERS
+Average Percentage Incorr =  17.013564241247416 PERCENT
+Alpha         (Real)      =  0.32156572343688694
+Average Alpha (Model)     =  0.3190672313760589
+
+Item: open
+Average Encounter Count   =  35.72 ENCOUNTERS
+Average Percentage Incorr =  17.067403486804643 PERCENT
+Alpha         (Real)      =  0.3230953934428667
+Average Alpha (Model)     =  0.31471448750811315
+
+Item: free time
+Average Encounter Count   =  34.46 ENCOUNTERS
+Average Percentage Incorr =  16.454236907735705 PERCENT
+Alpha         (Real)      =  0.30968277271199235
+Average Alpha (Model)     =  0.30636800135208087
+
+Item: canal
+Average Encounter Count   =  36.58 ENCOUNTERS
+Average Percentage Incorr =  16.820981469354376 PERCENT
+Alpha         (Real)      =  0.3244097496863796
+Average Alpha (Model)     =  0.3154239668930207
+
+Item: Chinese
+Average Encounter Count   =  33.32 ENCOUNTERS
+Average Percentage Incorr =  16.255945776642626 PERCENT
+Alpha         (Real)      =  0.29875597115902186
+Average Alpha (Model)     =  0.29983765956950603
+
+Item: stall
+Average Encounter Count   =  36.44 ENCOUNTERS
+Average Percentage Incorr =  16.517254068643272 PERCENT
+Alpha         (Real)      =  0.3135048709546217
+Average Alpha (Model)     =  0.3163245749442787
+
+Item: playing field
+Average Encounter Count   =  28.94 ENCOUNTERS
+Average Percentage Incorr =  14.945696067721114 PERCENT
+Alpha         (Real)      =  0.2651313521518684
+Average Alpha (Model)     =  0.2769449068878137
+
+Item: fancy
+Average Encounter Count   =  43.3 ENCOUNTERS
+Average Percentage Incorr =  17.036412836121286 PERCENT
+Alpha         (Real)      =  0.356808588637156
+Average Alpha (Model)     =  0.34573897797534775
+
+Item: a week
+Average Encounter Count   =  43.36 ENCOUNTERS
+Average Percentage Incorr =  16.92855779905866 PERCENT
+Alpha         (Real)      =  0.3608400222195225
+Average Alpha (Model)     =  0.34849571006193847
+
+Item: to enjoy
+Average Encounter Count   =  42.94 ENCOUNTERS
+Average Percentage Incorr =  16.553300810384336 PERCENT
+Alpha         (Real)      =  0.34884343871814893
+Average Alpha (Model)     =  0.3410509384429601
+
+Item: best
+Average Encounter Count   =  33.44 ENCOUNTERS
+Average Percentage Incorr =  15.76828781528736 PERCENT
+Alpha         (Real)      =  0.3052906545523877
+Average Alpha (Model)     =  0.30469955245350094
+
+Item: wonderful
+Average Encounter Count   =  27.92 ENCOUNTERS
+Average Percentage Incorr =  13.906717192098776 PERCENT
+Alpha         (Real)      =  0.23889005258503754
+Average Alpha (Model)     =  0.2727445851721275
+
+Item: expensive
+Average Encounter Count   =  58.5 ENCOUNTERS
+Average Percentage Incorr =  16.539714360882705 PERCENT
+Alpha         (Real)      =  0.4121434268760434
+Average Alpha (Model)     =  0.39784726452751373
+
+Item: to add
+Average Encounter Count   =  22.7 ENCOUNTERS
+Average Percentage Incorr =  11.248256102991732 PERCENT
+Alpha         (Real)      =  0.2095610478417777
+Average Alpha (Model)     =  0.23843731973936433
+
+Item: boat
+Average Encounter Count   =  29.1 ENCOUNTERS
+Average Percentage Incorr =  14.45032051298357 PERCENT
+Alpha         (Real)      =  0.2877889912987713
+Average Alpha (Model)     =  0.2785297859206695
+
+Item: to join in
+Average Encounter Count   =  45.52 ENCOUNTERS
+Average Percentage Incorr =  16.31923765311658 PERCENT
+Alpha         (Real)      =  0.36528647214346266
+Average Alpha (Model)     =  0.3560511319294675
+
+Item: view
+Average Encounter Count   =  55.66 ENCOUNTERS
+Average Percentage Incorr =  16.428457106158614 PERCENT
+Alpha         (Real)      =  0.40796896959503226
+Average Alpha (Model)     =  0.38976777378105537
+
+Item: canoeing
+Average Encounter Count   =  31.82 ENCOUNTERS
+Average Percentage Incorr =  14.52953013226869 PERCENT
+Alpha         (Real)      =  0.2834033985495885
+Average Alpha (Model)     =  0.2935643105226174
+
+Item: flower
+Average Encounter Count   =  33.52 ENCOUNTERS
+Average Percentage Incorr =  14.810495025018888 PERCENT
+Alpha         (Real)      =  0.3112423022146421
+Average Alpha (Model)     =  0.30160493107015535
+
+Item: area
+Average Encounter Count   =  47.64 ENCOUNTERS
+Average Percentage Incorr =  15.965424455581726 PERCENT
+Alpha         (Real)      =  0.38243446831878947
+Average Alpha (Model)     =  0.36002761338135264
+
+
+
+
+Testing learning:
+Writing time           = 1.5
+Learn sessions         = 50
+Study sessions         = 2
+Study session length   = 1800
+Immediate alpha adjust = True
+Alpha adjust value     = 0.02
+Cache used             = True
+Cache updated          = post-session
+
+
+Average Duration        =  10.261254659999999 SECONDS
+Average Encounter Count =  1090.1 ENCOUNTERS
+Average Alpha Error     =  0.03212549873746581
+
+Item: noodles
+Average Encounter Count   =  15.72 ENCOUNTERS
+Average Percentage Incorr =  13.034126228089079 PERCENT
+Alpha         (Real)      =  0.15041238061331177
+Average Alpha (Model)     =  0.21408257775680428
+
+Item: where
+Average Encounter Count   =  29.96 ENCOUNTERS
+Average Percentage Incorr =  22.65455098164625 PERCENT
+Alpha         (Real)      =  0.3333408884659153
+Average Alpha (Model)     =  0.3188023727073163
+
+Item: many
+Average Encounter Count   =  18.84 ENCOUNTERS
+Average Percentage Incorr =  17.39028757664913 PERCENT
+Alpha         (Real)      =  0.22149256906384937
+Average Alpha (Model)     =  0.24205157432839716
+
+Item: way
+Average Encounter Count   =  22.52 ENCOUNTERS
+Average Percentage Incorr =  19.724872730774674 PERCENT
+Alpha         (Real)      =  0.25043712405940277
+Average Alpha (Model)     =  0.27166488124845406
+
+Item: market
+Average Encounter Count   =  21.26 ENCOUNTERS
+Average Percentage Incorr =  19.306500499793916 PERCENT
+Alpha         (Real)      =  0.25725772360375077
+Average Alpha (Model)     =  0.2615528741427665
+
+Item: castle
+Average Encounter Count   =  51.56 ENCOUNTERS
+Average Percentage Incorr =  23.347515276020477 PERCENT
+Alpha         (Real)      =  0.4266520666573219
+Average Alpha (Model)     =  0.4144700082656804
+
+Item: group
+Average Encounter Count   =  19.94 ENCOUNTERS
+Average Percentage Incorr =  17.832160430155355 PERCENT
+Alpha         (Real)      =  0.23893202695047272
+Average Alpha (Model)     =  0.25178225201841015
+
+Item: restaurant
+Average Encounter Count   =  59.42 ENCOUNTERS
+Average Percentage Incorr =  22.70078506415429 PERCENT
+Alpha         (Real)      =  0.446923386391809
+Average Alpha (Model)     =  0.44130216617879214
+
+Item: amazing
+Average Encounter Count   =  24.7 ENCOUNTERS
+Average Percentage Incorr =  20.998396713558137 PERCENT
+Alpha         (Real)      =  0.27774385426810805
+Average Alpha (Model)     =  0.28873188167872316
+
+Item: to visit
+Average Encounter Count   =  36.24 ENCOUNTERS
+Average Percentage Incorr =  23.247495524262998 PERCENT
+Alpha         (Real)      =  0.36220346747583215
+Average Alpha (Model)     =  0.3531913396787231
+
+Item: each
+Average Encounter Count   =  20.56 ENCOUNTERS
+Average Percentage Incorr =  17.987415234596316 PERCENT
+Alpha         (Real)      =  0.22647284796617861
+Average Alpha (Model)     =  0.2567277067661
+
+Item: tree
+Average Encounter Count   =  32.76 ENCOUNTERS
+Average Percentage Incorr =  22.9734786255339 PERCENT
+Alpha         (Real)      =  0.3373873274784439
+Average Alpha (Model)     =  0.33456532217639195
+
+Item: British
+Average Encounter Count   =  42.5 ENCOUNTERS
+Average Percentage Incorr =  22.989683814519832 PERCENT
+Alpha         (Real)      =  0.39194127004071005
+Average Alpha (Model)     =  0.38028154925955787
+
+Item: adult
+Average Encounter Count   =  18.7 ENCOUNTERS
+Average Percentage Incorr =  16.90939238593028 PERCENT
+Alpha         (Real)      =  0.21687824157608487
+Average Alpha (Model)     =  0.24174670967743261
+
+Item: a day
+Average Encounter Count   =  28.56 ENCOUNTERS
+Average Percentage Incorr =  21.894345840204387 PERCENT
+Alpha         (Real)      =  0.3112368606189476
+Average Alpha (Model)     =  0.3133838363771459
+
+Item: open(from...to...)
+Average Encounter Count   =  27.58 ENCOUNTERS
+Average Percentage Incorr =  21.69697375822115 PERCENT
+Alpha         (Real)      =  0.3086606534579481
+Average Alpha (Model)     =  0.30823326438436527
+
+Item: furniture
+Average Encounter Count   =  18.8 ENCOUNTERS
+Average Percentage Incorr =  16.633067300626863 PERCENT
+Alpha         (Real)      =  0.21277816140663913
+Average Alpha (Model)     =  0.24126212198061914
+
+Item: a year
+Average Encounter Count   =  28.78 ENCOUNTERS
+Average Percentage Incorr =  21.74517241070151 PERCENT
+Alpha         (Real)      =  0.32156572343688694
+Average Alpha (Model)     =  0.3149033427569641
+
+Item: open
+Average Encounter Count   =  30.16 ENCOUNTERS
+Average Percentage Incorr =  22.109666893013465 PERCENT
+Alpha         (Real)      =  0.3230953934428667
+Average Alpha (Model)     =  0.3206674259610552
+
+Item: free time
+Average Encounter Count   =  27.62 ENCOUNTERS
+Average Percentage Incorr =  21.386692052907737 PERCENT
+Alpha         (Real)      =  0.30968277271199235
+Average Alpha (Model)     =  0.3060397719445102
+
+Item: canal
+Average Encounter Count   =  30.44 ENCOUNTERS
+Average Percentage Incorr =  22.280116304681894 PERCENT
+Alpha         (Real)      =  0.3244097496863796
+Average Alpha (Model)     =  0.324059265189622
+
+Item: Chinese
+Average Encounter Count   =  25.06 ENCOUNTERS
+Average Percentage Incorr =  20.638971301097122 PERCENT
+Alpha         (Real)      =  0.29875597115902186
+Average Alpha (Model)     =  0.2892274202848654
+
+Item: stall
+Average Encounter Count   =  27.46 ENCOUNTERS
+Average Percentage Incorr =  21.351277797172035 PERCENT
+Alpha         (Real)      =  0.3135048709546217
+Average Alpha (Model)     =  0.3033812306843257
+
+Item: playing field
+Average Encounter Count   =  22.78 ENCOUNTERS
+Average Percentage Incorr =  19.54560104068786 PERCENT
+Alpha         (Real)      =  0.2651313521518684
+Average Alpha (Model)     =  0.27674434576765455
+
+Item: fancy
+Average Encounter Count   =  34.18 ENCOUNTERS
+Average Percentage Incorr =  22.398007191987322 PERCENT
+Alpha         (Real)      =  0.356808588637156
+Average Alpha (Model)     =  0.34245990789016323
+
+Item: a week
+Average Encounter Count   =  35.06 ENCOUNTERS
+Average Percentage Incorr =  22.35806013013035 PERCENT
+Alpha         (Real)      =  0.3608400222195225
+Average Alpha (Model)     =  0.347719571633244
+
+Item: to enjoy
+Average Encounter Count   =  34.62 ENCOUNTERS
+Average Percentage Incorr =  22.320674394358136 PERCENT
+Alpha         (Real)      =  0.34884343871814893
+Average Alpha (Model)     =  0.346860588278308
+
+Item: best
+Average Encounter Count   =  26.5 ENCOUNTERS
+Average Percentage Incorr =  20.119959118284946 PERCENT
+Alpha         (Real)      =  0.3052906545523877
+Average Alpha (Model)     =  0.2993522850713112
+
+Item: wonderful
+Average Encounter Count   =  20.2 ENCOUNTERS
+Average Percentage Incorr =  17.03782448564069 PERCENT
+Alpha         (Real)      =  0.23889005258503754
+Average Alpha (Model)     =  0.2551827516020248
+
+Item: expensive
+Average Encounter Count   =  47.96 ENCOUNTERS
+Average Percentage Incorr =  22.22415287381619 PERCENT
+Alpha         (Real)      =  0.4121434268760434
+Average Alpha (Model)     =  0.40070959570549525
+
+Item: to add
+Average Encounter Count   =  18.72 ENCOUNTERS
+Average Percentage Incorr =  15.385400332909855 PERCENT
+Alpha         (Real)      =  0.2095610478417777
+Average Alpha (Model)     =  0.24001916431890677
+
+Item: boat
+Average Encounter Count   =  24.0 ENCOUNTERS
+Average Percentage Incorr =  18.71528725858258 PERCENT
+Alpha         (Real)      =  0.2877889912987713
+Average Alpha (Model)     =  0.27960348134183866
+
+Item: to join in
+Average Encounter Count   =  35.32 ENCOUNTERS
+Average Percentage Incorr =  21.918293478657297 PERCENT
+Alpha         (Real)      =  0.36528647214346266
+Average Alpha (Model)     =  0.3476729168661897
+
+Item: view
+Average Encounter Count   =  43.8 ENCOUNTERS
+Average Percentage Incorr =  21.934623212587404 PERCENT
+Alpha         (Real)      =  0.40796896959503226
+Average Alpha (Model)     =  0.3874122148983756
+
+Item: canoeing
+Average Encounter Count   =  23.68 ENCOUNTERS
+Average Percentage Incorr =  18.540973688102948 PERCENT
+Alpha         (Real)      =  0.2834033985495885
+Average Alpha (Model)     =  0.2785667704290791
+
+Item: flower
+Average Encounter Count   =  26.76 ENCOUNTERS
+Average Percentage Incorr =  19.680634734858188 PERCENT
+Alpha         (Real)      =  0.3112423022146421
+Average Alpha (Model)     =  0.30136067884941115
+
+Item: area
+Average Encounter Count   =  37.38 ENCOUNTERS
+Average Percentage Incorr =  21.46262293869208 PERCENT
+Alpha         (Real)      =  0.38243446831878947
+Average Alpha (Model)     =  0.3595651550251958
+
+
+
+
+Testing learning:
+Writing time           = 2.0
+Learn sessions         = 50
+Study sessions         = 2
+Study session length   = 1800
+Immediate alpha adjust = True
+Alpha adjust value     = 0.02
+Cache used             = True
+Cache updated          = post-session
+
+
+Average Duration        =  7.5681210399999985 SECONDS
+Average Encounter Count =  913.52 ENCOUNTERS
+Average Alpha Error     =  0.03103637982151711
+
+Item: noodles
+Average Encounter Count   =  13.88 ENCOUNTERS
+Average Percentage Incorr =  16.325757575757574 PERCENT
+Alpha         (Real)      =  0.15041238061331177
+Average Alpha (Model)     =  0.21358925046510446
+
+Item: where
+Average Encounter Count   =  25.72 ENCOUNTERS
+Average Percentage Incorr =  27.591585477404735 PERCENT
+Alpha         (Real)      =  0.3333408884659153
+Average Alpha (Model)     =  0.32012374855118614
+
+Item: many
+Average Encounter Count   =  17.02 ENCOUNTERS
+Average Percentage Incorr =  21.999247725846182 PERCENT
+Alpha         (Real)      =  0.22149256906384937
+Average Alpha (Model)     =  0.2496377408671402
+
+Item: way
+Average Encounter Count   =  17.98 ENCOUNTERS
+Average Percentage Incorr =  22.841415292130723 PERCENT
+Alpha         (Real)      =  0.25043712405940277
+Average Alpha (Model)     =  0.2561591655334559
+
+Item: market
+Average Encounter Count   =  17.9 ENCOUNTERS
+Average Percentage Incorr =  22.535132968391135 PERCENT
+Alpha         (Real)      =  0.25725772360375077
+Average Alpha (Model)     =  0.2591499042590687
+
+Item: castle
+Average Encounter Count   =  41.96 ENCOUNTERS
+Average Percentage Incorr =  28.8583717764481 PERCENT
+Alpha         (Real)      =  0.4266520666573219
+Average Alpha (Model)     =  0.40566903708679647
+
+Item: group
+Average Encounter Count   =  18.12 ENCOUNTERS
+Average Percentage Incorr =  22.92838914524202 PERCENT
+Alpha         (Real)      =  0.23893202695047272
+Average Alpha (Model)     =  0.2593535196385759
+
+Item: restaurant
+Average Encounter Count   =  47.76 ENCOUNTERS
+Average Percentage Incorr =  28.605936003290044 PERCENT
+Alpha         (Real)      =  0.446923386391809
+Average Alpha (Model)     =  0.4296274784795362
+
+Item: amazing
+Average Encounter Count   =  20.4 ENCOUNTERS
+Average Percentage Incorr =  25.1329633851906 PERCENT
+Alpha         (Real)      =  0.27774385426810805
+Average Alpha (Model)     =  0.27979077384302675
+
+Item: to visit
+Average Encounter Count   =  30.52 ENCOUNTERS
+Average Percentage Incorr =  28.227479463061126 PERCENT
+Alpha         (Real)      =  0.36220346747583215
+Average Alpha (Model)     =  0.3521487248370579
+
+Item: each
+Average Encounter Count   =  16.96 ENCOUNTERS
+Average Percentage Incorr =  21.711337518690453 PERCENT
+Alpha         (Real)      =  0.22647284796617861
+Average Alpha (Model)     =  0.2494737296740741
+
+Item: tree
+Average Encounter Count   =  24.96 ENCOUNTERS
+Average Percentage Incorr =  27.743728214621243 PERCENT
+Alpha         (Real)      =  0.3373873274784439
+Average Alpha (Model)     =  0.3157417601552156
+
+Item: British
+Average Encounter Count   =  35.52 ENCOUNTERS
+Average Percentage Incorr =  28.34065311374497 PERCENT
+Alpha         (Real)      =  0.39194127004071005
+Average Alpha (Model)     =  0.3780899214285689
+
+Item: adult
+Average Encounter Count   =  16.32 ENCOUNTERS
+Average Percentage Incorr =  20.326075008582738 PERCENT
+Alpha         (Real)      =  0.21687824157608487
+Average Alpha (Model)     =  0.24206205766483663
+
+Item: a day
+Average Encounter Count   =  23.1 ENCOUNTERS
+Average Percentage Incorr =  26.88176508232773 PERCENT
+Alpha         (Real)      =  0.3112368606189476
+Average Alpha (Model)     =  0.3009076579348385
+
+Item: open(from...to...)
+Average Encounter Count   =  22.36 ENCOUNTERS
+Average Percentage Incorr =  26.062592151147143 PERCENT
+Alpha         (Real)      =  0.3086606534579481
+Average Alpha (Model)     =  0.29894512388194877
+
+Item: furniture
+Average Encounter Count   =  15.2 ENCOUNTERS
+Average Percentage Incorr =  18.026331674861087 PERCENT
+Alpha         (Real)      =  0.21277816140663913
+Average Alpha (Model)     =  0.23184206276949532
+
+Item: a year
+Average Encounter Count   =  23.76 ENCOUNTERS
+Average Percentage Incorr =  26.40146356817292 PERCENT
+Alpha         (Real)      =  0.32156572343688694
+Average Alpha (Model)     =  0.3075852495694732
+
+Item: open
+Average Encounter Count   =  24.0 ENCOUNTERS
+Average Percentage Incorr =  27.246850510224352 PERCENT
+Alpha         (Real)      =  0.3230953934428667
+Average Alpha (Model)     =  0.30786494055152264
+
+Item: free time
+Average Encounter Count   =  23.18 ENCOUNTERS
+Average Percentage Incorr =  26.41263676705511 PERCENT
+Alpha         (Real)      =  0.30968277271199235
+Average Alpha (Model)     =  0.3054169077988481
+
+Item: canal
+Average Encounter Count   =  25.68 ENCOUNTERS
+Average Percentage Incorr =  27.389430068832358 PERCENT
+Alpha         (Real)      =  0.3244097496863796
+Average Alpha (Model)     =  0.3240108497534925
+
+Item: Chinese
+Average Encounter Count   =  22.54 ENCOUNTERS
+Average Percentage Incorr =  26.009729454262697 PERCENT
+Alpha         (Real)      =  0.29875597115902186
+Average Alpha (Model)     =  0.3007139339740446
+
+Item: stall
+Average Encounter Count   =  24.7 ENCOUNTERS
+Average Percentage Incorr =  26.66607698847252 PERCENT
+Alpha         (Real)      =  0.3135048709546217
+Average Alpha (Model)     =  0.3145074488584319
+
+Item: playing field
+Average Encounter Count   =  19.72 ENCOUNTERS
+Average Percentage Incorr =  24.175560512939832 PERCENT
+Alpha         (Real)      =  0.2651313521518684
+Average Alpha (Model)     =  0.2777811807908095
+
+Item: fancy
+Average Encounter Count   =  31.52 ENCOUNTERS
+Average Percentage Incorr =  27.9020316796751 PERCENT
+Alpha         (Real)      =  0.356808588637156
+Average Alpha (Model)     =  0.35918253881760315
+
+Item: a week
+Average Encounter Count   =  29.2 ENCOUNTERS
+Average Percentage Incorr =  27.330391215462658 PERCENT
+Alpha         (Real)      =  0.3608400222195225
+Average Alpha (Model)     =  0.3432519393426589
+
+Item: to enjoy
+Average Encounter Count   =  27.0 ENCOUNTERS
+Average Percentage Incorr =  27.070050317742457 PERCENT
+Alpha         (Real)      =  0.34884343871814893
+Average Alpha (Model)     =  0.33434211096451394
+
+Item: best
+Average Encounter Count   =  22.74 ENCOUNTERS
+Average Percentage Incorr =  25.37275464440804 PERCENT
+Alpha         (Real)      =  0.3052906545523877
+Average Alpha (Model)     =  0.30359989838613344
+
+Item: wonderful
+Average Encounter Count   =  18.14 ENCOUNTERS
+Average Percentage Incorr =  22.055633858172556 PERCENT
+Alpha         (Real)      =  0.23889005258503754
+Average Alpha (Model)     =  0.26284820090581723
+
+Item: expensive
+Average Encounter Count   =  37.46 ENCOUNTERS
+Average Percentage Incorr =  27.7556052878095 PERCENT
+Alpha         (Real)      =  0.4121434268760434
+Average Alpha (Model)     =  0.38893842390108596
+
+Item: to add
+Average Encounter Count   =  16.08 ENCOUNTERS
+Average Percentage Incorr =  18.61405890291339 PERCENT
+Alpha         (Real)      =  0.2095610478417777
+Average Alpha (Model)     =  0.24117732345690396
+
+Item: boat
+Average Encounter Count   =  21.36 ENCOUNTERS
+Average Percentage Incorr =  24.2835243577229 PERCENT
+Alpha         (Real)      =  0.2877889912987713
+Average Alpha (Model)     =  0.29146170033399915
+
+Item: to join in
+Average Encounter Count   =  28.74 ENCOUNTERS
+Average Percentage Incorr =  26.66974566123445 PERCENT
+Alpha         (Real)      =  0.36528647214346266
+Average Alpha (Model)     =  0.34231831969259924
+
+Item: view
+Average Encounter Count   =  35.54 ENCOUNTERS
+Average Percentage Incorr =  27.26918056747974 PERCENT
+Alpha         (Real)      =  0.40796896959503226
+Average Alpha (Model)     =  0.38150381077352635
+
+Item: canoeing
+Average Encounter Count   =  20.56 ENCOUNTERS
+Average Percentage Incorr =  23.745308274058438 PERCENT
+Alpha         (Real)      =  0.2834033985495885
+Average Alpha (Model)     =  0.2833257359530068
+
+Item: flower
+Average Encounter Count   =  24.1 ENCOUNTERS
+Average Percentage Incorr =  25.04583546485319 PERCENT
+Alpha         (Real)      =  0.3112423022146421
+Average Alpha (Model)     =  0.3134136498736399
+
+Item: area
+Average Encounter Count   =  31.82 ENCOUNTERS
+Average Percentage Incorr =  26.401237000860007 PERCENT
+Alpha         (Real)      =  0.38243446831878947
+Average Alpha (Model)     =  0.3642799364440804
+
+
+
+
+Testing learning:
+Writing time           = 2.5
+Learn sessions         = 50
+Study sessions         = 2
+Study session length   = 1800
+Immediate alpha adjust = True
+Alpha adjust value     = 0.02
+Cache used             = True
+Cache updated          = post-session
+
+
+Average Duration        =  5.512924859999998 SECONDS
+Average Encounter Count =  788.08 ENCOUNTERS
+Average Alpha Error     =  0.030677920967670972
+
+Item: noodles
+Average Encounter Count   =  12.6 ENCOUNTERS
+Average Percentage Incorr =  18.399693770282003 PERCENT
+Alpha         (Real)      =  0.15041238061331177
+Average Alpha (Model)     =  0.21588985392361518
+
+Item: where
+Average Encounter Count   =  22.26 ENCOUNTERS
+Average Percentage Incorr =  33.58147900652041 PERCENT
+Alpha         (Real)      =  0.3333408884659153
+Average Alpha (Model)     =  0.32070171348669274
+
+Item: many
+Average Encounter Count   =  14.3 ENCOUNTERS
+Average Percentage Incorr =  23.627225388990095 PERCENT
+Alpha         (Real)      =  0.22149256906384937
+Average Alpha (Model)     =  0.23876423907719002
+
+Item: way
+Average Encounter Count   =  16.3 ENCOUNTERS
+Average Percentage Incorr =  27.480658792531866 PERCENT
+Alpha         (Real)      =  0.25043712405940277
+Average Alpha (Model)     =  0.2612612687695795
+
+Item: market
+Average Encounter Count   =  16.62 ENCOUNTERS
+Average Percentage Incorr =  27.27619847286021 PERCENT
+Alpha         (Real)      =  0.25725772360375077
+Average Alpha (Model)     =  0.26412814547394864
+
+Item: castle
+Average Encounter Count   =  37.34 ENCOUNTERS
+Average Percentage Incorr =  34.720470423588246 PERCENT
+Alpha         (Real)      =  0.4266520666573219
+Average Alpha (Model)     =  0.41114272068957675
+
+Item: group
+Average Encounter Count   =  15.32 ENCOUNTERS
+Average Percentage Incorr =  25.75204818401412 PERCENT
+Alpha         (Real)      =  0.23893202695047272
+Average Alpha (Model)     =  0.2530592573131177
+
+Item: restaurant
+Average Encounter Count   =  40.48 ENCOUNTERS
+Average Percentage Incorr =  34.34847633390577 PERCENT
+Alpha         (Real)      =  0.446923386391809
+Average Alpha (Model)     =  0.4306453090525103
+
+Item: amazing
+Average Encounter Count   =  18.42 ENCOUNTERS
+Average Percentage Incorr =  29.29578308000909 PERCENT
+Alpha         (Real)      =  0.27774385426810805
+Average Alpha (Model)     =  0.2837366670306575
+
+Item: to visit
+Average Encounter Count   =  25.92 ENCOUNTERS
+Average Percentage Incorr =  33.8337386248881 PERCENT
+Alpha         (Real)      =  0.36220346747583215
+Average Alpha (Model)     =  0.3474586457199675
+
+Item: each
+Average Encounter Count   =  15.04 ENCOUNTERS
+Average Percentage Incorr =  24.65220066311398 PERCENT
+Alpha         (Real)      =  0.22647284796617861
+Average Alpha (Model)     =  0.25060210898652563
+
+Item: tree
+Average Encounter Count   =  22.3 ENCOUNTERS
+Average Percentage Incorr =  32.935596551595175 PERCENT
+Alpha         (Real)      =  0.3373873274784439
+Average Alpha (Model)     =  0.32252436597557094
+
+Item: British
+Average Encounter Count   =  29.74 ENCOUNTERS
+Average Percentage Incorr =  34.47323642326553 PERCENT
+Alpha         (Real)      =  0.39194127004071005
+Average Alpha (Model)     =  0.3737667154935817
+
+Item: adult
+Average Encounter Count   =  14.6 ENCOUNTERS
+Average Percentage Incorr =  23.81303066558485 PERCENT
+Alpha         (Real)      =  0.21687824157608487
+Average Alpha (Model)     =  0.2419957578884081
+
+Item: a day
+Average Encounter Count   =  19.84 ENCOUNTERS
+Average Percentage Incorr =  31.050702680532403 PERCENT
+Alpha         (Real)      =  0.3112368606189476
+Average Alpha (Model)     =  0.2963155598832716
+
+Item: open(from...to...)
+Average Encounter Count   =  20.02 ENCOUNTERS
+Average Percentage Incorr =  31.475065494344502 PERCENT
+Alpha         (Real)      =  0.3086606534579481
+Average Alpha (Model)     =  0.30275728146729836
+
+Item: furniture
+Average Encounter Count   =  14.36 ENCOUNTERS
+Average Percentage Incorr =  23.56200125124274 PERCENT
+Alpha         (Real)      =  0.21277816140663913
+Average Alpha (Model)     =  0.24130525724322274
+
+Item: a year
+Average Encounter Count   =  20.78 ENCOUNTERS
+Average Percentage Incorr =  31.358861191426314 PERCENT
+Alpha         (Real)      =  0.32156572343688694
+Average Alpha (Model)     =  0.30911614844654134
+
+Item: open
+Average Encounter Count   =  21.22 ENCOUNTERS
+Average Percentage Incorr =  32.06043147285105 PERCENT
+Alpha         (Real)      =  0.3230953934428667
+Average Alpha (Model)     =  0.31469432510497175
+
+Item: free time
+Average Encounter Count   =  19.96 ENCOUNTERS
+Average Percentage Incorr =  30.920924246182025 PERCENT
+Alpha         (Real)      =  0.30968277271199235
+Average Alpha (Model)     =  0.30179594704930546
+
+Item: canal
+Average Encounter Count   =  21.54 ENCOUNTERS
+Average Percentage Incorr =  31.604288574232793 PERCENT
+Alpha         (Real)      =  0.3244097496863796
+Average Alpha (Model)     =  0.3158217844222998
+
+Item: Chinese
+Average Encounter Count   =  19.5 ENCOUNTERS
+Average Percentage Incorr =  30.316463835143335 PERCENT
+Alpha         (Real)      =  0.29875597115902186
+Average Alpha (Model)     =  0.2951066114989051
+
+Item: stall
+Average Encounter Count   =  20.2 ENCOUNTERS
+Average Percentage Incorr =  30.971623671750702 PERCENT
+Alpha         (Real)      =  0.3135048709546217
+Average Alpha (Model)     =  0.30564492758787504
+
+Item: playing field
+Average Encounter Count   =  16.42 ENCOUNTERS
+Average Percentage Incorr =  27.80559871172336 PERCENT
+Alpha         (Real)      =  0.2651313521518684
+Average Alpha (Model)     =  0.2698459099799232
+
+Item: fancy
+Average Encounter Count   =  24.36 ENCOUNTERS
+Average Percentage Incorr =  32.620017888589025 PERCENT
+Alpha         (Real)      =  0.356808588637156
+Average Alpha (Model)     =  0.3382174912494706
+
+Item: a week
+Average Encounter Count   =  25.54 ENCOUNTERS
+Average Percentage Incorr =  32.55676685656013 PERCENT
+Alpha         (Real)      =  0.3608400222195225
+Average Alpha (Model)     =  0.3520536705450958
+
+Item: to enjoy
+Average Encounter Count   =  23.66 ENCOUNTERS
+Average Percentage Incorr =  32.36711918457746 PERCENT
+Alpha         (Real)      =  0.34884343871814893
+Average Alpha (Model)     =  0.3365010951401031
+
+Item: best
+Average Encounter Count   =  19.3 ENCOUNTERS
+Average Percentage Incorr =  29.690246656769755 PERCENT
+Alpha         (Real)      =  0.3052906545523877
+Average Alpha (Model)     =  0.29737577693824435
+
+Item: wonderful
+Average Encounter Count   =  14.7 ENCOUNTERS
+Average Percentage Incorr =  24.145172637819698 PERCENT
+Alpha         (Real)      =  0.23889005258503754
+Average Alpha (Model)     =  0.2514864604159859
+
+Item: expensive
+Average Encounter Count   =  32.08 ENCOUNTERS
+Average Percentage Incorr =  33.33326258265502 PERCENT
+Alpha         (Real)      =  0.4121434268760434
+Average Alpha (Model)     =  0.3905852982204414
+
+Item: to add
+Average Encounter Count   =  14.14 ENCOUNTERS
+Average Percentage Incorr =  22.42120276524301 PERCENT
+Alpha         (Real)      =  0.2095610478417777
+Average Alpha (Model)     =  0.24218863548587044
+
+Item: boat
+Average Encounter Count   =  18.26 ENCOUNTERS
+Average Percentage Incorr =  28.338692454361293 PERCENT
+Alpha         (Real)      =  0.2877889912987713
+Average Alpha (Model)     =  0.28829018128134387
+
+Item: to join in
+Average Encounter Count   =  24.66 ENCOUNTERS
+Average Percentage Incorr =  32.43571376383637 PERCENT
+Alpha         (Real)      =  0.36528647214346266
+Average Alpha (Model)     =  0.3455187912656071
+
+Item: view
+Average Encounter Count   =  31.42 ENCOUNTERS
+Average Percentage Incorr =  33.10638147579783 PERCENT
+Alpha         (Real)      =  0.40796896959503226
+Average Alpha (Model)     =  0.3926711612697534
+
+Item: canoeing
+Average Encounter Count   =  17.74 ENCOUNTERS
+Average Percentage Incorr =  27.214826373138052 PERCENT
+Alpha         (Real)      =  0.2834033985495885
+Average Alpha (Model)     =  0.2834048899198124
+
+Item: flower
+Average Encounter Count   =  19.24 ENCOUNTERS
+Average Percentage Incorr =  29.354896944562448 PERCENT
+Alpha         (Real)      =  0.3112423022146421
+Average Alpha (Model)     =  0.29938657001885693
+
+Item: area
+Average Encounter Count   =  27.9 ENCOUNTERS
+Average Percentage Incorr =  32.107974398966896 PERCENT
+Alpha         (Real)      =  0.38243446831878947
+Average Alpha (Model)     =  0.36586363014728734
+
+
+
+
+Testing learning:
+Writing time           = 3.0
+Learn sessions         = 50
+Study sessions         = 2
+Study session length   = 1800
+Immediate alpha adjust = True
+Alpha adjust value     = 0.02
+Cache used             = True
+Cache updated          = post-session
+
+
+Average Duration        =  4.16954666 SECONDS
+Average Encounter Count =  694.88 ENCOUNTERS
+Average Alpha Error     =  0.03049358979633069
+
+Item: noodles
+Average Encounter Count   =  11.24 ENCOUNTERS
+Average Percentage Incorr =  21.524869574869566 PERCENT
+Alpha         (Real)      =  0.15041238061331177
+Average Alpha (Model)     =  0.213550184925008
+
+Item: where
+Average Encounter Count   =  19.92 ENCOUNTERS
+Average Percentage Incorr =  37.785815826884615 PERCENT
+Alpha         (Real)      =  0.3333408884659153
+Average Alpha (Model)     =  0.3235071202429068
+
+Item: many
+Average Encounter Count   =  13.16 ENCOUNTERS
+Average Percentage Incorr =  27.94853071764835 PERCENT
+Alpha         (Real)      =  0.22149256906384937
+Average Alpha (Model)     =  0.24640748010543784
+
+Item: way
+Average Encounter Count   =  14.74 ENCOUNTERS
+Average Percentage Incorr =  31.520535536015405 PERCENT
+Alpha         (Real)      =  0.25043712405940277
+Average Alpha (Model)     =  0.2652311194396684
+
+Item: market
+Average Encounter Count   =  14.5 ENCOUNTERS
+Average Percentage Incorr =  31.511992634128852 PERCENT
+Alpha         (Real)      =  0.25725772360375077
+Average Alpha (Model)     =  0.2636071468696627
+
+Item: castle
+Average Encounter Count   =  31.78 ENCOUNTERS
+Average Percentage Incorr =  39.69294543238388 PERCENT
+Alpha         (Real)      =  0.4266520666573219
+Average Alpha (Model)     =  0.4059472605816206
+
+Item: group
+Average Encounter Count   =  13.54 ENCOUNTERS
+Average Percentage Incorr =  28.94198353246341 PERCENT
+Alpha         (Real)      =  0.23893202695047272
+Average Alpha (Model)     =  0.2497462729940416
+
+Item: restaurant
+Average Encounter Count   =  35.5 ENCOUNTERS
+Average Percentage Incorr =  39.22803259328607 PERCENT
+Alpha         (Real)      =  0.446923386391809
+Average Alpha (Model)     =  0.4303275561569265
+
+Item: amazing
+Average Encounter Count   =  15.6 ENCOUNTERS
+Average Percentage Incorr =  32.66903347770219 PERCENT
+Alpha         (Real)      =  0.27774385426810805
+Average Alpha (Model)     =  0.27650472090486783
+
+Item: to visit
+Average Encounter Count   =  22.12 ENCOUNTERS
+Average Percentage Incorr =  38.51071769857833 PERCENT
+Alpha         (Real)      =  0.36220346747583215
+Average Alpha (Model)     =  0.3441053372871567
+
+Item: each
+Average Encounter Count   =  13.64 ENCOUNTERS
+Average Percentage Incorr =  29.105394605394604 PERCENT
+Alpha         (Real)      =  0.22647284796617861
+Average Alpha (Model)     =  0.2529663175151451
+
+Item: tree
+Average Encounter Count   =  20.36 ENCOUNTERS
+Average Percentage Incorr =  37.891328147456164 PERCENT
+Alpha         (Real)      =  0.3373873274784439
+Average Alpha (Model)     =  0.3271133058938014
+
+Item: British
+Average Encounter Count   =  26.72 ENCOUNTERS
+Average Percentage Incorr =  39.40763688351547 PERCENT
+Alpha         (Real)      =  0.39194127004071005
+Average Alpha (Model)     =  0.37945588348851056
+
+Item: adult
+Average Encounter Count   =  12.88 ENCOUNTERS
+Average Percentage Incorr =  26.926176163018262 PERCENT
+Alpha         (Real)      =  0.21687824157608487
+Average Alpha (Model)     =  0.24279755126136396
+
+Item: a day
+Average Encounter Count   =  17.28 ENCOUNTERS
+Average Percentage Incorr =  34.85952880385162 PERCENT
+Alpha         (Real)      =  0.3112368606189476
+Average Alpha (Model)     =  0.29395006900822823
+
+Item: open(from...to...)
+Average Encounter Count   =  18.36 ENCOUNTERS
+Average Percentage Incorr =  35.880024668202076 PERCENT
+Alpha         (Real)      =  0.3086606534579481
+Average Alpha (Model)     =  0.30522622909475156
+
+Item: furniture
+Average Encounter Count   =  12.5 ENCOUNTERS
+Average Percentage Incorr =  25.67440323694193 PERCENT
+Alpha         (Real)      =  0.21277816140663913
+Average Alpha (Model)     =  0.23719766964132746
+
+Item: a year
+Average Encounter Count   =  18.36 ENCOUNTERS
+Average Percentage Incorr =  36.03979565849265 PERCENT
+Alpha         (Real)      =  0.32156572343688694
+Average Alpha (Model)     =  0.30997687989274963
+
+Item: open
+Average Encounter Count   =  19.36 ENCOUNTERS
+Average Percentage Incorr =  36.48169134742988 PERCENT
+Alpha         (Real)      =  0.3230953934428667
+Average Alpha (Model)     =  0.3168203059666069
+
+Item: free time
+Average Encounter Count   =  18.28 ENCOUNTERS
+Average Percentage Incorr =  35.629595627472185 PERCENT
+Alpha         (Real)      =  0.30968277271199235
+Average Alpha (Model)     =  0.3090159932392259
+
+Item: canal
+Average Encounter Count   =  19.0 ENCOUNTERS
+Average Percentage Incorr =  36.44037311852833 PERCENT
+Alpha         (Real)      =  0.3244097496863796
+Average Alpha (Model)     =  0.31627077300802736
+
+Item: Chinese
+Average Encounter Count   =  16.7 ENCOUNTERS
+Average Percentage Incorr =  34.592712626808726 PERCENT
+Alpha         (Real)      =  0.29875597115902186
+Average Alpha (Model)     =  0.29217579046695896
+
+Item: stall
+Average Encounter Count   =  18.24 ENCOUNTERS
+Average Percentage Incorr =  35.666563706431106 PERCENT
+Alpha         (Real)      =  0.3135048709546217
+Average Alpha (Model)     =  0.3069724528685154
+
+Item: playing field
+Average Encounter Count   =  14.8 ENCOUNTERS
+Average Percentage Incorr =  31.270217390109025 PERCENT
+Alpha         (Real)      =  0.2651313521518684
+Average Alpha (Model)     =  0.2684945911496647
+
+Item: fancy
+Average Encounter Count   =  21.96 ENCOUNTERS
+Average Percentage Incorr =  37.81277750178731 PERCENT
+Alpha         (Real)      =  0.356808588637156
+Average Alpha (Model)     =  0.3423982356430818
+
+Item: a week
+Average Encounter Count   =  22.42 ENCOUNTERS
+Average Percentage Incorr =  37.77590606986511 PERCENT
+Alpha         (Real)      =  0.3608400222195225
+Average Alpha (Model)     =  0.3480014521737531
+
+Item: to enjoy
+Average Encounter Count   =  20.82 ENCOUNTERS
+Average Percentage Incorr =  37.211937726352865 PERCENT
+Alpha         (Real)      =  0.34884343871814893
+Average Alpha (Model)     =  0.3338076393664087
+
+Item: best
+Average Encounter Count   =  17.3 ENCOUNTERS
+Average Percentage Incorr =  34.12694542133903 PERCENT
+Alpha         (Real)      =  0.3052906545523877
+Average Alpha (Model)     =  0.2972818383787953
+
+Item: wonderful
+Average Encounter Count   =  13.82 ENCOUNTERS
+Average Percentage Incorr =  28.804244663145592 PERCENT
+Alpha         (Real)      =  0.23889005258503754
+Average Alpha (Model)     =  0.2581630487751783
+
+Item: expensive
+Average Encounter Count   =  26.8 ENCOUNTERS
+Average Percentage Incorr =  38.61203418601537 PERCENT
+Alpha         (Real)      =  0.4121434268760434
+Average Alpha (Model)     =  0.38395771038609683
+
+Item: to add
+Average Encounter Count   =  12.5 ENCOUNTERS
+Average Percentage Incorr =  25.541539016539012 PERCENT
+Alpha         (Real)      =  0.2095610478417777
+Average Alpha (Model)     =  0.24106637124699468
+
+Item: boat
+Average Encounter Count   =  15.92 ENCOUNTERS
+Average Percentage Incorr =  32.51704896124401 PERCENT
+Alpha         (Real)      =  0.2877889912987713
+Average Alpha (Model)     =  0.28464376405135
+
+Item: to join in
+Average Encounter Count   =  21.14 ENCOUNTERS
+Average Percentage Incorr =  36.67447341164824 PERCENT
+Alpha         (Real)      =  0.36528647214346266
+Average Alpha (Model)     =  0.3423881448229493
+
+Item: view
+Average Encounter Count   =  27.18 ENCOUNTERS
+Average Percentage Incorr =  38.2040803850866 PERCENT
+Alpha         (Real)      =  0.40796896959503226
+Average Alpha (Model)     =  0.3883670796955597
+
+Item: canoeing
+Average Encounter Count   =  16.18 ENCOUNTERS
+Average Percentage Incorr =  33.734157310436075 PERCENT
+Alpha         (Real)      =  0.2834033985495885
+Average Alpha (Model)     =  0.2942324569455265
+
+Item: flower
+Average Encounter Count   =  16.32 ENCOUNTERS
+Average Percentage Incorr =  32.701693849143034 PERCENT
+Alpha         (Real)      =  0.3112423022146421
+Average Alpha (Model)     =  0.29221106973676286
+
+Item: area
+Average Encounter Count   =  23.94 ENCOUNTERS
+Average Percentage Incorr =  37.191541497017894 PERCENT
+Alpha         (Real)      =  0.38243446831878947
+Average Alpha (Model)     =  0.36822240465526407
+
+
+
+
+Testing learning:
+Writing time           = 3.5
+Learn sessions         = 50
+Study sessions         = 2
+Study session length   = 1800
+Immediate alpha adjust = True
+Alpha adjust value     = 0.02
+Cache used             = True
+Cache updated          = post-session
+
+
+Average Duration        =  3.3527898400000002 SECONDS
+Average Encounter Count =  622.7 ENCOUNTERS
+Average Alpha Error     =  0.03033568731860825
+
+Item: noodles
+Average Encounter Count   =  10.2 ENCOUNTERS
+Average Percentage Incorr =  21.014052614052602 PERCENT
+Alpha         (Real)      =  0.15041238061331177
+Average Alpha (Model)     =  0.2087788692053485
+
+Item: where
+Average Encounter Count   =  18.14 ENCOUNTERS
+Average Percentage Incorr =  41.5762132440629 PERCENT
+Alpha         (Real)      =  0.3333408884659153
+Average Alpha (Model)     =  0.3226639615937601
+
+Item: many
+Average Encounter Count   =  12.34 ENCOUNTERS
+Average Percentage Incorr =  30.090170450464555 PERCENT
+Alpha         (Real)      =  0.22149256906384937
+Average Alpha (Model)     =  0.2452000913144338
+
+Item: way
+Average Encounter Count   =  13.18 ENCOUNTERS
+Average Percentage Incorr =  33.421288188935236 PERCENT
+Alpha         (Real)      =  0.25043712405940277
+Average Alpha (Model)     =  0.25808039172323993
+
+Item: market
+Average Encounter Count   =  13.22 ENCOUNTERS
+Average Percentage Incorr =  33.50800619229412 PERCENT
+Alpha         (Real)      =  0.25725772360375077
+Average Alpha (Model)     =  0.25874263019843935
+
+Item: castle
+Average Encounter Count   =  29.44 ENCOUNTERS
+Average Percentage Incorr =  44.95171829180961 PERCENT
+Alpha         (Real)      =  0.4266520666573219
+Average Alpha (Model)     =  0.41143467304819836
+
+Item: group
+Average Encounter Count   =  12.82 ENCOUNTERS
+Average Percentage Incorr =  32.40327450327451 PERCENT
+Alpha         (Real)      =  0.23893202695047272
+Average Alpha (Model)     =  0.2546524671966608
+
+Item: restaurant
+Average Encounter Count   =  30.98 ENCOUNTERS
+Average Percentage Incorr =  44.99341650379361 PERCENT
+Alpha         (Real)      =  0.446923386391809
+Average Alpha (Model)     =  0.41888684858840564
+
+Item: amazing
+Average Encounter Count   =  14.12 ENCOUNTERS
+Average Percentage Incorr =  35.69625421877743 PERCENT
+Alpha         (Real)      =  0.27774385426810805
+Average Alpha (Model)     =  0.27354506479708907
+
+Item: to visit
+Average Encounter Count   =  20.78 ENCOUNTERS
+Average Percentage Incorr =  43.11959715115257 PERCENT
+Alpha         (Real)      =  0.36220346747583215
+Average Alpha (Model)     =  0.34548469770033063
+
+Item: each
+Average Encounter Count   =  12.4 ENCOUNTERS
+Average Percentage Incorr =  32.12397602397602 PERCENT
+Alpha         (Real)      =  0.22647284796617861
+Average Alpha (Model)     =  0.25077203496679074
+
+Item: tree
+Average Encounter Count   =  18.14 ENCOUNTERS
+Average Percentage Incorr =  41.5342976947971 PERCENT
+Alpha         (Real)      =  0.3373873274784439
+Average Alpha (Model)     =  0.3248869215801254
+
+Item: British
+Average Encounter Count   =  23.74 ENCOUNTERS
+Average Percentage Incorr =  43.768893996382175 PERCENT
+Alpha         (Real)      =  0.39194127004071005
+Average Alpha (Model)     =  0.37225557820822663
+
+Item: adult
+Average Encounter Count   =  12.02 ENCOUNTERS
+Average Percentage Incorr =  29.55786729610259 PERCENT
+Alpha         (Real)      =  0.21687824157608487
+Average Alpha (Model)     =  0.2436213665490339
+
+Item: a day
+Average Encounter Count   =  16.3 ENCOUNTERS
+Average Percentage Incorr =  39.86334851079433 PERCENT
+Alpha         (Real)      =  0.3112368606189476
+Average Alpha (Model)     =  0.30467683951889374
+
+Item: open(from...to...)
+Average Encounter Count   =  15.62 ENCOUNTERS
+Average Percentage Incorr =  38.7577890375878 PERCENT
+Alpha         (Real)      =  0.3086606534579481
+Average Alpha (Model)     =  0.29485765882499515
+
+Item: furniture
+Average Encounter Count   =  11.88 ENCOUNTERS
+Average Percentage Incorr =  29.33158785658785 PERCENT
+Alpha         (Real)      =  0.21277816140663913
+Average Alpha (Model)     =  0.2426396476637475
+
+Item: a year
+Average Encounter Count   =  17.0 ENCOUNTERS
+Average Percentage Incorr =  40.12827351355216 PERCENT
+Alpha         (Real)      =  0.32156572343688694
+Average Alpha (Model)     =  0.3128258550268635
+
+Item: open
+Average Encounter Count   =  17.7 ENCOUNTERS
+Average Percentage Incorr =  41.34041950070689 PERCENT
+Alpha         (Real)      =  0.3230953934428667
+Average Alpha (Model)     =  0.32030900436104526
+
+Item: free time
+Average Encounter Count   =  16.04 ENCOUNTERS
+Average Percentage Incorr =  38.48323775915983 PERCENT
+Alpha         (Real)      =  0.30968277271199235
+Average Alpha (Model)     =  0.3004406675800452
+
+Item: canal
+Average Encounter Count   =  16.64 ENCOUNTERS
+Average Percentage Incorr =  40.03126998560437 PERCENT
+Alpha         (Real)      =  0.3244097496863796
+Average Alpha (Model)     =  0.309369819918888
+
+Item: Chinese
+Average Encounter Count   =  14.6 ENCOUNTERS
+Average Percentage Incorr =  37.83872873772255 PERCENT
+Alpha         (Real)      =  0.29875597115902186
+Average Alpha (Model)     =  0.28444958559192896
+
+Item: stall
+Average Encounter Count   =  16.04 ENCOUNTERS
+Average Percentage Incorr =  39.173365098280975 PERCENT
+Alpha         (Real)      =  0.3135048709546217
+Average Alpha (Model)     =  0.30285757189641005
+
+Item: playing field
+Average Encounter Count   =  12.8 ENCOUNTERS
+Average Percentage Incorr =  33.22822177822177 PERCENT
+Alpha         (Real)      =  0.2651313521518684
+Average Alpha (Model)     =  0.2610699272619588
+
+Item: fancy
+Average Encounter Count   =  19.6 ENCOUNTERS
+Average Percentage Incorr =  42.15777306748231 PERCENT
+Alpha         (Real)      =  0.356808588637156
+Average Alpha (Model)     =  0.34463859051447465
+
+Item: a week
+Average Encounter Count   =  20.14 ENCOUNTERS
+Average Percentage Incorr =  42.53865594623841 PERCENT
+Alpha         (Real)      =  0.3608400222195225
+Average Alpha (Model)     =  0.34928401775727885
+
+Item: to enjoy
+Average Encounter Count   =  17.48 ENCOUNTERS
+Average Percentage Incorr =  40.77485228281836 PERCENT
+Alpha         (Real)      =  0.34884343871814893
+Average Alpha (Model)     =  0.3185349499490029
+
+Item: best
+Average Encounter Count   =  15.24 ENCOUNTERS
+Average Percentage Incorr =  37.3051755348195 PERCENT
+Alpha         (Real)      =  0.3052906545523877
+Average Alpha (Model)     =  0.29309891404598293
+
+Item: wonderful
+Average Encounter Count   =  12.38 ENCOUNTERS
+Average Percentage Incorr =  31.241320100608018 PERCENT
+Alpha         (Real)      =  0.23889005258503754
+Average Alpha (Model)     =  0.2555075162122803
+
+Item: expensive
+Average Encounter Count   =  24.62 ENCOUNTERS
+Average Percentage Incorr =  43.28266351259512 PERCENT
+Alpha         (Real)      =  0.4121434268760434
+Average Alpha (Model)     =  0.3869093782265306
+
+Item: to add
+Average Encounter Count   =  11.34 ENCOUNTERS
+Average Percentage Incorr =  28.51960816960816 PERCENT
+Alpha         (Real)      =  0.2095610478417777
+Average Alpha (Model)     =  0.23964080519259315
+
+Item: boat
+Average Encounter Count   =  13.96 ENCOUNTERS
+Average Percentage Incorr =  35.66335576188517 PERCENT
+Alpha         (Real)      =  0.2877889912987713
+Average Alpha (Model)     =  0.2785024437039031
+
+Item: to join in
+Average Encounter Count   =  18.5 ENCOUNTERS
+Average Percentage Incorr =  41.92865569392693 PERCENT
+Alpha         (Real)      =  0.36528647214346266
+Average Alpha (Model)     =  0.3373641175959429
+
+Item: view
+Average Encounter Count   =  24.0 ENCOUNTERS
+Average Percentage Incorr =  43.07184478062439 PERCENT
+Alpha         (Real)      =  0.40796896959503226
+Average Alpha (Model)     =  0.3862292552892485
+
+Item: canoeing
+Average Encounter Count   =  13.8 ENCOUNTERS
+Average Percentage Incorr =  35.864616429322304 PERCENT
+Alpha         (Real)      =  0.2834033985495885
+Average Alpha (Model)     =  0.2821844288928127
+
+Item: flower
+Average Encounter Count   =  15.22 ENCOUNTERS
+Average Percentage Incorr =  37.671487954769695 PERCENT
+Alpha         (Real)      =  0.3112423022146421
+Average Alpha (Model)     =  0.3002937514551875
+
+Item: area
+Average Encounter Count   =  20.28 ENCOUNTERS
+Average Percentage Incorr =  42.11361304927523 PERCENT
+Alpha         (Real)      =  0.38243446831878947
+Average Alpha (Model)     =  0.35724089704060646
+
+
+
+
+Testing learning:
+Writing time           = 4.0
+Learn sessions         = 50
+Study sessions         = 2
+Study session length   = 1800
+Immediate alpha adjust = True
+Alpha adjust value     = 0.02
+Cache used             = True
+Cache updated          = post-session
+
+
+Average Duration        =  2.78648006 SECONDS
+Average Encounter Count =  564.9 ENCOUNTERS
+Average Alpha Error     =  0.031274911069271466
+
+Item: noodles
+Average Encounter Count   =  10.2 ENCOUNTERS
+Average Percentage Incorr =  26.377028527028525 PERCENT
+Alpha         (Real)      =  0.15041238061331177
+Average Alpha (Model)     =  0.22190536806346817
+
+Item: where
+Average Encounter Count   =  16.44 ENCOUNTERS
+Average Percentage Incorr =  45.00588902841224 PERCENT
+Alpha         (Real)      =  0.3333408884659153
+Average Alpha (Model)     =  0.31649916499076713
+
+Item: many
+Average Encounter Count   =  11.82 ENCOUNTERS
+Average Percentage Incorr =  34.74288211788212 PERCENT
+Alpha         (Real)      =  0.22149256906384937
+Average Alpha (Model)     =  0.2525319273627566
+
+Item: way
+Average Encounter Count   =  12.2 ENCOUNTERS
+Average Percentage Incorr =  36.86962024903202 PERCENT
+Alpha         (Real)      =  0.25043712405940277
+Average Alpha (Model)     =  0.259067523504401
+
+Item: market
+Average Encounter Count   =  12.54 ENCOUNTERS
+Average Percentage Incorr =  37.004308702992915 PERCENT
+Alpha         (Real)      =  0.25725772360375077
+Average Alpha (Model)     =  0.26281979102338754
+
+Item: castle
+Average Encounter Count   =  25.24 ENCOUNTERS
+Average Percentage Incorr =  48.4957069510015 PERCENT
+Alpha         (Real)      =  0.4266520666573219
+Average Alpha (Model)     =  0.40453348084944646
+
+Item: group
+Average Encounter Count   =  11.42 ENCOUNTERS
+Average Percentage Incorr =  32.96729104229104 PERCENT
+Alpha         (Real)      =  0.23893202695047272
+Average Alpha (Model)     =  0.24555487212802074
+
+Item: restaurant
+Average Encounter Count   =  28.28 ENCOUNTERS
+Average Percentage Incorr =  49.80518096954832 PERCENT
+Alpha         (Real)      =  0.446923386391809
+Average Alpha (Model)     =  0.4239427054387659
+
+Item: amazing
+Average Encounter Count   =  13.72 ENCOUNTERS
+Average Percentage Incorr =  40.4693689093844 PERCENT
+Alpha         (Real)      =  0.27774385426810805
+Average Alpha (Model)     =  0.2837697160896925
+
+Item: to visit
+Average Encounter Count   =  18.66 ENCOUNTERS
+Average Percentage Incorr =  46.46622104887138 PERCENT
+Alpha         (Real)      =  0.36220346747583215
+Average Alpha (Model)     =  0.34085483578933085
+
+Item: each
+Average Encounter Count   =  10.94 ENCOUNTERS
+Average Percentage Incorr =  32.30022200022199 PERCENT
+Alpha         (Real)      =  0.22647284796617861
+Average Alpha (Model)     =  0.24172593928513195
+
+Item: tree
+Average Encounter Count   =  16.52 ENCOUNTERS
+Average Percentage Incorr =  45.11846291823072 PERCENT
+Alpha         (Real)      =  0.3373873274784439
+Average Alpha (Model)     =  0.31747246832123255
+
+Item: British
+Average Encounter Count   =  21.24 ENCOUNTERS
+Average Percentage Incorr =  47.96384832510587 PERCENT
+Alpha         (Real)      =  0.39194127004071005
+Average Alpha (Model)     =  0.36897858585291815
+
+Item: adult
+Average Encounter Count   =  11.0 ENCOUNTERS
+Average Percentage Incorr =  32.51848706848707 PERCENT
+Alpha         (Real)      =  0.21687824157608487
+Average Alpha (Model)     =  0.24318657687302214
+
+Item: a day
+Average Encounter Count   =  14.66 ENCOUNTERS
+Average Percentage Incorr =  41.813247150166674 PERCENT
+Alpha         (Real)      =  0.3112368606189476
+Average Alpha (Model)     =  0.29610114033169554
+
+Item: open(from...to...)
+Average Encounter Count   =  14.84 ENCOUNTERS
+Average Percentage Incorr =  42.547579793787236 PERCENT
+Alpha         (Real)      =  0.3086606534579481
+Average Alpha (Model)     =  0.2990817338757229
+
+Item: furniture
+Average Encounter Count   =  10.54 ENCOUNTERS
+Average Percentage Incorr =  29.948518148518144 PERCENT
+Alpha         (Real)      =  0.21277816140663913
+Average Alpha (Model)     =  0.2337524540059099
+
+Item: a year
+Average Encounter Count   =  15.26 ENCOUNTERS
+Average Percentage Incorr =  43.37536009764304 PERCENT
+Alpha         (Real)      =  0.32156572343688694
+Average Alpha (Model)     =  0.30703539067775387
+
+Item: open
+Average Encounter Count   =  14.9 ENCOUNTERS
+Average Percentage Incorr =  42.3774064171123 PERCENT
+Alpha         (Real)      =  0.3230953934428667
+Average Alpha (Model)     =  0.3019103456379653
+
+Item: free time
+Average Encounter Count   =  14.0 ENCOUNTERS
+Average Percentage Incorr =  42.005324517244034 PERCENT
+Alpha         (Real)      =  0.30968277271199235
+Average Alpha (Model)     =  0.290767281774832
+
+Item: canal
+Average Encounter Count   =  15.02 ENCOUNTERS
+Average Percentage Incorr =  43.45369053031592 PERCENT
+Alpha         (Real)      =  0.3244097496863796
+Average Alpha (Model)     =  0.3080573188669962
+
+Item: Chinese
+Average Encounter Count   =  13.98 ENCOUNTERS
+Average Percentage Incorr =  41.57120400239596 PERCENT
+Alpha         (Real)      =  0.29875597115902186
+Average Alpha (Model)     =  0.2937523439190103
+
+Item: stall
+Average Encounter Count   =  15.1 ENCOUNTERS
+Average Percentage Incorr =  43.29130227208367 PERCENT
+Alpha         (Real)      =  0.3135048709546217
+Average Alpha (Model)     =  0.30714264502557037
+
+Item: playing field
+Average Encounter Count   =  12.12 ENCOUNTERS
+Average Percentage Incorr =  36.785886335886346 PERCENT
+Alpha         (Real)      =  0.2651313521518684
+Average Alpha (Model)     =  0.2663244188470971
+
+Item: fancy
+Average Encounter Count   =  17.74 ENCOUNTERS
+Average Percentage Incorr =  46.74943003781339 PERCENT
+Alpha         (Real)      =  0.356808588637156
+Average Alpha (Model)     =  0.3418782242578042
+
+Item: a week
+Average Encounter Count   =  16.56 ENCOUNTERS
+Average Percentage Incorr =  45.65908010805843 PERCENT
+Alpha         (Real)      =  0.3608400222195225
+Average Alpha (Model)     =  0.3307302926558183
+
+Item: to enjoy
+Average Encounter Count   =  17.08 ENCOUNTERS
+Average Percentage Incorr =  45.009942712721674 PERCENT
+Alpha         (Real)      =  0.34884343871814893
+Average Alpha (Model)     =  0.33386735763771325
+
+Item: best
+Average Encounter Count   =  13.76 ENCOUNTERS
+Average Percentage Incorr =  41.83748326836563 PERCENT
+Alpha         (Real)      =  0.3052906545523877
+Average Alpha (Model)     =  0.2937295101419751
+
+Item: wonderful
+Average Encounter Count   =  11.24 ENCOUNTERS
+Average Percentage Incorr =  35.29191364191363 PERCENT
+Alpha         (Real)      =  0.23889005258503754
+Average Alpha (Model)     =  0.25791373386266203
+
+Item: expensive
+Average Encounter Count   =  20.46 ENCOUNTERS
+Average Percentage Incorr =  48.252794996382 PERCENT
+Alpha         (Real)      =  0.4121434268760434
+Average Alpha (Model)     =  0.37701845117179955
+
+Item: to add
+Average Encounter Count   =  10.52 ENCOUNTERS
+Average Percentage Incorr =  31.34770229770229 PERCENT
+Alpha         (Real)      =  0.2095610478417777
+Average Alpha (Model)     =  0.24172267403474013
+
+Item: boat
+Average Encounter Count   =  13.1 ENCOUNTERS
+Average Percentage Incorr =  40.48423896365073 PERCENT
+Alpha         (Real)      =  0.2877889912987713
+Average Alpha (Model)     =  0.2863280184778802
+
+Item: to join in
+Average Encounter Count   =  17.66 ENCOUNTERS
+Average Percentage Incorr =  46.788543844991544 PERCENT
+Alpha         (Real)      =  0.36528647214346266
+Average Alpha (Model)     =  0.34828292600661975
+
+Item: view
+Average Encounter Count   =  20.4 ENCOUNTERS
+Average Percentage Incorr =  47.806434384490586 PERCENT
+Alpha         (Real)      =  0.40796896959503226
+Average Alpha (Model)     =  0.3838527816038091
+
+Item: canoeing
+Average Encounter Count   =  12.56 ENCOUNTERS
+Average Percentage Incorr =  39.48043900543902 PERCENT
+Alpha         (Real)      =  0.2834033985495885
+Average Alpha (Model)     =  0.28206195408202
+
+Item: flower
+Average Encounter Count   =  14.5 ENCOUNTERS
+Average Percentage Incorr =  43.31617318869641 PERCENT
+Alpha         (Real)      =  0.3112423022146421
+Average Alpha (Model)     =  0.31335657197054284
+
+Item: area
+Average Encounter Count   =  18.68 ENCOUNTERS
+Average Percentage Incorr =  47.09385773190928 PERCENT
+Alpha         (Real)      =  0.38243446831878947
+Average Alpha (Model)     =  0.3611846975827844
+
+
+
+
+Testing learning:
+Writing time           = 4.5
+Learn sessions         = 50
+Study sessions         = 2
+Study session length   = 1800
+Immediate alpha adjust = True
+Alpha adjust value     = 0.02
+Cache used             = True
+Cache updated          = post-session
+
+
+Average Duration        =  2.3164142200000004 SECONDS
+Average Encounter Count =  516.3 ENCOUNTERS
+Average Alpha Error     =  0.031925115067017194
+
+Item: noodles
+Average Encounter Count   =  9.22 ENCOUNTERS
+Average Percentage Incorr =  26.814646464646454 PERCENT
+Alpha         (Real)      =  0.15041238061331177
+Average Alpha (Model)     =  0.21493337484237401
+
+Item: where
+Average Encounter Count   =  15.98 ENCOUNTERS
+Average Percentage Incorr =  49.29909598657276 PERCENT
+Alpha         (Real)      =  0.3333408884659153
+Average Alpha (Model)     =  0.323573281707659
+
+Item: many
+Average Encounter Count   =  10.84 ENCOUNTERS
+Average Percentage Incorr =  35.25091575091575 PERCENT
+Alpha         (Real)      =  0.22149256906384937
+Average Alpha (Model)     =  0.2443511478897984
+
+Item: way
+Average Encounter Count   =  12.18 ENCOUNTERS
+Average Percentage Incorr =  41.15409688350864 PERCENT
+Alpha         (Real)      =  0.25043712405940277
+Average Alpha (Model)     =  0.27075878404282305
+
+Item: market
+Average Encounter Count   =  12.06 ENCOUNTERS
+Average Percentage Incorr =  40.03813310872136 PERCENT
+Alpha         (Real)      =  0.25725772360375077
+Average Alpha (Model)     =  0.268480555398121
+
+Item: castle
+Average Encounter Count   =  23.44 ENCOUNTERS
+Average Percentage Incorr =  53.893873152501804 PERCENT
+Alpha         (Real)      =  0.4266520666573219
+Average Alpha (Model)     =  0.404204250317652
+
+Item: group
+Average Encounter Count   =  11.2 ENCOUNTERS
+Average Percentage Incorr =  37.76513486513486 PERCENT
+Alpha         (Real)      =  0.23893202695047272
+Average Alpha (Model)     =  0.2551282993151449
+
+Item: restaurant
+Average Encounter Count   =  24.08 ENCOUNTERS
+Average Percentage Incorr =  54.0851416141614 PERCENT
+Alpha         (Real)      =  0.446923386391809
+Average Alpha (Model)     =  0.40873387383774684
+
+Item: amazing
+Average Encounter Count   =  12.38 ENCOUNTERS
+Average Percentage Incorr =  42.9285964035964 PERCENT
+Alpha         (Real)      =  0.27774385426810805
+Average Alpha (Model)     =  0.281288329463322
+
+Item: to visit
+Average Encounter Count   =  16.8 ENCOUNTERS
+Average Percentage Incorr =  51.20786234749082 PERCENT
+Alpha         (Real)      =  0.36220346747583215
+Average Alpha (Model)     =  0.33796427716607896
+
+Item: each
+Average Encounter Count   =  10.92 ENCOUNTERS
+Average Percentage Incorr =  36.896867021866996 PERCENT
+Alpha         (Real)      =  0.22647284796617861
+Average Alpha (Model)     =  0.2514470820975025
+
+Item: tree
+Average Encounter Count   =  15.28 ENCOUNTERS
+Average Percentage Incorr =  48.86888525990694 PERCENT
+Alpha         (Real)      =  0.3373873274784439
+Average Alpha (Model)     =  0.3214837193650254
+
+Item: British
+Average Encounter Count   =  18.38 ENCOUNTERS
+Average Percentage Incorr =  52.01800038740014 PERCENT
+Alpha         (Real)      =  0.39194127004071005
+Average Alpha (Model)     =  0.3647657549100268
+
+Item: adult
+Average Encounter Count   =  10.36 ENCOUNTERS
+Average Percentage Incorr =  34.229826709238466 PERCENT
+Alpha         (Real)      =  0.21687824157608487
+Average Alpha (Model)     =  0.24333768369960024
+
+Item: a day
+Average Encounter Count   =  13.6 ENCOUNTERS
+Average Percentage Incorr =  46.3606124869283 PERCENT
+Alpha         (Real)      =  0.3112368606189476
+Average Alpha (Model)     =  0.30070816191913713
+
+Item: open(from...to...)
+Average Encounter Count   =  13.46 ENCOUNTERS
+Average Percentage Incorr =  45.35254555386135 PERCENT
+Alpha         (Real)      =  0.3086606534579481
+Average Alpha (Model)     =  0.29425019161766935
+
+Item: furniture
+Average Encounter Count   =  10.14 ENCOUNTERS
+Average Percentage Incorr =  33.82229992229991 PERCENT
+Alpha         (Real)      =  0.21277816140663913
+Average Alpha (Model)     =  0.23996271014100976
+
+Item: a year
+Average Encounter Count   =  14.02 ENCOUNTERS
+Average Percentage Incorr =  48.04408914099317 PERCENT
+Alpha         (Real)      =  0.32156572343688694
+Average Alpha (Model)     =  0.3115895443816455
+
+Item: open
+Average Encounter Count   =  14.34 ENCOUNTERS
+Average Percentage Incorr =  47.928114102959306 PERCENT
+Alpha         (Real)      =  0.3230953934428667
+Average Alpha (Model)     =  0.31219204200377215
+
+Item: free time
+Average Encounter Count   =  13.14 ENCOUNTERS
+Average Percentage Incorr =  45.95008227067051 PERCENT
+Alpha         (Real)      =  0.30968277271199235
+Average Alpha (Model)     =  0.29630492357455035
+
+Item: canal
+Average Encounter Count   =  14.26 ENCOUNTERS
+Average Percentage Incorr =  47.84832642417782 PERCENT
+Alpha         (Real)      =  0.3244097496863796
+Average Alpha (Model)     =  0.31108790111261475
+
+Item: Chinese
+Average Encounter Count   =  12.82 ENCOUNTERS
+Average Percentage Incorr =  44.86449106449108 PERCENT
+Alpha         (Real)      =  0.29875597115902186
+Average Alpha (Model)     =  0.2900600353392679
+
+Item: stall
+Average Encounter Count   =  13.22 ENCOUNTERS
+Average Percentage Incorr =  46.76657411216235 PERCENT
+Alpha         (Real)      =  0.3135048709546217
+Average Alpha (Model)     =  0.29928143212362096
+
+Item: playing field
+Average Encounter Count   =  11.6 ENCOUNTERS
+Average Percentage Incorr =  42.11841491841492 PERCENT
+Alpha         (Real)      =  0.2651313521518684
+Average Alpha (Model)     =  0.27464145368073234
+
+Item: fancy
+Average Encounter Count   =  15.68 ENCOUNTERS
+Average Percentage Incorr =  50.20485477714581 PERCENT
+Alpha         (Real)      =  0.356808588637156
+Average Alpha (Model)     =  0.33246765649020543
+
+Item: a week
+Average Encounter Count   =  16.32 ENCOUNTERS
+Average Percentage Incorr =  51.250407573162995 PERCENT
+Alpha         (Real)      =  0.3608400222195225
+Average Alpha (Model)     =  0.34314503416527353
+
+Item: to enjoy
+Average Encounter Count   =  15.34 ENCOUNTERS
+Average Percentage Incorr =  50.541478413227644 PERCENT
+Alpha         (Real)      =  0.34884343871814893
+Average Alpha (Model)     =  0.3335374280649438
+
+Item: best
+Average Encounter Count   =  13.0 ENCOUNTERS
+Average Percentage Incorr =  46.69280702957174 PERCENT
+Alpha         (Real)      =  0.3052906545523877
+Average Alpha (Model)     =  0.2974378472410438
+
+Item: wonderful
+Average Encounter Count   =  10.92 ENCOUNTERS
+Average Percentage Incorr =  40.44134754134755 PERCENT
+Alpha         (Real)      =  0.23889005258503754
+Average Alpha (Model)     =  0.2670694418191937
+
+Item: expensive
+Average Encounter Count   =  19.66 ENCOUNTERS
+Average Percentage Incorr =  54.004750348825866 PERCENT
+Alpha         (Real)      =  0.4121434268760434
+Average Alpha (Model)     =  0.3922483311872575
+
+Item: to add
+Average Encounter Count   =  9.6 ENCOUNTERS
+Average Percentage Incorr =  34.684404484404475 PERCENT
+Alpha         (Real)      =  0.2095610478417777
+Average Alpha (Model)     =  0.24270543925020657
+
+Item: boat
+Average Encounter Count   =  11.8 ENCOUNTERS
+Average Percentage Incorr =  44.324892651208444 PERCENT
+Alpha         (Real)      =  0.2877889912987713
+Average Alpha (Model)     =  0.2870968849665865
+
+Item: to join in
+Average Encounter Count   =  14.74 ENCOUNTERS
+Average Percentage Incorr =  50.95001360868235 PERCENT
+Alpha         (Real)      =  0.36528647214346266
+Average Alpha (Model)     =  0.33904087871039307
+
+Item: view
+Average Encounter Count   =  17.18 ENCOUNTERS
+Average Percentage Incorr =  52.255859903770116 PERCENT
+Alpha         (Real)      =  0.40796896959503226
+Average Alpha (Model)     =  0.3663341627835499
+
+Item: canoeing
+Average Encounter Count   =  11.16 ENCOUNTERS
+Average Percentage Incorr =  43.6973581973582 PERCENT
+Alpha         (Real)      =  0.2834033985495885
+Average Alpha (Model)     =  0.28038181268357043
+
+Item: flower
+Average Encounter Count   =  12.26 ENCOUNTERS
+Average Percentage Incorr =  47.561669702846174 PERCENT
+Alpha         (Real)      =  0.3112423022146421
+Average Alpha (Model)     =  0.3043161639707238
+
+Item: area
+Average Encounter Count   =  14.92 ENCOUNTERS
+Average Percentage Incorr =  51.881412292557805 PERCENT
+Alpha         (Real)      =  0.38243446831878947
+Average Alpha (Model)     =  0.3491736014536659
+
+
+
+
+Testing learning:
+Writing time           = 5.0
+Learn sessions         = 50
+Study sessions         = 2
+Study session length   = 1800
+Immediate alpha adjust = True
+Alpha adjust value     = 0.02
+Cache used             = True
+Cache updated          = post-session
+
+
+Average Duration        =  1.9131565799999999 SECONDS
+Average Encounter Count =  476.46 ENCOUNTERS
+Average Alpha Error     =  0.03241617715021524
+
+Item: noodles
+Average Encounter Count   =  8.76 ENCOUNTERS
+Average Percentage Incorr =  28.960739260739253 PERCENT
+Alpha         (Real)      =  0.15041238061331177
+Average Alpha (Model)     =  0.2181141323415812
+
+Item: where
+Average Encounter Count   =  14.08 ENCOUNTERS
+Average Percentage Incorr =  50.68681325554391 PERCENT
+Alpha         (Real)      =  0.3333408884659153
+Average Alpha (Model)     =  0.3142643257354165
+
+Item: many
+Average Encounter Count   =  9.76 ENCOUNTERS
+Average Percentage Incorr =  35.83636363636363 PERCENT
+Alpha         (Real)      =  0.22149256906384937
+Average Alpha (Model)     =  0.24103166880441368
+
+Item: way
+Average Encounter Count   =  11.28 ENCOUNTERS
+Average Percentage Incorr =  42.3067266067266 PERCENT
+Alpha         (Real)      =  0.25043712405940277
+Average Alpha (Model)     =  0.2665111172265258
+
+Item: market
+Average Encounter Count   =  11.28 ENCOUNTERS
+Average Percentage Incorr =  41.82269299328124 PERCENT
+Alpha         (Real)      =  0.25725772360375077
+Average Alpha (Model)     =  0.26632708692474494
+
+Item: castle
+Average Encounter Count   =  21.64 ENCOUNTERS
+Average Percentage Incorr =  57.56531429163554 PERCENT
+Alpha         (Real)      =  0.4266520666573219
+Average Alpha (Model)     =  0.407822524283883
+
+Item: group
+Average Encounter Count   =  11.28 ENCOUNTERS
+Average Percentage Incorr =  42.85723165723166 PERCENT
+Alpha         (Real)      =  0.23893202695047272
+Average Alpha (Model)     =  0.27004096587938803
+
+Item: restaurant
+Average Encounter Count   =  22.44 ENCOUNTERS
+Average Percentage Incorr =  57.92742440563824 PERCENT
+Alpha         (Real)      =  0.446923386391809
+Average Alpha (Model)     =  0.4105177079162589
+
+Item: amazing
+Average Encounter Count   =  11.86 ENCOUNTERS
+Average Percentage Incorr =  45.60870697929523 PERCENT
+Alpha         (Real)      =  0.27774385426810805
+Average Alpha (Model)     =  0.2798145904420714
+
+Item: to visit
+Average Encounter Count   =  16.7 ENCOUNTERS
+Average Percentage Incorr =  54.556211466626735 PERCENT
+Alpha         (Real)      =  0.36220346747583215
+Average Alpha (Model)     =  0.346601988121951
+
+Item: each
+Average Encounter Count   =  10.12 ENCOUNTERS
+Average Percentage Incorr =  37.53606393606394 PERCENT
+Alpha         (Real)      =  0.22647284796617861
+Average Alpha (Model)     =  0.24793677893064925
+
+Item: tree
+Average Encounter Count   =  14.5 ENCOUNTERS
+Average Percentage Incorr =  52.46258496405555 PERCENT
+Alpha         (Real)      =  0.3373873274784439
+Average Alpha (Model)     =  0.32174020314397905
+
+Item: British
+Average Encounter Count   =  17.24 ENCOUNTERS
+Average Percentage Incorr =  55.710736618043136 PERCENT
+Alpha         (Real)      =  0.39194127004071005
+Average Alpha (Model)     =  0.3598464253600748
+
+Item: adult
+Average Encounter Count   =  9.94 ENCOUNTERS
+Average Percentage Incorr =  37.67935397935398 PERCENT
+Alpha         (Real)      =  0.21687824157608487
+Average Alpha (Model)     =  0.2482742152631304
+
+Item: a day
+Average Encounter Count   =  12.78 ENCOUNTERS
+Average Percentage Incorr =  48.052288234641175 PERCENT
+Alpha         (Real)      =  0.3112368606189476
+Average Alpha (Model)     =  0.2959111794999147
+
+Item: open(from...to...)
+Average Encounter Count   =  12.48 ENCOUNTERS
+Average Percentage Incorr =  48.08250719868367 PERCENT
+Alpha         (Real)      =  0.3086606534579481
+Average Alpha (Model)     =  0.2936441766852024
+
+Item: furniture
+Average Encounter Count   =  9.64 ENCOUNTERS
+Average Percentage Incorr =  36.17662337662337 PERCENT
+Alpha         (Real)      =  0.21277816140663913
+Average Alpha (Model)     =  0.2413460120427623
+
+Item: a year
+Average Encounter Count   =  12.86 ENCOUNTERS
+Average Percentage Incorr =  50.13119527531293 PERCENT
+Alpha         (Real)      =  0.32156572343688694
+Average Alpha (Model)     =  0.30457055357498564
+
+Item: open
+Average Encounter Count   =  12.76 ENCOUNTERS
+Average Percentage Incorr =  49.27722816399287 PERCENT
+Alpha         (Real)      =  0.3230953934428667
+Average Alpha (Model)     =  0.3029452349643421
+
+Item: free time
+Average Encounter Count   =  12.12 ENCOUNTERS
+Average Percentage Incorr =  48.44143895320366 PERCENT
+Alpha         (Real)      =  0.30968277271199235
+Average Alpha (Model)     =  0.2966456602802294
+
+Item: canal
+Average Encounter Count   =  13.08 ENCOUNTERS
+Average Percentage Incorr =  50.90531675926414 PERCENT
+Alpha         (Real)      =  0.3244097496863796
+Average Alpha (Model)     =  0.31372715717834465
+
+Item: Chinese
+Average Encounter Count   =  12.08 ENCOUNTERS
+Average Percentage Incorr =  48.83142968142968 PERCENT
+Alpha         (Real)      =  0.29875597115902186
+Average Alpha (Model)     =  0.29511851090401015
+
+Item: stall
+Average Encounter Count   =  12.88 ENCOUNTERS
+Average Percentage Incorr =  50.30676253570992 PERCENT
+Alpha         (Real)      =  0.3135048709546217
+Average Alpha (Model)     =  0.3077788831723402
+
+Item: playing field
+Average Encounter Count   =  10.74 ENCOUNTERS
+Average Percentage Incorr =  43.369286269286256 PERCENT
+Alpha         (Real)      =  0.2651313521518684
+Average Alpha (Model)     =  0.2700626078346804
+
+Item: fancy
+Average Encounter Count   =  13.96 ENCOUNTERS
+Average Percentage Incorr =  54.05036512335275 PERCENT
+Alpha         (Real)      =  0.356808588637156
+Average Alpha (Model)     =  0.33065034576678426
+
+Item: a week
+Average Encounter Count   =  14.34 ENCOUNTERS
+Average Percentage Incorr =  54.51184817074911 PERCENT
+Alpha         (Real)      =  0.3608400222195225
+Average Alpha (Model)     =  0.3360980940545539
+
+Item: to enjoy
+Average Encounter Count   =  13.58 ENCOUNTERS
+Average Percentage Incorr =  53.39349932832906 PERCENT
+Alpha         (Real)      =  0.34884343871814893
+Average Alpha (Model)     =  0.32665139216939915
+
+Item: best
+Average Encounter Count   =  12.24 ENCOUNTERS
+Average Percentage Incorr =  49.74635087135087 PERCENT
+Alpha         (Real)      =  0.3052906545523877
+Average Alpha (Model)     =  0.3028542707146903
+
+Item: wonderful
+Average Encounter Count   =  9.68 ENCOUNTERS
+Average Percentage Incorr =  40.48875568875568 PERCENT
+Alpha         (Real)      =  0.23889005258503754
+Average Alpha (Model)     =  0.25645932804678595
+
+Item: expensive
+Average Encounter Count   =  15.96 ENCOUNTERS
+Average Percentage Incorr =  56.46399637178007 PERCENT
+Alpha         (Real)      =  0.4121434268760434
+Average Alpha (Model)     =  0.3658137511989919
+
+Item: to add
+Average Encounter Count   =  9.16 ENCOUNTERS
+Average Percentage Incorr =  39.046320346320336 PERCENT
+Alpha         (Real)      =  0.2095610478417777
+Average Alpha (Model)     =  0.25022354289791715
+
+Item: boat
+Average Encounter Count   =  11.26 ENCOUNTERS
+Average Percentage Incorr =  49.46721611721612 PERCENT
+Alpha         (Real)      =  0.2877889912987713
+Average Alpha (Model)     =  0.29642266557762864
+
+Item: to join in
+Average Encounter Count   =  13.58 ENCOUNTERS
+Average Percentage Incorr =  54.682425761373125 PERCENT
+Alpha         (Real)      =  0.36528647214346266
+Average Alpha (Model)     =  0.3362919409309514
+
+Item: view
+Average Encounter Count   =  16.06 ENCOUNTERS
+Average Percentage Incorr =  57.89016392104629 PERCENT
+Alpha         (Real)      =  0.40796896959503226
+Average Alpha (Model)     =  0.37538693184665156
+
+Item: canoeing
+Average Encounter Count   =  10.56 ENCOUNTERS
+Average Percentage Incorr =  49.05844155844156 PERCENT
+Alpha         (Real)      =  0.2834033985495885
+Average Alpha (Model)     =  0.28973195296137993
+
+Item: flower
+Average Encounter Count   =  10.82 ENCOUNTERS
+Average Percentage Incorr =  51.17861844038313 PERCENT
+Alpha         (Real)      =  0.3112423022146421
+Average Alpha (Model)     =  0.2998816394048875
+
+Item: area
+Average Encounter Count   =  12.96 ENCOUNTERS
+Average Percentage Incorr =  56.441909372017726 PERCENT
+Alpha         (Real)      =  0.38243446831878947
+Average Alpha (Model)     =  0.34356446171392674
+
+
+
+
+Testing learning:
+Writing time           = 5.5
+Learn sessions         = 50
+Study sessions         = 2
+Study session length   = 1800
+Immediate alpha adjust = True
+Alpha adjust value     = 0.02
+Cache used             = True
+Cache updated          = post-session
+
+
+Average Duration        =  1.7020841999999998 SECONDS
+Average Encounter Count =  443.64 ENCOUNTERS
+Average Alpha Error     =  0.03366242049760852
+
+Item: noodles
+Average Encounter Count   =  8.66 ENCOUNTERS
+Average Percentage Incorr =  30.418542568542566 PERCENT
+Alpha         (Real)      =  0.15041238061331177
+Average Alpha (Model)     =  0.22123113726817806
+
+Item: where
+Average Encounter Count   =  13.76 ENCOUNTERS
+Average Percentage Incorr =  53.37495478377832 PERCENT
+Alpha         (Real)      =  0.3333408884659153
+Average Alpha (Model)     =  0.32101066945071
+
+Item: many
+Average Encounter Count   =  9.66 ENCOUNTERS
+Average Percentage Incorr =  36.965861915861915 PERCENT
+Alpha         (Real)      =  0.22149256906384937
+Average Alpha (Model)     =  0.24042614378018531
+
+Item: way
+Average Encounter Count   =  10.28 ENCOUNTERS
+Average Percentage Incorr =  40.34777444777444 PERCENT
+Alpha         (Real)      =  0.25043712405940277
+Average Alpha (Model)     =  0.2571187012669649
+
+Item: market
+Average Encounter Count   =  10.66 ENCOUNTERS
+Average Percentage Incorr =  44.96210456210457 PERCENT
+Alpha         (Real)      =  0.25725772360375077
+Average Alpha (Model)     =  0.2698796484073209
+
+Item: castle
+Average Encounter Count   =  19.84 ENCOUNTERS
+Average Percentage Incorr =  60.2267770532813 PERCENT
+Alpha         (Real)      =  0.4266520666573219
+Average Alpha (Model)     =  0.39838540575510817
+
+Item: group
+Average Encounter Count   =  10.08 ENCOUNTERS
+Average Percentage Incorr =  40.319563769563764 PERCENT
+Alpha         (Real)      =  0.23893202695047272
+Average Alpha (Model)     =  0.25403496409508675
+
+Item: restaurant
+Average Encounter Count   =  21.18 ENCOUNTERS
+Average Percentage Incorr =  60.87115855077673 PERCENT
+Alpha         (Real)      =  0.446923386391809
+Average Alpha (Model)     =  0.4086638891643877
+
+Item: amazing
+Average Encounter Count   =  11.2 ENCOUNTERS
+Average Percentage Incorr =  46.16632256632257 PERCENT
+Alpha         (Real)      =  0.27774385426810805
+Average Alpha (Model)     =  0.27935595829127835
+
+Item: to visit
+Average Encounter Count   =  14.88 ENCOUNTERS
+Average Percentage Incorr =  55.740651823236966 PERCENT
+Alpha         (Real)      =  0.36220346747583215
+Average Alpha (Model)     =  0.3387667643367937
+
+Item: each
+Average Encounter Count   =  9.62 ENCOUNTERS
+Average Percentage Incorr =  38.12395382395382 PERCENT
+Alpha         (Real)      =  0.22647284796617861
+Average Alpha (Model)     =  0.24669376249455
+
+Item: tree
+Average Encounter Count   =  13.3 ENCOUNTERS
+Average Percentage Incorr =  52.857506913301776 PERCENT
+Alpha         (Real)      =  0.3373873274784439
+Average Alpha (Model)     =  0.3145561850537221
+
+Item: British
+Average Encounter Count   =  17.2 ENCOUNTERS
+Average Percentage Incorr =  59.354423801173034 PERCENT
+Alpha         (Real)      =  0.39194127004071005
+Average Alpha (Model)     =  0.37212266625062157
+
+Item: adult
+Average Encounter Count   =  9.54 ENCOUNTERS
+Average Percentage Incorr =  37.871428571428574 PERCENT
+Alpha         (Real)      =  0.21687824157608487
+Average Alpha (Model)     =  0.24510375554431904
+
+Item: a day
+Average Encounter Count   =  12.08 ENCOUNTERS
+Average Percentage Incorr =  50.19152204005145 PERCENT
+Alpha         (Real)      =  0.3112368606189476
+Average Alpha (Model)     =  0.29630481619683774
+
+Item: open(from...to...)
+Average Encounter Count   =  11.7 ENCOUNTERS
+Average Percentage Incorr =  49.61023976023976 PERCENT
+Alpha         (Real)      =  0.3086606534579481
+Average Alpha (Model)     =  0.2926087109323101
+
+Item: furniture
+Average Encounter Count   =  9.42 ENCOUNTERS
+Average Percentage Incorr =  37.939105339105325 PERCENT
+Alpha         (Real)      =  0.21277816140663913
+Average Alpha (Model)     =  0.24558982763205098
+
+Item: a year
+Average Encounter Count   =  11.94 ENCOUNTERS
+Average Percentage Incorr =  51.15060495060495 PERCENT
+Alpha         (Real)      =  0.32156572343688694
+Average Alpha (Model)     =  0.2989021970086886
+
+Item: open
+Average Encounter Count   =  12.18 ENCOUNTERS
+Average Percentage Incorr =  51.24944761121232 PERCENT
+Alpha         (Real)      =  0.3230953934428667
+Average Alpha (Model)     =  0.30152433139255175
+
+Item: free time
+Average Encounter Count   =  11.64 ENCOUNTERS
+Average Percentage Incorr =  51.21734931734931 PERCENT
+Alpha         (Real)      =  0.30968277271199235
+Average Alpha (Model)     =  0.2964466934231659
+
+Item: canal
+Average Encounter Count   =  12.0 ENCOUNTERS
+Average Percentage Incorr =  51.94602603279074 PERCENT
+Alpha         (Real)      =  0.3244097496863796
+Average Alpha (Model)     =  0.3023571241830069
+
+Item: Chinese
+Average Encounter Count   =  12.14 ENCOUNTERS
+Average Percentage Incorr =  52.90940236234354 PERCENT
+Alpha         (Real)      =  0.29875597115902186
+Average Alpha (Model)     =  0.3071081286839574
+
+Item: stall
+Average Encounter Count   =  12.06 ENCOUNTERS
+Average Percentage Incorr =  51.77588783765255 PERCENT
+Alpha         (Real)      =  0.3135048709546217
+Average Alpha (Model)     =  0.3054093786508217
+
+Item: playing field
+Average Encounter Count   =  10.3 ENCOUNTERS
+Average Percentage Incorr =  47.024830724830714 PERCENT
+Alpha         (Real)      =  0.2651313521518684
+Average Alpha (Model)     =  0.2776577915001307
+
+Item: fancy
+Average Encounter Count   =  13.32 ENCOUNTERS
+Average Percentage Incorr =  55.97499706176176 PERCENT
+Alpha         (Real)      =  0.356808588637156
+Average Alpha (Model)     =  0.3289586357434295
+
+Item: a week
+Average Encounter Count   =  12.58 ENCOUNTERS
+Average Percentage Incorr =  54.58487460252165 PERCENT
+Alpha         (Real)      =  0.3608400222195225
+Average Alpha (Model)     =  0.3218192763372844
+
+Item: to enjoy
+Average Encounter Count   =  12.3 ENCOUNTERS
+Average Percentage Incorr =  55.20616311792783 PERCENT
+Alpha         (Real)      =  0.34884343871814893
+Average Alpha (Model)     =  0.3219694561346386
+
+Item: best
+Average Encounter Count   =  10.88 ENCOUNTERS
+Average Percentage Incorr =  51.390270840270816 PERCENT
+Alpha         (Real)      =  0.3052906545523877
+Average Alpha (Model)     =  0.29671572822112524
+
+Item: wonderful
+Average Encounter Count   =  8.68 ENCOUNTERS
+Average Percentage Incorr =  40.65829725829725 PERCENT
+Alpha         (Real)      =  0.23889005258503754
+Average Alpha (Model)     =  0.2534047616646793
+
+Item: expensive
+Average Encounter Count   =  15.46 ENCOUNTERS
+Average Percentage Incorr =  61.722284569575585 PERCENT
+Alpha         (Real)      =  0.4121434268760434
+Average Alpha (Model)     =  0.3790053198533036
+
+Item: to add
+Average Encounter Count   =  8.54 ENCOUNTERS
+Average Percentage Incorr =  40.32900432900431 PERCENT
+Alpha         (Real)      =  0.2095610478417777
+Average Alpha (Model)     =  0.24848299566800872
+
+Item: boat
+Average Encounter Count   =  10.1 ENCOUNTERS
+Average Percentage Incorr =  49.58015873015872 PERCENT
+Alpha         (Real)      =  0.2877889912987713
+Average Alpha (Model)     =  0.2857838871276945
+
+Item: to join in
+Average Encounter Count   =  12.76 ENCOUNTERS
+Average Percentage Incorr =  59.242124868595425 PERCENT
+Alpha         (Real)      =  0.36528647214346266
+Average Alpha (Model)     =  0.34318598759690083
+
+Item: view
+Average Encounter Count   =  13.78 ENCOUNTERS
+Average Percentage Incorr =  60.76553511660861 PERCENT
+Alpha         (Real)      =  0.40796896959503226
+Average Alpha (Model)     =  0.36066329681569587
+
+Item: canoeing
+Average Encounter Count   =  9.26 ENCOUNTERS
+Average Percentage Incorr =  50.720490620490615 PERCENT
+Alpha         (Real)      =  0.2834033985495885
+Average Alpha (Model)     =  0.28081302891201326
+
+Item: flower
+Average Encounter Count   =  9.6 ENCOUNTERS
+Average Percentage Incorr =  53.84155844155845 PERCENT
+Alpha         (Real)      =  0.3112423022146421
+Average Alpha (Model)     =  0.3003264427684406
+
+Item: area
+Average Encounter Count   =  11.06 ENCOUNTERS
+Average Percentage Incorr =  57.05916305916305 PERCENT
+Alpha         (Real)      =  0.38243446831878947
+Average Alpha (Model)     =  0.34443726524663254
+
+
+
+
+Testing learning:
+Writing time           = 6.0
+Learn sessions         = 50
+Study sessions         = 2
+Study session length   = 1800
+Immediate alpha adjust = True
+Alpha adjust value     = 0.02
+Cache used             = True
+Cache updated          = post-session
+
+
+Average Duration        =  1.432654 SECONDS
+Average Encounter Count =  415.68 ENCOUNTERS
+Average Alpha Error     =  0.03372185703097722
+
+Item: noodles
+Average Encounter Count   =  8.5 ENCOUNTERS
+Average Percentage Incorr =  29.818253968253966 PERCENT
+Alpha         (Real)      =  0.15041238061331177
+Average Alpha (Model)     =  0.21833830487734945
+
+Item: where
+Average Encounter Count   =  13.18 ENCOUNTERS
+Average Percentage Incorr =  55.385389447154154 PERCENT
+Alpha         (Real)      =  0.3333408884659153
+Average Alpha (Model)     =  0.31595535792500135
+
+Item: many
+Average Encounter Count   =  9.16 ENCOUNTERS
+Average Percentage Incorr =  37.82445887445887 PERCENT
+Alpha         (Real)      =  0.22149256906384937
+Average Alpha (Model)     =  0.2423511118297062
+
+Item: way
+Average Encounter Count   =  10.36 ENCOUNTERS
+Average Percentage Incorr =  44.840087690087685 PERCENT
+Alpha         (Real)      =  0.25043712405940277
+Average Alpha (Model)     =  0.26577733116384095
+
+Item: market
+Average Encounter Count   =  10.0 ENCOUNTERS
+Average Percentage Incorr =  43.3098235098235 PERCENT
+Alpha         (Real)      =  0.25725772360375077
+Average Alpha (Model)     =  0.26184538777526967
+
+Item: castle
+Average Encounter Count   =  18.36 ENCOUNTERS
+Average Percentage Incorr =  62.46205425764317 PERCENT
+Alpha         (Real)      =  0.4266520666573219
+Average Alpha (Model)     =  0.3909985475433734
+
+Item: group
+Average Encounter Count   =  9.28 ENCOUNTERS
+Average Percentage Incorr =  39.68477633477632 PERCENT
+Alpha         (Real)      =  0.23893202695047272
+Average Alpha (Model)     =  0.2473798547535379
+
+Item: restaurant
+Average Encounter Count   =  20.3 ENCOUNTERS
+Average Percentage Incorr =  64.39684640379686 PERCENT
+Alpha         (Real)      =  0.446923386391809
+Average Alpha (Model)     =  0.41351253441906416
+
+Item: amazing
+Average Encounter Count   =  10.32 ENCOUNTERS
+Average Percentage Incorr =  46.518420468420466 PERCENT
+Alpha         (Real)      =  0.27774385426810805
+Average Alpha (Model)     =  0.2710151550480916
+
+Item: to visit
+Average Encounter Count   =  14.92 ENCOUNTERS
+Average Percentage Incorr =  60.28145556713665 PERCENT
+Alpha         (Real)      =  0.36220346747583215
+Average Alpha (Model)     =  0.352614601122673
+
+Item: each
+Average Encounter Count   =  9.28 ENCOUNTERS
+Average Percentage Incorr =  40.31320346320346 PERCENT
+Alpha         (Real)      =  0.22647284796617861
+Average Alpha (Model)     =  0.24801698681919607
+
+Item: tree
+Average Encounter Count   =  12.82 ENCOUNTERS
+Average Percentage Incorr =  56.03664551822446 PERCENT
+Alpha         (Real)      =  0.3373873274784439
+Average Alpha (Model)     =  0.31821330729378067
+
+Item: British
+Average Encounter Count   =  15.3 ENCOUNTERS
+Average Percentage Incorr =  60.03598625316893 PERCENT
+Alpha         (Real)      =  0.39194127004071005
+Average Alpha (Model)     =  0.35655907154250355
+
+Item: adult
+Average Encounter Count   =  9.18 ENCOUNTERS
+Average Percentage Incorr =  40.839538239538236 PERCENT
+Alpha         (Real)      =  0.21687824157608487
+Average Alpha (Model)     =  0.25055237218552845
+
+Item: a day
+Average Encounter Count   =  11.26 ENCOUNTERS
+Average Percentage Incorr =  52.27498057498056 PERCENT
+Alpha         (Real)      =  0.3112368606189476
+Average Alpha (Model)     =  0.29727623523983293
+
+Item: open(from...to...)
+Average Encounter Count   =  11.3 ENCOUNTERS
+Average Percentage Incorr =  50.43023643023642 PERCENT
+Alpha         (Real)      =  0.3086606534579481
+Average Alpha (Model)     =  0.2916843945457761
+
+Item: furniture
+Average Encounter Count   =  8.76 ENCOUNTERS
+Average Percentage Incorr =  37.880025530025534 PERCENT
+Alpha         (Real)      =  0.21277816140663913
+Average Alpha (Model)     =  0.24131511514830276
+
+Item: a year
+Average Encounter Count   =  12.16 ENCOUNTERS
+Average Percentage Incorr =  55.262547394126344 PERCENT
+Alpha         (Real)      =  0.32156572343688694
+Average Alpha (Model)     =  0.314675209239108
+
+Item: open
+Average Encounter Count   =  11.52 ENCOUNTERS
+Average Percentage Incorr =  54.61794937089053 PERCENT
+Alpha         (Real)      =  0.3230953934428667
+Average Alpha (Model)     =  0.3051150717164963
+
+Item: free time
+Average Encounter Count   =  11.24 ENCOUNTERS
+Average Percentage Incorr =  53.2039917598741 PERCENT
+Alpha         (Real)      =  0.30968277271199235
+Average Alpha (Model)     =  0.3015663105484537
+
+Item: canal
+Average Encounter Count   =  12.12 ENCOUNTERS
+Average Percentage Incorr =  55.29758019758019 PERCENT
+Alpha         (Real)      =  0.3244097496863796
+Average Alpha (Model)     =  0.3118669228958805
+
+Item: Chinese
+Average Encounter Count   =  10.44 ENCOUNTERS
+Average Percentage Incorr =  50.90528915528914 PERCENT
+Alpha         (Real)      =  0.29875597115902186
+Average Alpha (Model)     =  0.2896025291704257
+
+Item: stall
+Average Encounter Count   =  11.34 ENCOUNTERS
+Average Percentage Incorr =  54.123323898323896 PERCENT
+Alpha         (Real)      =  0.3135048709546217
+Average Alpha (Model)     =  0.3032951561117556
+
+Item: playing field
+Average Encounter Count   =  9.7 ENCOUNTERS
+Average Percentage Incorr =  47.284382284382254 PERCENT
+Alpha         (Real)      =  0.2651313521518684
+Average Alpha (Model)     =  0.27342219063462336
+
+Item: fancy
+Average Encounter Count   =  12.62 ENCOUNTERS
+Average Percentage Incorr =  58.81156621156619 PERCENT
+Alpha         (Real)      =  0.356808588637156
+Average Alpha (Model)     =  0.3304974136699483
+
+Item: a week
+Average Encounter Count   =  12.26 ENCOUNTERS
+Average Percentage Incorr =  59.281615606615595 PERCENT
+Alpha         (Real)      =  0.3608400222195225
+Average Alpha (Model)     =  0.32911276238918996
+
+Item: to enjoy
+Average Encounter Count   =  11.98 ENCOUNTERS
+Average Percentage Incorr =  57.91945276945275 PERCENT
+Alpha         (Real)      =  0.34884343871814893
+Average Alpha (Model)     =  0.3221142430087945
+
+Item: best
+Average Encounter Count   =  10.56 ENCOUNTERS
+Average Percentage Incorr =  54.78278388278388 PERCENT
+Alpha         (Real)      =  0.3052906545523877
+Average Alpha (Model)     =  0.30359296778467837
+
+Item: wonderful
+Average Encounter Count   =  8.5 ENCOUNTERS
+Average Percentage Incorr =  45.00569985569985 PERCENT
+Alpha         (Real)      =  0.23889005258503754
+Average Alpha (Model)     =  0.2607128263859043
+
+Item: expensive
+Average Encounter Count   =  14.08 ENCOUNTERS
+Average Percentage Incorr =  65.08472295678176 PERCENT
+Alpha         (Real)      =  0.4121434268760434
+Average Alpha (Model)     =  0.37296814715193166
+
+Item: to add
+Average Encounter Count   =  7.88 ENCOUNTERS
+Average Percentage Incorr =  42.54285714285716 PERCENT
+Alpha         (Real)      =  0.2095610478417777
+Average Alpha (Model)     =  0.24895125114050587
+
+Item: boat
+Average Encounter Count   =  9.4 ENCOUNTERS
+Average Percentage Incorr =  54.99822954822955 PERCENT
+Alpha         (Real)      =  0.2877889912987713
+Average Alpha (Model)     =  0.29262808666670187
+
+Item: to join in
+Average Encounter Count   =  11.04 ENCOUNTERS
+Average Percentage Incorr =  61.36023143523143 PERCENT
+Alpha         (Real)      =  0.36528647214346266
+Average Alpha (Model)     =  0.33042922618770176
+
+Item: view
+Average Encounter Count   =  11.84 ENCOUNTERS
+Average Percentage Incorr =  64.9562694787153 PERCENT
+Alpha         (Real)      =  0.40796896959503226
+Average Alpha (Model)     =  0.36008952334425454
+
+Item: canoeing
+Average Encounter Count   =  7.8 ENCOUNTERS
+Average Percentage Incorr =  48.661616161616166 PERCENT
+Alpha         (Real)      =  0.2834033985495885
+Average Alpha (Model)     =  0.282457297049907
+
+Item: flower
+Average Encounter Count   =  7.84 ENCOUNTERS
+Average Percentage Incorr =  46.814502164502166 PERCENT
+Alpha         (Real)      =  0.3112423022146421
+Average Alpha (Model)     =  0.2924280614028975
+
+Item: area
+Average Encounter Count   =  9.08 ENCOUNTERS
+Average Percentage Incorr =  54.21795426795428 PERCENT
+Alpha         (Real)      =  0.38243446831878947
+Average Alpha (Model)     =  0.33712608912036607
