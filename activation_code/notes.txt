@@ -1,6 +1,24 @@
-TODO: Arrange and clean test results into tables
-
 TODO: Read through papers and find what they say about best number of words given study time
+    - van Thiel says:
+      : Pavlik and Anderson: 180 Japanese-English word pairs, 3 sessions, 1 hour each, days 1, 3, 5
+      : van Woudenberg: 20 French-Dutch word pairs, 1 session, 15 minutes
+      : van Thiel: 20 French-Dutch word pairs (in batches), 1 session, 15 minutes
+    - van Woundenberg says:
+      : most research = > 30min study and > 1week retention; student's usually < 30min study and 1day retention
+      : van Woundenberg: 20 French-Dutch word pairs (in batches), 1 session, 15 minutes
+      : Most research just does learning and test at the end
+      : Dynamic learning increses success by up to 10%, below average students score significantly higher
+      : Q: Best item count given a set study time?
+        A: Item count depends on performance of user.
+      : Q: Best study time given item count?
+        A: Study time depends on the reaction (and response) of the user.
+      : Alpha adjustment by 0.01
+    - Koelewijn says:
+      : Koelewijn: 15 English-Dutch word pairs, 2 study sessions, 15 minutes each (twice + test on everything at the end)
+    - Nijboer says:
+      : Nijboer: 72 Biological facts, 4 sessions (3 study, 1 test), 25 minutes each (1 session = 24 facts, 2 = 48, 3 = 72)
+      : about 19/63 had >55%, for flashcards it was 12/63
+
 
 TODO: Clean up latest implementation
 
