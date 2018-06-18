@@ -1,0 +1,51 @@
+*** Tests the DIFFERENCE in performance when:
+    - NOT USING the CACHED HISTORY
+    - USING the CACHED HISTORY
+    - UPDATING the CACHED HISTORY:
+        : NEVER
+        : IMMEDIATELY (after an encounter, when the alpha is changed)
+        : POST_SESSION
+
+
+
+*** NOTES ***
+    - Absolute values should obviously not be taken seriously, but just as a comparison.
+    - Cached History = the activations of all items at the times of their previous encounters
+    - Updating Cache = recalculating the cached activations after a change in alpha
+
+
+
+*** TEST SETTINGS ***
+Learn sessions         = 50
+Study sessions         = 2
+Study session length   = 1800
+Immediate alpha adjust = True
+Alpha adjust value     = 0.02
+
+
+
+|===============================================================================================================|
+|                                                  TEST_RESULTS                                                 |
+|===============================================================================================================|
+| cached_history | cache_update | test_duration | avg_duration | avg_enc_count | avg_alpha_err | avg_alpha_bias |
+|     (used)     |    (when)    |   (seconds)   |  (learning)  |               |               |                |
+|===============================================================================================================|
+|      TRUE      |       -      | 60            | 1.986176 s   |     558.40    | 0.01835894717 | 0.02326939381  |
+|---------------------------------------------------------------------------------------------------------------|
+|      TRUE      | immediately  | 60            | 1.986176 s   |     558.40    | 0.01835894717 | 0.02326939381  |
+|---------------------------------------------------------------------------------------------------------------|
+|      TRUE      | post-session | 60            | 1.986176 s   |     558.40    | 0.01835894717 | 0.02326939381  |
+|---------------------------------------------------------------------------------------------------------------|
+|      FALSE     |       -      | 126           | 2.628845 s   |     555.50    | 0.01818810476 | 0.01965966862  |
+|===============================================================================================================|
+
+
+
+*** ITEM-SPECIFIC results ***
+    - CACHE_USED = TRUE,  CACHE_UPDATE = -
+
+    - CACHE_USED = TRUE,  CACHE_UPDATE = immediately
+
+    - CACHE_USED = TRUE,  CACHE_UPDATE = post-session
+
+    - CACHE_USED = FALSE, CACHE_UPDATE = -

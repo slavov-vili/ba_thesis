@@ -14,56 +14,39 @@ model_params = {"alpha_d":   0.3,   # default alpha for all items
                 "c":         0.21,  # decay scaling factor
                 "tau":      -0.8,   # activation threshold
                 "s":         0.255, # recall probability noise reduction factor
-                "delta":     0.025} # factor to scale down intersession time
+                "delta":     0.025, # factor to scale down intersession time
+                "F":         1,     # scaling factor for the reaction time
+                "f":         0.3}     # base reaction time
 
-
-# list all items to be learned
-items = ["noodles", "where", "many", "way", "market", "castle", "group", "restaurant", "amazing", "to visit", "each", "tree", "British", "adult", "a day", "open(from...to...)", "furniture", "a year", "open", "free time", "canal", "Chinese", "stall", "playing field", "fancy", "a week", "to enjoy", "best", "wonderful", "expensive", "to add", "boat", "to join in", "view", "canoeing", "flower", "area"] # end items list
 
 
 def initialize_items_info(items):
     items_info = {}
     for item in items:
-        items_info[item] = Bunch(alpha_real=random.gauss(0.3, 0.08),
-                                 alpha_model=model_params["alpha_d"],
-                                 encounters=[],
-                                 incorrect=0)
+        items_info[item] = Bunch(alpha_real  = random.gauss(0.3, 0.08),
+                                 alpha_model = model_params["alpha_d"],
+                                 encounters  = [],
+                                 incorrect   = 0)
     return items_info
 
+def reset_items_info(items_info):
+    for item in items_info:
+        items_info[item].alpha_model = model_params["alpha_d"]
+        items_info[item].encounters  = []
+        items_info[item].incorrect   = 0
+
+
+
+# list all items to be learned
+items = ["noodles", "where", "many", "way", "market", "castle", "group", "restaurant", "amazing", "to visit", "each", "tree", "British", "adult", "a day", "open(from...to...)", "furniture", "a year", "open", "free time", "canal", "Chinese", "stall", "playing field", "fancy", "a week", "to enjoy", "best", "wonderful", "expensive", "to add", "boat", "to join in", "view", "canoeing", "flower", "area"] # end items list
 # maps each item to its values
 items_info = initialize_items_info(items)
 
 
 
-def calc_avg_alpha_difference(items, items_info):
-    sum_alpha_diff = 0
-    for item in items:
-        sum_alpha_diff += np.abs(items_info[item].alpha_real - items_info[item].alpha_model)
-    return sum_alpha_diff / len(items)
 
 
-def print_item_info(item, items_info):
-    """
-    Prints out all the information for a specific item.
-    Arguments:
-    item       -- the item, whose information will be printed
-    items_info -- the map, containing each item's information
-    Returns:
-    nothing, prints to stdout
-    """
-    print("Item:", item)
-    print("Real Alpha:",  items_info[item].alpha_real)
-    print("Model Alpha:", items_info[item].alpha_model)
-    item_encounters = items_info[item].encounters
-    print("Encounters(", len(item_encounters),"):")
-    for i, enc in enumerate(item_encounters):
-        print("Encounter", i, "time:",        enc.time)
-        print("Encounter", i, "alpha:",       enc.alpha)
-        print("Encounter", i, "activation:",  enc.activation)
-        print("Encounter", i, "recall prob:", calc_recall_prob(enc.activation))
-        print("Encounter", i, "was guessed:", enc.was_guessed)
-    print("Incorrect:", items_info[item].incorrect)
-
+# [ Graphing area ]
 
 def graph_item_info(item, items_info, learn_start):
     """
@@ -144,6 +127,53 @@ def graph_item_info(item, items_info, learn_start):
 
 
 
+
+
+# [ Printing area ]
+
+def print_final_results(items_info, full=True):
+    print("\nFinal results:")
+    for item in items_info:
+        if not full and len(items_info[item].encounters) == 0:
+            continue
+        print("Item:'", item, "'")
+        print("Alpha Real: ", items_info[item].alpha_real)
+        print("Alpha Model:", items_info[item].alpha_model)
+        print("Encounters: ", len(items_info[item].encounters))
+        print("Incorrect:  ", items_info[item].incorrect)
+
+def print_item_info(item, items_info):
+    """
+    Prints out all the information for a specific item.
+
+    Arguments:
+    item       -- the item, whose information will be printed
+    items_info -- the map, containing each item's information
+
+    Returns:
+    nothing, prints to stdout
+    """
+    print("Item:", item)
+    print("Real  Alpha:", items_info[item].alpha_real)
+    print("Model Alpha:", items_info[item].alpha_model)
+    item_encounters = items_info[item].encounters
+    print("Encounters: ", len(item_encounters))
+    print("Incorrect:  ", items_info[item].incorrect)
+    for i, enc in enumerate(item_encounters):
+        print("Encounter", i, "time:",       enc.time)
+        print("Encounter", i, "alpha:",      enc.alpha)
+        print("Encounter", i, "activation:", enc.activation)
+        print("Encounter", i, "recall prob (real): ",
+                calc_recall_prob(calc_activation(item, items_info[item].alpha_real, item_encounters[:i], [], enc.time)[0]))
+        print("Encounter", i, "recall prob (model):", calc_recall_prob(enc.activation))
+        print("Encounter", i, "was guessed:", enc.was_guessed)
+
+
+
+
+
+# [ Implementation area ]
+
 def learn(items, items_info, sesh_count, sesh_length):
     """
     Simulates learning process by adding new encounters of words.
@@ -216,7 +246,6 @@ def learn(items, items_info, sesh_count, sesh_length):
     return learn_start
 
 
-
 def get_next_item(items, items_info, time, next_new_item_idx):
     """
     Finds the next item to be presented based on their activation.
@@ -275,7 +304,6 @@ def get_next_item(items, items_info, time, next_new_item_idx):
     return next_item, next_item_act, next_new_item_idx_inc
 
 
-
 def calc_activation(item, alpha, encounters, activations, cur_time):
     """
     Calculates the activation for a given item at a given timestamp.
@@ -329,7 +357,6 @@ def calc_activation(item, alpha, encounters, activations, cur_time):
     return m
 
 
-
 def calc_decay(activation, alpha):
     """
     Calculate the activation decay of an item given its activation and alpha at the time of encounter.
@@ -351,7 +378,6 @@ def calc_decay(activation, alpha):
     return d
 
 
-
 def calc_recall_prob(activation):
     """
     Calculates an item's probability of recall given its activation.
@@ -366,14 +392,12 @@ def calc_recall_prob(activation):
     return Pr
 
 
-
 def calc_time_diff(cur_time, start_time):
     """
     Calculates the difference between a starting time and the current time.
     The time difference is represented in total seconds.
     """
     return (cur_time - start_time).total_seconds()
-
 
 
 def guess_item(recall_prob):
