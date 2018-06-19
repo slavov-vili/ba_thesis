@@ -20,13 +20,16 @@ TODO: Read through papers and find what they say about best number of words give
       : about 19/63 had >55%, for flashcards it was 12/63
 
 
+TODO: Redo all tests with latest implementation
+    - Tests redone, results - saved
+
+TODO: Test different session counts and lengths with alpha adjust = 0.02
+
+TODO: Redo session count tests with 0.01
+
 TODO: Clean up latest implementation
 
 TODO: Update graph file with latest implementation
-
-TODO: Redo all tests with latest implementation
-
-TODO: Test different session counts and lengths
 
 
 
