@@ -336,7 +336,7 @@ def learn(items, items_info, sesh_count, sesh_length, cached, immediate_alpha_ad
 
             # NOTE: Only here to simulate the duration if interactions.
             # Encounter duration = time it takes to start typing + average time to type a word
-            enc_duration = datetime.timedelta(seconds = calc_reaction_time(item_act_model)) + datetime.timedelta(seconds = 2.5)
+            enc_duration = datetime.timedelta(seconds = calc_reaction_time(item_act_model)) + datetime.timedelta(seconds = 3.0)
             # increment the current time to account for the length of the encounter
             cur_time    += enc_duration
 
@@ -602,8 +602,6 @@ def main():
                         for immediate_alpha_adjust in immediate_alpha_adjusts:
                             # For all possible options of updating cached history
                             for cache_update in ["post-session"]: #["", "immediately", "post-session"]:
-                                reset_items_info(items_info)
-
                                 # NOTE: these are here to avoid useless tests
                                 # Since cache is NOT used, there is no use updating it
                                 if not cached and cache_update != "":
@@ -614,10 +612,12 @@ def main():
 
                                 alpha_adjust_value = 0.02 if immediate_alpha_adjust else 0.05
 
-                                for item_count in [26, 27, 28, 29, 30, 31, 32, 33, 34]:
+                                # for item_count in [26, 27, 28, 29, 30, 31, 32, 33, 34]:
+                                    reset_items_info(items_info)
                                     print("\n\n\n")
                                     print("Testing learning:")
-                                    print("Item count             =", item_count)
+                                    # print("Item count             =", item_count)
+                                    print("Writing time           =", writing_time)
                                     print("Learn sessions         =", learn_sesh_count)
                                     print("Study sessions         =", study_sesh_count)
                                     print("Study session length   =", study_sesh_length)
@@ -625,8 +625,7 @@ def main():
                                     print("Alpha adjust value     =", alpha_adjust_value)
                                     print("Cache used             =", cached)
                                     print("Cache updated          =", cache_update)
-
-                                    test_learning(items[:item_count], items_info, study_sesh_count, study_sesh_length, learn_sesh_count, cached, immediate_alpha_adjust, alpha_adjust_value, cache_update)
+                                    test_learning(items, items_info, study_sesh_count, study_sesh_length, learn_sesh_count, cached, immediate_alpha_adjust, alpha_adjust_value, cache_update)
 
 
 
