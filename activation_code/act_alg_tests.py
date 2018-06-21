@@ -583,10 +583,10 @@ def guess_item(recall_prob):
 
 def main():
     learn_sesh_counts       = [50]
-    study_sesh_counts       = [2, 4] # [1, 2, 3, 4]
+    study_sesh_counts       = [4, 5, 7, 10]
     study_sesh_lengths      = [1800] # [900, 1800, 2700, 3600]
     immediate_alpha_adjusts = [True] #, False]
-    alpha_adjust_values     = [0.01, 0.02]
+    alpha_adjust_values     = [0.02, 0.03]
 
     # For all possible options for INTER-SESSION TIME
     for inter_sesh_time in [24]: # [2, 4, 24]:

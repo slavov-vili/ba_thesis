@@ -23,13 +23,7 @@ TODO: Read through papers and find what they say about best number of words give
 TODO: Redo all tests with latest implementation
     - Tests redone, results - saved
 
-TODO: Test different session counts and lengths with alpha adjust = 0.02
-
-TODO: Copy Chris' results and calculate average alpha difference
-
-TODO: Find out best session count/length combination when have 1 hour, 1 day, 1 week
-
-TODO: Redo session count tests with 0.01
+TODO: Do tests with adjustment = 0.02 and sesh_count = 4, 5, 7, 10
 
 TODO: Clean up latest implementation
 
