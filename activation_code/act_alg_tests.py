@@ -181,14 +181,21 @@ def calc_avg_alpha_bias(items, items_info):
 
 
 
-# [ Printing area ]
+# [ Printing ]
 
 def print_final_results(items_info, full=True):
-    print("\nFinal results:")
+    relevant_items = 0
     for item in items_info:
-        if not full and len(items_info[item].encounters) == 0:
-            continue
-        print("Item:'", item, "'")
+        if full:
+            relevant_items.append(item)
+        elif len(items_info[item].encounters) != 0:
+            relevant_items.append(item)
+
+    print("\nFinal results:")
+    print("Average alpha error:", calc_avg_alpha_error(relevant_items, items_info))
+    print("Average alpha bias: ", calc_avg_alpha_bias(relevant_items,  items_info))
+    for item in relevant_items:
+        print("Item:     '", item, "'")
         print("Alpha Real: ", items_info[item].alpha_real)
         print("Alpha Model:", items_info[item].alpha_model)
         print("Encounters: ", len(items_info[item].encounters))
@@ -208,6 +215,7 @@ def print_item_info(item, items_info):
     print("Item:", item)
     print("Real  Alpha:", items_info[item].alpha_real)
     print("Model Alpha:", items_info[item].alpha_model)
+    print("Alpha Error:", items_info[item].alpha_real - items_info[item].alpha_model)
     item_encounters = items_info[item].encounters
     print("Encounters: ", len(item_encounters))
     print("Incorrect:  ", items_info[item].incorrect)
@@ -372,9 +380,9 @@ def learn(items, items_info, sesh_count, sesh_length, cached, immediate_alpha_ad
                     for i, enc in enumerate(item_encounters):
                         # NOTE: Since encounters are ordered chronologically,
                         #       the previous encounter list always contains updated values
-                        # Get all encounters, which happened before this one
+                        # Get all previous encounters
                         prev_encounters  = item_encounters[:i]
-                        # Get each encounter's activation
+                        # Get each previous encounter's activation
                         prev_activations = [prev_enc.activation for prev_enc in prev_encounters]
                         # recalculate the encounter's activation with the updated alpha
                         enc.activation   = calc_activation(item, items_info[item].alpha_model, prev_encounters, prev_activations, enc.time)[0]

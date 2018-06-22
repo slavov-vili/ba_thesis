@@ -54,7 +54,7 @@ items_info = initialize_items_info(items)
 # [ Testing area ]
 
 # TODO: maybe implement encounter-specific information to track performance more closely
-def test_learning(items, items_info, sesh_count, sesh_length, learn_count, cached, immediate_alpha, alpha_adjust_value, cache_update):
+def test_learning(items, items_info, sesh_count, sesh_length, learn_count):
     """
     Gets average values for learning both when using the cached and the uncached activations for each encounter
     Prints a comparison between the two averages.
@@ -76,7 +76,7 @@ def test_learning(items, items_info, sesh_count, sesh_length, learn_count, cache
 
         # Conduct a learning session
         start = datetime.datetime.now()
-        learn(items, items_info, sesh_count, sesh_length, cached, immediate_alpha, alpha_adjust_value, cache_update)
+        learn(items, items_info, sesh_count, sesh_length)
         end   = datetime.datetime.now()
 
         # Add the LEARNING session's DURATION to the averages
@@ -123,7 +123,7 @@ def test_learning(items, items_info, sesh_count, sesh_length, learn_count, cache
         print("Alpha         (Real)      = ", items_info[item].alpha_real)
         print("Average Alpha (Model)     = ", avg_item_info.avg_alpha)
 
-def test_learn_duration(items, item_count, items_info, sesh_count, sesh_length, cached, immediate_alpha_adjustment, alpha_adjust_value, cache_update):
+def test_learn_duration(items, items_info, sesh_count, sesh_length):
     """
     Prints how much time it takes for learning to finish given a number of items.
     """
@@ -131,15 +131,15 @@ def test_learn_duration(items, item_count, items_info, sesh_count, sesh_length, 
     reset_items_info(items_info)
 
     start = datetime.datetime.now()
-    learn(items[:item_count], items_info, sesh_count, sesh_length, cached, immediate_alpha_adjustment, alpha_adjust_value, cache_update)
+    learn(items, items_info, sesh_count, sesh_length)
     end   = datetime.datetime.now()
 
-    enc_count = sum([len(items_info[item].encounters) for item in items[:item_count]])
+    enc_count = sum([len(items_info[item].encounters) for item in items])
 
     print("\n")
-    print("Item count:", item_count)
+    print("Item count:      ", len(items))
     print("Total encounters:", enc_count)
-    print("Duration:", (end - start).total_seconds())
+    print("Duration:        ", (end - start).total_seconds())
 
 def test_act_call_count(item, items_info, enc_count):
     """
@@ -184,11 +184,18 @@ def calc_avg_alpha_bias(items, items_info):
 # [ Printing ]
 
 def print_final_results(items_info, full=True):
-    print("\nFinal results:")
+    relevant_items = []
     for item in items_info:
-        if not full and len(items_info[item].encounters) == 0:
-            continue
-        print("Item:'", item, "'")
+        if full:
+            relevant_items.append(item)
+        elif len(items_info[item].encounters) != 0:
+            relevant_items.append(item)
+
+    print("\nFinal results:")
+    print("Average alpha error:", calc_avg_alpha_error(relevant_items, items_info))
+    print("Average alpha bias: ", calc_avg_alpha_bias(relevant_items,  items_info))
+    for item in relevant_items:
+        print("Item:     '", item, "'")
         print("Alpha Real: ", items_info[item].alpha_real)
         print("Alpha Model:", items_info[item].alpha_model)
         print("Encounters: ", len(items_info[item].encounters))
@@ -208,6 +215,7 @@ def print_item_info(item, items_info):
     print("Item:", item)
     print("Real  Alpha:", items_info[item].alpha_real)
     print("Model Alpha:", items_info[item].alpha_model)
+    print("Alpha Error:", items_info[item].alpha_real - items_info[item].alpha_model)
     item_encounters = items_info[item].encounters
     print("Encounters: ", len(item_encounters))
     print("Incorrect:  ", items_info[item].incorrect)
@@ -227,7 +235,7 @@ def print_item_info(item, items_info):
 # [ Implementation area ]
 
 
-def learn(items, items_info, sesh_count, sesh_length, cached, immediate_alpha_adjustment, alpha_adjust_value, cache_update):
+def learn(items, items_info, sesh_count, sesh_length):
     """
     Simulates the learning process by adding new encounters of words.
 
@@ -236,11 +244,6 @@ def learn(items, items_info, sesh_count, sesh_length, cached, immediate_alpha_ad
     items_info                 -- the information related to each item
     sesh_count                 -- the number of sessions to be performed
     sesh_length                -- the length of each session (in seconds)
-    cached                     -- whether to use the cached activations for each encounter
-                                  in the activation calculation OR to recalculate them again
-    immediate_alpha_adjustment -- whether the alpha should be adjusted immediately after each encounter
-    alpha_adjust_value         -- how much should the alpha be adjusted
-    cache_update               -- when should the cache be updated
 
     Returns:
     the datetime when the learning process started
@@ -258,25 +261,19 @@ def learn(items, items_info, sesh_count, sesh_length, cached, immediate_alpha_ad
         # Set the session's information
         sesh_start = cur_time
         sesh_end   = sesh_start + datetime.timedelta(seconds=sesh_length)
-        sesh_enc_counts       = {}
-        sesh_incorrect_counts = {}
-        sesh_avg_recall_probs = {}
-        for item in items:
-            sesh_enc_counts[item]       = 0
-            sesh_incorrect_counts[item] = 0
-            sesh_avg_recall_probs[item] = 0.0
+
         # print("\nSession", sesh_id, "start:", sesh_start)
 
         # while there is time in the session
         while cur_time < sesh_end:
             # get the next item to be presented
-            item, next_new_item_idx = get_next_item(items, items_info, cur_time, next_new_item_idx, cached)
+            item, next_new_item_idx = get_next_item(items, items_info, cur_time, next_new_item_idx)
             # print("Encountered '", item, "' at", cur_time)
 
             # Extract all encounters, which happened before future time
             prev_encounters   = [enc for enc in items_info[item].encounters if enc.time < cur_time]
-            # Store each previous encounter's activation if cached values should be used
-            prev_activations  = [] if not cached else [enc.activation for enc in prev_encounters]
+            # Store each previous encounter's activation
+            prev_activations  = [enc.activation for enc in prev_encounters]
             # Calculate the item's activation with the MODEL's alpha
             item_act_model = calc_activation(item, items_info[item].alpha_model, prev_encounters, prev_activations, cur_time)[0]
             item_rec_model = calc_recall_prob(item_act_model)
@@ -298,87 +295,37 @@ def learn(items, items_info, sesh_count, sesh_length, cached, immediate_alpha_ad
 
             # NOTE: The values for adjusting the alpha were selected through a bunch of testing and fitting
             # NOTE: in order for the results, produced by this simple simulation, to somewhat make sense.
-            # If the alpha should be adjusted immediately after an encounter
-            if immediate_alpha_adjustment:
-                # adjust the alpha value depending on the outcome
-                if guessed:
-                    if items_info[item].alpha_model > model_params["alpha_min"]:
-                        items_info[item].alpha_model -= (1 - item_rec_model) * (2 * alpha_adjust_value)
-                else:
-                    if items_info[item].alpha_model < model_params["alpha_max"]:
-                        items_info[item].alpha_model += item_rec_model * (2 * alpha_adjust_value)
-                    # Increment the ITEM's incorrect counter
-                    items_info[item].incorrect  += 1
-
-                # If the cached activations should be updated IMMEDIATELY after the alpha is changed
-                if cache_update == "immediately":
-                    # Store the item's encounters
-                    item_encounters = items_info[item].encounters
-                    # For each encounter
-                    for i, enc in enumerate(item_encounters):
-                        # Get all encounters, which happened before this one
-                        prev_encounters  = item_encounters[:i]
-                        # Get each encounter's activation
-                        prev_activations = [prev_enc.activation for prev_enc in prev_encounters]
-                        # recalculate the encounter's activation with the updated alpha
-                        enc.activation   = calc_activation(item, items_info[item].alpha_model, prev_encounters, prev_activations, enc.time)[0]
+            # adjust the alpha value depending on the outcome
+            if guessed:
+                if items_info[item].alpha_model > model_params["alpha_min"]:
+                    items_info[item].alpha_model -= (1 - item_rec_model) * (2 * 0.02)
             else:
-                # Add the recall probability to the session average
-                sesh_avg_recall_probs[item] += item_rec_model
-                if not guessed:
-                    # Increment the ITEM's incorrect counter
-                    items_info[item].incorrect  += 1
-                    # Increment the SESSION's incorrect counter
-                    sesh_incorrect_counts[item] += 1
-
-            # increment the session's encounter count
-            sesh_enc_counts[item] += 1
+                if items_info[item].alpha_model < model_params["alpha_max"]:
+                    items_info[item].alpha_model += item_rec_model * (2 * 0.02)
+                # Increment the ITEM's incorrect counter
+                items_info[item].incorrect  += 1
 
             # NOTE: Only here to simulate the duration if interactions.
             # Encounter duration = time it takes to start typing + average time to type a word
-            enc_duration = datetime.timedelta(seconds = calc_reaction_time(item_act_model)) + datetime.timedelta(seconds = 2.5)
+            enc_duration = datetime.timedelta(seconds = calc_reaction_time(item_act_model)) + datetime.timedelta(seconds = 3.0)
             # increment the current time to account for the length of the encounter
             cur_time    += enc_duration
 
-        # If the alphas should be updated AFTER the end of the SESSION
-        if not immediate_alpha_adjustment:
-            # For each item
-            for item in items:
-                # If the item WAS seen in this session
-                if sesh_enc_counts[item] != 0:
-                    sesh_avg_recall_probs[item] /= sesh_enc_counts[item]
-
-                    # TODO: consider better way to evaluate if session was success
-                    # If the overall outcome of the session is a SUCCESS
-                    if sesh_incorrect_counts[item] < (sesh_enc_counts[item] / 4):
-                        # Adjust the alpha to INCREASE the decay
-                        if items_info[item].alpha_model > model_params["alpha_min"]:
-                            items_info[item].alpha_model -= (1 - sesh_avg_recall_probs[item]) * (2 * alpha_adjust_value)
-                    # If the item was NOT seen
-                    else:
-                        # Adjust the alpha to DECREASE the decay
-                        if items_info[item].alpha_model < model_params["alpha_max"]:
-                            items_info[item].alpha_model += sesh_avg_recall_probs[item] * (2 * alpha_adjust_value)
-
-        # If the cached activations should be updated AFTER the end of the SESSION
-        if cache_update == "post-session":
-            # For each item
-            for item in items:
-                # If the item WAS seen in this session
-                if sesh_enc_counts[item] != 0:
-                    # Store the item's encounters
-                    item_encounters = items_info[item].encounters
-                    # For each encounter
-                    for i, enc in enumerate(item_encounters):
-                        # NOTE: Since encounters are ordered chronologically,
-                        #       the previous encounter list always contains updated values
-                        # Get all encounters, which happened before this one
-                        prev_encounters  = item_encounters[:i]
-                        # Get each encounter's activation
-                        prev_activations = [prev_enc.activation for prev_enc in prev_encounters]
-                        # recalculate the encounter's activation with the updated alpha
-                        enc.activation   = calc_activation(item, items_info[item].alpha_model, prev_encounters, prev_activations, enc.time)[0]
-
+        # Update the cached activations
+        # For each item
+        for item in items:
+            # Store the item's encounters
+            item_encounters = items_info[item].encounters
+            # For each encounter
+            for i, enc in enumerate(item_encounters):
+                # NOTE: Since encounters are ordered chronologically,
+                #       the previous encounter list always contains updated values
+                # Get all previous encounters
+                prev_encounters  = item_encounters[:i]
+                # Get each previous encounter's activation
+                prev_activations = [prev_enc.activation for prev_enc in prev_encounters]
+                # recalculate the encounter's activation with the updated alpha
+                enc.activation   = calc_activation(item, items_info[item].alpha_model, prev_encounters, prev_activations, enc.time)[0]
 
         # increment the current time to account for the intersession time
         # NOTE: Only here to simulate learning during multiple sessions.
@@ -386,7 +333,7 @@ def learn(items, items_info, sesh_count, sesh_length, cached, immediate_alpha_ad
         cur_time += datetime.timedelta(seconds=scaled_intersesh_time)
 
 
-def get_next_item(items, items_info, cur_time, next_new_item_idx, cached):
+def get_next_item(items, items_info, cur_time, next_new_item_idx):
     """
     Finds the next item to be presented based on their activation.
 
@@ -395,8 +342,7 @@ def get_next_item(items, items_info, cur_time, next_new_item_idx, cached):
     items_info        -- the map, containing each item's information
     cur_time          -- the time, at which the next item should be presented
     next_new_item_idx -- the index of the next NEW item from the list
-    cached            -- whether to use the cached activations for each encounter
-                         in the activation calculation OR to recalculate them again
+
     Returns:
     the next item to be presented, its activation and the index of the next NEW item
     """
@@ -412,8 +358,8 @@ def get_next_item(items, items_info, cur_time, next_new_item_idx, cached):
     for item in seen_items:
         # Extract all encounters, which happened before current time
         prev_encounters   = [enc for enc in items_info[item].encounters if enc.time < cur_time]
-        # Store each previous encounter's activation if cached values should be used
-        prev_activations  = [] if not cached else [enc.activation for enc in prev_encounters]
+        # Store each previous encounter's activation
+        prev_activations  = [enc.activation for enc in prev_encounters]
         # Map each item to its activation
         item_to_act[item] = calc_activation(item, items_info[item].alpha_model, prev_encounters, prev_activations, future_time)[0]
 

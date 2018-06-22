@@ -27,8 +27,8 @@ TODO: Do tests with adjustment = 0.02 and sesh_count = 4, 5, 7, 10
     - Done, 7 sessions wins by a very slight lead, so 4 is good enough
 
 TODO: Clean up latest implementation
+    - Done
 
 TODO: Update graph file with latest implementation
-
 
 TODO: Compare real item order vs model's
