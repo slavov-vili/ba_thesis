@@ -583,15 +583,15 @@ def guess_item(recall_prob):
 
 def main():
     learn_sesh_counts       = [50]
-    study_sesh_counts       = [4, 5, 7, 10]
+    study_sesh_counts       = [2] # [4, 5, 7, 10]
     study_sesh_lengths      = [1800] # [900, 1800, 2700, 3600]
     immediate_alpha_adjusts = [True] #, False]
-    alpha_adjust_values     = [0.02, 0.03]
+    alpha_adjust_values     = [0.02]
 
     # For all possible options for INTER-SESSION TIME
     for inter_sesh_time in [24]: # [2, 4, 24]:
         # For all possible options of USING the CACHED HISTORY
-        for cached in [True]: # [False, True]:
+        for cached in [False, True]:
             # For all possible NUMBERS of LEARNING SESSIONS
             for learn_sesh_count in learn_sesh_counts:
                 # For all possible NUMBERS of STUDY SESSIONS
@@ -603,7 +603,7 @@ def main():
                             # For all possible WAYS of ADJUSTING the ALPHA
                             for immediate_alpha_adjust in immediate_alpha_adjusts:
                                 # For all possible options of updating cached history
-                                for cache_update in ["post-session"]: #["", "immediately", "post-session"]:
+                                for cache_update in ["", "immediately", "post-session"]:
                                     # NOTE: these are here to avoid useless tests
                                     # Since cache is NOT used, there is no use updating it
                                     if not cached and cache_update != "":

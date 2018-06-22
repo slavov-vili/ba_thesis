@@ -24,32 +24,11 @@ TODO: Redo all tests with latest implementation
     - Tests redone, results - saved
 
 TODO: Do tests with adjustment = 0.02 and sesh_count = 4, 5, 7, 10
+    - Done, 7 sessions wins by a very slight lead, so 4 is good enough
 
 TODO: Clean up latest implementation
 
 TODO: Update graph file with latest implementation
 
 
-
 TODO: Compare real item order vs model's
-
-find best average learning sesh count (relatively accurate and also doesn't take too much time)
-best average = 50
-
-    - WITHOUT cache update
-        tested immediate vs post-session alpha adjustment (as well as different adjustment values)
-        - immediate adjustment by 0.03 wins, but avg alpha error is 0.036
-          * tested for 0.02 and 0.04, 0.02 performs quit a bit better (by 0,03)
-        - post-session adjustment performed quite bad
-        
-    - WITH cache update
-        tested immediate vs post-session ALPHA adjustment
-        - immediate adjustment by 0.03 wins, but avg alpha error is 0.036
-          * tested for 0.02 and 0.04, 0.02 performs quit a bit better (by 0,03)
-        - post-session adjustment performed quite bad
-
-        tested immediate vs post-session cache update
-        - post-session update performed the best
-
-
-        after best adjustment is found, test different study_sesh_counts and different study_sesh_lengths
