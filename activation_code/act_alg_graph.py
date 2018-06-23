@@ -35,6 +35,14 @@ def reset_items_info(items_info):
         items_info[item].encounters  = []
         items_info[item].incorrect   = 0
 
+def initialize_avg_items_info(items):
+    avg_items_info = {}
+    for item in items:
+        avg_items_info[item] = Bunch(avg_enc_count   = 0.0,
+                                     avg_perc_incorr = 0.0,
+                                     avg_alpha       = 0.0)
+    return avg_items_info
+
 
 
 # list all items to be learned
@@ -48,77 +56,83 @@ items_info = initialize_items_info(items)
 
 # [ Graphing area ]
 
-def graph_item_info(item, items_info, learn_start):
+def graph_item_info(item, items_info, learn_start, learn_end):
     """
-    Graphs the activation of the item throughout the learning process.
+    Graphs the activation and alpha developments of the item throughout the learning process.
+
     Arguments:
     item        -- the item, whose activation is being graphed
     items_info  -- the map, containing each item's information
     learn_start -- the time when the learning process started
+    learn_end   -- the time when the learning process ended
+
     Returns:
     nothing, shows the graph
     """
 
     # set the graph bounds
-    plot_bounds_x_time  = (0, 6000)
+    plot_bounds_x_time  = (0, calc_time_diff(learn_end, learn_start))
     plot_bounds_y_act   = (-1.5, 1.5)
     plot_bounds_y_alpha = (model_params["alpha_min"], model_params["alpha_max"])
 
     # store the x and y values for activations and alphas
-    x_act = []
-    y_act = []
+    x_act   = []
+    y_act   = []
     y_alpha = []
 
+    # Store all of the item's encounters
     item_encounters = items_info[item].encounters
-    # add the first encounter's information
-    x_act.append(calc_time_diff(item_encounters[0].time, learn_start))
-    y_act.append(item_encounters[0].activation)
-    y_alpha.append(item_encounters[0].alpha)
-
-    # for each two consecutive encounters
-    for i in range(0, len(item_encounters)-1):
-        prev_enc = item_encounters[i]
-        next_enc = item_encounters[i+1]
-
-        cur_time = prev_enc.time + datetime.timedelta(seconds=1)
-        # for each second between the two encounters
-        while cur_time < next_enc.time:
+    # Store the initial time and alpha
+    cur_time   = item_encounters[0].time
+    last_alpha = item_encounters[0].alpha
+    # For each encounter
+    for cur_enc in item_encounters:
+        # Store the previous encounters and their activations
+        prev_encounters  = [prev_enc for prev_enc in item_encounters if prev_enc.time < cur_enc.time]
+        prev_activations = [prev_enc.activation for prev_enc in prev_encounters]
+        # For each second BEFORE the current encounter
+        while cur_time < cur_enc.time:
+            # increment the current time
+            cur_time  += datetime.timedelta(seconds=1)
             # calculate the item's activation and add it to the graphing lists
-            cur_act = calc_activation(item, prev_enc.alpha, [enc for enc in item_encounters if enc.time < cur_time], [], cur_time)
+            cur_act = calc_activation(item, last_alpha, prev_encounters, prev_activations, cur_time)[0]
             # add the encounter's activation and alpha at its specific time
             x_act.append(calc_time_diff(cur_time, learn_start))
             y_act.append(cur_act)
-            y_alpha.append(prev_enc.alpha)
-            # increment the current time
-            cur_time += datetime.timedelta(seconds=1)
+            y_alpha.append(last_alpha)
 
-        # add the next encounter's information
-        x_act.append(calc_time_diff(next_enc.time, learn_start))
-        y_act.append(next_enc.activation)
-        y_alpha.append(next_enc.alpha)
+        # Add the encounter's information to the graphing lists
+        x_act.append(calc_time_diff(cur_enc.time, learn_start))
+        y_act.append(cur_enc.activation)
+        y_alpha.append(cur_enc.alpha)
+        # update the current time
+        cur_time   = cur_enc.time
+        # update the last alpha
+        last_alpha = cur_enc.alpha
+
 
     # create a subplot for activations
     plt.subplot(2,1,1)
     # plot the recall threshold
     plt.plot([plot_bounds_x_time[0], plot_bounds_x_time[1]], [model_params["tau"], model_params["tau"]], color='r', linestyle='--')
-    # plot the item's activations
+    # plot the item's activations throughout learning
     plt.plot(x_act, y_act, color='g')
     # Set plot information
     plt.title("Plot for \'" + item + "\'")
     plt.ylabel("Item Activation")
-    # set the plot's axes
+    # Set the plot's axes
     plt.axis([plot_bounds_x_time[0], plot_bounds_x_time[1], plot_bounds_y_act[0], plot_bounds_y_act[1]])
 
     # create a subplot for alphas
     plt.subplot(2,1,2)
-    # plot the item's actual alpha
-    plt.plot([plot_bounds_x_time[0], plot_bounds_x_time[1]], [items_info[item].alpha_real, items_info[item].alpha_real], color='k', linestyle='--')
-    # plot the item's alphas
-    plt.plot(x_act, y_alpha, color='b')
+    # plot the item's real alpha
+    plt.plot([plot_bounds_x_time[0], plot_bounds_x_time[1]], [items_info[item].alpha_real, items_info[item].alpha_real], color='g', linestyle='--')
+    # plot the item's alphas throughout learning
+    plt.plot(x_act, y_alpha, color='r')
     # Set plot information
     plt.xlabel("Elapsed Session Time (seconds)")
     plt.ylabel("Item Alpha")
-    # set the plot's axes
+    # Set the plot's axes
     plt.axis([plot_bounds_x_time[0], plot_bounds_x_time[1], plot_bounds_y_alpha[0], plot_bounds_y_alpha[1]])
 
     # show the plot
@@ -129,14 +143,151 @@ def graph_item_info(item, items_info, learn_start):
 
 
 
-# [ Printing area ]
+# [ Testing area ]
+
+# TODO: maybe implement encounter-specific information to track performance more closely
+def test_learning(items, items_info, sesh_count, sesh_length, learn_count):
+    """
+    Gets average values for learning both when using the cached and the uncached activations for each encounter
+    Prints a comparison between the two averages.
+
+    learn_count  -- how many times should learning sessions be conducted when getting the average values
+    """
+
+    # Store the average values for learning sessions
+    averages = Bunch(avg_duration    = 0.0,
+                     avg_enc_count   = 0.0,
+                     avg_alpha_err   = 0.0,
+                     avg_alpha_bias  = 0.0,
+                     avg_items_info  = initialize_avg_items_info(items))
+
+    # Conduct learning sessions
+    for i in range(learn_count):
+        # Reset the session-specific item information
+        reset_items_info(items_info)
+
+        # Conduct a learning session
+        start = datetime.datetime.now()
+        learn(items, items_info, sesh_count, sesh_length)
+        end   = datetime.datetime.now()
+
+        # Add the LEARNING session's DURATION to the averages
+        learn_duration = (end - start).total_seconds()
+        averages.avg_duration += learn_duration
+        # Add the LEARNING session's ENCOUNTER COUNT to the averages
+        learn_enc_count = sum([len(items_info[item].encounters) for item in items])
+        averages.avg_enc_count  += learn_enc_count
+        # Add the LEARNING session's ALPHA ERROR to the averages
+        averages.avg_alpha_err  += calc_avg_alpha_error(items, items_info)
+        # Add the LEARNING session's ALPHA BIAS to the averages
+        averages.avg_alpha_bias += calc_avg_alpha_bias(items, items_info)
+        # Add each item
+        for item in items:
+            item_enc_count = len(items_info[item].encounters)
+            # Add the item's ENCOUNTER COUNT to the averages
+            averages.avg_items_info[item].avg_enc_count   += item_enc_count
+            # Add the item's INCORRECT PERCENTAGE to the averages
+            averages.avg_items_info[item].avg_perc_incorr += (items_info[item].incorrect / item_enc_count) * 100
+            # Add the item's ALPHA to the ITEM-SPECIFIC averages
+            averages.avg_items_info[item].avg_alpha       += items_info[item].alpha_model
+
+    # Calculate the averages
+    averages.avg_duration   /= learn_count
+    averages.avg_enc_count  /= learn_count
+    averages.avg_alpha_err  /= learn_count
+    averages.avg_alpha_bias /= learn_count
+    for item in items:
+        averages.avg_items_info[item].avg_enc_count   /= learn_count
+        averages.avg_items_info[item].avg_perc_incorr /= learn_count
+        averages.avg_items_info[item].avg_alpha       /= learn_count
+
+
+    print("\n")
+    print("Average Duration        = ", averages.avg_duration, "SECONDS")
+    print("Average Encounter Count = ", averages.avg_enc_count, "ENCOUNTERS")
+    print("Average Alpha Error     = ", averages.avg_alpha_err)
+    print("Average Alpha Bias      = ", averages.avg_alpha_bias)
+    for item in averages.avg_items_info:
+        avg_item_info = averages.avg_items_info[item]
+        print("\nItem:", item)
+        print("Average Encounter Count   = ", avg_item_info.avg_enc_count,   "ENCOUNTERS")
+        print("Average Percentage Incorr = ", avg_item_info.avg_perc_incorr, "PERCENT")
+        print("Alpha         (Real)      = ", items_info[item].alpha_real)
+        print("Average Alpha (Model)     = ", avg_item_info.avg_alpha)
+
+def test_learn_duration(items, items_info, sesh_count, sesh_length):
+    """
+    Prints how much time it takes for learning to finish given a number of items.
+    """
+    # Reset the session-specific item information
+    reset_items_info(items_info)
+
+    start = datetime.datetime.now()
+    learn(items, items_info, sesh_count, sesh_length)
+    end   = datetime.datetime.now()
+
+    enc_count = sum([len(items_info[item].encounters) for item in items])
+
+    print("\n")
+    print("Item count:      ", len(items))
+    print("Total encounters:", enc_count)
+    print("Duration:        ", (end - start).total_seconds())
+
+def test_act_call_count(item, items_info, enc_count):
+    """
+    Prints how many times the activation function will be called given a number of encounters.
+    NOTE: ALWAYS do learning before trying to count the calls
+    """
+
+    encounters    = items_info[item].encounters[:enc_count]
+
+    start = datetime.datetime.now()
+    _, act_count = calc_activation(item, items_info[item].alpha_model, encounters, [], start)
+    end   = datetime.datetime.now()
+
+    print("\n")
+    print("Item:", item)
+    print("Encounters:", enc_count)
+    print("The activation function was called", act_count, "times")
+    print("Time taken:", (end - start).total_seconds())
+
+
+
+
+
+# [ Metadata calculation]
+
+def calc_avg_alpha_error(items, items_info):
+    sum_alpha_err = 0
+    for item in items:
+        sum_alpha_err += np.abs(items_info[item].alpha_real - items_info[item].alpha_model)
+    return sum_alpha_err / len(items)
+
+def calc_avg_alpha_bias(items, items_info):
+    sum_alpha_bias = 0
+    for item in items:
+        sum_alpha_bias += items_info[item].alpha_real - items_info[item].alpha_model
+    return sum_alpha_bias / len(items)
+
+
+
+
+
+# [ Printing ]
 
 def print_final_results(items_info, full=True):
-    print("\nFinal results:")
+    relevant_items = []
     for item in items_info:
-        if not full and len(items_info[item].encounters) == 0:
-            continue
-        print("Item:'", item, "'")
+        if full:
+            relevant_items.append(item)
+        elif len(items_info[item].encounters) != 0:
+            relevant_items.append(item)
+
+    print("\nFinal results:")
+    print("Average alpha error:", calc_avg_alpha_error(relevant_items, items_info))
+    print("Average alpha bias: ", calc_avg_alpha_bias(relevant_items,  items_info))
+    for item in relevant_items:
+        print("Item:     '", item, "'")
         print("Alpha Real: ", items_info[item].alpha_real)
         print("Alpha Model:", items_info[item].alpha_model)
         print("Encounters: ", len(items_info[item].encounters))
@@ -156,6 +307,7 @@ def print_item_info(item, items_info):
     print("Item:", item)
     print("Real  Alpha:", items_info[item].alpha_real)
     print("Model Alpha:", items_info[item].alpha_model)
+    print("Alpha Error:", items_info[item].alpha_real - items_info[item].alpha_model)
     item_encounters = items_info[item].encounters
     print("Encounters: ", len(item_encounters))
     print("Incorrect:  ", items_info[item].incorrect)
@@ -174,101 +326,140 @@ def print_item_info(item, items_info):
 
 # [ Implementation area ]
 
+
 def learn(items, items_info, sesh_count, sesh_length):
     """
-    Simulates learning process by adding new encounters of words.
+    Simulates the learning process by adding new encounters of words.
+
     Arguments:
-    items       -- the items which need to be learned
-    items_info  -- the information related to each item
-    sesh_count  -- the number of sessions to be performed
-    sesh_length -- the length of each session(in seconds)
+    items                      -- the items which need to be learned
+    items_info                 -- the information related to each item
+    sesh_count                 -- the number of sessions to be performed
+    sesh_length                -- the length of each session (in seconds)
+
     Returns:
     the datetime when the learning process started
     """
 
     # store the current time
-    learn_start = datetime.datetime.now()
-    cur_time    = learn_start
+    cur_time = datetime.datetime.now()
+    learn_start = cur_time
     # store the index of the next NEW item which needs to be learned
+    # NOTE: if the new items are in a separate list, this does NOT need to be here
     next_new_item_idx = 0
 
-    # for each session
+    # for each STUDY session
+    # NOTE: Only needed for simulating full learning process. Otherwise all learning takes place in a single session.
     for sesh_id in range(sesh_count):
-        # set the session's starting time
+        # Set the session's information
         sesh_start = cur_time
         sesh_end   = sesh_start + datetime.timedelta(seconds=sesh_length)
-        print("\n")
-        print("Session", sesh_id, "start:", sesh_start)
+
+        # print("\nSession", sesh_id, "start:", sesh_start)
 
         # while there is time in the session
         while cur_time < sesh_end:
             # get the next item to be presented
-            item, item_act, next_new_item_idx = get_next_item(items, items_info, cur_time, next_new_item_idx)
-            print("\nEncountered '", item, "' at", cur_time)
-            print("Encounters:", len(items_info[item].encounters))
-            print("Activation:", item_act)
+            item, next_new_item_idx = get_next_item(items, items_info, cur_time, next_new_item_idx)
+            # print("Encountered '", item, "' at", cur_time)
 
-            # calculate the item's recall probability with its REAL alpha
-            item_rec = calc_recall_prob(calc_activation(item, items_info[item].alpha_real, items_info[item].encounters, [], cur_time))
-            print("Recall prob:", item_rec)
+            # Extract all encounters, which happened before future time
+            prev_encounters   = [enc for enc in items_info[item].encounters if enc.time < cur_time]
+            # Store each previous encounter's activation
+            prev_activations  = [enc.activation for enc in prev_encounters]
+            # Calculate the item's activation with the MODEL's alpha
+            item_act_model = calc_activation(item, items_info[item].alpha_model, prev_encounters, prev_activations, cur_time)[0]
+            item_rec_model = calc_recall_prob(item_act_model)
+
+            # NOTE: Only needed to simulate user interaction
+            # calculate the item's activation with its REAL alpha
+            # NOTE: NEVER use cached activations when calculating the item's REAL activation
+            item_act_real = calc_activation(item, items_info[item].alpha_real, items_info[item].encounters, [], cur_time)[0]
+            # calculate the item's recall probability, based on the its real activation
+            item_rec_real = calc_recall_prob(item_act_real)
             # try to guess the item
-            guessed = guess_item(item_rec)
-            print("Guessed item:", guessed)
+            guessed = guess_item(item_rec_real)
 
             # add the current encounter to the item's encounter list
-            items_info[item].encounters.append(Bunch(time=cur_time, alpha=items_info[item].alpha_model, activation=item_act, was_guessed=guessed))
+            items_info[item].encounters.append(Bunch(time        = cur_time,
+                                                     alpha       = items_info[item].alpha_model,
+                                                     activation  = item_act_model,
+                                                     was_guessed = guessed))
 
-            # adjust values depending on outcome
+            # NOTE: The values for adjusting the alpha were selected through a bunch of testing and fitting
+            # NOTE: in order for the results, produced by this simple simulation, to somewhat make sense.
+            # adjust the alpha value depending on the outcome
             if guessed:
                 if items_info[item].alpha_model > model_params["alpha_min"]:
-                    items_info[item].alpha_model -= 0.03
+                    items_info[item].alpha_model -= (1 - item_rec_model) * (2 * 0.02)
             else:
                 if items_info[item].alpha_model < model_params["alpha_max"]:
-                    items_info[item].alpha_model += 0.03
-                items_info[item].incorrect += 1
+                    items_info[item].alpha_model += item_rec_model * (2 * 0.02)
+                # Increment the ITEM's incorrect counter
+                items_info[item].incorrect  += 1
 
+            # NOTE: Only here to simulate the duration if interactions.
+            # Encounter duration = time it takes to start typing + average time to type a word
+            enc_duration = datetime.timedelta(seconds = calc_reaction_time(item_act_model)) + datetime.timedelta(seconds = 3.0)
             # increment the current time to account for the length of the encounter
-            cur_time += datetime.timedelta(seconds=random.randint(3, 10))
+            cur_time    += enc_duration
+
+        # Update the cached activations
+        # For each item
+        for item in items:
+            # Store the item's encounters
+            item_encounters = items_info[item].encounters
+            # For each encounter
+            for i, enc in enumerate(item_encounters):
+                # NOTE: Since encounters are ordered chronologically,
+                #       the previous encounter list always contains updated values
+                # Get all previous encounters
+                prev_encounters  = item_encounters[:i]
+                # Get each previous encounter's activation
+                prev_activations = [prev_enc.activation for prev_enc in prev_encounters]
+                # recalculate the encounter's activation with the updated alpha
+                enc.activation   = calc_activation(item, items_info[item].alpha_model, prev_encounters, prev_activations, enc.time)[0]
 
         # increment the current time to account for the intersession time
+        # NOTE: Only here to simulate learning during multiple sessions.
         scaled_intersesh_time = (24 * model_params["delta"]) * 3600
         cur_time += datetime.timedelta(seconds=scaled_intersesh_time)
 
+    learn_end = cur_time
+    return learn_start, learn_end
 
 
-    print("\nFinal results:")
-    for item in items:
-        print("Item:'", item, "'")
-        print("Alpha Real:", items_info[item].alpha_real)
-        print("Alpha Model:", items_info[item].alpha_model)
-        print("Encounters:", len(items_info[item].encounters))
-        print("Incorrect:", items_info[item].incorrect)
-    return learn_start
-
-
-def get_next_item(items, items_info, time, next_new_item_idx):
+def get_next_item(items, items_info, cur_time, next_new_item_idx):
     """
     Finds the next item to be presented based on their activation.
+
     Arguments:
     items             -- the items to be considered when choosing the next item
     items_info        -- the map, containing each item's information
-    time              -- the time, at which the next item should be presented
+    cur_time          -- the time, at which the next item should be presented
     next_new_item_idx -- the index of the next NEW item from the list
+
     Returns:
     the next item to be presented, its activation and the index of the next NEW item
     """
 
     # extract all SEEN items
+    # NOTE: If the SEEN and UNSEEN items were separate, this would NOT be needed
     seen_items = items[:next_new_item_idx]
     # maps an item to its activation
     item_to_act = {}
-    # add 15 seconds to the time in order to catch items before the fall below the retrieval threshold
-    future_time = time + datetime.timedelta(seconds=15)
+    # add 15 seconds to the time in order to catch items before they fall below the retrieval threshold
+    future_time = calc_future_time(cur_time)
     # recalculate each SEEN item's activation at future time with their updated alphas
     for item in seen_items:
-        item_to_act[item] = calc_activation(item, items_info[item].alpha_model, [enc for enc in items_info[item].encounters if enc.time < future_time], [], future_time)
+        # Extract all encounters, which happened before current time
+        prev_encounters   = [enc for enc in items_info[item].encounters if enc.time < cur_time]
+        # Store each previous encounter's activation
+        prev_activations  = [enc.activation for enc in prev_encounters]
+        # Map each item to its activation
+        item_to_act[item] = calc_activation(item, items_info[item].alpha_model, prev_encounters, prev_activations, future_time)[0]
 
-    print("\nFinding next word:")
+    # print("\nFinding next word!")
 
     # the default next item is the one with the lowest activation
     next_item = "" if len(seen_items) == 0 else min(seen_items, key=item_to_act.get)
@@ -278,56 +469,55 @@ def get_next_item(items, items_info, time, next_new_item_idx):
     # if ALL items are NEW
     if next_item == "":
         # select the next new item to be presented
-        next_item = items[next_new_item_idx_inc]
+        next_item = items[next_new_item_idx]
         # increment the index of the next new item
         next_new_item_idx_inc += 1
-        print("Item is NEW word!")
-    # if the lowest activation is BELOW the retrieval threshold
-    elif item_to_act[next_item] < model_params["tau"]:
-        print("Item BELOW threshold!")
-    # if ALL items are ABOVE the threshold
-    # AND there ARE NEW items available
-    elif next_new_item_idx_inc < len(items):
+    # if the lowest activation is ABOVE the retrieval threshold
+    # AND
+    # there ARE NEW items available
+    elif item_to_act[next_item] > model_params["tau"] and next_new_item_idx < len(items):
         # select the next new item to be presented
-        next_item = items[next_new_item_idx_inc]
+        next_item = items[next_new_item_idx]
         # increment the index of the next new item
         next_new_item_idx_inc += 1
-        print("Item is NEW word!")
-    # if NO items BELOW treshold
-    # AND NO NEW items
-    else:
-        print("Item has LOWEST activation!")
 
-    # store the next item's activation based on whether it is a NEW item or NOT
-    next_item_act = calc_activation(next_item, items_info[next_item].alpha_model, [enc for enc in items_info[next_item].encounters if enc.time < time], [], future_time) if next_item not in item_to_act else item_to_act[next_item]
+    # NOTE: in ALL other cases, the item with the lowest activation is selected
+    # NOTE: (regardless of whether it is below the retrieval threshold)
 
-    return next_item, next_item_act, next_new_item_idx_inc
+    return next_item, next_new_item_idx_inc
 
 
-def calc_activation(item, alpha, encounters, activations, cur_time):
+def calc_activation(item, alpha, encounters, activations, cur_time, call_count=1):
     """
     Calculates the activation for a given item at a given timestamp.
     Takes into account all previous encounters of the item through the calculation of decay.
+
     Arguments:
     item        -- the item whose activation should be calculated
     alpha       -- the alpha value of the item which should be used in the calculation
     encounters  -- the list of all of the item's encounters
     activations -- the list of activations corresponding to each encounter (used for caching activation values)
     cur_time    -- the timestamp at which the activation should be calculated
+    call_count  -- used to see how many recursive calls are made
+
     Returns:
     the activation of the item at the given timestamp
     """
 
+    # NOTE: only here to count recursive function calls
+    # stores the incremented call count when the function is called recursively
+    call_count_inc = call_count
+
     # if there are NO previous encounters
     if len(encounters) == 0:
         m = np.NINF
-    # ASSUMING that the encounters are sorted according to their timestamps
+    # ASSUMING that the encounters are sorted chronologically
     # if the last encounter happens later than the time of calculation
     elif encounters[len(encounters)-1].time > cur_time:
         raise ValueError("Encounters must happen BEFORE the time of activation calculation!")
     else:
         # stores the sum of time differences
-        sum = 0.0
+        time_diff_sum = 0.0
         # for each encounter
         for enc_idx, enc_bunch in enumerate(encounters):
             # stores the encounter's activation
@@ -335,10 +525,12 @@ def calc_activation(item, alpha, encounters, activations, cur_time):
             # if the encounter's activation has ALREADY been calculated
             if enc_idx < len(activations):
                 enc_act = activations[enc_idx]
-            # if the encounter's activation has NOT been calculated
+            # if the encounter's activation has NOT been calculated yet
             else:
                 # calculate the activation of the item at the time of the encounter
-                enc_act = calc_activation(item, alpha, [enc for enc in encounters if enc.time < enc_bunch.time], activations, enc_bunch.time)
+                enc_act, call_count_inc = calc_activation(item, alpha, encounters[:enc_idx], activations, enc_bunch.time, call_count_inc)
+                # NOTE: only here to count recursive function calls
+                call_count_inc += 1
                 # add the encounter's activation to the list
                 activations.append(enc_act)
 
@@ -349,12 +541,12 @@ def calc_activation(item, alpha, encounters, activations, cur_time):
             enc_decay = calc_decay(enc_act, alpha)
 
             # SCALE the difference by the decay and ADD it to the sum
-            sum += np.power(time_diff, -enc_decay)
+            time_diff_sum += np.power(time_diff, -enc_decay)
 
         # calculate the activation given the sum of scaled time differences
-        m = np.log(sum)
+        m = np.log(time_diff_sum)
 
-    return m
+    return m, call_count_inc
 
 
 def calc_decay(activation, alpha):
@@ -387,9 +579,16 @@ def calc_recall_prob(activation):
     the item's probability of recall based on activation
     """
 
-    # calculate the probability of recall
-    Pr = 1 / (1 + np.exp(((model_params["tau"] - activation) / model_params["s"])))
-    return Pr
+    return 1 / (1 + np.exp(((model_params["tau"] - activation) / model_params["s"])))
+
+
+def calc_reaction_time(activation):
+    """
+    Calculates the predicted reaction time (in seconds) based on an item's activation
+    """
+    reaction_time = 3.788 if np.isneginf(activation) else model_params["F"] * np.exp(np.negative(activation)) + model_params["f"]
+
+    return reaction_time
 
 
 def calc_time_diff(cur_time, start_time):
@@ -398,6 +597,13 @@ def calc_time_diff(cur_time, start_time):
     The time difference is represented in total seconds.
     """
     return (cur_time - start_time).total_seconds()
+
+
+def calc_future_time(time):
+    """
+    Adds a given amount to the time
+    """
+    return time + datetime.timedelta(seconds=15)
 
 
 def guess_item(recall_prob):
@@ -409,4 +615,4 @@ def guess_item(recall_prob):
     True if the word was guessed, False otherwise
     """
 
-    return True if random.uniform(0,1) < recall_prob else False
+    return True if random.random() < recall_prob else False

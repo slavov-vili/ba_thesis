@@ -30,5 +30,8 @@ TODO: Clean up latest implementation
     - Done
 
 TODO: Update graph file with latest implementation
+    - Done
+    - Fixed graphing function
+    - TODO: make graphing function for averages
 
 TODO: Compare real item order vs model's
