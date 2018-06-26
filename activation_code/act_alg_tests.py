@@ -159,6 +159,42 @@ def test_act_call_count(item, items_info, enc_count):
     print("The activation function was called", act_count, "times")
     print("Time taken:", (end - start).total_seconds())
 
+def test_encounter_history(items, items_info, sesh_count, sesh_length, learn_count, cached, immediate_alpha, alpha_adjust_value, cache_update, inter_sesh_time):
+    """
+    Gets average values for the encounter order of learning sessions with the given parameters.
+
+    Arguments:
+    learn_count  -- how many times should learning sessions be conducted when getting the average values
+
+    Returns:
+    a list of items, most commonly seen at the given encounter indices
+    """
+
+    # Store the average items
+    averages = []
+
+    # Conduct the learning sessions
+    for i in range(learn_count):
+
+
+def get_session_encounters(items_info):
+    """
+    Extracts the full encounter history of a given session
+
+    Arguments:
+    items_info -- the information for each item from that session
+
+    Returns:
+    the sorted tuple of encounters and the item which got presented
+    """
+    # Store each encounter and the item which got presented in a list of tuples
+    sessions = []
+    for item in items_info:
+        for enc in items_info[item].encounters:
+            sessions.append((enc.time, item))
+    # Return the sorted list of encounters
+    return sorted(sessions)
+
 
 
 
@@ -235,7 +271,7 @@ def print_item_info(item, items_info):
 # [ Implementation area ]
 
 
-def learn(items, items_info, sesh_count, sesh_length, cached, immediate_alpha_adjustment, alpha_adjust_value, cache_update, inter_sesh_time):
+def learn(items, items_info, sesh_count, sesh_length, cached, immediate_alpha_adjustment, alpha_adjust_value, cache_update, inter_sesh_time, use_real_alphas):
     """
     Simulates the learning process by adding new encounters of words.
 
@@ -249,16 +285,25 @@ def learn(items, items_info, sesh_count, sesh_length, cached, immediate_alpha_ad
     immediate_alpha_adjustment -- whether the alpha should be adjusted immediately after each encounter
     alpha_adjust_value         -- how much should the alpha be adjusted
     cache_update               -- when should the cache be updated
+    use_real_alphas            -- whether the real alphas of items should be used when getting the next item
 
     Returns:
     the datetime when the learning process started
     """
+
+    # If the real alphas of items should be used
+    if use_real_alphas:
+        # Set each item's alpha to be its real alpha
+        for item in items:
+            items_info[item].alpha_model = items_info[item].alpha_real
 
     # store the current time
     cur_time = datetime.datetime.now()
     # store the index of the next NEW item which needs to be learned
     # NOTE: if the new items are in a separate list, this does NOT need to be here
     next_new_item_idx = 0
+    # store the index of the current encounter
+    cur_enc_idx = 0
 
     # for each STUDY session
     # NOTE: Only needed for simulating full learning process. Otherwise all learning takes place in a single session.
@@ -292,7 +337,7 @@ def learn(items, items_info, sesh_count, sesh_length, cached, immediate_alpha_ad
             # NOTE: Only needed to simulate user interaction
             # calculate the item's activation with its REAL alpha
             # NOTE: NEVER use cached activations when calculating the item's REAL activation
-            item_act_real = calc_activation(item, items_info[item].alpha_real, items_info[item].encounters, [], cur_time)[0]
+            item_act_real = calc_activation(item, items_info[item].alpha_real, prev_encounters, [], cur_time)[0]
             # calculate the item's recall probability, based on the its real activation
             item_rec_real = calc_recall_prob(item_act_real)
             # try to guess the item
@@ -307,7 +352,7 @@ def learn(items, items_info, sesh_count, sesh_length, cached, immediate_alpha_ad
             # NOTE: The values for adjusting the alpha were selected through a bunch of testing and fitting
             # NOTE: in order for the results, produced by this simple simulation, to somewhat make sense.
             # If the alpha should be adjusted immediately after an encounter
-            if immediate_alpha_adjustment:
+            if immediate_alpha_adjustment and not use_real_alphas:
                 # adjust the alpha value depending on the outcome
                 if guessed:
                     if items_info[item].alpha_model > model_params["alpha_min"]:
@@ -349,7 +394,7 @@ def learn(items, items_info, sesh_count, sesh_length, cached, immediate_alpha_ad
             cur_time    += enc_duration
 
         # If the alphas should be updated AFTER the end of the SESSION
-        if not immediate_alpha_adjustment:
+        if not immediate_alpha_adjustment and not use_real_alphas:
             # For each item
             for item in items:
                 # If the item WAS seen in this session
@@ -589,53 +634,53 @@ def guess_item(recall_prob):
 
 # [ Main function ]
 
-def main():
-    learn_sesh_counts       = [50]
-    study_sesh_counts       = [2] # [4, 5, 7, 10]
-    study_sesh_lengths      = [1800] # [900, 1800, 2700, 3600]
-    immediate_alpha_adjusts = [True] #, False]
-    alpha_adjust_values     = [0.02]
+# def main():
+    # learn_sesh_counts       = [50]
+    # study_sesh_counts       = [2] # [4, 5, 7, 10]
+    # study_sesh_lengths      = [1800] # [900, 1800, 2700, 3600]
+    # immediate_alpha_adjusts = [True] #, False]
+    # alpha_adjust_values     = [0.02]
 
-    # For all possible options for INTER-SESSION TIME
-    for inter_sesh_time in [24]: # [2, 4, 24]:
-        # For all possible options of USING the CACHED HISTORY
-        for cached in [False, True]:
-            # For all possible NUMBERS of LEARNING SESSIONS
-            for learn_sesh_count in learn_sesh_counts:
-                # For all possible NUMBERS of STUDY SESSIONS
-                for study_sesh_count in study_sesh_counts:
-                    # For all possible SESSION LENGTHS
-                    for study_sesh_length in study_sesh_lengths:
-                        # For all possible VALUES for ALPHA ADJUSTING
-                        for alpha_adjust_value in alpha_adjust_values:
-                            # For all possible WAYS of ADJUSTING the ALPHA
-                            for immediate_alpha_adjust in immediate_alpha_adjusts:
-                                # For all possible options of updating cached history
-                                for cache_update in ["", "immediately", "post-session"]:
-                                    # NOTE: these are here to avoid useless tests
-                                    # Since cache is NOT used, there is no use updating it
-                                    if not cached and cache_update != "":
-                                        continue
-                                    # Since alpha is adjusted POST-SESSION, there is no use updating the cache immediately
-                                    if not immediate_alpha_adjust and cache_update == "immediately":
-                                        continue
+    # # For all possible options for INTER-SESSION TIME
+    # for inter_sesh_time in [24]: # [2, 4, 24]:
+        # # For all possible options of USING the CACHED HISTORY
+        # for cached in [False, True]:
+            # # For all possible NUMBERS of LEARNING SESSIONS
+            # for learn_sesh_count in learn_sesh_counts:
+                # # For all possible NUMBERS of STUDY SESSIONS
+                # for study_sesh_count in study_sesh_counts:
+                    # # For all possible SESSION LENGTHS
+                    # for study_sesh_length in study_sesh_lengths:
+                        # # For all possible VALUES for ALPHA ADJUSTING
+                        # for alpha_adjust_value in alpha_adjust_values:
+                            # # For all possible WAYS of ADJUSTING the ALPHA
+                            # for immediate_alpha_adjust in immediate_alpha_adjusts:
+                                # # For all possible options of updating cached history
+                                # for cache_update in ["", "immediately", "post-session"]:
+                                    # # NOTE: these are here to avoid useless tests
+                                    # # Since cache is NOT used, there is no use updating it
+                                    # if not cached and cache_update != "":
+                                        # continue
+                                    # # Since alpha is adjusted POST-SESSION, there is no use updating the cache immediately
+                                    # if not immediate_alpha_adjust and cache_update == "immediately":
+                                        # continue
 
-                                    # alpha_adjust_value = 0.02 if immediate_alpha_adjust else 0.05
+                                    # # alpha_adjust_value = 0.02 if immediate_alpha_adjust else 0.05
 
-                                    # NOTE: session LENGTHS are in SECONDS, while INTER-SESH time is in kOURS
-                                    reset_items_info(items_info)
-                                    print("\n\n\n")
-                                    print("Testing learning:")
-                                    print("Learn sessions         =", learn_sesh_count)
-                                    print("Inter-session time     =", inter_sesh_time)
-                                    print("Study sessions         =", study_sesh_count)
-                                    print("Study session length   =", study_sesh_length)
-                                    print("Immediate alpha adjust =", immediate_alpha_adjust)
-                                    print("Alpha adjust value     =", alpha_adjust_value)
-                                    print("Cache used             =", cached)
-                                    print("Cache updated          =", cache_update)
-                                    test_learning(items, items_info, study_sesh_count, study_sesh_length, learn_sesh_count, cached, immediate_alpha_adjust, alpha_adjust_value, cache_update, inter_sesh_time)
+                                    # # NOTE: session LENGTHS are in SECONDS, while INTER-SESH time is in kOURS
+                                    # reset_items_info(items_info)
+                                    # print("\n\n\n")
+                                    # print("Testing learning:")
+                                    # print("Learn sessions         =", learn_sesh_count)
+                                    # print("Inter-session time     =", inter_sesh_time)
+                                    # print("Study sessions         =", study_sesh_count)
+                                    # print("Study session length   =", study_sesh_length)
+                                    # print("Immediate alpha adjust =", immediate_alpha_adjust)
+                                    # print("Alpha adjust value     =", alpha_adjust_value)
+                                    # print("Cache used             =", cached)
+                                    # print("Cache updated          =", cache_update)
+                                    # test_learning(items, items_info, study_sesh_count, study_sesh_length, learn_sesh_count, cached, immediate_alpha_adjust, alpha_adjust_value, cache_update, inter_sesh_time)
 
 
 
-main()
+# main()
