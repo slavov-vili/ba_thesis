@@ -1,0 +1,14 @@
+Next Meeting: 12.07 15:00
+
+Finished all tests, new methods proven better now
+
+Compared error to Chris' results and its quite close
+
+Tested best session count/length for 37 items, 4x3600 works best with 24 h inter-session time
+
+Wanna start writing
+
+TODO: discuss inter-session spacing
+TODO: what the model does ? what not ? Does it run well ?
+TODO: bottleneck, what can do ? heuristic approach, do calculation, but cheap ? Worked, results quite similar, fast enough ? WHat does the model show us about learning ? Conclusion from test results ?
+TODO: fact learning important, session lengths, inter-sesh time etc. replicate Chris' work and technical challenges, conceptual questions, use Chris' implementation + show issues, possible solutions, which I chose, no discussion about word count, session time etc., good model = possibilities for these questions. Next step - real life implementation, beyond the scope of a thesis, people who have learners can take over. Computers allow me to model it and run different parameters. 
