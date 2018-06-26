@@ -40,6 +40,17 @@ def initialize_avg_items_info(items):
                                      avg_alpha       = 0.0)
     return avg_items_info
 
+def initialize_enc_items(enc_count):
+    """
+    Initializes a list, which stores lists of items.
+    Each list represents all items which have been seen at the given encounter index throughout multiple LEARNING sessions.
+    """
+
+    enc_items = []
+    for enc_idx in range(enc_count):
+        enc_items.append([])
+    return enc_items
+
 
 
 # list all items to be learned
@@ -76,7 +87,7 @@ def test_learning(items, items_info, sesh_count, sesh_length, learn_count, cache
 
         # Conduct a learning session
         start = datetime.datetime.now()
-        learn(items, items_info, sesh_count, sesh_length, cached, immediate_alpha, alpha_adjust_value, cache_update, inter_sesh_time)
+        learn(items, items_info, sesh_count, sesh_length, cached, immediate_alpha, alpha_adjust_value, cache_update, inter_sesh_time, False)
         end   = datetime.datetime.now()
 
         # Add the LEARNING session's DURATION to the averages
@@ -159,7 +170,7 @@ def test_act_call_count(item, items_info, enc_count):
     print("The activation function was called", act_count, "times")
     print("Time taken:", (end - start).total_seconds())
 
-def test_encounter_history(items, items_info, sesh_count, sesh_length, learn_count, cached, immediate_alpha, alpha_adjust_value, cache_update, inter_sesh_time):
+def test_encounter_history(items, items_info, sesh_count, sesh_length, learn_count, cached, immediate_alpha, alpha_adjust_value, cache_update, inter_sesh_time, use_real_alphas):
     """
     Gets average values for the encounter order of learning sessions with the given parameters.
 
@@ -170,12 +181,28 @@ def test_encounter_history(items, items_info, sesh_count, sesh_length, learn_cou
     a list of items, most commonly seen at the given encounter indices
     """
 
-    # Store the average items
-    averages = []
+    # Stores the encounter history of each LEARNING session
+    session_histories = []
 
-    # Conduct the learning sessions
+    # Conduct the LEARNING sessions
     for i in range(learn_count):
+        # Reset the session-specific item information
+        reset_items_info(items_info)
 
+        # Do the LEARNING session
+        learn(items, items_info, sesh_count, sesh_length, cached, immediate_alpha, alpha_adjust_value, cache_update, inter_sesh_time, use_real_alphas)
+        # Store the session's encounter history
+        session_histories.append(get_session_encounters(items_info))
+
+    # Use a history size which exists in all recorded histories
+    history_size = min([len(hist) for hist in session_histories])
+
+    # Get a list of encounters, represented by tuples of items and their count (how often they have been seen throughout the history)
+    enc_item_counts = get_item_counts(session_histories, history_size)
+
+    # Returns the final version of the LEARNING history
+    # (a list, representing all encounters and the item most commonly seen at that encounter)
+    return [max(item_counts, key = lambda tup: tup[1])[0] for item_counts in enc_item_counts]
 
 def get_session_encounters(items_info):
     """
@@ -195,6 +222,26 @@ def get_session_encounters(items_info):
     # Return the sorted list of encounters
     return sorted(sessions)
 
+def get_item_counts(session_histories, history_size):
+    """
+    Looks through the session histories and compiles lists of items most commonly seen at the given encounter index.
+    Then transforms those lists into tuples of items and how often they have been seen.
+    """
+    # Stores the lists of items which have been seen at the given indices throughout the LEARNING sessions
+    enc_items = initialize_enc_items(history_size)
+    
+    # For each recorded session history
+    for hist in session_histories:
+        # For each encounter in that history
+        for i in range(history_size):
+            # Add the item seen at this position in this history to the respective list
+            enc_items[i].append(hist[i][1])
+
+    # Translate each encounter's list of items into a list of tuples (item + count)
+    for i, items in enumerate(enc_items):
+        enc_items[i] = [(item, items.count(item)) for item in set(items)]
+
+    return enc_items
 
 
 
