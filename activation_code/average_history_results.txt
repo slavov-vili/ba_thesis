@@ -1,0 +1,686 @@
+Encounter 0 Item: noodles
+Encounter 1 Item: noodles
+Encounter 2 Item: where
+Encounter 3 Item: where
+Encounter 4 Item: many
+Encounter 5 Item: many
+Encounter 6 Item: way
+Encounter 7 Item: way
+Encounter 8 Item: market
+Encounter 9 Item: market
+Encounter 10 Item: castle
+Encounter 11 Item: castle
+Encounter 12 Item: noodles
+Encounter 13 Item: where
+Encounter 14 Item: group
+Encounter 15 Item: group
+Encounter 16 Item: many
+Encounter 17 Item: way
+Encounter 18 Item: restaurant
+Encounter 19 Item: restaurant
+Encounter 20 Item: market
+Encounter 21 Item: castle
+Encounter 22 Item: amazing
+Encounter 23 Item: amazing
+Encounter 24 Item: to visit
+Encounter 25 Item: to visit
+Encounter 26 Item: group
+Encounter 27 Item: each
+Encounter 28 Item: each
+Encounter 29 Item: each
+Encounter 30 Item: tree
+Encounter 31 Item: tree
+Encounter 32 Item: tree
+Encounter 33 Item: amazing
+Encounter 34 Item: amazing
+Encounter 35 Item: British
+Encounter 36 Item: to visit
+Encounter 37 Item: British
+Encounter 38 Item: each
+Encounter 39 Item: each
+Encounter 40 Item: adult
+Encounter 41 Item: adult
+Encounter 42 Item: tree
+Encounter 43 Item: a day
+Encounter 44 Item: a day
+Encounter 45 Item: a day
+Encounter 46 Item: a day
+Encounter 47 Item: group
+Encounter 48 Item: open(from...to...)
+Encounter 49 Item: open(from...to...)
+Encounter 50 Item: open(from...to...)
+Encounter 51 Item: open(from...to...)
+Encounter 52 Item: open(from...to...)
+Encounter 53 Item: open(from...to...)
+Encounter 54 Item: furniture
+Encounter 55 Item: furniture
+Encounter 56 Item: furniture
+Encounter 57 Item: furniture
+Encounter 58 Item: a year
+Encounter 59 Item: a year
+Encounter 60 Item: a year
+Encounter 61 Item: a year
+Encounter 62 Item: restaurant
+Encounter 63 Item: a year
+Encounter 64 Item: open
+Encounter 65 Item: open
+Encounter 66 Item: open
+Encounter 67 Item: open
+Encounter 68 Item: furniture
+Encounter 69 Item: free time
+Encounter 70 Item: a year
+Encounter 71 Item: free time
+Encounter 72 Item: free time
+Encounter 73 Item: canal
+Encounter 74 Item: canal
+Encounter 75 Item: canal
+Encounter 76 Item: open
+Encounter 77 Item: Chinese
+Encounter 78 Item: Chinese
+Encounter 79 Item: Chinese
+Encounter 80 Item: stall
+Encounter 81 Item: stall
+Encounter 82 Item: amazing
+Encounter 83 Item: free time
+Encounter 84 Item: canal
+Encounter 85 Item: stall
+Encounter 86 Item: stall
+Encounter 87 Item: Chinese
+Encounter 88 Item: Chinese
+Encounter 89 Item: Chinese
+Encounter 90 Item: stall
+Encounter 91 Item: playing field
+Encounter 92 Item: stall
+Encounter 93 Item: playing field
+Encounter 94 Item: playing field
+Encounter 95 Item: playing field
+Encounter 96 Item: fancy
+Encounter 97 Item: fancy
+Encounter 98 Item: open
+Encounter 99 Item: playing field
+Encounter 100 Item: a week
+Encounter 101 Item: a week
+Encounter 102 Item: a week
+Encounter 103 Item: fancy
+Encounter 104 Item: fancy
+Encounter 105 Item: a week
+Encounter 106 Item: a week
+Encounter 107 Item: a week
+Encounter 108 Item: to visit
+Encounter 109 Item: to enjoy
+Encounter 110 Item: to enjoy
+Encounter 111 Item: to enjoy
+Encounter 112 Item: a week
+Encounter 113 Item: a week
+Encounter 114 Item: best
+Encounter 115 Item: best
+Encounter 116 Item: best
+Encounter 117 Item: best
+Encounter 118 Item: best
+Encounter 119 Item: best
+Encounter 120 Item: best
+Encounter 121 Item: to enjoy
+Encounter 122 Item: wonderful
+Encounter 123 Item: wonderful
+Encounter 124 Item: wonderful
+Encounter 125 Item: best
+Encounter 126 Item: wonderful
+Encounter 127 Item: best
+Encounter 128 Item: wonderful
+Encounter 129 Item: wonderful
+Encounter 130 Item: wonderful
+Encounter 131 Item: expensive
+Encounter 132 Item: expensive
+Encounter 133 Item: expensive
+Encounter 134 Item: to add
+Encounter 135 Item: to add
+Encounter 136 Item: to add
+Encounter 137 Item: expensive
+Encounter 138 Item: expensive
+Encounter 139 Item: to add
+Encounter 140 Item: furniture
+Encounter 141 Item: furniture
+Encounter 142 Item: boat
+Encounter 143 Item: to add
+Encounter 144 Item: boat
+Encounter 145 Item: boat
+Encounter 146 Item: to add
+Encounter 147 Item: to add
+Encounter 148 Item: boat
+Encounter 149 Item: to join in
+Encounter 150 Item: to join in
+Encounter 151 Item: boat
+Encounter 152 Item: boat
+Encounter 153 Item: boat
+Encounter 154 Item: to join in
+Encounter 155 Item: to join in
+Encounter 156 Item: view
+Encounter 157 Item: view
+Encounter 158 Item: view
+Encounter 159 Item: view
+Encounter 160 Item: view
+Encounter 161 Item: to join in
+Encounter 162 Item: canoeing
+Encounter 163 Item: canoeing
+Encounter 164 Item: canoeing
+Encounter 165 Item: canoeing
+Encounter 166 Item: flower
+Encounter 167 Item: canoeing
+Encounter 168 Item: view
+Encounter 169 Item: canoeing
+Encounter 170 Item: view
+Encounter 171 Item: flower
+Encounter 172 Item: flower
+Encounter 173 Item: flower
+Encounter 174 Item: canoeing
+Encounter 175 Item: canoeing
+Encounter 176 Item: flower
+Encounter 177 Item: flower
+Encounter 178 Item: flower
+Encounter 179 Item: to add
+Encounter 180 Item: flower
+Encounter 181 Item: flower
+Encounter 182 Item: flower
+Encounter 183 Item: area
+Encounter 184 Item: area
+Encounter 185 Item: flower
+Encounter 186 Item: to join in
+Encounter 187 Item: free time
+Encounter 188 Item: area
+Encounter 189 Item: boat
+Encounter 190 Item: view
+Encounter 191 Item: open
+Encounter 192 Item: to enjoy
+Encounter 193 Item: view
+Encounter 194 Item: view
+Encounter 195 Item: area
+Encounter 196 Item: area
+Encounter 197 Item: area
+Encounter 198 Item: to join in
+Encounter 199 Item: flower
+Encounter 200 Item: canoeing
+Encounter 201 Item: best
+Encounter 202 Item: adult
+Encounter 203 Item: to visit
+Encounter 204 Item: free time
+Encounter 205 Item: flower
+Encounter 206 Item: to add
+Encounter 207 Item: free time
+Encounter 208 Item: canoeing
+Encounter 209 Item: to add
+Encounter 210 Item: a day
+Encounter 211 Item: to add
+Encounter 212 Item: a week
+Encounter 213 Item: a week
+Encounter 214 Item: a week
+Encounter 215 Item: a week
+Encounter 216 Item: free time
+Encounter 217 Item: a week
+Encounter 218 Item: to add
+Encounter 219 Item: wonderful
+Encounter 220 Item: to join in
+Encounter 221 Item: each
+Encounter 222 Item: wonderful
+Encounter 223 Item: wonderful
+Encounter 224 Item: to add
+Encounter 225 Item: view
+Encounter 226 Item: a week
+Encounter 227 Item: group
+Encounter 228 Item: where
+Encounter 229 Item: canoeing
+Encounter 230 Item: restaurant
+Encounter 231 Item: canoeing
+Encounter 232 Item: to add
+Encounter 233 Item: to enjoy
+Encounter 234 Item: stall
+Encounter 235 Item: a week
+Encounter 236 Item: to add
+Encounter 237 Item: to enjoy
+Encounter 238 Item: each
+Encounter 239 Item: amazing
+Encounter 240 Item: boat
+Encounter 241 Item: noodles
+Encounter 242 Item: fancy
+Encounter 243 Item: a day
+Encounter 244 Item: to add
+Encounter 245 Item: British
+Encounter 246 Item: free time
+Encounter 247 Item: to enjoy
+Encounter 248 Item: area
+Encounter 249 Item: expensive
+Encounter 250 Item: to add
+Encounter 251 Item: stall
+Encounter 252 Item: wonderful
+Encounter 253 Item: expensive
+Encounter 254 Item: to visit
+Encounter 255 Item: tree
+Encounter 256 Item: tree
+Encounter 257 Item: each
+Encounter 258 Item: adult
+Encounter 259 Item: each
+Encounter 260 Item: a year
+Encounter 261 Item: each
+Encounter 262 Item: amazing
+Encounter 263 Item: to add
+Encounter 264 Item: to add
+Encounter 265 Item: area
+Encounter 266 Item: to add
+Encounter 267 Item: adult
+Encounter 268 Item: to join in
+Encounter 269 Item: open
+Encounter 270 Item: Chinese
+Encounter 271 Item: free time
+Encounter 272 Item: amazing
+Encounter 273 Item: open
+Encounter 274 Item: wonderful
+Encounter 275 Item: canoeing
+Encounter 276 Item: a year
+Encounter 277 Item: each
+Encounter 278 Item: amazing
+Encounter 279 Item: expensive
+Encounter 280 Item: area
+Encounter 281 Item: a week
+Encounter 282 Item: free time
+Encounter 283 Item: tree
+Encounter 284 Item: a week
+Encounter 285 Item: wonderful
+Encounter 286 Item: expensive
+Encounter 287 Item: free time
+Encounter 288 Item: view
+Encounter 289 Item: many
+Encounter 290 Item: canoeing
+Encounter 291 Item: where
+Encounter 292 Item: view
+Encounter 293 Item: amazing
+Encounter 294 Item: view
+Encounter 295 Item: to add
+Encounter 296 Item: market
+Encounter 297 Item: expensive
+Encounter 298 Item: canoeing
+Encounter 299 Item: expensive
+Encounter 300 Item: flower
+Encounter 301 Item: to add
+Encounter 302 Item: to add
+Encounter 303 Item: British
+Encounter 304 Item: to add
+Encounter 305 Item: area
+Encounter 306 Item: British
+Encounter 307 Item: free time
+Encounter 308 Item: amazing
+Encounter 309 Item: adult
+Encounter 310 Item: each
+Encounter 311 Item: to add
+Encounter 312 Item: stall
+Encounter 313 Item: view
+Encounter 314 Item: to visit
+Encounter 315 Item: free time
+Encounter 316 Item: a year
+Encounter 317 Item: to visit
+Encounter 318 Item: free time
+Encounter 319 Item: amazing
+Encounter 320 Item: each
+Encounter 321 Item: open
+Encounter 322 Item: a week
+Encounter 323 Item: a year
+Encounter 324 Item: to enjoy
+Encounter 325 Item: a week
+Encounter 326 Item: Chinese
+Encounter 327 Item: Chinese
+Encounter 328 Item: adult
+Encounter 329 Item: free time
+Encounter 330 Item: free time
+Encounter 331 Item: to add
+Encounter 332 Item: to add
+Encounter 333 Item: area
+Encounter 334 Item: area
+Encounter 335 Item: canoeing
+Encounter 336 Item: area
+Encounter 337 Item: view
+Encounter 338 Item: flower
+Encounter 339 Item: a week
+Encounter 340 Item: flower
+Encounter 341 Item: canoeing
+Encounter 342 Item: stall
+Encounter 343 Item: to join in
+Encounter 344 Item: boat
+Encounter 345 Item: fancy
+Encounter 346 Item: stall
+Encounter 347 Item: to visit
+Encounter 348 Item: to add
+Encounter 349 Item: adult
+Encounter 350 Item: open
+Encounter 351 Item: each
+Encounter 352 Item: a day
+Encounter 353 Item: to add
+Encounter 354 Item: group
+Encounter 355 Item: to add
+Encounter 356 Item: canal
+Encounter 357 Item: adult
+Encounter 358 Item: best
+Encounter 359 Item: tree
+Encounter 360 Item: market
+Encounter 361 Item: a week
+Encounter 362 Item: playing field
+Encounter 363 Item: way
+Encounter 364 Item: fancy
+Encounter 365 Item: area
+Encounter 366 Item: boat
+Encounter 367 Item: where
+Encounter 368 Item: playing field
+Encounter 369 Item: castle
+Encounter 370 Item: British
+Encounter 371 Item: restaurant
+Encounter 372 Item: noodles
+Encounter 373 Item: open
+Encounter 374 Item: view
+Encounter 375 Item: free time
+Encounter 376 Item: to add
+Encounter 377 Item: to add
+Encounter 378 Item: furniture
+Encounter 379 Item: wonderful
+Encounter 380 Item: free time
+Encounter 381 Item: free time
+Encounter 382 Item: each
+Encounter 383 Item: adult
+Encounter 384 Item: each
+Encounter 385 Item: a week
+Encounter 386 Item: expensive
+Encounter 387 Item: wonderful
+Encounter 388 Item: where
+Encounter 389 Item: canoeing
+Encounter 390 Item: free time
+Encounter 391 Item: free time
+Encounter 392 Item: many
+Encounter 393 Item: amazing
+Encounter 394 Item: amazing
+Encounter 395 Item: market
+Encounter 396 Item: a week
+Encounter 397 Item: area
+Encounter 398 Item: Chinese
+Encounter 399 Item: free time
+Encounter 400 Item: free time
+Encounter 401 Item: canoeing
+Encounter 402 Item: to add
+Encounter 403 Item: view
+Encounter 404 Item: stall
+Encounter 405 Item: each
+Encounter 406 Item: wonderful
+Encounter 407 Item: fancy
+Encounter 408 Item: amazing
+Encounter 409 Item: a week
+Encounter 410 Item: free time
+Encounter 411 Item: British
+Encounter 412 Item: to add
+Encounter 413 Item: to add
+Encounter 414 Item: where
+Encounter 415 Item: wonderful
+Encounter 416 Item: to visit
+Encounter 417 Item: each
+Encounter 418 Item: amazing
+Encounter 419 Item: fancy
+Encounter 420 Item: to enjoy
+Encounter 421 Item: expensive
+Encounter 422 Item: free time
+Encounter 423 Item: to enjoy
+Encounter 424 Item: each
+Encounter 425 Item: to add
+Encounter 426 Item: amazing
+Encounter 427 Item: wonderful
+Encounter 428 Item: amazing
+Encounter 429 Item: Chinese
+Encounter 430 Item: to add
+Encounter 431 Item: wonderful
+Encounter 432 Item: open
+Encounter 433 Item: free time
+Encounter 434 Item: free time
+Encounter 435 Item: each
+Encounter 436 Item: a week
+Encounter 437 Item: to add
+Encounter 438 Item: to add
+Encounter 439 Item: each
+Encounter 440 Item: wonderful
+Encounter 441 Item: furniture
+Encounter 442 Item: wonderful
+Encounter 443 Item: a day
+Encounter 444 Item: free time
+Encounter 445 Item: fancy
+Encounter 446 Item: wonderful
+Encounter 447 Item: area
+Encounter 448 Item: to add
+Encounter 449 Item: flower
+Encounter 450 Item: to add
+Encounter 451 Item: where
+Encounter 452 Item: amazing
+Encounter 453 Item: to add
+Encounter 454 Item: free time
+Encounter 455 Item: to add
+Encounter 456 Item: area
+Encounter 457 Item: to join in
+Encounter 458 Item: wonderful
+Encounter 459 Item: to add
+Encounter 460 Item: to add
+Encounter 461 Item: adult
+Encounter 462 Item: to add
+Encounter 463 Item: free time
+Encounter 464 Item: to add
+Encounter 465 Item: free time
+Encounter 466 Item: to visit
+Encounter 467 Item: free time
+Encounter 468 Item: free time
+Encounter 469 Item: expensive
+Encounter 470 Item: amazing
+Encounter 471 Item: to add
+Encounter 472 Item: wonderful
+Encounter 473 Item: to add
+Encounter 474 Item: free time
+Encounter 475 Item: stall
+Encounter 476 Item: free time
+Encounter 477 Item: to add
+Encounter 478 Item: amazing
+Encounter 479 Item: canoeing
+Encounter 480 Item: amazing
+Encounter 481 Item: Chinese
+Encounter 482 Item: free time
+Encounter 483 Item: group
+Encounter 484 Item: fancy
+Encounter 485 Item: each
+Encounter 486 Item: free time
+Encounter 487 Item: a week
+Encounter 488 Item: canoeing
+Encounter 489 Item: a year
+Encounter 490 Item: free time
+Encounter 491 Item: each
+Encounter 492 Item: expensive
+Encounter 493 Item: expensive
+Encounter 494 Item: open
+Encounter 495 Item: open(from...to...)
+Encounter 496 Item: to add
+Encounter 497 Item: wonderful
+Encounter 498 Item: to add
+Encounter 499 Item: a year
+Encounter 500 Item: Chinese
+Encounter 501 Item: many
+Encounter 502 Item: to add
+Encounter 503 Item: to visit
+Encounter 504 Item: canoeing
+Encounter 505 Item: free time
+Encounter 506 Item: group
+Encounter 507 Item: open
+Encounter 508 Item: a year
+Encounter 509 Item: wonderful
+Encounter 510 Item: a year
+Encounter 511 Item: Chinese
+Encounter 512 Item: free time
+Encounter 513 Item: to add
+Encounter 514 Item: to add
+Encounter 515 Item: wonderful
+Encounter 516 Item: to add
+Encounter 517 Item: free time
+Encounter 518 Item: wonderful
+Encounter 519 Item: to add
+Encounter 520 Item: free time
+Encounter 521 Item: amazing
+Encounter 522 Item: a week
+Encounter 523 Item: furniture
+Encounter 524 Item: wonderful
+Encounter 525 Item: view
+Encounter 526 Item: to add
+Encounter 527 Item: to add
+Encounter 528 Item: area
+Encounter 529 Item: free time
+Encounter 530 Item: free time
+Encounter 531 Item: a week
+Encounter 532 Item: a year
+Encounter 533 Item: to add
+Encounter 534 Item: British
+Encounter 535 Item: open(from...to...)
+Encounter 536 Item: group
+Encounter 537 Item: to add
+Encounter 538 Item: free time
+Encounter 539 Item: a year
+Encounter 540 Item: area
+Encounter 541 Item: to add
+Encounter 542 Item: to add
+Encounter 543 Item: a week
+Encounter 544 Item: wonderful
+Encounter 545 Item: to add
+Encounter 546 Item: expensive
+Encounter 547 Item: furniture
+Encounter 548 Item: free time
+Encounter 549 Item: free time
+Encounter 550 Item: free time
+Encounter 551 Item: canoeing
+Encounter 552 Item: each
+Encounter 553 Item: free time
+Encounter 554 Item: wonderful
+Encounter 555 Item: to add
+Encounter 556 Item: wonderful
+Encounter 557 Item: free time
+Encounter 558 Item: Chinese
+Encounter 559 Item: stall
+Encounter 560 Item: free time
+Encounter 561 Item: canoeing
+Encounter 562 Item: to add
+Encounter 563 Item: a year
+Encounter 564 Item: free time
+Encounter 565 Item: a year
+Encounter 566 Item: group
+Encounter 567 Item: many
+Encounter 568 Item: amazing
+Encounter 569 Item: expensive
+Encounter 570 Item: wonderful
+Encounter 571 Item: each
+Encounter 572 Item: each
+Encounter 573 Item: to add
+Encounter 574 Item: amazing
+Encounter 575 Item: open
+Encounter 576 Item: open
+Encounter 577 Item: a year
+Encounter 578 Item: free time
+Encounter 579 Item: fancy
+Encounter 580 Item: wonderful
+Encounter 581 Item: wonderful
+Encounter 582 Item: free time
+Encounter 583 Item: a week
+Encounter 584 Item: to add
+Encounter 585 Item: where
+Encounter 586 Item: expensive
+Encounter 587 Item: wonderful
+Encounter 588 Item: furniture
+Encounter 589 Item: to add
+Encounter 590 Item: wonderful
+Encounter 591 Item: a year
+Encounter 592 Item: a week
+Encounter 593 Item: to add
+Encounter 594 Item: free time
+Encounter 595 Item: to add
+Encounter 596 Item: free time
+Encounter 597 Item: to add
+Encounter 598 Item: Chinese
+Encounter 599 Item: to add
+Encounter 600 Item: to add
+Encounter 601 Item: each
+Encounter 602 Item: a week
+Encounter 603 Item: Chinese
+Encounter 604 Item: area
+Encounter 605 Item: amazing
+Encounter 606 Item: wonderful
+Encounter 607 Item: amazing
+Encounter 608 Item: a year
+Encounter 609 Item: to add
+Encounter 610 Item: free time
+Encounter 611 Item: amazing
+Encounter 612 Item: furniture
+Encounter 613 Item: wonderful
+Encounter 614 Item: a year
+Encounter 615 Item: to add
+Encounter 616 Item: free time
+Encounter 617 Item: to add
+Encounter 618 Item: open(from...to...)
+Encounter 619 Item: best
+Encounter 620 Item: many
+Encounter 621 Item: expensive
+Encounter 622 Item: to add
+Encounter 623 Item: where
+Encounter 624 Item: free time
+Encounter 625 Item: free time
+Encounter 626 Item: furniture
+Encounter 627 Item: wonderful
+Encounter 628 Item: free time
+Encounter 629 Item: to add
+Encounter 630 Item: amazing
+Encounter 631 Item: free time
+Encounter 632 Item: a week
+Encounter 633 Item: each
+Encounter 634 Item: amazing
+Encounter 635 Item: expensive
+Encounter 636 Item: area
+Encounter 637 Item: expensive
+Encounter 638 Item: expensive
+Encounter 639 Item: amazing
+Encounter 640 Item: furniture
+Encounter 641 Item: wonderful
+Encounter 642 Item: free time
+Encounter 643 Item: canoeing
+Encounter 644 Item: each
+Encounter 645 Item: wonderful
+Encounter 646 Item: a year
+Encounter 647 Item: to add
+Encounter 648 Item: amazing
+Encounter 649 Item: to add
+Encounter 650 Item: to add
+Encounter 651 Item: free time
+Encounter 652 Item: free time
+Encounter 653 Item: free time
+Encounter 654 Item: free time
+Encounter 655 Item: canal
+Encounter 656 Item: free time
+Encounter 657 Item: group
+Encounter 658 Item: stall
+Encounter 659 Item: a week
+Encounter 660 Item: a week
+Encounter 661 Item: free time
+Encounter 662 Item: a year
+Encounter 663 Item: wonderful
+Encounter 664 Item: a week
+Encounter 665 Item: adult
+Encounter 666 Item: castle
+Encounter 667 Item: each
+Encounter 668 Item: each
+Encounter 669 Item: a week
+Encounter 670 Item: amazing
+Encounter 671 Item: open(from...to...)
+Encounter 672 Item: each
+Encounter 673 Item: each
+Encounter 674 Item: each
+Encounter 675 Item: to visit
+Encounter 676 Item: a week
+Encounter 677 Item: to add
+Encounter 678 Item: furniture
+Encounter 679 Item: to add
+Encounter 680 Item: group
+Encounter 681 Item: free time
+Encounter 682 Item: a year
+Encounter 683 Item: a week
+Encounter 684 Item: to add
+Encounter 685 Item: each

@@ -51,6 +51,11 @@ def initialize_enc_items(enc_count):
         enc_items.append([])
     return enc_items
 
+def initialize_item_to_encs(items):
+    item_to_encs = {}
+    for item in items:
+        item_to_encs[item] = []
+    return item_to_encs
 
 
 # list all items to be learned
@@ -64,7 +69,6 @@ items_info = initialize_items_info(items)
 
 # [ Testing area ]
 
-# TODO: maybe implement encounter-specific information to track performance more closely
 def test_learning(items, items_info, sesh_count, sesh_length, learn_count, cached, immediate_alpha, alpha_adjust_value, cache_update, inter_sesh_time):
     """
     Gets average values for learning both when using the cached and the uncached activations for each encounter
@@ -170,39 +174,101 @@ def test_act_call_count(item, items_info, enc_count):
     print("The activation function was called", act_count, "times")
     print("Time taken:", (end - start).total_seconds())
 
-def test_encounter_history(items, items_info, sesh_count, sesh_length, learn_count, cached, immediate_alpha, alpha_adjust_value, cache_update, inter_sesh_time, use_real_alphas):
+def test_encounter_history(items, items_info, sesh_count, sesh_length, inter_sesh_time):
     """
-    Gets average values for the encounter order of learning sessions with the given parameters.
-
-    Arguments:
-    learn_count  -- how many times should learning sessions be conducted when getting the average values
-
-    Returns:
-    a list of items, most commonly seen at the given encounter indices
+    Gets the encounter-specific results of learning sessions when using:
+        - the real alphas    and the original  implementation of the algorithm
+        - the model's alphas and the original  implementation of the algorithm
+        - the model's alphas and the optimized implementation of the algorithm
     """
 
-    # Stores the encounter history of each LEARNING session
-    session_histories = []
+    learn_sessions = []
 
-    # Conduct the LEARNING sessions
-    for i in range(learn_count):
-        # Reset the session-specific item information
-        reset_items_info(items_info)
+    # Reset the session-specific item information
+    reset_items_info(items_info)
+    # Do a learning session with the REAL ALPHAS, without USING the CACHED values
+    learn(items, items_info, sesh_count, sesh_length, False, True, 0.02, "", 24, True, initialize_item_to_encs(items))
+    # Store the session's encounter OUTCOMES
+    encounter_outcomes = get_session_enc_outcomes(items, items_info)
+    # Add the learning session's information to the list
+    learn_sessions.append(Bunch(real_alphas  = True,
+                                cache_used   = False,
+                                cache_update = "-",
+                                history      = get_session_encounters(items_info)))
 
-        # Do the LEARNING session
-        learn(items, items_info, sesh_count, sesh_length, cached, immediate_alpha, alpha_adjust_value, cache_update, inter_sesh_time, use_real_alphas)
-        # Store the session's encounter history
-        session_histories.append(get_session_encounters(items_info))
+    # Reset the session-specific item information
+    reset_items_info(items_info)
+    # Do a learning session with the MODEL's ALPHAS, WITHOUT using the CACHED values (using the previously stored encounter outcomes)
+    learn(items, items_info, sesh_count, sesh_length, False, True, 0.02, "", 24, False, encounter_outcomes)
+    # Add the learning session's information to the list
+    learn_sessions.append(Bunch(real_alphas  = False,
+                                cache_used   = False,
+                                cache_update = "-",
+                                history      = get_session_encounters(items_info)))
 
-    # Use a history size which exists in all recorded histories
-    history_size = min([len(hist) for hist in session_histories])
+    # Reset the session-specific item information
+    reset_items_info(items_info)
+    # Do a learning session with the MODEL's ALPHAS, USING the CACHED values (using the previously stored encounter outcomes)
+    learn(items, items_info, sesh_count, sesh_length, True, True, 0.02, "post-session", 24, False, encounter_outcomes)
+    # Add the learning session's information to the list
+    learn_sessions.append(Bunch(real_alphas  = False,
+                                cache_used   = True,
+                                cache_update = "post-session",
+                                history      = get_session_encounters(items_info)))
 
-    # Get a list of encounters, represented by tuples of items and their count (how often they have been seen throughout the history)
-    enc_item_counts = get_item_counts(session_histories, history_size)
+    # Use a history size which exists in all recorded session histories
+    # history_size = min([len(sesh.history) for sesh in learn_sessions])
+    # For each recorded session
+    for sesh in learn_sessions:
+        print("Session Settings:")
+        print("Real alphas used:", sesh.real_alphas)
+        print("Cache used:      ", sesh.cache_used)
+        print("Cache updated:   ", sesh.cache_update)
+        print("Avg item offset from real values:", calc_session_avg_enc_offset(sesh.history, learn_sessions[0].history))
 
-    # Returns the final version of the LEARNING history
-    # (a list, representing all encounters and the item most commonly seen at that encounter)
-    return [max(item_counts, key = lambda tup: tup[1])[0] for item_counts in enc_item_counts]
+    item_to_enc_indices_real      = get_item_enc_indices(learn_sessions[0].history)
+    item_to_enc_indices_model     = get_item_enc_indices(learn_sessions[1].history)
+    item_to_enc_indices_optimized = get_item_enc_indices(learn_sessions[2].history)
+    print("\n")
+    print("Item History Comparison:")
+    # For each item
+    for item in items:
+        # Print the item's encounter indices and the offset from the real values
+        print("Item:", item)
+        print("Encounter indices (real):     ", item_to_enc_indices_real[item])
+        print("Average index offset from the real values:", calc_item_avg_enc_offset(item, item_to_enc_indices_real, item_to_enc_indices_real))
+        print("Encounter indices (model):    ", item_to_enc_indices_model[item])
+        print("Average index offset from the real values:", calc_item_avg_enc_offset(item, item_to_enc_indices_model, item_to_enc_indices_real))
+        print("Encounter indices (optimized):", item_to_enc_indices_optimized[item])
+        print("Average index offset from the real values:", calc_item_avg_enc_offset(item, item_to_enc_indices_optimized, item_to_enc_indices_real))
+
+    print("\n")
+    print("Encounter History Comparison:")
+    biggest_history = max(len(sesh.history) for sesh in learn_sessions)
+    # For each encounter
+    for i in range(biggest_history):
+        print("Encounter", i, ":")
+        # Store the item, encountered at the current encounter in the respective history
+        item_real      = learn_sessions[0].history[i] if i < len(learn_sessions[0].history) else "-"
+        item_model     = learn_sessions[1].history[i] if i < len(learn_sessions[1].history) else "-"
+        item_optimized = learn_sessions[2].history[i] if i < len(learn_sessions[2].history) else "-"
+        # Print the respective items
+        print("\titem_real_alphas         = ", item_real)
+        print("\titem_model_alphas        = ", item_model)
+        print("\titem_optimized_algorithm = ", item_optimized)
+
+
+
+def get_session_enc_outcomes(items, items_info):
+    # Maps an item to a list of the outcomes of its encounters
+    item_to_encs = initialize_item_to_encs(items)
+    # For each item
+    for item in items:
+        # For each encounter of that item
+        for enc in items_info[item].encounters:
+            # Add the encounter's outcome to the map
+            item_to_encs[item].append(enc.was_guessed)
+    return item_to_encs
 
 def get_session_encounters(items_info):
     """
@@ -212,36 +278,27 @@ def get_session_encounters(items_info):
     items_info -- the information for each item from that session
 
     Returns:
-    the sorted tuple of encounters and the item which got presented
+    the sorted list of encounters (tuples of encounter time and the item which got presented)
     """
     # Store each encounter and the item which got presented in a list of tuples
-    sessions = []
+    encounters = []
     for item in items_info:
         for enc in items_info[item].encounters:
-            sessions.append((enc.time, item))
+            encounters.append((enc.time, item))
     # Return the sorted list of encounters
-    return sorted(sessions)
+    return [tup[1] for tup in sorted(encounters)]
 
-def get_item_counts(session_histories, history_size):
+def get_item_enc_indices(session_history):
     """
-    Looks through the session histories and compiles lists of items most commonly seen at the given encounter index.
-    Then transforms those lists into tuples of items and how often they have been seen.
+    Converts a session history to a map of item to all encounter indices, where that item occurs.
     """
-    # Stores the lists of items which have been seen at the given indices throughout the LEARNING sessions
-    enc_items = initialize_enc_items(history_size)
-    
-    # For each recorded session history
-    for hist in session_histories:
-        # For each encounter in that history
-        for i in range(history_size):
-            # Add the item seen at this position in this history to the respective list
-            enc_items[i].append(hist[i][1])
+    item_to_enc_indices = {}
+    for item in session_history:
+        item_to_enc_indices[item] = []
+    for idx, item in enumerate(session_history):
+        item_to_enc_indices[item].append(idx)
+    return item_to_enc_indices
 
-    # Translate each encounter's list of items into a list of tuples (item + count)
-    for i, items in enumerate(enc_items):
-        enc_items[i] = [(item, items.count(item)) for item in set(items)]
-
-    return enc_items
 
 
 
@@ -259,6 +316,48 @@ def calc_avg_alpha_bias(items, items_info):
     for item in items:
         sum_alpha_bias += items_info[item].alpha_real - items_info[item].alpha_model
     return sum_alpha_bias / len(items)
+
+def calc_session_avg_enc_offset(hist_1, hist_2):
+    """
+    Calculates the average item offset given two session histories.
+    A history is a list of items and represent which item was seen at which encounter.
+
+    NOTE: the function assumes, that both histories contain the same items, just in possibly different orders
+    """
+
+
+    # Transform the histories into maps of items to the lists of encounter indices, where they (the items) was seen
+    item_to_indices_1 = get_item_enc_indices(hist_1)
+    item_to_indices_2 = get_item_enc_indices(hist_2)
+
+    # Stores the complete encounter index differences of all items
+    total_avg_diff = 0
+
+    # For each item
+    for item in item_to_indices_1:
+        # Add the average encounter difference for the item to the overall difference
+        total_avg_diff += calc_item_avg_enc_offset(item, item_to_indices_1, item_to_indices_2)
+
+    return total_avg_diff / len(item_to_indices_1)
+
+def calc_item_avg_enc_offset(item, item_to_indices_1, item_to_indices_2):
+    """
+    Calculates the average encounter offset for the given item.
+
+    NOTE: the function assumes, that both histories contain the same items, just in possibly different orders
+    """
+    avg_idx_diff = 0
+    # Store the encounter indices of the item from the respective map
+    item_encs_1 = item_to_indices_1[item]
+    item_encs_2 = item_to_indices_2[item]
+    # Get the length of the smaller encounter index list
+    most_encs = max(len(item_encs_1), len(item_encs_2))
+    # Add all index differences to the average
+    for i in range(most_encs):
+        encs_1_idx = item_encs_1[i] if i < len(item_encs_1) else 0
+        encs_2_idx = item_encs_2[i] if i < len(item_encs_2) else 0
+        avg_idx_diff += np.abs(encs_1_idx - encs_2_idx)
+    return avg_idx_diff / most_encs
 
 
 
@@ -318,7 +417,7 @@ def print_item_info(item, items_info):
 # [ Implementation area ]
 
 
-def learn(items, items_info, sesh_count, sesh_length, cached, immediate_alpha_adjustment, alpha_adjust_value, cache_update, inter_sesh_time, use_real_alphas):
+def learn(items, items_info, sesh_count, sesh_length, cached, immediate_alpha_adjustment, alpha_adjust_value, cache_update, inter_sesh_time, use_real_alphas, encounter_outcomes):
     """
     Simulates the learning process by adding new encounters of words.
 
@@ -333,6 +432,7 @@ def learn(items, items_info, sesh_count, sesh_length, cached, immediate_alpha_ad
     alpha_adjust_value         -- how much should the alpha be adjusted
     cache_update               -- when should the cache be updated
     use_real_alphas            -- whether the real alphas of items should be used when getting the next item
+    encounter_outcomes         -- a list of predetermined outcomes for all encounters
 
     Returns:
     the datetime when the learning process started
@@ -387,8 +487,10 @@ def learn(items, items_info, sesh_count, sesh_length, cached, immediate_alpha_ad
             item_act_real = calc_activation(item, items_info[item].alpha_real, prev_encounters, [], cur_time)[0]
             # calculate the item's recall probability, based on the its real activation
             item_rec_real = calc_recall_prob(item_act_real)
+            # Store the index of the current encounter
+            cur_enc_idx = len(prev_encounters)
             # try to guess the item
-            guessed = guess_item(item_rec_real)
+            guessed = guess_item(item_rec_real) if cur_enc_idx >= len(encounter_outcomes[item]) else encounter_outcomes[item][cur_enc_idx]
 
             # add the current encounter to the item's encounter list
             items_info[item].encounters.append(Bunch(time        = cur_time,
@@ -691,7 +793,7 @@ def guess_item(recall_prob):
     # # For all possible options for INTER-SESSION TIME
     # for inter_sesh_time in [24]: # [2, 4, 24]:
         # # For all possible options of USING the CACHED HISTORY
-        # for cached in [False, True]:
+        # for cached in [True] # [False, True]:
             # # For all possible NUMBERS of LEARNING SESSIONS
             # for learn_sesh_count in learn_sesh_counts:
                 # # For all possible NUMBERS of STUDY SESSIONS
@@ -730,4 +832,7 @@ def guess_item(recall_prob):
 
 
 
-# main()
+def main():
+    test_encounter_history(items, items_info, 2, 1800, 24)
+
+main()
