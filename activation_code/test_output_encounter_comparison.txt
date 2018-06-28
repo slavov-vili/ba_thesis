@@ -1,0 +1,3080 @@
+Test Settings:
+Real alphas used: True
+Cache used:       False
+Cache updated:    -
+Avg item offset from next test: 179.5329020558869
+Test Settings:
+Real alphas used: False
+Cache used:       False
+Cache updated:    -
+Avg item offset from next test: 53.264722874473556
+Test Settings:
+Real alphas used: False
+Cache used:       True
+Cache updated:    post-session
+Avg item offset from next test: 174.5500957987184
+
+
+Item History Comparison:
+Item: noodles
+Encounter indices (real):      [0, 1, 15, 53, 130, 234, 307, 380, 448, 508, 577, 646]
+Average index offset from next test: 247.76470588235293
+Encounter indices (model):     [0, 1, 10, 31, 59, 90, 150, 190, 215, 246, 286, 346, 389, 443, 497, 569, 639]
+Average index offset from next test: 46.64705882352941
+Encounter indices (optimized): [0, 1, 10, 31, 58, 86, 152, 184, 205, 241, 286, 345, 395, 465, 540, 623]
+Average index offset from next test: 232.6875
+Item: where
+Encounter indices (real):      [2, 3, 16, 52, 122, 217, 292, 366, 429, 494, 557, 629]
+Average index offset from next test: 238.57894736842104
+Encounter indices (model):     [2, 3, 13, 46, 124, 196, 269, 304, 330, 342, 374, 388, 416, 449, 483, 521, 577, 623, 672]
+Average index offset from next test: 43.526315789473685
+Encounter indices (optimized): [2, 3, 13, 46, 128, 195, 273, 302, 322, 339, 370, 383, 411, 453, 491, 544, 601, 683]
+Average index offset from next test: 222.11111111111111
+Item: many
+Encounter indices (real):      [4, 5, 14, 35, 70, 118, 182, 248, 299, 353, 397, 441, 483, 527, 570, 609, 653]
+Average index offset from next test: 83.05263157894737
+Encounter indices (model):     [4, 5, 16, 47, 91, 181, 220, 249, 293, 359, 385, 430, 482, 544, 567, 582, 607, 637, 675]
+Average index offset from next test: 69.19047619047619
+Encounter indices (optimized): [4, 5, 16, 50, 91, 185, 219, 243, 291, 360, 384, 432, 485, 572, 581, 587, 603, 628, 665, 670, 690]
+Average index offset from next test: 141.28571428571428
+Item: way
+Encounter indices (real):      [6, 7, 17, 37, 71, 119, 181, 246, 293, 350, 391, 432, 475, 517, 560, 603, 644]
+Average index offset from next test: 230.69230769230768
+Encounter indices (model):     [6, 7, 18, 39, 86, 135, 208, 237, 287, 361, 386, 432, 455, 470, 495, 505, 526, 535, 550, 572, 596, 618, 645, 670, 679, 693]
+Average index offset from next test: 40.42307692307692
+Encounter indices (optimized): [6, 7, 18, 39, 87, 133, 209, 234, 289, 361, 386, 436, 452, 461, 480, 486, 501, 505, 516, 532, 552, 578, 604, 632, 672]
+Average index offset from next test: 204.28
+Item: market
+Encounter indices (real):      [8, 9, 102, 437]
+Average index offset from next test: 266.6923076923077
+Encounter indices (model):     [8, 9, 17, 32, 61, 115, 197, 255, 329, 379, 451, 540, 650]
+Average index offset from next test: 73.92307692307692
+Encounter indices (optimized): [8, 9, 17, 32, 61, 117, 201, 275, 363, 439, 521, 661]
+Average index offset from next test: 260.6666666666667
+Item: castle
+Encounter indices (real):      [10, 11, 23, 58, 126, 220, 296, 365, 427, 491, 552, 621]
+Average index offset from next test: 208.6875
+Encounter indices (model):     [11, 12, 23, 56, 100, 153, 195, 239, 266, 307, 350, 397, 459, 511, 597, 677]
+Average index offset from next test: 53.75
+Encounter indices (optimized): [11, 12, 23, 56, 99, 146, 181, 230, 253, 297, 351, 399, 472, 554, 667]
+Average index offset from next test: 189.26666666666668
+Item: group
+Encounter indices (real):      [12, 13, 18, 26, 36, 50, 68, 84, 107, 129, 158, 183, 211, 236, 260, 277, 301, 319, 332, 354, 375, 393, 412, 430, 449, 469, 488, 504, 521, 538, 555, 574, 591, 607, 627, 642, 659]
+Average index offset from next test: 379.8378378378378
+Encounter indices (model):     [14, 15, 26, 58, 136, 227, 316, 372, 402, 467, 532, 564, 615, 634, 646, 666, 694]
+Average index offset from next test: 262.2962962962963
+Encounter indices (optimized): [14, 15, 26, 60, 147, 240, 374, 404, 430, 479, 553, 569, 615, 622, 627, 643, 666, 671, 675, 677, 678, 679, 681, 684, 687, 691, 695]
+Average index offset from next test: 349.4594594594595
+Item: restaurant
+Encounter indices (real):      [19, 20, 27, 38, 54, 78, 108, 139, 177, 215, 250, 280, 311, 339, 367, 396, 422, 451, 476, 502, 530, 554, 580, 605, 632, 657]
+Average index offset from next test: 189.03846153846155
+Encounter indices (model):     [19, 20, 29, 44, 64, 85, 105, 142, 193, 230, 277, 318, 365, 409, 468, 488, 528, 590, 642]
+Average index offset from next test: 50.578947368421055
+Encounter indices (optimized): [19, 20, 29, 44, 62, 82, 101, 138, 192, 231, 281, 344, 394, 463, 524, 535, 576, 630]
+Average index offset from next test: 212.53846153846155
+Item: amazing
+Encounter indices (real):      [21, 22, 34, 69, 131, 225, 294, 362, 421, 489, 550, 608, 672]
+Average index offset from next test: 143.86666666666667
+Encounter indices (model):     [21, 22, 30, 51, 97, 147, 214, 278, 308, 358, 410, 475, 551, 586, 636]
+Average index offset from next test: 9.0
+Encounter indices (optimized): [21, 22, 30, 52, 100, 145, 215, 280, 306, 358, 419, 495, 600, 611, 657]
+Average index offset from next test: 141.53333333333333
+Item: to visit
+Encounter indices (real):      [24, 25, 46, 132, 271, 390, 496, 604]
+Average index offset from next test: 229.9090909090909
+Encounter indices (model):     [24, 25, 35, 66, 109, 194, 265, 370, 442, 531, 656]
+Average index offset from next test: 67.72727272727273
+Encounter indices (optimized): [24, 25, 35, 66, 107, 196, 274, 372, 459, 588]
+Average index offset from next test: 193.6
+Item: each
+Encounter indices (real):      [28, 29, 43, 81, 168, 254, 323, 384, 450, 515, 585, 660]
+Average index offset from next test: 182.8
+Encounter indices (model):     [27, 28, 36, 57, 84, 137, 206, 270, 366, 395, 423, 466, 506, 576, 635]
+Average index offset from next test: 5.533333333333333
+Encounter indices (optimized): [27, 28, 36, 57, 85, 141, 214, 278, 364, 389, 407, 451, 498, 571, 645]
+Average index offset from next test: 183.8
+Item: tree
+Encounter indices (real):      [30, 31, 51, 116, 245, 369, 452, 543, 636]
+Average index offset from next test: 265.2857142857143
+Encounter indices (model):     [33, 34, 45, 78, 122, 174, 207, 248, 298, 363, 414, 477, 562, 652]
+Average index offset from next test: 57.93333333333333
+Encounter indices (optimized): [33, 34, 45, 78, 123, 167, 199, 247, 307, 365, 427, 448, 493, 563, 641]
+Average index offset from next test: 279.26666666666665
+Item: British
+Encounter indices (real):      [32, 33, 45, 72, 125, 204, 269, 324, 363, 416, 474, 532, 586, 639]
+Average index offset from next test: 42.57142857142857
+Encounter indices (model):     [37, 38, 48, 80, 156, 234, 325, 371, 440, 516, 559, 589, 629, 688]
+Average index offset from next test: 72.85714285714286
+Encounter indices (optimized): [37, 38, 49, 83, 166, 252, 373, 402, 474, 598, 612, 620, 650]
+Average index offset from next test: 108.42857142857143
+Item: adult
+Encounter indices (real):      [39, 40, 44, 49, 57, 66, 75, 85, 97, 109, 124, 137, 153, 172, 187, 207, 223, 239, 253, 268, 281, 295, 308, 321, 328, 341, 356, 368, 383, 394, 407, 418, 431, 444, 454, 467, 478, 490, 501, 512, 523, 534, 546, 556, 568, 578, 589, 600, 610, 622, 633, 643, 654, 665, 675]
+Average index offset from next test: 387.6181818181818
+Encounter indices (model):     [40, 41, 52, 73, 121, 168, 221, 281, 367, 426, 499, 603, 632, 692]
+Average index offset from next test: 58.857142857142854
+Encounter indices (optimized): [40, 41, 51, 71, 118, 163, 220, 287, 367, 441, 518, 651, 664]
+Average index offset from next test: 383.25454545454545
+Item: a day
+Encounter indices (real):      [41, 42, 62, 133, 259, 381, 471, 561, 669]
+Average index offset from next test: 271.7142857142857
+Encounter indices (model):     [42, 43, 55, 77, 128, 176, 211, 251, 299, 362, 413, 476, 561, 651]
+Average index offset from next test: 54.642857142857146
+Encounter indices (optimized): [42, 43, 53, 74, 124, 168, 200, 242, 298, 359, 421, 497, 605]
+Average index offset from next test: 250.84615384615384
+Item: open(from...to...)
+Encounter indices (real):      [47, 48, 61, 94, 163, 243, 304, 361, 417, 481, 542, 601, 668]
+Average index offset from next test: 178.0625
+Encounter indices (model):     [49, 50, 60, 82, 129, 175, 223, 253, 297, 356, 403, 434, 479, 533, 604, 664]
+Average index offset from next test: 47.76470588235294
+Encounter indices (optimized): [47, 48, 59, 80, 129, 174, 227, 254, 304, 357, 418, 440, 481, 547, 556, 594, 636]
+Average index offset from next test: 196.76470588235293
+Item: furniture
+Encounter indices (real):      [55, 56, 63, 77, 100, 127, 165, 208, 247, 276, 309, 344, 376, 405, 434, 463, 495, 525, 553, 584, 611, 640, 670]
+Average index offset from next test: 83.47826086956522
+Encounter indices (model):     [53, 54, 65, 99, 144, 213, 243, 273, 314, 357, 404, 433, 453, 484, 520, 537, 568, 579, 599, 626, 654, 683]
+Average index offset from next test: 44.65217391304348
+Encounter indices (optimized): [54, 55, 65, 97, 140, 211, 239, 264, 308, 355, 414, 434, 446, 473, 504, 511, 537, 542, 558, 583, 609, 640, 685]
+Average index offset from next test: 41.34782608695652
+Item: a year
+Encounter indices (real):      [59, 60, 67, 79, 99, 123, 154, 191, 226, 263, 291, 318, 340, 371, 399, 426, 453, 482, 507, 536, 562, 593, 618, 645, 671]
+Average index offset from next test: 227.47222222222223
+Encounter indices (model):     [62, 63, 74, 96, 127, 157, 184, 205, 232, 247, 260, 280, 300, 312, 331, 334, 354, 373, 390, 400, 420, 441, 465, 487, 510, 518, 523, 534, 547, 563, 584, 602, 620, 640, 661, 684]
+Average index offset from next test: 30.083333333333332
+Encounter indices (optimized): [63, 64, 75, 96, 126, 154, 179, 198, 225, 238, 248, 269, 293, 301, 320, 327, 334, 347, 377, 385, 400, 426, 457, 482, 510, 514, 527, 549, 577, 606, 608, 618, 633, 653, 682]
+Average index offset from next test: 224.34285714285716
+Item: open
+Encounter indices (real):      [64, 65, 76, 104, 161, 228, 284, 357, 408, 458, 511, 569, 628]
+Average index offset from next test: 67.23076923076923
+Encounter indices (model):     [67, 68, 79, 110, 182, 252, 292, 368, 435, 507, 549, 622]
+Average index offset from next test: 14.416666666666666
+Encounter indices (optimized): [67, 68, 79, 112, 187, 267, 303, 371, 455, 564, 584, 647]
+Average index offset from next test: 80.53846153846153
+Item: free time
+Encounter indices (real):      [73, 74, 80, 93, 110, 134, 169, 206, 241, 270, 303, 326, 343, 373, 400, 428, 455, 485, 510, 540, 566, 595, 625, 648]
+Average index offset from next test: 313.9166666666667
+Encounter indices (model):     [69, 70, 81, 114, 185, 225, 285, 369, 437, 515, 627]
+Average index offset from next test: 64.27272727272727
+Encounter indices (optimized): [69, 70, 81, 113, 189, 222, 290, 369, 454, 565]
+Average index offset from next test: 316.0416666666667
+Item: canal
+Encounter indices (real):      [82, 83, 90, 101, 117, 138, 170, 201, 232, 264, 287, 313, 333, 360, 389, 414, 442, 468, 492, 516, 541, 565, 592, 616, 638, 664]
+Average index offset from next test: 27.0
+Encounter indices (model):     [71, 72, 83, 104, 132, 183, 231, 262, 305, 328, 338, 364, 391, 408, 421, 429, 444, 463, 481, 500, 525, 554, 588, 613, 649, 681]
+Average index offset from next test: 32.11538461538461
+Encounter indices (optimized): [72, 73, 84, 105, 132, 182, 232, 260, 310, 328, 338, 362, 391, 401, 410, 416, 429, 447, 468, 487, 508, 541, 579, 616, 658]
+Average index offset from next test: 54.42307692307692
+Item: Chinese
+Encounter indices (real):      [86, 87, 103, 167, 258, 359, 439, 522, 606]
+Average index offset from next test: 252.28571428571428
+Encounter indices (model):     [75, 76, 87, 118, 186, 226, 261, 309, 345, 387, 447, 501, 591, 662]
+Average index offset from next test: 13.214285714285714
+Encounter indices (optimized): [76, 77, 88, 121, 194, 228, 258, 311, 332, 354, 408, 476, 574, 699]
+Average index offset from next test: 246.64285714285714
+Item: stall
+Encounter indices (real):      [88, 89, 98, 115, 145, 184, 233, 273, 312, 347, 388, 423, 460, 499, 537, 576, 612, 651]
+Average index offset from next test: 58.55555555555556
+Encounter indices (model):     [88, 89, 98, 120, 149, 178, 199, 229, 267, 306, 347, 393, 450, 503, 593, 612, 659]
+Average index offset from next test: 12.235294117647058
+Encounter indices (optimized): [89, 90, 98, 120, 150, 177, 197, 226, 266, 312, 348, 396, 469, 546, 644, 652, 694]
+Average index offset from next test: 67.88888888888889
+Item: playing field
+Encounter indices (real):      [91, 92, 105, 140, 210, 274, 355, 411, 473, 535, 598, 666]
+Average index offset from next test: 149.21428571428572
+Encounter indices (model):     [92, 93, 103, 125, 170, 204, 245, 295, 360, 418, 486, 512, 585, 653]
+Average index offset from next test: 7.928571428571429
+Encounter indices (optimized): [92, 93, 104, 127, 176, 206, 257, 315, 366, 433, 507, 522, 586, 668]
+Average index offset from next test: 143.57142857142858
+Item: fancy
+Encounter indices (real):      [95, 96, 106, 128, 171, 216, 266, 310, 349, 392, 438, 484, 531, 575, 620, 667]
+Average index offset from next test: 62.0625
+Encounter indices (model):     [94, 95, 106, 138, 198, 235, 268, 289, 327, 349, 396, 460, 517, 605, 690]
+Average index offset from next test: 56.666666666666664
+Encounter indices (optimized): [94, 95, 106, 139, 204, 237, 265, 282, 319, 350, 398, 471, 555, 686]
+Average index offset from next test: 102.6875
+Item: a week
+Encounter indices (real):      [111, 112, 120, 136, 164, 199, 237, 272, 306, 338, 378, 409, 445, 479, 513, 548, 581, 615, 647]
+Average index offset from next test: 135.47368421052633
+Encounter indices (model):     [101, 102, 113, 146, 203, 240, 272, 315, 344, 384, 412, 454, 498, 558, 617, 685]
+Average index offset from next test: 49.25
+Encounter indices (optimized): [102, 103, 114, 151, 212, 245, 272, 318, 343, 390, 409, 458, 502, 575, 660]
+Average index offset from next test: 161.78947368421052
+Item: to enjoy
+Encounter indices (real):      [113, 114, 121, 135, 159, 188, 224, 257, 286, 317, 337, 372, 404, 433, 464, 497, 528, 558, 590, 623, 652]
+Average index offset from next test: 172.55555555555554
+Encounter indices (model):     [107, 108, 119, 152, 210, 242, 276, 317, 343, 377, 411, 431, 446, 456, 474, 492, 513, 543, 553, 573, 595, 616, 624, 638, 657, 676, 696]
+Average index offset from next test: 60.666666666666664
+Encounter indices (optimized): [108, 109, 119, 153, 213, 244, 271, 316, 340, 375, 412, 428, 438, 444, 460, 477, 499, 523, 528, 545, 568, 596, 619, 654, 696]
+Average index offset from next test: 136.44
+Item: best
+Encounter indices (real):      [141, 142, 148, 162, 178, 203, 229, 255, 278, 305, 331, 358, 387, 413, 440, 466, 493, 519, 544, 572, 596, 626, 649, 674]
+Average index offset from next test: 79.42307692307692
+Encounter indices (model):     [111, 112, 123, 145, 187, 233, 290, 321, 341, 376, 392, 407, 419, 438, 462, 485, 494, 509, 530, 556, 587, 611, 641, 669, 680, 697]
+Average index offset from next test: 9.692307692307692
+Encounter indices (optimized): [110, 111, 122, 143, 186, 233, 299, 324, 341, 376, 388, 397, 405, 422, 445, 470, 475, 490, 506, 531, 560, 597, 626, 669, 673, 689]
+Average index offset from next test: 81.96153846153847
+Item: wonderful
+Encounter indices (real):      [143, 144, 157, 189, 240, 288, 348, 402, 456, 509, 571, 630]
+Average index offset from next test: 288.3181818181818
+Encounter indices (model):     [116, 117, 126, 148, 189, 216, 238, 256, 271, 291, 303, 324, 336, 375, 401, 445, 464, 489, 522, 566, 608, 655]
+Average index offset from next test: 100.13636363636364
+Encounter indices (optimized): [115, 116, 125, 148, 193, 216, 235, 250, 263, 285, 294, 313, 336, 378, 415, 467, 509, 589, 662]
+Average index offset from next test: 256.8421052631579
+Item: expensive
+Encounter indices (real):      [146, 147, 155, 173, 198, 231, 265, 297, 325, 342, 379, 410, 447, 480, 514, 549, 582, 617, 650]
+Average index offset from next test: 61.78947368421053
+Encounter indices (model):     [130, 131, 141, 173, 217, 250, 279, 319, 352, 405, 439, 461, 496, 508, 538, 578, 614, 658]
+Average index offset from next test: 9.666666666666666
+Encounter indices (optimized): [130, 131, 142, 175, 221, 255, 277, 323, 356, 420, 442, 456, 483, 492, 513, 548, 593, 634]
+Average index offset from next test: 56.73684210526316
+Item: to add
+Encounter indices (real):      [149, 150, 156, 166, 179, 197, 214, 235, 256, 275, 298, 316, 330, 351, 374, 395, 415, 436, 457, 477, 498, 518, 539, 559, 579, 599, 619, 637, 658]
+Average index offset from next test: 103.1875
+Encounter indices (model):     [133, 134, 143, 165, 200, 241, 275, 294, 311, 323, 333, 355, 383, 398, 424, 436, 458, 480, 504, 536, 570, 581, 600, 625, 631, 648, 663, 668, 671, 678, 686, 695]
+Average index offset from next test: 72.97142857142858
+Encounter indices (optimized): [134, 135, 144, 165, 203, 249, 276, 292, 305, 314, 321, 333, 368, 381, 403, 413, 435, 462, 488, 517, 562, 567, 585, 607, 610, 621, 635, 637, 638, 642, 648, 655, 663, 676, 688]
+Average index offset from next test: 139.02857142857144
+Item: boat
+Encounter indices (real):      [151, 152, 160, 176, 200, 230, 261, 290, 320, 335, 370, 403, 435, 470, 500, 533, 564, 597, 631, 663]
+Average index offset from next test: 15.35
+Encounter indices (model):     [139, 140, 151, 180, 222, 258, 282, 301, 339, 382, 406, 425, 457, 472, 493, 519, 555, 594, 628, 667]
+Average index offset from next test: 15.75
+Encounter indices (optimized): [136, 137, 149, 180, 223, 259, 279, 296, 331, 346, 379, 393, 425, 437, 464, 494, 530, 580, 624, 697]
+Average index offset from next test: 18.6
+Item: to join in
+Encounter indices (real):      [174, 175, 180, 190, 205, 221, 242, 262, 279, 302, 322, 329, 352, 377, 398, 419, 443, 462, 486, 506, 529, 551, 573, 594, 614, 635, 656]
+Average index offset from next test: 209.97435897435898
+Encounter indices (model):     [154, 155, 164, 179, 202, 219, 244, 263, 288, 302, 313, 332, 335, 353, 380, 394, 417, 428, 448, 471, 491, 514, 524, 542, 548, 552, 560, 571, 575, 583, 592, 601, 610, 621, 633, 647, 660, 673, 689]
+Average index offset from next test: 44.19512195121951
+Encounter indices (optimized): [155, 156, 164, 178, 202, 218, 246, 262, 288, 300, 309, 326, 335, 352, 382, 392, 417, 424, 443, 466, 489, 515, 519, 533, 536, 538, 543, 550, 559, 561, 566, 573, 582, 592, 602, 614, 625, 639, 656, 680, 698]
+Average index offset from next test: 227.09756097560975
+Item: view
+Encounter indices (real):      [185, 186, 196, 219, 252, 289, 334, 385, 425, 472, 520, 567, 613, 662]
+Average index offset from next test: 190.41176470588235
+Encounter indices (model):     [158, 159, 169, 188, 209, 236, 257, 274, 296, 326, 340, 381, 427, 478, 539, 609, 682]
+Average index offset from next test: 83.47058823529412
+Encounter indices (optimized): [157, 158, 169, 188, 208, 236, 256, 270, 295, 330, 342, 387, 449, 503, 599]
+Average index offset from next test: 130.4
+Item: canoeing
+Encounter indices (real):      [192, 193, 202, 222, 249, 282, 314, 336, 382, 420, 461, 503, 547, 588, 634, 673]
+Average index offset from next test: 202.66666666666666
+Encounter indices (model):     [160, 161, 172, 192, 212, 228, 254, 284, 320, 337, 378, 422, 473, 490, 527, 541, 574, 606, 644, 687, 698]
+Average index offset from next test: 38.23809523809524
+Encounter indices (optimized): [159, 160, 171, 191, 210, 224, 251, 284, 329, 337, 380, 431, 484, 496, 526, 534, 557, 595, 631, 693]
+Average index offset from next test: 175.35
+Item: flower
+Encounter indices (real):      [194, 195, 209, 244, 285, 345, 401, 459, 524, 587, 655]
+Average index offset from next test: 176.0
+Encounter indices (model):     [162, 163, 171, 191, 218, 259, 283, 322, 348, 399, 469, 545, 630]
+Average index offset from next test: 54.07692307692308
+Encounter indices (optimized): [161, 162, 170, 190, 217, 261, 283, 325, 349, 406, 478, 591]
+Average index offset from next test: 140.58333333333334
+Item: area
+Encounter indices (real):      [212, 213, 218, 227, 238, 251, 267, 283, 300, 315, 327, 346, 364, 386, 406, 424, 446, 465, 487, 505, 526, 545, 563, 583, 602, 624, 641, 661]
+Average index offset from next test: 220.17857142857142
+Encounter indices (model):     [166, 167, 177, 201, 224, 264, 310, 351, 415, 452, 502, 529, 546, 557, 565, 580, 598, 619, 643, 665, 674, 691]
+Average index offset from next test: 142.44444444444446
+Encounter indices (optimized): [172, 173, 183, 207, 229, 268, 317, 353, 423, 450, 500, 512, 520, 525, 529, 539, 551, 570, 590, 613, 617, 629, 646, 649, 659, 674, 692]
+Average index offset from next test: 106.25
+
+
+Encounter History Comparison:
+Encounter 0 :
+	item_real_alphas         =  noodles
+	item_model_alphas        =  noodles
+	item_optimized_algorithm =  noodles
+Encounter 1 :
+	item_real_alphas         =  noodles
+	item_model_alphas        =  noodles
+	item_optimized_algorithm =  noodles
+Encounter 2 :
+	item_real_alphas         =  where
+	item_model_alphas        =  where
+	item_optimized_algorithm =  where
+Encounter 3 :
+	item_real_alphas         =  where
+	item_model_alphas        =  where
+	item_optimized_algorithm =  where
+Encounter 4 :
+	item_real_alphas         =  many
+	item_model_alphas        =  many
+	item_optimized_algorithm =  many
+Encounter 5 :
+	item_real_alphas         =  many
+	item_model_alphas        =  many
+	item_optimized_algorithm =  many
+Encounter 6 :
+	item_real_alphas         =  way
+	item_model_alphas        =  way
+	item_optimized_algorithm =  way
+Encounter 7 :
+	item_real_alphas         =  way
+	item_model_alphas        =  way
+	item_optimized_algorithm =  way
+Encounter 8 :
+	item_real_alphas         =  market
+	item_model_alphas        =  market
+	item_optimized_algorithm =  market
+Encounter 9 :
+	item_real_alphas         =  market
+	item_model_alphas        =  market
+	item_optimized_algorithm =  market
+Encounter 10 :
+	item_real_alphas         =  castle
+	item_model_alphas        =  noodles
+	item_optimized_algorithm =  noodles
+Encounter 11 :
+	item_real_alphas         =  castle
+	item_model_alphas        =  castle
+	item_optimized_algorithm =  castle
+Encounter 12 :
+	item_real_alphas         =  group
+	item_model_alphas        =  castle
+	item_optimized_algorithm =  castle
+Encounter 13 :
+	item_real_alphas         =  group
+	item_model_alphas        =  where
+	item_optimized_algorithm =  where
+Encounter 14 :
+	item_real_alphas         =  many
+	item_model_alphas        =  group
+	item_optimized_algorithm =  group
+Encounter 15 :
+	item_real_alphas         =  noodles
+	item_model_alphas        =  group
+	item_optimized_algorithm =  group
+Encounter 16 :
+	item_real_alphas         =  where
+	item_model_alphas        =  many
+	item_optimized_algorithm =  many
+Encounter 17 :
+	item_real_alphas         =  way
+	item_model_alphas        =  market
+	item_optimized_algorithm =  market
+Encounter 18 :
+	item_real_alphas         =  group
+	item_model_alphas        =  way
+	item_optimized_algorithm =  way
+Encounter 19 :
+	item_real_alphas         =  restaurant
+	item_model_alphas        =  restaurant
+	item_optimized_algorithm =  restaurant
+Encounter 20 :
+	item_real_alphas         =  restaurant
+	item_model_alphas        =  restaurant
+	item_optimized_algorithm =  restaurant
+Encounter 21 :
+	item_real_alphas         =  amazing
+	item_model_alphas        =  amazing
+	item_optimized_algorithm =  amazing
+Encounter 22 :
+	item_real_alphas         =  amazing
+	item_model_alphas        =  amazing
+	item_optimized_algorithm =  amazing
+Encounter 23 :
+	item_real_alphas         =  castle
+	item_model_alphas        =  castle
+	item_optimized_algorithm =  castle
+Encounter 24 :
+	item_real_alphas         =  to visit
+	item_model_alphas        =  to visit
+	item_optimized_algorithm =  to visit
+Encounter 25 :
+	item_real_alphas         =  to visit
+	item_model_alphas        =  to visit
+	item_optimized_algorithm =  to visit
+Encounter 26 :
+	item_real_alphas         =  group
+	item_model_alphas        =  group
+	item_optimized_algorithm =  group
+Encounter 27 :
+	item_real_alphas         =  restaurant
+	item_model_alphas        =  each
+	item_optimized_algorithm =  each
+Encounter 28 :
+	item_real_alphas         =  each
+	item_model_alphas        =  each
+	item_optimized_algorithm =  each
+Encounter 29 :
+	item_real_alphas         =  each
+	item_model_alphas        =  restaurant
+	item_optimized_algorithm =  restaurant
+Encounter 30 :
+	item_real_alphas         =  tree
+	item_model_alphas        =  amazing
+	item_optimized_algorithm =  amazing
+Encounter 31 :
+	item_real_alphas         =  tree
+	item_model_alphas        =  noodles
+	item_optimized_algorithm =  noodles
+Encounter 32 :
+	item_real_alphas         =  British
+	item_model_alphas        =  market
+	item_optimized_algorithm =  market
+Encounter 33 :
+	item_real_alphas         =  British
+	item_model_alphas        =  tree
+	item_optimized_algorithm =  tree
+Encounter 34 :
+	item_real_alphas         =  amazing
+	item_model_alphas        =  tree
+	item_optimized_algorithm =  tree
+Encounter 35 :
+	item_real_alphas         =  many
+	item_model_alphas        =  to visit
+	item_optimized_algorithm =  to visit
+Encounter 36 :
+	item_real_alphas         =  group
+	item_model_alphas        =  each
+	item_optimized_algorithm =  each
+Encounter 37 :
+	item_real_alphas         =  way
+	item_model_alphas        =  British
+	item_optimized_algorithm =  British
+Encounter 38 :
+	item_real_alphas         =  restaurant
+	item_model_alphas        =  British
+	item_optimized_algorithm =  British
+Encounter 39 :
+	item_real_alphas         =  adult
+	item_model_alphas        =  way
+	item_optimized_algorithm =  way
+Encounter 40 :
+	item_real_alphas         =  adult
+	item_model_alphas        =  adult
+	item_optimized_algorithm =  adult
+Encounter 41 :
+	item_real_alphas         =  a day
+	item_model_alphas        =  adult
+	item_optimized_algorithm =  adult
+Encounter 42 :
+	item_real_alphas         =  a day
+	item_model_alphas        =  a day
+	item_optimized_algorithm =  a day
+Encounter 43 :
+	item_real_alphas         =  each
+	item_model_alphas        =  a day
+	item_optimized_algorithm =  a day
+Encounter 44 :
+	item_real_alphas         =  adult
+	item_model_alphas        =  restaurant
+	item_optimized_algorithm =  restaurant
+Encounter 45 :
+	item_real_alphas         =  British
+	item_model_alphas        =  tree
+	item_optimized_algorithm =  tree
+Encounter 46 :
+	item_real_alphas         =  to visit
+	item_model_alphas        =  where
+	item_optimized_algorithm =  where
+Encounter 47 :
+	item_real_alphas         =  open(from...to...)
+	item_model_alphas        =  many
+	item_optimized_algorithm =  open(from...to...)
+Encounter 48 :
+	item_real_alphas         =  open(from...to...)
+	item_model_alphas        =  British
+	item_optimized_algorithm =  open(from...to...)
+Encounter 49 :
+	item_real_alphas         =  adult
+	item_model_alphas        =  open(from...to...)
+	item_optimized_algorithm =  British
+Encounter 50 :
+	item_real_alphas         =  group
+	item_model_alphas        =  open(from...to...)
+	item_optimized_algorithm =  many
+Encounter 51 :
+	item_real_alphas         =  tree
+	item_model_alphas        =  amazing
+	item_optimized_algorithm =  adult
+Encounter 52 :
+	item_real_alphas         =  where
+	item_model_alphas        =  adult
+	item_optimized_algorithm =  amazing
+Encounter 53 :
+	item_real_alphas         =  noodles
+	item_model_alphas        =  furniture
+	item_optimized_algorithm =  a day
+Encounter 54 :
+	item_real_alphas         =  restaurant
+	item_model_alphas        =  furniture
+	item_optimized_algorithm =  furniture
+Encounter 55 :
+	item_real_alphas         =  furniture
+	item_model_alphas        =  a day
+	item_optimized_algorithm =  furniture
+Encounter 56 :
+	item_real_alphas         =  furniture
+	item_model_alphas        =  castle
+	item_optimized_algorithm =  castle
+Encounter 57 :
+	item_real_alphas         =  adult
+	item_model_alphas        =  each
+	item_optimized_algorithm =  each
+Encounter 58 :
+	item_real_alphas         =  castle
+	item_model_alphas        =  group
+	item_optimized_algorithm =  noodles
+Encounter 59 :
+	item_real_alphas         =  a year
+	item_model_alphas        =  noodles
+	item_optimized_algorithm =  open(from...to...)
+Encounter 60 :
+	item_real_alphas         =  a year
+	item_model_alphas        =  open(from...to...)
+	item_optimized_algorithm =  group
+Encounter 61 :
+	item_real_alphas         =  open(from...to...)
+	item_model_alphas        =  market
+	item_optimized_algorithm =  market
+Encounter 62 :
+	item_real_alphas         =  a day
+	item_model_alphas        =  a year
+	item_optimized_algorithm =  restaurant
+Encounter 63 :
+	item_real_alphas         =  furniture
+	item_model_alphas        =  a year
+	item_optimized_algorithm =  a year
+Encounter 64 :
+	item_real_alphas         =  open
+	item_model_alphas        =  restaurant
+	item_optimized_algorithm =  a year
+Encounter 65 :
+	item_real_alphas         =  open
+	item_model_alphas        =  furniture
+	item_optimized_algorithm =  furniture
+Encounter 66 :
+	item_real_alphas         =  adult
+	item_model_alphas        =  to visit
+	item_optimized_algorithm =  to visit
+Encounter 67 :
+	item_real_alphas         =  a year
+	item_model_alphas        =  open
+	item_optimized_algorithm =  open
+Encounter 68 :
+	item_real_alphas         =  group
+	item_model_alphas        =  open
+	item_optimized_algorithm =  open
+Encounter 69 :
+	item_real_alphas         =  amazing
+	item_model_alphas        =  free time
+	item_optimized_algorithm =  free time
+Encounter 70 :
+	item_real_alphas         =  many
+	item_model_alphas        =  free time
+	item_optimized_algorithm =  free time
+Encounter 71 :
+	item_real_alphas         =  way
+	item_model_alphas        =  canal
+	item_optimized_algorithm =  adult
+Encounter 72 :
+	item_real_alphas         =  British
+	item_model_alphas        =  canal
+	item_optimized_algorithm =  canal
+Encounter 73 :
+	item_real_alphas         =  free time
+	item_model_alphas        =  adult
+	item_optimized_algorithm =  canal
+Encounter 74 :
+	item_real_alphas         =  free time
+	item_model_alphas        =  a year
+	item_optimized_algorithm =  a day
+Encounter 75 :
+	item_real_alphas         =  adult
+	item_model_alphas        =  Chinese
+	item_optimized_algorithm =  a year
+Encounter 76 :
+	item_real_alphas         =  open
+	item_model_alphas        =  Chinese
+	item_optimized_algorithm =  Chinese
+Encounter 77 :
+	item_real_alphas         =  furniture
+	item_model_alphas        =  a day
+	item_optimized_algorithm =  Chinese
+Encounter 78 :
+	item_real_alphas         =  restaurant
+	item_model_alphas        =  tree
+	item_optimized_algorithm =  tree
+Encounter 79 :
+	item_real_alphas         =  a year
+	item_model_alphas        =  open
+	item_optimized_algorithm =  open
+Encounter 80 :
+	item_real_alphas         =  free time
+	item_model_alphas        =  British
+	item_optimized_algorithm =  open(from...to...)
+Encounter 81 :
+	item_real_alphas         =  each
+	item_model_alphas        =  free time
+	item_optimized_algorithm =  free time
+Encounter 82 :
+	item_real_alphas         =  canal
+	item_model_alphas        =  open(from...to...)
+	item_optimized_algorithm =  restaurant
+Encounter 83 :
+	item_real_alphas         =  canal
+	item_model_alphas        =  canal
+	item_optimized_algorithm =  British
+Encounter 84 :
+	item_real_alphas         =  group
+	item_model_alphas        =  each
+	item_optimized_algorithm =  canal
+Encounter 85 :
+	item_real_alphas         =  adult
+	item_model_alphas        =  restaurant
+	item_optimized_algorithm =  each
+Encounter 86 :
+	item_real_alphas         =  Chinese
+	item_model_alphas        =  way
+	item_optimized_algorithm =  noodles
+Encounter 87 :
+	item_real_alphas         =  Chinese
+	item_model_alphas        =  Chinese
+	item_optimized_algorithm =  way
+Encounter 88 :
+	item_real_alphas         =  stall
+	item_model_alphas        =  stall
+	item_optimized_algorithm =  Chinese
+Encounter 89 :
+	item_real_alphas         =  stall
+	item_model_alphas        =  stall
+	item_optimized_algorithm =  stall
+Encounter 90 :
+	item_real_alphas         =  canal
+	item_model_alphas        =  noodles
+	item_optimized_algorithm =  stall
+Encounter 91 :
+	item_real_alphas         =  playing field
+	item_model_alphas        =  many
+	item_optimized_algorithm =  many
+Encounter 92 :
+	item_real_alphas         =  playing field
+	item_model_alphas        =  playing field
+	item_optimized_algorithm =  playing field
+Encounter 93 :
+	item_real_alphas         =  free time
+	item_model_alphas        =  playing field
+	item_optimized_algorithm =  playing field
+Encounter 94 :
+	item_real_alphas         =  open(from...to...)
+	item_model_alphas        =  fancy
+	item_optimized_algorithm =  fancy
+Encounter 95 :
+	item_real_alphas         =  fancy
+	item_model_alphas        =  fancy
+	item_optimized_algorithm =  fancy
+Encounter 96 :
+	item_real_alphas         =  fancy
+	item_model_alphas        =  a year
+	item_optimized_algorithm =  a year
+Encounter 97 :
+	item_real_alphas         =  adult
+	item_model_alphas        =  amazing
+	item_optimized_algorithm =  furniture
+Encounter 98 :
+	item_real_alphas         =  stall
+	item_model_alphas        =  stall
+	item_optimized_algorithm =  stall
+Encounter 99 :
+	item_real_alphas         =  a year
+	item_model_alphas        =  furniture
+	item_optimized_algorithm =  castle
+Encounter 100 :
+	item_real_alphas         =  furniture
+	item_model_alphas        =  castle
+	item_optimized_algorithm =  amazing
+Encounter 101 :
+	item_real_alphas         =  canal
+	item_model_alphas        =  a week
+	item_optimized_algorithm =  restaurant
+Encounter 102 :
+	item_real_alphas         =  market
+	item_model_alphas        =  a week
+	item_optimized_algorithm =  a week
+Encounter 103 :
+	item_real_alphas         =  Chinese
+	item_model_alphas        =  playing field
+	item_optimized_algorithm =  a week
+Encounter 104 :
+	item_real_alphas         =  open
+	item_model_alphas        =  canal
+	item_optimized_algorithm =  playing field
+Encounter 105 :
+	item_real_alphas         =  playing field
+	item_model_alphas        =  restaurant
+	item_optimized_algorithm =  canal
+Encounter 106 :
+	item_real_alphas         =  fancy
+	item_model_alphas        =  fancy
+	item_optimized_algorithm =  fancy
+Encounter 107 :
+	item_real_alphas         =  group
+	item_model_alphas        =  to enjoy
+	item_optimized_algorithm =  to visit
+Encounter 108 :
+	item_real_alphas         =  restaurant
+	item_model_alphas        =  to enjoy
+	item_optimized_algorithm =  to enjoy
+Encounter 109 :
+	item_real_alphas         =  adult
+	item_model_alphas        =  to visit
+	item_optimized_algorithm =  to enjoy
+Encounter 110 :
+	item_real_alphas         =  free time
+	item_model_alphas        =  open
+	item_optimized_algorithm =  best
+Encounter 111 :
+	item_real_alphas         =  a week
+	item_model_alphas        =  best
+	item_optimized_algorithm =  best
+Encounter 112 :
+	item_real_alphas         =  a week
+	item_model_alphas        =  best
+	item_optimized_algorithm =  open
+Encounter 113 :
+	item_real_alphas         =  to enjoy
+	item_model_alphas        =  a week
+	item_optimized_algorithm =  free time
+Encounter 114 :
+	item_real_alphas         =  to enjoy
+	item_model_alphas        =  free time
+	item_optimized_algorithm =  a week
+Encounter 115 :
+	item_real_alphas         =  stall
+	item_model_alphas        =  market
+	item_optimized_algorithm =  wonderful
+Encounter 116 :
+	item_real_alphas         =  tree
+	item_model_alphas        =  wonderful
+	item_optimized_algorithm =  wonderful
+Encounter 117 :
+	item_real_alphas         =  canal
+	item_model_alphas        =  wonderful
+	item_optimized_algorithm =  market
+Encounter 118 :
+	item_real_alphas         =  many
+	item_model_alphas        =  Chinese
+	item_optimized_algorithm =  adult
+Encounter 119 :
+	item_real_alphas         =  way
+	item_model_alphas        =  to enjoy
+	item_optimized_algorithm =  to enjoy
+Encounter 120 :
+	item_real_alphas         =  a week
+	item_model_alphas        =  stall
+	item_optimized_algorithm =  stall
+Encounter 121 :
+	item_real_alphas         =  to enjoy
+	item_model_alphas        =  adult
+	item_optimized_algorithm =  Chinese
+Encounter 122 :
+	item_real_alphas         =  where
+	item_model_alphas        =  tree
+	item_optimized_algorithm =  best
+Encounter 123 :
+	item_real_alphas         =  a year
+	item_model_alphas        =  best
+	item_optimized_algorithm =  tree
+Encounter 124 :
+	item_real_alphas         =  adult
+	item_model_alphas        =  where
+	item_optimized_algorithm =  a day
+Encounter 125 :
+	item_real_alphas         =  British
+	item_model_alphas        =  playing field
+	item_optimized_algorithm =  wonderful
+Encounter 126 :
+	item_real_alphas         =  castle
+	item_model_alphas        =  wonderful
+	item_optimized_algorithm =  a year
+Encounter 127 :
+	item_real_alphas         =  furniture
+	item_model_alphas        =  a year
+	item_optimized_algorithm =  playing field
+Encounter 128 :
+	item_real_alphas         =  fancy
+	item_model_alphas        =  a day
+	item_optimized_algorithm =  where
+Encounter 129 :
+	item_real_alphas         =  group
+	item_model_alphas        =  open(from...to...)
+	item_optimized_algorithm =  open(from...to...)
+Encounter 130 :
+	item_real_alphas         =  noodles
+	item_model_alphas        =  expensive
+	item_optimized_algorithm =  expensive
+Encounter 131 :
+	item_real_alphas         =  amazing
+	item_model_alphas        =  expensive
+	item_optimized_algorithm =  expensive
+Encounter 132 :
+	item_real_alphas         =  to visit
+	item_model_alphas        =  canal
+	item_optimized_algorithm =  canal
+Encounter 133 :
+	item_real_alphas         =  a day
+	item_model_alphas        =  to add
+	item_optimized_algorithm =  way
+Encounter 134 :
+	item_real_alphas         =  free time
+	item_model_alphas        =  to add
+	item_optimized_algorithm =  to add
+Encounter 135 :
+	item_real_alphas         =  to enjoy
+	item_model_alphas        =  way
+	item_optimized_algorithm =  to add
+Encounter 136 :
+	item_real_alphas         =  a week
+	item_model_alphas        =  group
+	item_optimized_algorithm =  boat
+Encounter 137 :
+	item_real_alphas         =  adult
+	item_model_alphas        =  each
+	item_optimized_algorithm =  boat
+Encounter 138 :
+	item_real_alphas         =  canal
+	item_model_alphas        =  fancy
+	item_optimized_algorithm =  restaurant
+Encounter 139 :
+	item_real_alphas         =  restaurant
+	item_model_alphas        =  boat
+	item_optimized_algorithm =  fancy
+Encounter 140 :
+	item_real_alphas         =  playing field
+	item_model_alphas        =  boat
+	item_optimized_algorithm =  furniture
+Encounter 141 :
+	item_real_alphas         =  best
+	item_model_alphas        =  expensive
+	item_optimized_algorithm =  each
+Encounter 142 :
+	item_real_alphas         =  best
+	item_model_alphas        =  restaurant
+	item_optimized_algorithm =  expensive
+Encounter 143 :
+	item_real_alphas         =  wonderful
+	item_model_alphas        =  to add
+	item_optimized_algorithm =  best
+Encounter 144 :
+	item_real_alphas         =  wonderful
+	item_model_alphas        =  furniture
+	item_optimized_algorithm =  to add
+Encounter 145 :
+	item_real_alphas         =  stall
+	item_model_alphas        =  best
+	item_optimized_algorithm =  amazing
+Encounter 146 :
+	item_real_alphas         =  expensive
+	item_model_alphas        =  a week
+	item_optimized_algorithm =  castle
+Encounter 147 :
+	item_real_alphas         =  expensive
+	item_model_alphas        =  amazing
+	item_optimized_algorithm =  group
+Encounter 148 :
+	item_real_alphas         =  best
+	item_model_alphas        =  wonderful
+	item_optimized_algorithm =  wonderful
+Encounter 149 :
+	item_real_alphas         =  to add
+	item_model_alphas        =  stall
+	item_optimized_algorithm =  boat
+Encounter 150 :
+	item_real_alphas         =  to add
+	item_model_alphas        =  noodles
+	item_optimized_algorithm =  stall
+Encounter 151 :
+	item_real_alphas         =  boat
+	item_model_alphas        =  boat
+	item_optimized_algorithm =  a week
+Encounter 152 :
+	item_real_alphas         =  boat
+	item_model_alphas        =  to enjoy
+	item_optimized_algorithm =  noodles
+Encounter 153 :
+	item_real_alphas         =  adult
+	item_model_alphas        =  castle
+	item_optimized_algorithm =  to enjoy
+Encounter 154 :
+	item_real_alphas         =  a year
+	item_model_alphas        =  to join in
+	item_optimized_algorithm =  a year
+Encounter 155 :
+	item_real_alphas         =  expensive
+	item_model_alphas        =  to join in
+	item_optimized_algorithm =  to join in
+Encounter 156 :
+	item_real_alphas         =  to add
+	item_model_alphas        =  British
+	item_optimized_algorithm =  to join in
+Encounter 157 :
+	item_real_alphas         =  wonderful
+	item_model_alphas        =  a year
+	item_optimized_algorithm =  view
+Encounter 158 :
+	item_real_alphas         =  group
+	item_model_alphas        =  view
+	item_optimized_algorithm =  view
+Encounter 159 :
+	item_real_alphas         =  to enjoy
+	item_model_alphas        =  view
+	item_optimized_algorithm =  canoeing
+Encounter 160 :
+	item_real_alphas         =  boat
+	item_model_alphas        =  canoeing
+	item_optimized_algorithm =  canoeing
+Encounter 161 :
+	item_real_alphas         =  open
+	item_model_alphas        =  canoeing
+	item_optimized_algorithm =  flower
+Encounter 162 :
+	item_real_alphas         =  best
+	item_model_alphas        =  flower
+	item_optimized_algorithm =  flower
+Encounter 163 :
+	item_real_alphas         =  open(from...to...)
+	item_model_alphas        =  flower
+	item_optimized_algorithm =  adult
+Encounter 164 :
+	item_real_alphas         =  a week
+	item_model_alphas        =  to join in
+	item_optimized_algorithm =  to join in
+Encounter 165 :
+	item_real_alphas         =  furniture
+	item_model_alphas        =  to add
+	item_optimized_algorithm =  to add
+Encounter 166 :
+	item_real_alphas         =  to add
+	item_model_alphas        =  area
+	item_optimized_algorithm =  British
+Encounter 167 :
+	item_real_alphas         =  Chinese
+	item_model_alphas        =  area
+	item_optimized_algorithm =  tree
+Encounter 168 :
+	item_real_alphas         =  each
+	item_model_alphas        =  adult
+	item_optimized_algorithm =  a day
+Encounter 169 :
+	item_real_alphas         =  free time
+	item_model_alphas        =  view
+	item_optimized_algorithm =  view
+Encounter 170 :
+	item_real_alphas         =  canal
+	item_model_alphas        =  playing field
+	item_optimized_algorithm =  flower
+Encounter 171 :
+	item_real_alphas         =  fancy
+	item_model_alphas        =  flower
+	item_optimized_algorithm =  canoeing
+Encounter 172 :
+	item_real_alphas         =  adult
+	item_model_alphas        =  canoeing
+	item_optimized_algorithm =  area
+Encounter 173 :
+	item_real_alphas         =  expensive
+	item_model_alphas        =  expensive
+	item_optimized_algorithm =  area
+Encounter 174 :
+	item_real_alphas         =  to join in
+	item_model_alphas        =  tree
+	item_optimized_algorithm =  open(from...to...)
+Encounter 175 :
+	item_real_alphas         =  to join in
+	item_model_alphas        =  open(from...to...)
+	item_optimized_algorithm =  expensive
+Encounter 176 :
+	item_real_alphas         =  boat
+	item_model_alphas        =  a day
+	item_optimized_algorithm =  playing field
+Encounter 177 :
+	item_real_alphas         =  restaurant
+	item_model_alphas        =  area
+	item_optimized_algorithm =  stall
+Encounter 178 :
+	item_real_alphas         =  best
+	item_model_alphas        =  stall
+	item_optimized_algorithm =  to join in
+Encounter 179 :
+	item_real_alphas         =  to add
+	item_model_alphas        =  to join in
+	item_optimized_algorithm =  a year
+Encounter 180 :
+	item_real_alphas         =  to join in
+	item_model_alphas        =  boat
+	item_optimized_algorithm =  boat
+Encounter 181 :
+	item_real_alphas         =  way
+	item_model_alphas        =  many
+	item_optimized_algorithm =  castle
+Encounter 182 :
+	item_real_alphas         =  many
+	item_model_alphas        =  open
+	item_optimized_algorithm =  canal
+Encounter 183 :
+	item_real_alphas         =  group
+	item_model_alphas        =  canal
+	item_optimized_algorithm =  area
+Encounter 184 :
+	item_real_alphas         =  stall
+	item_model_alphas        =  a year
+	item_optimized_algorithm =  noodles
+Encounter 185 :
+	item_real_alphas         =  view
+	item_model_alphas        =  free time
+	item_optimized_algorithm =  many
+Encounter 186 :
+	item_real_alphas         =  view
+	item_model_alphas        =  Chinese
+	item_optimized_algorithm =  best
+Encounter 187 :
+	item_real_alphas         =  adult
+	item_model_alphas        =  best
+	item_optimized_algorithm =  open
+Encounter 188 :
+	item_real_alphas         =  to enjoy
+	item_model_alphas        =  view
+	item_optimized_algorithm =  view
+Encounter 189 :
+	item_real_alphas         =  wonderful
+	item_model_alphas        =  wonderful
+	item_optimized_algorithm =  free time
+Encounter 190 :
+	item_real_alphas         =  to join in
+	item_model_alphas        =  noodles
+	item_optimized_algorithm =  flower
+Encounter 191 :
+	item_real_alphas         =  a year
+	item_model_alphas        =  flower
+	item_optimized_algorithm =  canoeing
+Encounter 192 :
+	item_real_alphas         =  canoeing
+	item_model_alphas        =  canoeing
+	item_optimized_algorithm =  restaurant
+Encounter 193 :
+	item_real_alphas         =  canoeing
+	item_model_alphas        =  restaurant
+	item_optimized_algorithm =  wonderful
+Encounter 194 :
+	item_real_alphas         =  flower
+	item_model_alphas        =  to visit
+	item_optimized_algorithm =  Chinese
+Encounter 195 :
+	item_real_alphas         =  flower
+	item_model_alphas        =  castle
+	item_optimized_algorithm =  where
+Encounter 196 :
+	item_real_alphas         =  view
+	item_model_alphas        =  where
+	item_optimized_algorithm =  to visit
+Encounter 197 :
+	item_real_alphas         =  to add
+	item_model_alphas        =  market
+	item_optimized_algorithm =  stall
+Encounter 198 :
+	item_real_alphas         =  expensive
+	item_model_alphas        =  fancy
+	item_optimized_algorithm =  a year
+Encounter 199 :
+	item_real_alphas         =  a week
+	item_model_alphas        =  stall
+	item_optimized_algorithm =  tree
+Encounter 200 :
+	item_real_alphas         =  boat
+	item_model_alphas        =  to add
+	item_optimized_algorithm =  a day
+Encounter 201 :
+	item_real_alphas         =  canal
+	item_model_alphas        =  area
+	item_optimized_algorithm =  market
+Encounter 202 :
+	item_real_alphas         =  canoeing
+	item_model_alphas        =  to join in
+	item_optimized_algorithm =  to join in
+Encounter 203 :
+	item_real_alphas         =  best
+	item_model_alphas        =  a week
+	item_optimized_algorithm =  to add
+Encounter 204 :
+	item_real_alphas         =  British
+	item_model_alphas        =  playing field
+	item_optimized_algorithm =  fancy
+Encounter 205 :
+	item_real_alphas         =  to join in
+	item_model_alphas        =  a year
+	item_optimized_algorithm =  noodles
+Encounter 206 :
+	item_real_alphas         =  free time
+	item_model_alphas        =  each
+	item_optimized_algorithm =  playing field
+Encounter 207 :
+	item_real_alphas         =  adult
+	item_model_alphas        =  tree
+	item_optimized_algorithm =  area
+Encounter 208 :
+	item_real_alphas         =  furniture
+	item_model_alphas        =  way
+	item_optimized_algorithm =  view
+Encounter 209 :
+	item_real_alphas         =  flower
+	item_model_alphas        =  view
+	item_optimized_algorithm =  way
+Encounter 210 :
+	item_real_alphas         =  playing field
+	item_model_alphas        =  to enjoy
+	item_optimized_algorithm =  canoeing
+Encounter 211 :
+	item_real_alphas         =  group
+	item_model_alphas        =  a day
+	item_optimized_algorithm =  furniture
+Encounter 212 :
+	item_real_alphas         =  area
+	item_model_alphas        =  canoeing
+	item_optimized_algorithm =  a week
+Encounter 213 :
+	item_real_alphas         =  area
+	item_model_alphas        =  furniture
+	item_optimized_algorithm =  to enjoy
+Encounter 214 :
+	item_real_alphas         =  to add
+	item_model_alphas        =  amazing
+	item_optimized_algorithm =  each
+Encounter 215 :
+	item_real_alphas         =  restaurant
+	item_model_alphas        =  noodles
+	item_optimized_algorithm =  amazing
+Encounter 216 :
+	item_real_alphas         =  fancy
+	item_model_alphas        =  wonderful
+	item_optimized_algorithm =  wonderful
+Encounter 217 :
+	item_real_alphas         =  where
+	item_model_alphas        =  expensive
+	item_optimized_algorithm =  flower
+Encounter 218 :
+	item_real_alphas         =  area
+	item_model_alphas        =  flower
+	item_optimized_algorithm =  to join in
+Encounter 219 :
+	item_real_alphas         =  view
+	item_model_alphas        =  to join in
+	item_optimized_algorithm =  many
+Encounter 220 :
+	item_real_alphas         =  castle
+	item_model_alphas        =  many
+	item_optimized_algorithm =  adult
+Encounter 221 :
+	item_real_alphas         =  to join in
+	item_model_alphas        =  adult
+	item_optimized_algorithm =  expensive
+Encounter 222 :
+	item_real_alphas         =  canoeing
+	item_model_alphas        =  boat
+	item_optimized_algorithm =  free time
+Encounter 223 :
+	item_real_alphas         =  adult
+	item_model_alphas        =  open(from...to...)
+	item_optimized_algorithm =  boat
+Encounter 224 :
+	item_real_alphas         =  to enjoy
+	item_model_alphas        =  area
+	item_optimized_algorithm =  canoeing
+Encounter 225 :
+	item_real_alphas         =  amazing
+	item_model_alphas        =  free time
+	item_optimized_algorithm =  a year
+Encounter 226 :
+	item_real_alphas         =  a year
+	item_model_alphas        =  Chinese
+	item_optimized_algorithm =  stall
+Encounter 227 :
+	item_real_alphas         =  area
+	item_model_alphas        =  group
+	item_optimized_algorithm =  open(from...to...)
+Encounter 228 :
+	item_real_alphas         =  open
+	item_model_alphas        =  canoeing
+	item_optimized_algorithm =  Chinese
+Encounter 229 :
+	item_real_alphas         =  best
+	item_model_alphas        =  stall
+	item_optimized_algorithm =  area
+Encounter 230 :
+	item_real_alphas         =  boat
+	item_model_alphas        =  restaurant
+	item_optimized_algorithm =  castle
+Encounter 231 :
+	item_real_alphas         =  expensive
+	item_model_alphas        =  canal
+	item_optimized_algorithm =  restaurant
+Encounter 232 :
+	item_real_alphas         =  canal
+	item_model_alphas        =  a year
+	item_optimized_algorithm =  canal
+Encounter 233 :
+	item_real_alphas         =  stall
+	item_model_alphas        =  best
+	item_optimized_algorithm =  best
+Encounter 234 :
+	item_real_alphas         =  noodles
+	item_model_alphas        =  British
+	item_optimized_algorithm =  way
+Encounter 235 :
+	item_real_alphas         =  to add
+	item_model_alphas        =  fancy
+	item_optimized_algorithm =  wonderful
+Encounter 236 :
+	item_real_alphas         =  group
+	item_model_alphas        =  view
+	item_optimized_algorithm =  view
+Encounter 237 :
+	item_real_alphas         =  a week
+	item_model_alphas        =  way
+	item_optimized_algorithm =  fancy
+Encounter 238 :
+	item_real_alphas         =  area
+	item_model_alphas        =  wonderful
+	item_optimized_algorithm =  a year
+Encounter 239 :
+	item_real_alphas         =  adult
+	item_model_alphas        =  castle
+	item_optimized_algorithm =  furniture
+Encounter 240 :
+	item_real_alphas         =  wonderful
+	item_model_alphas        =  a week
+	item_optimized_algorithm =  group
+Encounter 241 :
+	item_real_alphas         =  free time
+	item_model_alphas        =  to add
+	item_optimized_algorithm =  noodles
+Encounter 242 :
+	item_real_alphas         =  to join in
+	item_model_alphas        =  to enjoy
+	item_optimized_algorithm =  a day
+Encounter 243 :
+	item_real_alphas         =  open(from...to...)
+	item_model_alphas        =  furniture
+	item_optimized_algorithm =  many
+Encounter 244 :
+	item_real_alphas         =  flower
+	item_model_alphas        =  to join in
+	item_optimized_algorithm =  to enjoy
+Encounter 245 :
+	item_real_alphas         =  tree
+	item_model_alphas        =  playing field
+	item_optimized_algorithm =  a week
+Encounter 246 :
+	item_real_alphas         =  way
+	item_model_alphas        =  noodles
+	item_optimized_algorithm =  to join in
+Encounter 247 :
+	item_real_alphas         =  furniture
+	item_model_alphas        =  a year
+	item_optimized_algorithm =  tree
+Encounter 248 :
+	item_real_alphas         =  many
+	item_model_alphas        =  tree
+	item_optimized_algorithm =  a year
+Encounter 249 :
+	item_real_alphas         =  canoeing
+	item_model_alphas        =  many
+	item_optimized_algorithm =  to add
+Encounter 250 :
+	item_real_alphas         =  restaurant
+	item_model_alphas        =  expensive
+	item_optimized_algorithm =  wonderful
+Encounter 251 :
+	item_real_alphas         =  area
+	item_model_alphas        =  a day
+	item_optimized_algorithm =  canoeing
+Encounter 252 :
+	item_real_alphas         =  view
+	item_model_alphas        =  open
+	item_optimized_algorithm =  British
+Encounter 253 :
+	item_real_alphas         =  adult
+	item_model_alphas        =  open(from...to...)
+	item_optimized_algorithm =  castle
+Encounter 254 :
+	item_real_alphas         =  each
+	item_model_alphas        =  canoeing
+	item_optimized_algorithm =  open(from...to...)
+Encounter 255 :
+	item_real_alphas         =  best
+	item_model_alphas        =  market
+	item_optimized_algorithm =  expensive
+Encounter 256 :
+	item_real_alphas         =  to add
+	item_model_alphas        =  wonderful
+	item_optimized_algorithm =  view
+Encounter 257 :
+	item_real_alphas         =  to enjoy
+	item_model_alphas        =  view
+	item_optimized_algorithm =  playing field
+Encounter 258 :
+	item_real_alphas         =  Chinese
+	item_model_alphas        =  boat
+	item_optimized_algorithm =  Chinese
+Encounter 259 :
+	item_real_alphas         =  a day
+	item_model_alphas        =  flower
+	item_optimized_algorithm =  boat
+Encounter 260 :
+	item_real_alphas         =  group
+	item_model_alphas        =  a year
+	item_optimized_algorithm =  canal
+Encounter 261 :
+	item_real_alphas         =  boat
+	item_model_alphas        =  Chinese
+	item_optimized_algorithm =  flower
+Encounter 262 :
+	item_real_alphas         =  to join in
+	item_model_alphas        =  canal
+	item_optimized_algorithm =  to join in
+Encounter 263 :
+	item_real_alphas         =  a year
+	item_model_alphas        =  to join in
+	item_optimized_algorithm =  wonderful
+Encounter 264 :
+	item_real_alphas         =  canal
+	item_model_alphas        =  area
+	item_optimized_algorithm =  furniture
+Encounter 265 :
+	item_real_alphas         =  expensive
+	item_model_alphas        =  to visit
+	item_optimized_algorithm =  fancy
+Encounter 266 :
+	item_real_alphas         =  fancy
+	item_model_alphas        =  castle
+	item_optimized_algorithm =  stall
+Encounter 267 :
+	item_real_alphas         =  area
+	item_model_alphas        =  stall
+	item_optimized_algorithm =  open
+Encounter 268 :
+	item_real_alphas         =  adult
+	item_model_alphas        =  fancy
+	item_optimized_algorithm =  area
+Encounter 269 :
+	item_real_alphas         =  British
+	item_model_alphas        =  where
+	item_optimized_algorithm =  a year
+Encounter 270 :
+	item_real_alphas         =  free time
+	item_model_alphas        =  each
+	item_optimized_algorithm =  view
+Encounter 271 :
+	item_real_alphas         =  to visit
+	item_model_alphas        =  wonderful
+	item_optimized_algorithm =  to enjoy
+Encounter 272 :
+	item_real_alphas         =  a week
+	item_model_alphas        =  a week
+	item_optimized_algorithm =  a week
+Encounter 273 :
+	item_real_alphas         =  stall
+	item_model_alphas        =  furniture
+	item_optimized_algorithm =  where
+Encounter 274 :
+	item_real_alphas         =  playing field
+	item_model_alphas        =  view
+	item_optimized_algorithm =  to visit
+Encounter 275 :
+	item_real_alphas         =  to add
+	item_model_alphas        =  to add
+	item_optimized_algorithm =  market
+Encounter 276 :
+	item_real_alphas         =  furniture
+	item_model_alphas        =  to enjoy
+	item_optimized_algorithm =  to add
+Encounter 277 :
+	item_real_alphas         =  group
+	item_model_alphas        =  restaurant
+	item_optimized_algorithm =  expensive
+Encounter 278 :
+	item_real_alphas         =  best
+	item_model_alphas        =  amazing
+	item_optimized_algorithm =  each
+Encounter 279 :
+	item_real_alphas         =  to join in
+	item_model_alphas        =  expensive
+	item_optimized_algorithm =  boat
+Encounter 280 :
+	item_real_alphas         =  restaurant
+	item_model_alphas        =  a year
+	item_optimized_algorithm =  amazing
+Encounter 281 :
+	item_real_alphas         =  adult
+	item_model_alphas        =  adult
+	item_optimized_algorithm =  restaurant
+Encounter 282 :
+	item_real_alphas         =  canoeing
+	item_model_alphas        =  boat
+	item_optimized_algorithm =  fancy
+Encounter 283 :
+	item_real_alphas         =  area
+	item_model_alphas        =  flower
+	item_optimized_algorithm =  flower
+Encounter 284 :
+	item_real_alphas         =  open
+	item_model_alphas        =  canoeing
+	item_optimized_algorithm =  canoeing
+Encounter 285 :
+	item_real_alphas         =  flower
+	item_model_alphas        =  free time
+	item_optimized_algorithm =  wonderful
+Encounter 286 :
+	item_real_alphas         =  to enjoy
+	item_model_alphas        =  noodles
+	item_optimized_algorithm =  noodles
+Encounter 287 :
+	item_real_alphas         =  canal
+	item_model_alphas        =  way
+	item_optimized_algorithm =  adult
+Encounter 288 :
+	item_real_alphas         =  wonderful
+	item_model_alphas        =  to join in
+	item_optimized_algorithm =  to join in
+Encounter 289 :
+	item_real_alphas         =  view
+	item_model_alphas        =  fancy
+	item_optimized_algorithm =  way
+Encounter 290 :
+	item_real_alphas         =  boat
+	item_model_alphas        =  best
+	item_optimized_algorithm =  free time
+Encounter 291 :
+	item_real_alphas         =  a year
+	item_model_alphas        =  wonderful
+	item_optimized_algorithm =  many
+Encounter 292 :
+	item_real_alphas         =  where
+	item_model_alphas        =  open
+	item_optimized_algorithm =  to add
+Encounter 293 :
+	item_real_alphas         =  way
+	item_model_alphas        =  many
+	item_optimized_algorithm =  a year
+Encounter 294 :
+	item_real_alphas         =  amazing
+	item_model_alphas        =  to add
+	item_optimized_algorithm =  wonderful
+Encounter 295 :
+	item_real_alphas         =  adult
+	item_model_alphas        =  playing field
+	item_optimized_algorithm =  view
+Encounter 296 :
+	item_real_alphas         =  castle
+	item_model_alphas        =  view
+	item_optimized_algorithm =  boat
+Encounter 297 :
+	item_real_alphas         =  expensive
+	item_model_alphas        =  open(from...to...)
+	item_optimized_algorithm =  castle
+Encounter 298 :
+	item_real_alphas         =  to add
+	item_model_alphas        =  tree
+	item_optimized_algorithm =  a day
+Encounter 299 :
+	item_real_alphas         =  many
+	item_model_alphas        =  a day
+	item_optimized_algorithm =  best
+Encounter 300 :
+	item_real_alphas         =  area
+	item_model_alphas        =  a year
+	item_optimized_algorithm =  to join in
+Encounter 301 :
+	item_real_alphas         =  group
+	item_model_alphas        =  boat
+	item_optimized_algorithm =  a year
+Encounter 302 :
+	item_real_alphas         =  to join in
+	item_model_alphas        =  to join in
+	item_optimized_algorithm =  where
+Encounter 303 :
+	item_real_alphas         =  free time
+	item_model_alphas        =  wonderful
+	item_optimized_algorithm =  open
+Encounter 304 :
+	item_real_alphas         =  open(from...to...)
+	item_model_alphas        =  where
+	item_optimized_algorithm =  open(from...to...)
+Encounter 305 :
+	item_real_alphas         =  best
+	item_model_alphas        =  canal
+	item_optimized_algorithm =  to add
+Encounter 306 :
+	item_real_alphas         =  a week
+	item_model_alphas        =  stall
+	item_optimized_algorithm =  amazing
+Encounter 307 :
+	item_real_alphas         =  noodles
+	item_model_alphas        =  castle
+	item_optimized_algorithm =  tree
+Encounter 308 :
+	item_real_alphas         =  adult
+	item_model_alphas        =  amazing
+	item_optimized_algorithm =  furniture
+Encounter 309 :
+	item_real_alphas         =  furniture
+	item_model_alphas        =  Chinese
+	item_optimized_algorithm =  to join in
+Encounter 310 :
+	item_real_alphas         =  fancy
+	item_model_alphas        =  area
+	item_optimized_algorithm =  canal
+Encounter 311 :
+	item_real_alphas         =  restaurant
+	item_model_alphas        =  to add
+	item_optimized_algorithm =  Chinese
+Encounter 312 :
+	item_real_alphas         =  stall
+	item_model_alphas        =  a year
+	item_optimized_algorithm =  stall
+Encounter 313 :
+	item_real_alphas         =  canal
+	item_model_alphas        =  to join in
+	item_optimized_algorithm =  wonderful
+Encounter 314 :
+	item_real_alphas         =  canoeing
+	item_model_alphas        =  furniture
+	item_optimized_algorithm =  to add
+Encounter 315 :
+	item_real_alphas         =  area
+	item_model_alphas        =  a week
+	item_optimized_algorithm =  playing field
+Encounter 316 :
+	item_real_alphas         =  to add
+	item_model_alphas        =  group
+	item_optimized_algorithm =  to enjoy
+Encounter 317 :
+	item_real_alphas         =  to enjoy
+	item_model_alphas        =  to enjoy
+	item_optimized_algorithm =  area
+Encounter 318 :
+	item_real_alphas         =  a year
+	item_model_alphas        =  restaurant
+	item_optimized_algorithm =  a week
+Encounter 319 :
+	item_real_alphas         =  group
+	item_model_alphas        =  expensive
+	item_optimized_algorithm =  fancy
+Encounter 320 :
+	item_real_alphas         =  boat
+	item_model_alphas        =  canoeing
+	item_optimized_algorithm =  a year
+Encounter 321 :
+	item_real_alphas         =  adult
+	item_model_alphas        =  best
+	item_optimized_algorithm =  to add
+Encounter 322 :
+	item_real_alphas         =  to join in
+	item_model_alphas        =  flower
+	item_optimized_algorithm =  where
+Encounter 323 :
+	item_real_alphas         =  each
+	item_model_alphas        =  to add
+	item_optimized_algorithm =  expensive
+Encounter 324 :
+	item_real_alphas         =  British
+	item_model_alphas        =  wonderful
+	item_optimized_algorithm =  best
+Encounter 325 :
+	item_real_alphas         =  expensive
+	item_model_alphas        =  British
+	item_optimized_algorithm =  flower
+Encounter 326 :
+	item_real_alphas         =  free time
+	item_model_alphas        =  view
+	item_optimized_algorithm =  to join in
+Encounter 327 :
+	item_real_alphas         =  area
+	item_model_alphas        =  fancy
+	item_optimized_algorithm =  a year
+Encounter 328 :
+	item_real_alphas         =  adult
+	item_model_alphas        =  canal
+	item_optimized_algorithm =  canal
+Encounter 329 :
+	item_real_alphas         =  to join in
+	item_model_alphas        =  market
+	item_optimized_algorithm =  canoeing
+Encounter 330 :
+	item_real_alphas         =  to add
+	item_model_alphas        =  where
+	item_optimized_algorithm =  view
+Encounter 331 :
+	item_real_alphas         =  best
+	item_model_alphas        =  a year
+	item_optimized_algorithm =  boat
+Encounter 332 :
+	item_real_alphas         =  group
+	item_model_alphas        =  to join in
+	item_optimized_algorithm =  Chinese
+Encounter 333 :
+	item_real_alphas         =  canal
+	item_model_alphas        =  to add
+	item_optimized_algorithm =  to add
+Encounter 334 :
+	item_real_alphas         =  view
+	item_model_alphas        =  a year
+	item_optimized_algorithm =  a year
+Encounter 335 :
+	item_real_alphas         =  boat
+	item_model_alphas        =  to join in
+	item_optimized_algorithm =  to join in
+Encounter 336 :
+	item_real_alphas         =  canoeing
+	item_model_alphas        =  wonderful
+	item_optimized_algorithm =  wonderful
+Encounter 337 :
+	item_real_alphas         =  to enjoy
+	item_model_alphas        =  canoeing
+	item_optimized_algorithm =  canoeing
+Encounter 338 :
+	item_real_alphas         =  a week
+	item_model_alphas        =  canal
+	item_optimized_algorithm =  canal
+Encounter 339 :
+	item_real_alphas         =  restaurant
+	item_model_alphas        =  boat
+	item_optimized_algorithm =  where
+Encounter 340 :
+	item_real_alphas         =  a year
+	item_model_alphas        =  view
+	item_optimized_algorithm =  to enjoy
+Encounter 341 :
+	item_real_alphas         =  adult
+	item_model_alphas        =  best
+	item_optimized_algorithm =  best
+Encounter 342 :
+	item_real_alphas         =  expensive
+	item_model_alphas        =  where
+	item_optimized_algorithm =  view
+Encounter 343 :
+	item_real_alphas         =  free time
+	item_model_alphas        =  to enjoy
+	item_optimized_algorithm =  a week
+Encounter 344 :
+	item_real_alphas         =  furniture
+	item_model_alphas        =  a week
+	item_optimized_algorithm =  restaurant
+Encounter 345 :
+	item_real_alphas         =  flower
+	item_model_alphas        =  Chinese
+	item_optimized_algorithm =  noodles
+Encounter 346 :
+	item_real_alphas         =  area
+	item_model_alphas        =  noodles
+	item_optimized_algorithm =  boat
+Encounter 347 :
+	item_real_alphas         =  stall
+	item_model_alphas        =  stall
+	item_optimized_algorithm =  a year
+Encounter 348 :
+	item_real_alphas         =  wonderful
+	item_model_alphas        =  flower
+	item_optimized_algorithm =  stall
+Encounter 349 :
+	item_real_alphas         =  fancy
+	item_model_alphas        =  fancy
+	item_optimized_algorithm =  flower
+Encounter 350 :
+	item_real_alphas         =  way
+	item_model_alphas        =  castle
+	item_optimized_algorithm =  fancy
+Encounter 351 :
+	item_real_alphas         =  to add
+	item_model_alphas        =  area
+	item_optimized_algorithm =  castle
+Encounter 352 :
+	item_real_alphas         =  to join in
+	item_model_alphas        =  expensive
+	item_optimized_algorithm =  to join in
+Encounter 353 :
+	item_real_alphas         =  many
+	item_model_alphas        =  to join in
+	item_optimized_algorithm =  area
+Encounter 354 :
+	item_real_alphas         =  group
+	item_model_alphas        =  a year
+	item_optimized_algorithm =  Chinese
+Encounter 355 :
+	item_real_alphas         =  playing field
+	item_model_alphas        =  to add
+	item_optimized_algorithm =  furniture
+Encounter 356 :
+	item_real_alphas         =  adult
+	item_model_alphas        =  open(from...to...)
+	item_optimized_algorithm =  expensive
+Encounter 357 :
+	item_real_alphas         =  open
+	item_model_alphas        =  furniture
+	item_optimized_algorithm =  open(from...to...)
+Encounter 358 :
+	item_real_alphas         =  best
+	item_model_alphas        =  amazing
+	item_optimized_algorithm =  amazing
+Encounter 359 :
+	item_real_alphas         =  Chinese
+	item_model_alphas        =  many
+	item_optimized_algorithm =  a day
+Encounter 360 :
+	item_real_alphas         =  canal
+	item_model_alphas        =  playing field
+	item_optimized_algorithm =  many
+Encounter 361 :
+	item_real_alphas         =  open(from...to...)
+	item_model_alphas        =  way
+	item_optimized_algorithm =  way
+Encounter 362 :
+	item_real_alphas         =  amazing
+	item_model_alphas        =  a day
+	item_optimized_algorithm =  canal
+Encounter 363 :
+	item_real_alphas         =  British
+	item_model_alphas        =  tree
+	item_optimized_algorithm =  market
+Encounter 364 :
+	item_real_alphas         =  area
+	item_model_alphas        =  canal
+	item_optimized_algorithm =  each
+Encounter 365 :
+	item_real_alphas         =  castle
+	item_model_alphas        =  restaurant
+	item_optimized_algorithm =  tree
+Encounter 366 :
+	item_real_alphas         =  where
+	item_model_alphas        =  each
+	item_optimized_algorithm =  playing field
+Encounter 367 :
+	item_real_alphas         =  restaurant
+	item_model_alphas        =  adult
+	item_optimized_algorithm =  adult
+Encounter 368 :
+	item_real_alphas         =  adult
+	item_model_alphas        =  open
+	item_optimized_algorithm =  to add
+Encounter 369 :
+	item_real_alphas         =  tree
+	item_model_alphas        =  free time
+	item_optimized_algorithm =  free time
+Encounter 370 :
+	item_real_alphas         =  boat
+	item_model_alphas        =  to visit
+	item_optimized_algorithm =  where
+Encounter 371 :
+	item_real_alphas         =  a year
+	item_model_alphas        =  British
+	item_optimized_algorithm =  open
+Encounter 372 :
+	item_real_alphas         =  to enjoy
+	item_model_alphas        =  group
+	item_optimized_algorithm =  to visit
+Encounter 373 :
+	item_real_alphas         =  free time
+	item_model_alphas        =  a year
+	item_optimized_algorithm =  British
+Encounter 374 :
+	item_real_alphas         =  to add
+	item_model_alphas        =  where
+	item_optimized_algorithm =  group
+Encounter 375 :
+	item_real_alphas         =  group
+	item_model_alphas        =  wonderful
+	item_optimized_algorithm =  to enjoy
+Encounter 376 :
+	item_real_alphas         =  furniture
+	item_model_alphas        =  best
+	item_optimized_algorithm =  best
+Encounter 377 :
+	item_real_alphas         =  to join in
+	item_model_alphas        =  to enjoy
+	item_optimized_algorithm =  a year
+Encounter 378 :
+	item_real_alphas         =  a week
+	item_model_alphas        =  canoeing
+	item_optimized_algorithm =  wonderful
+Encounter 379 :
+	item_real_alphas         =  expensive
+	item_model_alphas        =  market
+	item_optimized_algorithm =  boat
+Encounter 380 :
+	item_real_alphas         =  noodles
+	item_model_alphas        =  to join in
+	item_optimized_algorithm =  canoeing
+Encounter 381 :
+	item_real_alphas         =  a day
+	item_model_alphas        =  view
+	item_optimized_algorithm =  to add
+Encounter 382 :
+	item_real_alphas         =  canoeing
+	item_model_alphas        =  boat
+	item_optimized_algorithm =  to join in
+Encounter 383 :
+	item_real_alphas         =  adult
+	item_model_alphas        =  to add
+	item_optimized_algorithm =  where
+Encounter 384 :
+	item_real_alphas         =  each
+	item_model_alphas        =  a week
+	item_optimized_algorithm =  many
+Encounter 385 :
+	item_real_alphas         =  view
+	item_model_alphas        =  many
+	item_optimized_algorithm =  a year
+Encounter 386 :
+	item_real_alphas         =  area
+	item_model_alphas        =  way
+	item_optimized_algorithm =  way
+Encounter 387 :
+	item_real_alphas         =  best
+	item_model_alphas        =  Chinese
+	item_optimized_algorithm =  view
+Encounter 388 :
+	item_real_alphas         =  stall
+	item_model_alphas        =  where
+	item_optimized_algorithm =  best
+Encounter 389 :
+	item_real_alphas         =  canal
+	item_model_alphas        =  noodles
+	item_optimized_algorithm =  each
+Encounter 390 :
+	item_real_alphas         =  to visit
+	item_model_alphas        =  a year
+	item_optimized_algorithm =  a week
+Encounter 391 :
+	item_real_alphas         =  way
+	item_model_alphas        =  canal
+	item_optimized_algorithm =  canal
+Encounter 392 :
+	item_real_alphas         =  fancy
+	item_model_alphas        =  best
+	item_optimized_algorithm =  to join in
+Encounter 393 :
+	item_real_alphas         =  group
+	item_model_alphas        =  stall
+	item_optimized_algorithm =  boat
+Encounter 394 :
+	item_real_alphas         =  adult
+	item_model_alphas        =  to join in
+	item_optimized_algorithm =  restaurant
+Encounter 395 :
+	item_real_alphas         =  to add
+	item_model_alphas        =  each
+	item_optimized_algorithm =  noodles
+Encounter 396 :
+	item_real_alphas         =  restaurant
+	item_model_alphas        =  fancy
+	item_optimized_algorithm =  stall
+Encounter 397 :
+	item_real_alphas         =  many
+	item_model_alphas        =  castle
+	item_optimized_algorithm =  best
+Encounter 398 :
+	item_real_alphas         =  to join in
+	item_model_alphas        =  to add
+	item_optimized_algorithm =  fancy
+Encounter 399 :
+	item_real_alphas         =  a year
+	item_model_alphas        =  flower
+	item_optimized_algorithm =  castle
+Encounter 400 :
+	item_real_alphas         =  free time
+	item_model_alphas        =  a year
+	item_optimized_algorithm =  a year
+Encounter 401 :
+	item_real_alphas         =  flower
+	item_model_alphas        =  wonderful
+	item_optimized_algorithm =  canal
+Encounter 402 :
+	item_real_alphas         =  wonderful
+	item_model_alphas        =  group
+	item_optimized_algorithm =  British
+Encounter 403 :
+	item_real_alphas         =  boat
+	item_model_alphas        =  open(from...to...)
+	item_optimized_algorithm =  to add
+Encounter 404 :
+	item_real_alphas         =  to enjoy
+	item_model_alphas        =  furniture
+	item_optimized_algorithm =  group
+Encounter 405 :
+	item_real_alphas         =  furniture
+	item_model_alphas        =  expensive
+	item_optimized_algorithm =  best
+Encounter 406 :
+	item_real_alphas         =  area
+	item_model_alphas        =  boat
+	item_optimized_algorithm =  flower
+Encounter 407 :
+	item_real_alphas         =  adult
+	item_model_alphas        =  best
+	item_optimized_algorithm =  each
+Encounter 408 :
+	item_real_alphas         =  open
+	item_model_alphas        =  canal
+	item_optimized_algorithm =  Chinese
+Encounter 409 :
+	item_real_alphas         =  a week
+	item_model_alphas        =  restaurant
+	item_optimized_algorithm =  a week
+Encounter 410 :
+	item_real_alphas         =  expensive
+	item_model_alphas        =  amazing
+	item_optimized_algorithm =  canal
+Encounter 411 :
+	item_real_alphas         =  playing field
+	item_model_alphas        =  to enjoy
+	item_optimized_algorithm =  where
+Encounter 412 :
+	item_real_alphas         =  group
+	item_model_alphas        =  a week
+	item_optimized_algorithm =  to enjoy
+Encounter 413 :
+	item_real_alphas         =  best
+	item_model_alphas        =  a day
+	item_optimized_algorithm =  to add
+Encounter 414 :
+	item_real_alphas         =  canal
+	item_model_alphas        =  tree
+	item_optimized_algorithm =  furniture
+Encounter 415 :
+	item_real_alphas         =  to add
+	item_model_alphas        =  area
+	item_optimized_algorithm =  wonderful
+Encounter 416 :
+	item_real_alphas         =  British
+	item_model_alphas        =  where
+	item_optimized_algorithm =  canal
+Encounter 417 :
+	item_real_alphas         =  open(from...to...)
+	item_model_alphas        =  to join in
+	item_optimized_algorithm =  to join in
+Encounter 418 :
+	item_real_alphas         =  adult
+	item_model_alphas        =  playing field
+	item_optimized_algorithm =  open(from...to...)
+Encounter 419 :
+	item_real_alphas         =  to join in
+	item_model_alphas        =  best
+	item_optimized_algorithm =  amazing
+Encounter 420 :
+	item_real_alphas         =  canoeing
+	item_model_alphas        =  a year
+	item_optimized_algorithm =  expensive
+Encounter 421 :
+	item_real_alphas         =  amazing
+	item_model_alphas        =  canal
+	item_optimized_algorithm =  a day
+Encounter 422 :
+	item_real_alphas         =  restaurant
+	item_model_alphas        =  canoeing
+	item_optimized_algorithm =  best
+Encounter 423 :
+	item_real_alphas         =  stall
+	item_model_alphas        =  each
+	item_optimized_algorithm =  area
+Encounter 424 :
+	item_real_alphas         =  area
+	item_model_alphas        =  to add
+	item_optimized_algorithm =  to join in
+Encounter 425 :
+	item_real_alphas         =  view
+	item_model_alphas        =  boat
+	item_optimized_algorithm =  boat
+Encounter 426 :
+	item_real_alphas         =  a year
+	item_model_alphas        =  adult
+	item_optimized_algorithm =  a year
+Encounter 427 :
+	item_real_alphas         =  castle
+	item_model_alphas        =  view
+	item_optimized_algorithm =  tree
+Encounter 428 :
+	item_real_alphas         =  free time
+	item_model_alphas        =  to join in
+	item_optimized_algorithm =  to enjoy
+Encounter 429 :
+	item_real_alphas         =  where
+	item_model_alphas        =  canal
+	item_optimized_algorithm =  canal
+Encounter 430 :
+	item_real_alphas         =  group
+	item_model_alphas        =  many
+	item_optimized_algorithm =  group
+Encounter 431 :
+	item_real_alphas         =  adult
+	item_model_alphas        =  to enjoy
+	item_optimized_algorithm =  canoeing
+Encounter 432 :
+	item_real_alphas         =  way
+	item_model_alphas        =  way
+	item_optimized_algorithm =  many
+Encounter 433 :
+	item_real_alphas         =  to enjoy
+	item_model_alphas        =  furniture
+	item_optimized_algorithm =  playing field
+Encounter 434 :
+	item_real_alphas         =  furniture
+	item_model_alphas        =  open(from...to...)
+	item_optimized_algorithm =  furniture
+Encounter 435 :
+	item_real_alphas         =  boat
+	item_model_alphas        =  open
+	item_optimized_algorithm =  to add
+Encounter 436 :
+	item_real_alphas         =  to add
+	item_model_alphas        =  to add
+	item_optimized_algorithm =  way
+Encounter 437 :
+	item_real_alphas         =  market
+	item_model_alphas        =  free time
+	item_optimized_algorithm =  boat
+Encounter 438 :
+	item_real_alphas         =  fancy
+	item_model_alphas        =  best
+	item_optimized_algorithm =  to enjoy
+Encounter 439 :
+	item_real_alphas         =  Chinese
+	item_model_alphas        =  expensive
+	item_optimized_algorithm =  market
+Encounter 440 :
+	item_real_alphas         =  best
+	item_model_alphas        =  British
+	item_optimized_algorithm =  open(from...to...)
+Encounter 441 :
+	item_real_alphas         =  many
+	item_model_alphas        =  a year
+	item_optimized_algorithm =  adult
+Encounter 442 :
+	item_real_alphas         =  canal
+	item_model_alphas        =  to visit
+	item_optimized_algorithm =  expensive
+Encounter 443 :
+	item_real_alphas         =  to join in
+	item_model_alphas        =  noodles
+	item_optimized_algorithm =  to join in
+Encounter 444 :
+	item_real_alphas         =  adult
+	item_model_alphas        =  canal
+	item_optimized_algorithm =  to enjoy
+Encounter 445 :
+	item_real_alphas         =  a week
+	item_model_alphas        =  wonderful
+	item_optimized_algorithm =  best
+Encounter 446 :
+	item_real_alphas         =  area
+	item_model_alphas        =  to enjoy
+	item_optimized_algorithm =  furniture
+Encounter 447 :
+	item_real_alphas         =  expensive
+	item_model_alphas        =  Chinese
+	item_optimized_algorithm =  canal
+Encounter 448 :
+	item_real_alphas         =  noodles
+	item_model_alphas        =  to join in
+	item_optimized_algorithm =  tree
+Encounter 449 :
+	item_real_alphas         =  group
+	item_model_alphas        =  where
+	item_optimized_algorithm =  view
+Encounter 450 :
+	item_real_alphas         =  each
+	item_model_alphas        =  stall
+	item_optimized_algorithm =  area
+Encounter 451 :
+	item_real_alphas         =  restaurant
+	item_model_alphas        =  market
+	item_optimized_algorithm =  each
+Encounter 452 :
+	item_real_alphas         =  tree
+	item_model_alphas        =  area
+	item_optimized_algorithm =  way
+Encounter 453 :
+	item_real_alphas         =  a year
+	item_model_alphas        =  furniture
+	item_optimized_algorithm =  where
+Encounter 454 :
+	item_real_alphas         =  adult
+	item_model_alphas        =  a week
+	item_optimized_algorithm =  free time
+Encounter 455 :
+	item_real_alphas         =  free time
+	item_model_alphas        =  way
+	item_optimized_algorithm =  open
+Encounter 456 :
+	item_real_alphas         =  wonderful
+	item_model_alphas        =  to enjoy
+	item_optimized_algorithm =  expensive
+Encounter 457 :
+	item_real_alphas         =  to add
+	item_model_alphas        =  boat
+	item_optimized_algorithm =  a year
+Encounter 458 :
+	item_real_alphas         =  open
+	item_model_alphas        =  to add
+	item_optimized_algorithm =  a week
+Encounter 459 :
+	item_real_alphas         =  flower
+	item_model_alphas        =  castle
+	item_optimized_algorithm =  to visit
+Encounter 460 :
+	item_real_alphas         =  stall
+	item_model_alphas        =  fancy
+	item_optimized_algorithm =  to enjoy
+Encounter 461 :
+	item_real_alphas         =  canoeing
+	item_model_alphas        =  expensive
+	item_optimized_algorithm =  way
+Encounter 462 :
+	item_real_alphas         =  to join in
+	item_model_alphas        =  best
+	item_optimized_algorithm =  to add
+Encounter 463 :
+	item_real_alphas         =  furniture
+	item_model_alphas        =  canal
+	item_optimized_algorithm =  restaurant
+Encounter 464 :
+	item_real_alphas         =  to enjoy
+	item_model_alphas        =  wonderful
+	item_optimized_algorithm =  boat
+Encounter 465 :
+	item_real_alphas         =  area
+	item_model_alphas        =  a year
+	item_optimized_algorithm =  noodles
+Encounter 466 :
+	item_real_alphas         =  best
+	item_model_alphas        =  each
+	item_optimized_algorithm =  to join in
+Encounter 467 :
+	item_real_alphas         =  adult
+	item_model_alphas        =  group
+	item_optimized_algorithm =  wonderful
+Encounter 468 :
+	item_real_alphas         =  canal
+	item_model_alphas        =  restaurant
+	item_optimized_algorithm =  canal
+Encounter 469 :
+	item_real_alphas         =  group
+	item_model_alphas        =  flower
+	item_optimized_algorithm =  stall
+Encounter 470 :
+	item_real_alphas         =  boat
+	item_model_alphas        =  way
+	item_optimized_algorithm =  best
+Encounter 471 :
+	item_real_alphas         =  a day
+	item_model_alphas        =  to join in
+	item_optimized_algorithm =  fancy
+Encounter 472 :
+	item_real_alphas         =  view
+	item_model_alphas        =  boat
+	item_optimized_algorithm =  castle
+Encounter 473 :
+	item_real_alphas         =  playing field
+	item_model_alphas        =  canoeing
+	item_optimized_algorithm =  furniture
+Encounter 474 :
+	item_real_alphas         =  British
+	item_model_alphas        =  to enjoy
+	item_optimized_algorithm =  British
+Encounter 475 :
+	item_real_alphas         =  way
+	item_model_alphas        =  amazing
+	item_optimized_algorithm =  best
+Encounter 476 :
+	item_real_alphas         =  restaurant
+	item_model_alphas        =  a day
+	item_optimized_algorithm =  Chinese
+Encounter 477 :
+	item_real_alphas         =  to add
+	item_model_alphas        =  tree
+	item_optimized_algorithm =  to enjoy
+Encounter 478 :
+	item_real_alphas         =  adult
+	item_model_alphas        =  view
+	item_optimized_algorithm =  flower
+Encounter 479 :
+	item_real_alphas         =  a week
+	item_model_alphas        =  open(from...to...)
+	item_optimized_algorithm =  group
+Encounter 480 :
+	item_real_alphas         =  expensive
+	item_model_alphas        =  to add
+	item_optimized_algorithm =  way
+Encounter 481 :
+	item_real_alphas         =  open(from...to...)
+	item_model_alphas        =  canal
+	item_optimized_algorithm =  open(from...to...)
+Encounter 482 :
+	item_real_alphas         =  a year
+	item_model_alphas        =  many
+	item_optimized_algorithm =  a year
+Encounter 483 :
+	item_real_alphas         =  many
+	item_model_alphas        =  where
+	item_optimized_algorithm =  expensive
+Encounter 484 :
+	item_real_alphas         =  fancy
+	item_model_alphas        =  furniture
+	item_optimized_algorithm =  canoeing
+Encounter 485 :
+	item_real_alphas         =  free time
+	item_model_alphas        =  best
+	item_optimized_algorithm =  many
+Encounter 486 :
+	item_real_alphas         =  to join in
+	item_model_alphas        =  playing field
+	item_optimized_algorithm =  way
+Encounter 487 :
+	item_real_alphas         =  area
+	item_model_alphas        =  a year
+	item_optimized_algorithm =  canal
+Encounter 488 :
+	item_real_alphas         =  group
+	item_model_alphas        =  restaurant
+	item_optimized_algorithm =  to add
+Encounter 489 :
+	item_real_alphas         =  amazing
+	item_model_alphas        =  wonderful
+	item_optimized_algorithm =  to join in
+Encounter 490 :
+	item_real_alphas         =  adult
+	item_model_alphas        =  canoeing
+	item_optimized_algorithm =  best
+Encounter 491 :
+	item_real_alphas         =  castle
+	item_model_alphas        =  to join in
+	item_optimized_algorithm =  where
+Encounter 492 :
+	item_real_alphas         =  canal
+	item_model_alphas        =  to enjoy
+	item_optimized_algorithm =  expensive
+Encounter 493 :
+	item_real_alphas         =  best
+	item_model_alphas        =  boat
+	item_optimized_algorithm =  tree
+Encounter 494 :
+	item_real_alphas         =  where
+	item_model_alphas        =  best
+	item_optimized_algorithm =  boat
+Encounter 495 :
+	item_real_alphas         =  furniture
+	item_model_alphas        =  way
+	item_optimized_algorithm =  amazing
+Encounter 496 :
+	item_real_alphas         =  to visit
+	item_model_alphas        =  expensive
+	item_optimized_algorithm =  canoeing
+Encounter 497 :
+	item_real_alphas         =  to enjoy
+	item_model_alphas        =  noodles
+	item_optimized_algorithm =  a day
+Encounter 498 :
+	item_real_alphas         =  to add
+	item_model_alphas        =  a week
+	item_optimized_algorithm =  each
+Encounter 499 :
+	item_real_alphas         =  stall
+	item_model_alphas        =  adult
+	item_optimized_algorithm =  to enjoy
+Encounter 500 :
+	item_real_alphas         =  boat
+	item_model_alphas        =  canal
+	item_optimized_algorithm =  area
+Encounter 501 :
+	item_real_alphas         =  adult
+	item_model_alphas        =  Chinese
+	item_optimized_algorithm =  way
+Encounter 502 :
+	item_real_alphas         =  restaurant
+	item_model_alphas        =  area
+	item_optimized_algorithm =  a week
+Encounter 503 :
+	item_real_alphas         =  canoeing
+	item_model_alphas        =  stall
+	item_optimized_algorithm =  view
+Encounter 504 :
+	item_real_alphas         =  group
+	item_model_alphas        =  to add
+	item_optimized_algorithm =  furniture
+Encounter 505 :
+	item_real_alphas         =  area
+	item_model_alphas        =  way
+	item_optimized_algorithm =  way
+Encounter 506 :
+	item_real_alphas         =  to join in
+	item_model_alphas        =  each
+	item_optimized_algorithm =  best
+Encounter 507 :
+	item_real_alphas         =  a year
+	item_model_alphas        =  open
+	item_optimized_algorithm =  playing field
+Encounter 508 :
+	item_real_alphas         =  noodles
+	item_model_alphas        =  expensive
+	item_optimized_algorithm =  canal
+Encounter 509 :
+	item_real_alphas         =  wonderful
+	item_model_alphas        =  best
+	item_optimized_algorithm =  wonderful
+Encounter 510 :
+	item_real_alphas         =  free time
+	item_model_alphas        =  a year
+	item_optimized_algorithm =  a year
+Encounter 511 :
+	item_real_alphas         =  open
+	item_model_alphas        =  castle
+	item_optimized_algorithm =  furniture
+Encounter 512 :
+	item_real_alphas         =  adult
+	item_model_alphas        =  playing field
+	item_optimized_algorithm =  area
+Encounter 513 :
+	item_real_alphas         =  a week
+	item_model_alphas        =  to enjoy
+	item_optimized_algorithm =  expensive
+Encounter 514 :
+	item_real_alphas         =  expensive
+	item_model_alphas        =  to join in
+	item_optimized_algorithm =  a year
+Encounter 515 :
+	item_real_alphas         =  each
+	item_model_alphas        =  free time
+	item_optimized_algorithm =  to join in
+Encounter 516 :
+	item_real_alphas         =  canal
+	item_model_alphas        =  British
+	item_optimized_algorithm =  way
+Encounter 517 :
+	item_real_alphas         =  way
+	item_model_alphas        =  fancy
+	item_optimized_algorithm =  to add
+Encounter 518 :
+	item_real_alphas         =  to add
+	item_model_alphas        =  a year
+	item_optimized_algorithm =  adult
+Encounter 519 :
+	item_real_alphas         =  best
+	item_model_alphas        =  boat
+	item_optimized_algorithm =  to join in
+Encounter 520 :
+	item_real_alphas         =  view
+	item_model_alphas        =  furniture
+	item_optimized_algorithm =  area
+Encounter 521 :
+	item_real_alphas         =  group
+	item_model_alphas        =  where
+	item_optimized_algorithm =  market
+Encounter 522 :
+	item_real_alphas         =  Chinese
+	item_model_alphas        =  wonderful
+	item_optimized_algorithm =  playing field
+Encounter 523 :
+	item_real_alphas         =  adult
+	item_model_alphas        =  a year
+	item_optimized_algorithm =  to enjoy
+Encounter 524 :
+	item_real_alphas         =  flower
+	item_model_alphas        =  to join in
+	item_optimized_algorithm =  restaurant
+Encounter 525 :
+	item_real_alphas         =  furniture
+	item_model_alphas        =  canal
+	item_optimized_algorithm =  area
+Encounter 526 :
+	item_real_alphas         =  area
+	item_model_alphas        =  way
+	item_optimized_algorithm =  canoeing
+Encounter 527 :
+	item_real_alphas         =  many
+	item_model_alphas        =  canoeing
+	item_optimized_algorithm =  a year
+Encounter 528 :
+	item_real_alphas         =  to enjoy
+	item_model_alphas        =  restaurant
+	item_optimized_algorithm =  to enjoy
+Encounter 529 :
+	item_real_alphas         =  to join in
+	item_model_alphas        =  area
+	item_optimized_algorithm =  area
+Encounter 530 :
+	item_real_alphas         =  restaurant
+	item_model_alphas        =  best
+	item_optimized_algorithm =  boat
+Encounter 531 :
+	item_real_alphas         =  fancy
+	item_model_alphas        =  to visit
+	item_optimized_algorithm =  best
+Encounter 532 :
+	item_real_alphas         =  British
+	item_model_alphas        =  group
+	item_optimized_algorithm =  way
+Encounter 533 :
+	item_real_alphas         =  boat
+	item_model_alphas        =  open(from...to...)
+	item_optimized_algorithm =  to join in
+Encounter 534 :
+	item_real_alphas         =  adult
+	item_model_alphas        =  a year
+	item_optimized_algorithm =  canoeing
+Encounter 535 :
+	item_real_alphas         =  playing field
+	item_model_alphas        =  way
+	item_optimized_algorithm =  restaurant
+Encounter 536 :
+	item_real_alphas         =  a year
+	item_model_alphas        =  to add
+	item_optimized_algorithm =  to join in
+Encounter 537 :
+	item_real_alphas         =  stall
+	item_model_alphas        =  furniture
+	item_optimized_algorithm =  furniture
+Encounter 538 :
+	item_real_alphas         =  group
+	item_model_alphas        =  expensive
+	item_optimized_algorithm =  to join in
+Encounter 539 :
+	item_real_alphas         =  to add
+	item_model_alphas        =  view
+	item_optimized_algorithm =  area
+Encounter 540 :
+	item_real_alphas         =  free time
+	item_model_alphas        =  market
+	item_optimized_algorithm =  noodles
+Encounter 541 :
+	item_real_alphas         =  canal
+	item_model_alphas        =  canoeing
+	item_optimized_algorithm =  canal
+Encounter 542 :
+	item_real_alphas         =  open(from...to...)
+	item_model_alphas        =  to join in
+	item_optimized_algorithm =  furniture
+Encounter 543 :
+	item_real_alphas         =  tree
+	item_model_alphas        =  to enjoy
+	item_optimized_algorithm =  to join in
+Encounter 544 :
+	item_real_alphas         =  best
+	item_model_alphas        =  many
+	item_optimized_algorithm =  where
+Encounter 545 :
+	item_real_alphas         =  area
+	item_model_alphas        =  flower
+	item_optimized_algorithm =  to enjoy
+Encounter 546 :
+	item_real_alphas         =  adult
+	item_model_alphas        =  area
+	item_optimized_algorithm =  stall
+Encounter 547 :
+	item_real_alphas         =  canoeing
+	item_model_alphas        =  a year
+	item_optimized_algorithm =  open(from...to...)
+Encounter 548 :
+	item_real_alphas         =  a week
+	item_model_alphas        =  to join in
+	item_optimized_algorithm =  expensive
+Encounter 549 :
+	item_real_alphas         =  expensive
+	item_model_alphas        =  open
+	item_optimized_algorithm =  a year
+Encounter 550 :
+	item_real_alphas         =  amazing
+	item_model_alphas        =  way
+	item_optimized_algorithm =  to join in
+Encounter 551 :
+	item_real_alphas         =  to join in
+	item_model_alphas        =  amazing
+	item_optimized_algorithm =  area
+Encounter 552 :
+	item_real_alphas         =  castle
+	item_model_alphas        =  to join in
+	item_optimized_algorithm =  way
+Encounter 553 :
+	item_real_alphas         =  furniture
+	item_model_alphas        =  to enjoy
+	item_optimized_algorithm =  group
+Encounter 554 :
+	item_real_alphas         =  restaurant
+	item_model_alphas        =  canal
+	item_optimized_algorithm =  castle
+Encounter 555 :
+	item_real_alphas         =  group
+	item_model_alphas        =  boat
+	item_optimized_algorithm =  fancy
+Encounter 556 :
+	item_real_alphas         =  adult
+	item_model_alphas        =  best
+	item_optimized_algorithm =  open(from...to...)
+Encounter 557 :
+	item_real_alphas         =  where
+	item_model_alphas        =  area
+	item_optimized_algorithm =  canoeing
+Encounter 558 :
+	item_real_alphas         =  to enjoy
+	item_model_alphas        =  a week
+	item_optimized_algorithm =  furniture
+Encounter 559 :
+	item_real_alphas         =  to add
+	item_model_alphas        =  British
+	item_optimized_algorithm =  to join in
+Encounter 560 :
+	item_real_alphas         =  way
+	item_model_alphas        =  to join in
+	item_optimized_algorithm =  best
+Encounter 561 :
+	item_real_alphas         =  a day
+	item_model_alphas        =  a day
+	item_optimized_algorithm =  to join in
+Encounter 562 :
+	item_real_alphas         =  a year
+	item_model_alphas        =  tree
+	item_optimized_algorithm =  to add
+Encounter 563 :
+	item_real_alphas         =  area
+	item_model_alphas        =  a year
+	item_optimized_algorithm =  tree
+Encounter 564 :
+	item_real_alphas         =  boat
+	item_model_alphas        =  group
+	item_optimized_algorithm =  open
+Encounter 565 :
+	item_real_alphas         =  canal
+	item_model_alphas        =  area
+	item_optimized_algorithm =  free time
+Encounter 566 :
+	item_real_alphas         =  free time
+	item_model_alphas        =  wonderful
+	item_optimized_algorithm =  to join in
+Encounter 567 :
+	item_real_alphas         =  view
+	item_model_alphas        =  many
+	item_optimized_algorithm =  to add
+Encounter 568 :
+	item_real_alphas         =  adult
+	item_model_alphas        =  furniture
+	item_optimized_algorithm =  to enjoy
+Encounter 569 :
+	item_real_alphas         =  open
+	item_model_alphas        =  noodles
+	item_optimized_algorithm =  group
+Encounter 570 :
+	item_real_alphas         =  many
+	item_model_alphas        =  to add
+	item_optimized_algorithm =  area
+Encounter 571 :
+	item_real_alphas         =  wonderful
+	item_model_alphas        =  to join in
+	item_optimized_algorithm =  each
+Encounter 572 :
+	item_real_alphas         =  best
+	item_model_alphas        =  way
+	item_optimized_algorithm =  many
+Encounter 573 :
+	item_real_alphas         =  to join in
+	item_model_alphas        =  to enjoy
+	item_optimized_algorithm =  to join in
+Encounter 574 :
+	item_real_alphas         =  group
+	item_model_alphas        =  canoeing
+	item_optimized_algorithm =  Chinese
+Encounter 575 :
+	item_real_alphas         =  fancy
+	item_model_alphas        =  to join in
+	item_optimized_algorithm =  a week
+Encounter 576 :
+	item_real_alphas         =  stall
+	item_model_alphas        =  each
+	item_optimized_algorithm =  restaurant
+Encounter 577 :
+	item_real_alphas         =  noodles
+	item_model_alphas        =  where
+	item_optimized_algorithm =  a year
+Encounter 578 :
+	item_real_alphas         =  adult
+	item_model_alphas        =  expensive
+	item_optimized_algorithm =  way
+Encounter 579 :
+	item_real_alphas         =  to add
+	item_model_alphas        =  furniture
+	item_optimized_algorithm =  canal
+Encounter 580 :
+	item_real_alphas         =  restaurant
+	item_model_alphas        =  area
+	item_optimized_algorithm =  boat
+Encounter 581 :
+	item_real_alphas         =  a week
+	item_model_alphas        =  to add
+	item_optimized_algorithm =  many
+Encounter 582 :
+	item_real_alphas         =  expensive
+	item_model_alphas        =  many
+	item_optimized_algorithm =  to join in
+Encounter 583 :
+	item_real_alphas         =  area
+	item_model_alphas        =  to join in
+	item_optimized_algorithm =  furniture
+Encounter 584 :
+	item_real_alphas         =  furniture
+	item_model_alphas        =  a year
+	item_optimized_algorithm =  open
+Encounter 585 :
+	item_real_alphas         =  each
+	item_model_alphas        =  playing field
+	item_optimized_algorithm =  to add
+Encounter 586 :
+	item_real_alphas         =  British
+	item_model_alphas        =  amazing
+	item_optimized_algorithm =  playing field
+Encounter 587 :
+	item_real_alphas         =  flower
+	item_model_alphas        =  best
+	item_optimized_algorithm =  many
+Encounter 588 :
+	item_real_alphas         =  canoeing
+	item_model_alphas        =  canal
+	item_optimized_algorithm =  to visit
+Encounter 589 :
+	item_real_alphas         =  adult
+	item_model_alphas        =  British
+	item_optimized_algorithm =  wonderful
+Encounter 590 :
+	item_real_alphas         =  to enjoy
+	item_model_alphas        =  restaurant
+	item_optimized_algorithm =  area
+Encounter 591 :
+	item_real_alphas         =  group
+	item_model_alphas        =  Chinese
+	item_optimized_algorithm =  flower
+Encounter 592 :
+	item_real_alphas         =  canal
+	item_model_alphas        =  to join in
+	item_optimized_algorithm =  to join in
+Encounter 593 :
+	item_real_alphas         =  a year
+	item_model_alphas        =  stall
+	item_optimized_algorithm =  expensive
+Encounter 594 :
+	item_real_alphas         =  to join in
+	item_model_alphas        =  boat
+	item_optimized_algorithm =  open(from...to...)
+Encounter 595 :
+	item_real_alphas         =  free time
+	item_model_alphas        =  to enjoy
+	item_optimized_algorithm =  canoeing
+Encounter 596 :
+	item_real_alphas         =  best
+	item_model_alphas        =  way
+	item_optimized_algorithm =  to enjoy
+Encounter 597 :
+	item_real_alphas         =  boat
+	item_model_alphas        =  castle
+	item_optimized_algorithm =  best
+Encounter 598 :
+	item_real_alphas         =  playing field
+	item_model_alphas        =  area
+	item_optimized_algorithm =  British
+Encounter 599 :
+	item_real_alphas         =  to add
+	item_model_alphas        =  furniture
+	item_optimized_algorithm =  view
+Encounter 600 :
+	item_real_alphas         =  adult
+	item_model_alphas        =  to add
+	item_optimized_algorithm =  amazing
+Encounter 601 :
+	item_real_alphas         =  open(from...to...)
+	item_model_alphas        =  to join in
+	item_optimized_algorithm =  where
+Encounter 602 :
+	item_real_alphas         =  area
+	item_model_alphas        =  a year
+	item_optimized_algorithm =  to join in
+Encounter 603 :
+	item_real_alphas         =  way
+	item_model_alphas        =  adult
+	item_optimized_algorithm =  many
+Encounter 604 :
+	item_real_alphas         =  to visit
+	item_model_alphas        =  open(from...to...)
+	item_optimized_algorithm =  way
+Encounter 605 :
+	item_real_alphas         =  restaurant
+	item_model_alphas        =  fancy
+	item_optimized_algorithm =  a day
+Encounter 606 :
+	item_real_alphas         =  Chinese
+	item_model_alphas        =  canoeing
+	item_optimized_algorithm =  a year
+Encounter 607 :
+	item_real_alphas         =  group
+	item_model_alphas        =  many
+	item_optimized_algorithm =  to add
+Encounter 608 :
+	item_real_alphas         =  amazing
+	item_model_alphas        =  wonderful
+	item_optimized_algorithm =  a year
+Encounter 609 :
+	item_real_alphas         =  many
+	item_model_alphas        =  view
+	item_optimized_algorithm =  furniture
+Encounter 610 :
+	item_real_alphas         =  adult
+	item_model_alphas        =  to join in
+	item_optimized_algorithm =  to add
+Encounter 611 :
+	item_real_alphas         =  furniture
+	item_model_alphas        =  best
+	item_optimized_algorithm =  amazing
+Encounter 612 :
+	item_real_alphas         =  stall
+	item_model_alphas        =  stall
+	item_optimized_algorithm =  British
+Encounter 613 :
+	item_real_alphas         =  view
+	item_model_alphas        =  canal
+	item_optimized_algorithm =  area
+Encounter 614 :
+	item_real_alphas         =  to join in
+	item_model_alphas        =  expensive
+	item_optimized_algorithm =  to join in
+Encounter 615 :
+	item_real_alphas         =  a week
+	item_model_alphas        =  group
+	item_optimized_algorithm =  group
+Encounter 616 :
+	item_real_alphas         =  canal
+	item_model_alphas        =  to enjoy
+	item_optimized_algorithm =  canal
+Encounter 617 :
+	item_real_alphas         =  expensive
+	item_model_alphas        =  a week
+	item_optimized_algorithm =  area
+Encounter 618 :
+	item_real_alphas         =  a year
+	item_model_alphas        =  way
+	item_optimized_algorithm =  a year
+Encounter 619 :
+	item_real_alphas         =  to add
+	item_model_alphas        =  area
+	item_optimized_algorithm =  to enjoy
+Encounter 620 :
+	item_real_alphas         =  fancy
+	item_model_alphas        =  a year
+	item_optimized_algorithm =  British
+Encounter 621 :
+	item_real_alphas         =  castle
+	item_model_alphas        =  to join in
+	item_optimized_algorithm =  to add
+Encounter 622 :
+	item_real_alphas         =  adult
+	item_model_alphas        =  open
+	item_optimized_algorithm =  group
+Encounter 623 :
+	item_real_alphas         =  to enjoy
+	item_model_alphas        =  where
+	item_optimized_algorithm =  noodles
+Encounter 624 :
+	item_real_alphas         =  area
+	item_model_alphas        =  to enjoy
+	item_optimized_algorithm =  boat
+Encounter 625 :
+	item_real_alphas         =  free time
+	item_model_alphas        =  to add
+	item_optimized_algorithm =  to join in
+Encounter 626 :
+	item_real_alphas         =  best
+	item_model_alphas        =  furniture
+	item_optimized_algorithm =  best
+Encounter 627 :
+	item_real_alphas         =  group
+	item_model_alphas        =  free time
+	item_optimized_algorithm =  group
+Encounter 628 :
+	item_real_alphas         =  open
+	item_model_alphas        =  boat
+	item_optimized_algorithm =  many
+Encounter 629 :
+	item_real_alphas         =  where
+	item_model_alphas        =  British
+	item_optimized_algorithm =  area
+Encounter 630 :
+	item_real_alphas         =  wonderful
+	item_model_alphas        =  flower
+	item_optimized_algorithm =  restaurant
+Encounter 631 :
+	item_real_alphas         =  boat
+	item_model_alphas        =  to add
+	item_optimized_algorithm =  canoeing
+Encounter 632 :
+	item_real_alphas         =  restaurant
+	item_model_alphas        =  adult
+	item_optimized_algorithm =  way
+Encounter 633 :
+	item_real_alphas         =  adult
+	item_model_alphas        =  to join in
+	item_optimized_algorithm =  a year
+Encounter 634 :
+	item_real_alphas         =  canoeing
+	item_model_alphas        =  group
+	item_optimized_algorithm =  expensive
+Encounter 635 :
+	item_real_alphas         =  to join in
+	item_model_alphas        =  each
+	item_optimized_algorithm =  to add
+Encounter 636 :
+	item_real_alphas         =  tree
+	item_model_alphas        =  amazing
+	item_optimized_algorithm =  open(from...to...)
+Encounter 637 :
+	item_real_alphas         =  to add
+	item_model_alphas        =  many
+	item_optimized_algorithm =  to add
+Encounter 638 :
+	item_real_alphas         =  canal
+	item_model_alphas        =  to enjoy
+	item_optimized_algorithm =  to add
+Encounter 639 :
+	item_real_alphas         =  British
+	item_model_alphas        =  noodles
+	item_optimized_algorithm =  to join in
+Encounter 640 :
+	item_real_alphas         =  furniture
+	item_model_alphas        =  a year
+	item_optimized_algorithm =  furniture
+Encounter 641 :
+	item_real_alphas         =  area
+	item_model_alphas        =  best
+	item_optimized_algorithm =  tree
+Encounter 642 :
+	item_real_alphas         =  group
+	item_model_alphas        =  restaurant
+	item_optimized_algorithm =  to add
+Encounter 643 :
+	item_real_alphas         =  adult
+	item_model_alphas        =  area
+	item_optimized_algorithm =  group
+Encounter 644 :
+	item_real_alphas         =  way
+	item_model_alphas        =  canoeing
+	item_optimized_algorithm =  stall
+Encounter 645 :
+	item_real_alphas         =  a year
+	item_model_alphas        =  way
+	item_optimized_algorithm =  each
+Encounter 646 :
+	item_real_alphas         =  noodles
+	item_model_alphas        =  group
+	item_optimized_algorithm =  area
+Encounter 647 :
+	item_real_alphas         =  a week
+	item_model_alphas        =  to join in
+	item_optimized_algorithm =  open
+Encounter 648 :
+	item_real_alphas         =  free time
+	item_model_alphas        =  to add
+	item_optimized_algorithm =  to add
+Encounter 649 :
+	item_real_alphas         =  best
+	item_model_alphas        =  canal
+	item_optimized_algorithm =  area
+Encounter 650 :
+	item_real_alphas         =  expensive
+	item_model_alphas        =  market
+	item_optimized_algorithm =  British
+Encounter 651 :
+	item_real_alphas         =  stall
+	item_model_alphas        =  a day
+	item_optimized_algorithm =  adult
+Encounter 652 :
+	item_real_alphas         =  to enjoy
+	item_model_alphas        =  tree
+	item_optimized_algorithm =  stall
+Encounter 653 :
+	item_real_alphas         =  many
+	item_model_alphas        =  playing field
+	item_optimized_algorithm =  a year
+Encounter 654 :
+	item_real_alphas         =  adult
+	item_model_alphas        =  furniture
+	item_optimized_algorithm =  to enjoy
+Encounter 655 :
+	item_real_alphas         =  flower
+	item_model_alphas        =  wonderful
+	item_optimized_algorithm =  to add
+Encounter 656 :
+	item_real_alphas         =  to join in
+	item_model_alphas        =  to visit
+	item_optimized_algorithm =  to join in
+Encounter 657 :
+	item_real_alphas         =  restaurant
+	item_model_alphas        =  to enjoy
+	item_optimized_algorithm =  amazing
+Encounter 658 :
+	item_real_alphas         =  to add
+	item_model_alphas        =  expensive
+	item_optimized_algorithm =  canal
+Encounter 659 :
+	item_real_alphas         =  group
+	item_model_alphas        =  stall
+	item_optimized_algorithm =  area
+Encounter 660 :
+	item_real_alphas         =  each
+	item_model_alphas        =  to join in
+	item_optimized_algorithm =  a week
+Encounter 661 :
+	item_real_alphas         =  area
+	item_model_alphas        =  a year
+	item_optimized_algorithm =  market
+Encounter 662 :
+	item_real_alphas         =  view
+	item_model_alphas        =  Chinese
+	item_optimized_algorithm =  wonderful
+Encounter 663 :
+	item_real_alphas         =  boat
+	item_model_alphas        =  to add
+	item_optimized_algorithm =  to add
+Encounter 664 :
+	item_real_alphas         =  canal
+	item_model_alphas        =  open(from...to...)
+	item_optimized_algorithm =  adult
+Encounter 665 :
+	item_real_alphas         =  adult
+	item_model_alphas        =  area
+	item_optimized_algorithm =  many
+Encounter 666 :
+	item_real_alphas         =  playing field
+	item_model_alphas        =  group
+	item_optimized_algorithm =  group
+Encounter 667 :
+	item_real_alphas         =  fancy
+	item_model_alphas        =  boat
+	item_optimized_algorithm =  castle
+Encounter 668 :
+	item_real_alphas         =  open(from...to...)
+	item_model_alphas        =  to add
+	item_optimized_algorithm =  playing field
+Encounter 669 :
+	item_real_alphas         =  a day
+	item_model_alphas        =  best
+	item_optimized_algorithm =  best
+Encounter 670 :
+	item_real_alphas         =  furniture
+	item_model_alphas        =  way
+	item_optimized_algorithm =  many
+Encounter 671 :
+	item_real_alphas         =  a year
+	item_model_alphas        =  to add
+	item_optimized_algorithm =  group
+Encounter 672 :
+	item_real_alphas         =  amazing
+	item_model_alphas        =  where
+	item_optimized_algorithm =  way
+Encounter 673 :
+	item_real_alphas         =  canoeing
+	item_model_alphas        =  to join in
+	item_optimized_algorithm =  best
+Encounter 674 :
+	item_real_alphas         =  best
+	item_model_alphas        =  area
+	item_optimized_algorithm =  area
+Encounter 675 :
+	item_real_alphas         =  adult
+	item_model_alphas        =  many
+	item_optimized_algorithm =  group
+Encounter 676 :
+	item_real_alphas         =  -
+	item_model_alphas        =  to enjoy
+	item_optimized_algorithm =  to add
+Encounter 677 :
+	item_real_alphas         =  -
+	item_model_alphas        =  castle
+	item_optimized_algorithm =  group
+Encounter 678 :
+	item_real_alphas         =  -
+	item_model_alphas        =  to add
+	item_optimized_algorithm =  group
+Encounter 679 :
+	item_real_alphas         =  -
+	item_model_alphas        =  way
+	item_optimized_algorithm =  group
+Encounter 680 :
+	item_real_alphas         =  -
+	item_model_alphas        =  best
+	item_optimized_algorithm =  to join in
+Encounter 681 :
+	item_real_alphas         =  -
+	item_model_alphas        =  canal
+	item_optimized_algorithm =  group
+Encounter 682 :
+	item_real_alphas         =  -
+	item_model_alphas        =  view
+	item_optimized_algorithm =  a year
+Encounter 683 :
+	item_real_alphas         =  -
+	item_model_alphas        =  furniture
+	item_optimized_algorithm =  where
+Encounter 684 :
+	item_real_alphas         =  -
+	item_model_alphas        =  a year
+	item_optimized_algorithm =  group
+Encounter 685 :
+	item_real_alphas         =  -
+	item_model_alphas        =  a week
+	item_optimized_algorithm =  furniture
+Encounter 686 :
+	item_real_alphas         =  -
+	item_model_alphas        =  to add
+	item_optimized_algorithm =  fancy
+Encounter 687 :
+	item_real_alphas         =  -
+	item_model_alphas        =  canoeing
+	item_optimized_algorithm =  group
+Encounter 688 :
+	item_real_alphas         =  -
+	item_model_alphas        =  British
+	item_optimized_algorithm =  to add
+Encounter 689 :
+	item_real_alphas         =  -
+	item_model_alphas        =  to join in
+	item_optimized_algorithm =  best
+Encounter 690 :
+	item_real_alphas         =  -
+	item_model_alphas        =  fancy
+	item_optimized_algorithm =  many
+Encounter 691 :
+	item_real_alphas         =  -
+	item_model_alphas        =  area
+	item_optimized_algorithm =  group
+Encounter 692 :
+	item_real_alphas         =  -
+	item_model_alphas        =  adult
+	item_optimized_algorithm =  area
+Encounter 693 :
+	item_real_alphas         =  -
+	item_model_alphas        =  way
+	item_optimized_algorithm =  canoeing
+Encounter 694 :
+	item_real_alphas         =  -
+	item_model_alphas        =  group
+	item_optimized_algorithm =  stall
+Encounter 695 :
+	item_real_alphas         =  -
+	item_model_alphas        =  to add
+	item_optimized_algorithm =  group
+Encounter 696 :
+	item_real_alphas         =  -
+	item_model_alphas        =  to enjoy
+	item_optimized_algorithm =  to enjoy
+Encounter 697 :
+	item_real_alphas         =  -
+	item_model_alphas        =  best
+	item_optimized_algorithm =  boat
+Encounter 698 :
+	item_real_alphas         =  -
+	item_model_alphas        =  canoeing
+	item_optimized_algorithm =  to join in
+Encounter 699 :
+	item_real_alphas         =  -
+	item_model_alphas        =  -
+	item_optimized_algorithm =  Chinese

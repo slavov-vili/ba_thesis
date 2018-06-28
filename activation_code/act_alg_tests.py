@@ -219,12 +219,12 @@ def test_encounter_history(items, items_info, sesh_count, sesh_length, inter_ses
     # Use a history size which exists in all recorded session histories
     # history_size = min([len(sesh.history) for sesh in learn_sessions])
     # For each recorded session
-    for sesh in learn_sessions:
-        print("Session Settings:")
+    for i, sesh in enumerate(learn_sessions):
+        print("Test Settings:")
         print("Real alphas used:", sesh.real_alphas)
         print("Cache used:      ", sesh.cache_used)
         print("Cache updated:   ", sesh.cache_update)
-        print("Avg item offset from real values:", calc_session_avg_enc_offset(sesh.history, learn_sessions[0].history))
+        print("Avg item offset from next test:", calc_session_avg_enc_offset(sesh.history, learn_sessions[(i+1)%3].history))
 
     item_to_enc_indices_real      = get_item_enc_indices(learn_sessions[0].history)
     item_to_enc_indices_model     = get_item_enc_indices(learn_sessions[1].history)
@@ -236,11 +236,11 @@ def test_encounter_history(items, items_info, sesh_count, sesh_length, inter_ses
         # Print the item's encounter indices and the offset from the real values
         print("Item:", item)
         print("Encounter indices (real):     ", item_to_enc_indices_real[item])
-        print("Average index offset from the real values:", calc_item_avg_enc_offset(item, item_to_enc_indices_real, item_to_enc_indices_real))
+        print("Average index offset from next test:", calc_item_avg_enc_offset(item, item_to_enc_indices_real, item_to_enc_indices_model))
         print("Encounter indices (model):    ", item_to_enc_indices_model[item])
-        print("Average index offset from the real values:", calc_item_avg_enc_offset(item, item_to_enc_indices_model, item_to_enc_indices_real))
+        print("Average index offset from next test:", calc_item_avg_enc_offset(item, item_to_enc_indices_model, item_to_enc_indices_optimized))
         print("Encounter indices (optimized):", item_to_enc_indices_optimized[item])
-        print("Average index offset from the real values:", calc_item_avg_enc_offset(item, item_to_enc_indices_optimized, item_to_enc_indices_real))
+        print("Average index offset from next test:", calc_item_avg_enc_offset(item, item_to_enc_indices_optimized, item_to_enc_indices_real))
 
     print("\n")
     print("Encounter History Comparison:")
