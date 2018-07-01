@@ -225,7 +225,8 @@ def test_encounter_history(items, items_info, sesh_count, sesh_length, inter_ses
         print("Cache used:      ", sesh.cache_used)
         print("Cache updated:   ", sesh.cache_update)
         # TODO: print bias
-        print("Avg item offset from next test:", calc_session_avg_enc_offset(sesh.history, learn_sessions[(i+1)%3].history))
+        print("Avg item offset from next test:", calc_session_avg_enc_offset(sesh.history,      learn_sessions[(i+1)%3].history))
+        print("Avg item offset from next test:", calc_session_avg_enc_offset_bias(sesh.history, learn_sessions[(i+1)%3].history))
 
     item_to_enc_indices_real      = get_item_enc_indices(learn_sessions[0].history)
     item_to_enc_indices_model     = get_item_enc_indices(learn_sessions[1].history)
@@ -237,11 +238,14 @@ def test_encounter_history(items, items_info, sesh_count, sesh_length, inter_ses
         # Print the item's encounter indices and the offset from the real values
         print("Item:", item)
         print("Encounter indices (real):     ", item_to_enc_indices_real[item])
-        print("Average index offset from next test:", calc_item_avg_enc_offset(item, item_to_enc_indices_real, item_to_enc_indices_model))
+        print("Average index offset from next test:", calc_item_avg_enc_offset(item,  item_to_enc_indices_real, item_to_enc_indices_model))
+        print("Index offset bias    from next test:", calc_item_enc_offset_bias(item, item_to_enc_indices_real, item_to_enc_indices_model))
         print("Encounter indices (model):    ", item_to_enc_indices_model[item])
-        print("Average index offset from next test:", calc_item_avg_enc_offset(item, item_to_enc_indices_model, item_to_enc_indices_optimized))
+        print("Average index offset from next test:", calc_item_avg_enc_offset(item,  item_to_enc_indices_model, item_to_enc_indices_optimized))
+        print("Index offset bias    from next test:", calc_item_enc_offset_bias(item, item_to_enc_indices_model, item_to_enc_indices_optimized))
         print("Encounter indices (optimized):", item_to_enc_indices_optimized[item])
-        print("Average index offset from next test:", calc_item_avg_enc_offset(item, item_to_enc_indices_optimized, item_to_enc_indices_real))
+        print("Average index offset from next test:", calc_item_avg_enc_offset(item,  item_to_enc_indices_optimized, item_to_enc_indices_real))
+        print("Index offset bias    from next test:", calc_item_enc_offset_bias(item, item_to_enc_indices_optimized, item_to_enc_indices_real))
 
     print("\n")
     print("Encounter History Comparison:")
@@ -320,7 +324,7 @@ def calc_avg_alpha_bias(items, items_info):
 
 def calc_session_avg_enc_offset(hist_1, hist_2):
     """
-    Calculates the average item offset given two session histories.
+    Calculates the average encounter index offset given two session histories.
     A history is a list of items and represent which item was seen at which encounter.
 
     NOTE: the function assumes, that both histories contain the same items, just in possibly different orders
@@ -359,6 +363,48 @@ def calc_item_avg_enc_offset(item, item_to_indices_1, item_to_indices_2):
         encs_2_idx = item_encs_2[i] if i < len(item_encs_2) else 0
         avg_idx_diff += np.abs(encs_1_idx - encs_2_idx)
     return avg_idx_diff / most_encs
+
+def calc_session_avg_enc_offset_bias(hist_1, hist_2):
+    """
+    Calculates the average encounter index offset bias given two session histories.
+    A history is a list of items and represent which item was seen at which encounter.
+
+    NOTE: the function assumes, that both histories contain the same items, just in possibly different orders
+    """
+
+
+    # Transform the histories into maps of items to the lists of encounter indices, where they (the items) was seen
+    item_to_indices_1 = get_item_enc_indices(hist_1)
+    item_to_indices_2 = get_item_enc_indices(hist_2)
+
+    # Stores the complete encounter index differences of all items
+    avg_idx_diff_bias = 0
+
+    # For each item
+    for item in item_to_indices_1:
+        # Add the average encounter difference for the item to the overall difference
+        avg_idx_diff_bias += calc_item_enc_offset_bias(item, item_to_indices_1, item_to_indices_2)
+
+    return avg_idx_diff_bias / len(item_to_indices_1)
+
+def calc_item_enc_offset_bias(item, item_to_indices_1, item_to_indices_2):
+    """
+    Calculates the encounter index offset bias for the given item.
+
+    NOTE: the function assumes, that both histories contain the same items, just in possibly different orders
+    """
+    idx_bias = 0
+    # Store the encounter indices of the item from the respective map
+    item_encs_1 = item_to_indices_1[item]
+    item_encs_2 = item_to_indices_2[item]
+    # Get the length of the smaller encounter index list
+    most_encs = max(len(item_encs_1), len(item_encs_2))
+    # Add all index differences to the bias
+    for i in range(most_encs):
+        encs_1_idx = item_encs_1[i] if i < len(item_encs_1) else 0
+        encs_2_idx = item_encs_2[i] if i < len(item_encs_2) else 0
+        idx_bias += encs_1_idx - encs_2_idx
+    return idx_bias
 
 
 
@@ -834,6 +880,6 @@ def guess_item(recall_prob):
 
 
 def main():
-    test_encounter_history(items, items_info, 2, 3600, 24)
+    test_encounter_history(items, items_info, 2, 1800, 24)
 
 main()
