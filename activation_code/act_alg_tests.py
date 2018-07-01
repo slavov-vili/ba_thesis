@@ -224,6 +224,7 @@ def test_encounter_history(items, items_info, sesh_count, sesh_length, inter_ses
         print("Real alphas used:", sesh.real_alphas)
         print("Cache used:      ", sesh.cache_used)
         print("Cache updated:   ", sesh.cache_update)
+        # TODO: print bias
         print("Avg item offset from next test:", calc_session_avg_enc_offset(sesh.history, learn_sessions[(i+1)%3].history))
 
     item_to_enc_indices_real      = get_item_enc_indices(learn_sessions[0].history)
@@ -833,6 +834,6 @@ def guess_item(recall_prob):
 
 
 def main():
-    test_encounter_history(items, items_info, 2, 1800, 24)
+    test_encounter_history(items, items_info, 2, 3600, 24)
 
 main()
