@@ -1,6 +1,9 @@
 Working     title: Developing a computationally efficient implementation of the ACT-R cognitive architecture
 Alternative title: A computationally efficient implementation of the ACT-R cognitive architecture
 
+- Improving the computational performance of an activation-based learning model
+- A heuristic implementation of the Pavlik and Anderson learning model
+
 0. Introduction
   - Using technology to facilitate learning
   - Learning = language learning/fact learning
