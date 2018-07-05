@@ -270,7 +270,7 @@ def learn(items, items_info, sesh_count, sesh_length):
             item, next_new_item_idx = get_next_item(items, items_info, cur_time, next_new_item_idx)
             # print("Encountered '", item, "' at", cur_time)
 
-            # Extract all encounters, which happened before future time
+            # Extract all encounters, which happened before current time
             prev_encounters   = [enc for enc in items_info[item].encounters if enc.time < cur_time]
             # Store each previous encounter's activation
             prev_activations  = [enc.activation for enc in prev_encounters]
@@ -305,7 +305,7 @@ def learn(items, items_info, sesh_count, sesh_length):
                 # Increment the ITEM's incorrect counter
                 items_info[item].incorrect  += 1
 
-            # NOTE: Only here to simulate the duration if interactions.
+            # NOTE: Only here to simulate the duration of interactions.
             # Encounter duration = time it takes to start typing + average time to type a word
             enc_duration = datetime.timedelta(seconds = calc_reaction_time(item_act_model)) + datetime.timedelta(seconds = 3.0)
             # increment the current time to account for the length of the encounter
@@ -432,13 +432,15 @@ def calc_activation(item, alpha, encounters, activations, cur_time, call_count=1
             # if the encounter's activation has NOT been calculated yet
             else:
                 # calculate the activation of the item at the time of the encounter
+                # NOTE: because of the way I check if a values is cached (enc_idx < len(activations))
+                #       I did not find the need to slice off the activations list
                 enc_act, call_count_inc = calc_activation(item, alpha, encounters[:enc_idx], activations, enc_bunch.time, call_count_inc)
                 # NOTE: only here to count recursive function calls
                 call_count_inc += 1
                 # add the encounter's activation to the list
                 activations.append(enc_act)
 
-            # calculate the time difference between the current time and the previous encounter
+            # calculate the time difference between the current time and the encounter
             # AND convert it to seconds
             time_diff = calc_time_diff(cur_time, enc_bunch.time)
             # calculate the item's decay at the encounter
