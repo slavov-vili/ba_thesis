@@ -4,17 +4,25 @@ Alternative title: A computationally efficient implementation of the ACT-R cogni
 - Improving the computational performance of an activation-based learning model
 - A heuristic implementation of the Pavlik and Anderson learning model
 
-0. Introduction
+- Efficient/Optimized computational modeling of activation-based concept learning
+
+   Abstract (Summary of whole paper, a sentence from each chapter)
+
+1. Introduction (introduce the topic, why this is important, what model am I using)
   - Using technology to facilitate learning
   - Learning = language learning/fact learning
-  - Tough to do, so need to find a balance between performance and effectiveness
+  - Mention spacing effect, testing effect, introduce ACT-R
+  - Tough to make an accurate model, which is also efficient, need to find a balance between performance and effectiveness
   - The ACT-R cognitive architecture models memory quite well, but needs performance optimization for a smooth user experience
   - Aim of this thesis: analyze the algorithm, look for possibilities of improvement, conduct simulations similar to Chris' thesis to determine whether there was an improvement in performance
-1. Background
+2. Background (introduce model, development, related work; introduce optimization techniques; contribution to the field (which technique I am gonn apply))
   - Explain spacing effect, testing effect, introduce ACT-R
+  - Introduce the Pavlik and Anderson model
   - There have been various improvements to effectiveness
   - Explain the problem (recursive recalculation for each word, before each encounter; gets worse with longer encounter histories)
-2. Optimization process
+  - Introduce optimization techniques, which one I chose
+  - Which technique I am gonna use
+3. Optimization process
   - In its most-inefficient form, the algorithm is a mutual recursion between the activation function and the decay function (flooded the stack)
   - Reasonable implementation: a single recursion in the activation function
   - Try to identify the bottleneck: too many repeating recursive calls
@@ -23,20 +31,20 @@ Alternative title: A computationally efficient implementation of the ACT-R cogni
   - Based on what was mentioned in Sense's PhD thesis, an individual's rate of forgetting stays relatively stable over time and since the rate of forgetting (the alpha parameter) is the reason those recursive calls are needed in the first place, i've decided to try a heuristic approach where the activations of items during each study session are stored into memory and whenever an item is being chosen for the next encounter, those cached values are used in the activation function
   - The above approach will obviously not produce the same results as the original implementation of the algorithm (since it uses cached values), but reduces the complexity to a single function call (since everything else was already calculated and stored in memory)
   - If the cache isn't updated, the model will eventually be out of date, therefore a cache update is scheduled between the sessions. The cache update does the whole computation of each item's activation at each encounter and updates the stored values so that in the next session, the values have been updated using the latest alpha value. Since this happens outside of the study sessions, it does not hinder the users' interaction with the system.
-3. Evaluation of performance (Setup)
+4. Evaluation of performance (Setup)
   - The performance of the algorithm will be tested using simulations similar to Chris' paper
   - Explain how the simulations reflect real data, what is the point of the model in the simulation (encounter duration based on reaction time formula, random alphas chosen the way Chris does, the point is to adjust the alpha accordingly to the real one)
   - List of 37 words
   - Papers say that the word count to study time ratio depends on user performance
   - Will use 2 sessions x 30 minutes for consistency, even though 4 sessions x 60 minutes showed better results (The papers tries to improve computational performance, not effectiveness in learning)
   - Alpha adjust value chosen as a result of multiple tests
-4. Evaluation of performance (Results)
+5. Evaluation of performance (Results)
   - Test results: Session duration, count and inter-session time (shows that spaced out learning provides better results)
   - Test results: Cached recursion (absolute value of time + mention time complexity/recursive call count)
   - Test results: Cached history   (absolute value of time + mention time complexity/recursive call count)
   - Output is sensible, items with higher alpha (which means they should be more difficult) get presented more often, items stay above forgetting threshold; not updating the cache performs worse, because the current activation is dependent on previous ones
   - Shows that caching performs faster and with similar results (look at average alpha error)
-5. Possible extensions beyond this thesis
+6. Possible extensions beyond this thesis
   - Since the model aims to put most weight on the latest encounters, experiments could be done in order to notice if it is possible to disregard the history from a certain point in time (for example if only the last N encounters affect the current activation, then all encounters before that can be disregarded)
   - The improved implementation can be implemented into a real-life system and used by actual language learners to gather real data
   - Analyzing the data might provide further options for performance optimizations (for example if patterns of activation/alpha change are identified, those items can be clustered and then instead of recalculating activation for each word, recalculation could take place only once for the entire cluster)
