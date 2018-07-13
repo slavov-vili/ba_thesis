@@ -1,28 +1,40 @@
 Working     title: Developing a computationally efficient implementation of the ACT-R cognitive architecture
 Alternative title: A computationally efficient implementation of the ACT-R cognitive architecture
 
-- Improving the computational performance of an activation-based learning model
-- A heuristic implementation of the Pavlik and Anderson learning model
+Next title suggestions: Improving the computational performance of an activation-based learning model
+Next title suggestions: A heuristic implementation of the Pavlik and Anderson learning model
 
-- Efficient/Optimized computational modeling of activation-based concept learning
+Latest title: Efficient/Optimized computational modeling of activation-based concept learning
+
+
+
+
 
    Abstract (Summary of whole paper, a sentence from each chapter)
 
 1. Introduction (introduce the topic, why this is important, what model am I using)
-  - Using technology to facilitate learning
+  - Fact learning important in all domains
   - Learning = language (vocabulary) learning/fact learning
   - Mention spacing effect, testing effect, introduce ACT-R
+  - thanks to technology it has a real life application
+  - technology to facilitate learning
   - Its hard to model the human mind accurately as well as efficiently
   - Aim of this thesis: analyze the algorithm, look for possibilities of improvement, conduct simulations similar to Chris' thesis to determine whether there was an improvement in performance
+  - explicit formal implemented models allow us to test and simulate real learning conditions
 
-2. Background (introduce model, development, related work; introduce optimization techniques; contribution to the field (which technique I am gonn apply))
+2. Background (introduce model, development, related work; introduce optimization techniques; contribution to the field (which technique I am gonna apply))
   - Background of the Pavlik and Anderson model
     * Explain spacing effect
     * Introduce and explain the Pavlik and Anderson model
     * Changes to the model in order to improve effectiveness
-    * Explain the problem (recursive recalculation for each word, before each encounter; gets worse with longer encounter histories)
+    * Explain the problem (recursive recalculation for each word after each word encounter; gets worse with longer encounter histories)
   - Background of optimization techniques
     * Introduce optimization techniques
+    * algorithm analysis
+    * big O calculus helps to analyze, but the complexity of the algorithm itself cannot be improved much
+    * dynamic programming, can reduce the polynomial of the equation
+    * early algorithm to reduce complex parsing of natural language
+    * dynamic programming techniques to store partial results
     * Which technique I am gonna use
 
 3. Optimization process
@@ -31,17 +43,24 @@ Alternative title: A computationally efficient implementation of the ACT-R cogni
   - Try to identify the bottleneck: too many repeating recursive calls
   - Point out that Chris used memoization to avoid unnecessary recursive calls and thus significantly speed up the calculation
   - Comparison results show that it is still quite slow, since the recalculation occurs for each word, before each encounter (hinders user interaction)
-  - Based on what was mentioned in Sense's PhD thesis, an individual's rate of forgetting stays relatively stable over time and since the rate of forgetting (the alpha parameter) is the reason those recursive calls are needed in the first place, i've decided to try a heuristic approach where the activations of items during each study session are stored into memory and whenever an item is being chosen for the next encounter, those cached values are used in the activation function
-  - The above approach will obviously not produce the same results as the original implementation of the algorithm (since it uses cached values), but reduces the complexity to a single function call (since everything else was already calculated and stored in memory)
+  - Based on what was mentioned in Sense's PhD thesis, an individual's rate of forgetting stays relatively stable over time and since the rate of forgetting (the alpha parameter) is the reason those recursive calls are needed in the first place, i've decided to try a heuristic approach where the activations of items during each study session are cached and whenever an item is being chosen for the next encounter, those cached values are used in the activation function
+  - critical: computing resources on the client, during user interaction (session)
+  - can't take things out of the algorithm itself, but can take it outside of the session
+  - The above approach will obviously not produce exactly the same results during the session as the original implementation of the algorithm (since it uses cached values), but reduces the complexity to a single function call (since everything else was already calculated and cached)
   - If the cache isn't updated, the model will eventually be out of date, therefore a cache update is scheduled between the sessions. The cache update does the whole computation of each item's activation at each encounter and updates the stored values so that in the next session, the values have been updated using the latest alpha value. Since this happens outside of the study sessions, it does not hinder the users' interaction with the system.
+  - outside session the full calculation is done, but this allows 
+  - outside session, replay interaction, requires all info from the session stored
 
 4. Evaluation of performance (Setup)
   - The performance of the algorithm will be tested using simulations similar to Chris' paper
   - Explain how the simulations reflect real data, what is the point of the model in the simulation (encounter duration based on reaction time formula, random alphas chosen the way Chris does, the point is to adjust the alpha accordingly to the real one)
   - List of 37 words
   - Papers say that the word count to study time ratio depends on user performance
+  - word count for session, what makes sense to do based on simulation results
   - Will use 2 sessions x 30 minutes for consistency, even though 4 sessions x 60 minutes showed better results (The papers tries to improve computational performance, not effectiveness in learning)
   - Alpha adjust value chosen as a result of multiple tests
+  - progressively introduce different test results and why I did the tests. after each result say why it happened
+  - learning causes quicker forgetting; introducing competitiors
 
 5. Evaluation of performance (Results)
   - Test results: Session duration, count and inter-session time (shows that spaced out learning provides better results)
@@ -49,17 +68,27 @@ Alternative title: A computationally efficient implementation of the ACT-R cogni
   - Test results: Cached history   (absolute value of time + mention time complexity/recursive call count)
   - Output is sensible, items with higher alpha (which means they should be more difficult) get presented more often, items stay above forgetting threshold; not updating the cache performs worse, because the current activation is dependent on previous ones
   - Shows that caching performs faster and with similar results (look at average alpha error)
+  
 
-6. Possible extensions beyond this thesis
+  - Mix 4. and 5. introduce test, show results, explain/conclusions
+
+
+6. Possible extensions beyond this thesis (outlook)
   - Since the model aims to put most weight on the latest encounters, experiments could be done in order to notice if it is possible to disregard the history from a certain point in time (for example if only the last N encounters affect the current activation, then all encounters before that can be disregarded)
   - The improved implementation can be implemented into a real-life system and used by actual language learners to gather real data
   - Analyzing the data might provide further options for performance optimizations (for example if patterns of activation/alpha change are identified, those items can be clustered and then instead of recalculating activation for each word, recalculation could take place only once for the entire cluster)
+  - relates to: easy to grasp information from familiar domains
+  - empirically determain if we can predict results based on learner interest/knowledge
+  - setting initial alpha can be based on ^
+  - exciting to see in real life to look at actual cognitive differences
+
 
 7. Conclusions
   - The chosen implementation and the parameters clearly show the spacing effect (evident from the results of the encounter duration test)
   - The computational complexity was significantly improved and the end values were not too far off from the original implementation (evident from the average alpha error at the end of each learning process)
   - Its hard to come up with a conceptually complex enough theory to model human memory, but also computationally efficient enough to provide a reasonable user experience. Turns out that using estimated values is a decent enough compromise in order to achieve that.
   - Technology allows us to make such simulations and try to develop a model based on expected results, but its limit regarding how humans process language are still evident. If the model is integrated into a system used by real language learners, their results can be processed in order to try and identify regular patterns in their retention of words from different areas.
+  - What makes a word harder to learn? Domain, form, semantic or syntactic similarities, orthography
 
 
 
