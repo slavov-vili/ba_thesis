@@ -63,7 +63,7 @@ Latest title: Efficient/Optimized computational modeling of activation-based con
   - learning causes quicker forgetting; introducing competitiors
 
 5. Evaluation of performance (Results)
-  - Test results: Session duration, count and inter-session time (shows that spaced out learning provides better results)
+  - Test results: Session duration, count and inter-session time (shows that spaced out learning provides
   - Test results: Cached recursion (absolute value of time + mention time complexity/recursive call count)
   - Test results: Cached history   (absolute value of time + mention time complexity/recursive call count)
   - Output is sensible, items with higher alpha (which means they should be more difficult) get presented more often, items stay above forgetting threshold; not updating the cache performs worse, because the current activation is dependent on previous ones

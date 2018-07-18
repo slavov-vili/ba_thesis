@@ -1,5 +1,33 @@
+Title: ??? Optimized computational modeling of an adaptive activation-based concept learning ???
+
+
+
 1. Introduction
     Technology has made its way into our working environments, vehicles, mobile phones and even into our homes, in an attempt to make our lives easier and more convenient. One area of our lives, where technology has been gaining popularity is education. Educational technology in particular has been gaining increasing popularity due to its efforts in improving the application of technology in facilitating learning.
     Learning words in languages = very important, declarative memory? A language user's mothertongue is learned at a very young age when not much conscious effort is put into the learning process, but instead the learner acquires the language unconsciously therefore that is referred to as "language acquisition". On the other hand when it comes to learning further foreign languages, the user has to actively participate in the learning process in which case we speak of "language learning".
     Cognitive psychology has been able to identify a number of patterns, called cognitive biases, which try to explain how humans process information, such as the modality effect, the testing effect and the spacing effect. While being aware of these patterns allows educators to simply develop systems, which reliably produce improved learning results, computers require well defined and formalized rules in order to achieve this. One of the more famous and successful cognitive architectures is the Adaptive Control of Thought—Rational (known as ACT-R).
-    The goal of this thesis is to analyze an activation-based learning model, based on the ACT-R architecture and try to develop a more computationally efficient implementation of that model. I will compare the perforamnce as well as the accuracy of the resulting implementation to the original implementation of the model.
+    The goal of this thesis is to analyze an adaptive activation-based learning model, based on the ACT-R architecture and try to develop a more computationally efficient implementation of that model. I will compare the perforamnce as well as the accuracy of the resulting implementation to the original implementation of the model.
+
+
+
+2. Background
+    Subsection: The Pavlik and Anderson model
+    When it comes to factual learning tasks, massed learning (colloquially known as cramming) has become the go-to approach. This way of learning consists of exposing the learner to a big amount of information in a short amount of time in an attempt to make use of the recency effect <WHAT IS RECENCY EFFECT> to retrieve the studied information at a later time. Research, however, has shown (Ebbinghaus, 1885) that massed learning only produces short-term results and therefore is unsuitable when we want to achieve long-term information retention. The proposed alternative for effective long-term retention is the so-called distributed (or spaced) learning, which is based on Ebbinghaus' conclusions that spacing the individual item interactions further apart actually produces consistent long-term results. This discovery is known as the "spacing effect". <WHY SPACING IS EFFECTIVE> (contextual fluctuation; Pavlik and Anderson 2008). Spaced learning attempts to optimize both intra-session intervals (how often each word gets presented within a study session, based on its current strength in memory) and inter-session intervals (how far apart different study sessions should take place). Pavlik and Anderson have managed to formalize this research into an activation-based learning model, based on the ACT-R cognitive architecture.
+    Subsection: The basics of ACT-R
+    Since the model, which is being analyzed in this thesis is based on the ACT-R architecture, I will provide a very superficial introduction to it in order to introduce some important terminology and concepts. ACT-R stands for "Adaptive Character of Thought - Rational" and its aim is to explain and formally define how humans perceive and express both declarative and procedural knowledge. <WHAT ARE DECLARATIVE AND PROCEDURAL KNOWLEDE>.  {Reference: van Woundenberg 2008}. <HOW ACT-R CAME TO INCLUDE SPACING AND STUFF (Anderson 2008; van Woundenberg 2008)>.
+
+
+
+3. Optimization process
+
+
+
+4. Evaluation of Performance (Setup + Results)
+
+
+
+5. Possible extensions/improvements (Outlook)
+
+
+
+6. Conclusion
