@@ -27,6 +27,10 @@ TODO: sequences and series + recursion
     <ADD DECAY CALCULATION FORMULA>
     The model achieves adaptation by tweaking the alpha parameter <ALPHA> based on the learner's performance. Correctly guessing a word during one of the encounters means that the learner is making progress in strenghtening that word's activation in their memory. In that case the alpha gets reduced, which results in a lower decay and therefore the item is shown less often during the study session. If the reverse is the case (the learner gets the word wrong), then they need to practice it more in order to learn it better. To make sure this happens, the model increases the alpha, which in turn increases the decay and results in more frequent presentations. Furthermore, the model tries to present words before they fall below a forgetting threshold <BOLD tau BOLD>, at which point they would be forgotten by the user and previous learning will have been in vain. After a state is reached, where the decay is so minimal that the item's strength in memory is considered stable, the item stops being presented (and is considered "learned") and a new item from the vocabulary list enters the system.
 
+    Subsection: Extensions of the Pavlik and Anderson Model
+
+    Subsection: Program optimization
+    //TODO: downloaded wiki articles
 
 
 3. Optimization process
