@@ -39,8 +39,9 @@ TODO: sequences and series + recursion
 
 
     Subsection: Algorithm optimization techniques
-    The process of algorithm optimization usually aims to improve an algorithm by reducing the usage of a certain resource (whether it is execution time, hard drive space or something else). However, sometimes optimization with regards to one resource requires increased usage of another one. In the case of this learning algorithm, the valued resource is time (since the algorithm gets executed before each item encounter) and therefore optimization could come at the cost of hard drive space.
-    //TODO: downloaded wiki articles
+    The process of algorithm optimization usually aims to improve an algorithm by reducing the usage of a certain resource (whether it is execution time, hard drive space or something else). However, sometimes optimization with regards to one resource requires increased usage of another one. In the case of this learning algorithm, the valued resource is time (since the algorithm gets executed before each item encounter and needs to quickly decide which word should be presented next) and therefore optimization could come at the cost of hard drive space.
+
+    //TODO: downloaded wiki articles (Dynamic computing, Approximate computing, Memoization)
 
 
 3. Optimization process
