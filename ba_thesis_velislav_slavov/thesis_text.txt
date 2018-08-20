@@ -38,7 +38,7 @@ TODO: sequences and series + recursion
     Even though most of the proposed solutions have been shown to provide improved effectiveness of the model, none of them tackle the problem of computational efficiency. When integrated in a real-life system, an inefficient algorithm could inconvenience the user by making them wait while the activations of all items are calculated before each encounter, wasting precious learning time during the study sessions. Furthermore, since the activation calculation takes into account all previous encounters with the item, it becomes increasingly expensive when it comes to learning more difficult words (since they would take more encounters to learn). All of these factors have inspired this attempt at improving the computation time of the algorithm.
 
 
-    Subsection: Algorithm optimization techniques
+    Subsection: Algorithm optimization methods
     The process of algorithm optimization usually aims to improve an algorithm by reducing the usage of a certain resource (whether it is execution time, hard drive space or something else). However, sometimes optimization with regards to one resource requires increased usage of another one. In the case of this learning algorithm, the valued resource is time (since the algorithm gets executed before each item encounter and needs to quickly decide which word should be presented next) and therefore optimization could come at the cost of hard drive space.
 
     //TODO: downloaded wiki articles (Dynamic computing, Approximate computing, Memoization)
