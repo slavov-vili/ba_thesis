@@ -35,11 +35,17 @@ TODO: sequences and series + recursion
     Different approaches were taken by Van Rijn, Van Maanen, Van Woudenberg in 2009 and Nijboer in 2011. They proposed that the learner's reaction time be recorded and used when calculating the activation of each item. This suggestion is based on the idea that if the learner takes longer to finish the word encounter, then it is more difficult for them to recall the item from memory. Nijboer further expanded upon the idea of using reaction time by providing a way to predict the expected time needed to process the item presentation exercise (for example the time needed to read a sentence, before the learner has to attempt to retrieve a missing word from their memory).
 
     Subsection: The problem
-    Even though most of the proposed solutions have been shown to provide improved effectiveness of the model, none of them tackle the problem of computational efficiency. When integrated in a real-life system, an inefficient algorithm could inconvenience the user by making them wait while the activations of all items are calculated before each encounter, wasting precious learning time during the study sessions. Furthermore, since the activation calculation takes into account all previous encounters with the item, it becomes increasingly expensive when it comes to learning more difficult words (since they would take more encounters to learn). All of these factors have inspired this attempt at improving the computation time of the algorithm.
+    Even though most of the proposed extensions have been shown to provide improved effectiveness of the model, none of them tackle the problem of computational efficiency. When integrated in a real-life system, an inefficient algorithm could inconvenience the user by making them wait while the activations of all items are calculated before each encounter, wasting precious learning time during the study sessions. Furthermore, since the activation calculation takes into account all previous encounters with the item, it becomes increasingly expensive when it comes to learning more difficult words (since they would take more encounters to learn). All of these factors have inspired this attempt at improving the computation time of the algorithm.
 
 
-    Subsection: Algorithm optimization methods
-    The process of algorithm optimization usually aims to improve an algorithm by reducing the usage of a certain resource (whether it is execution time, hard drive space or something else). However, sometimes optimization with regards to one resource requires increased usage of another one. In the case of this learning algorithm, the valued resource is time (since the algorithm gets executed before each item encounter and needs to quickly decide which word should be presented next) and therefore optimization could come at the cost of hard drive space.
+    Subsection: Program optimization methods
+    The process of algorithm optimization usually aims to improve an algorithm by reducing the usage of a certain resource (whether it is execution time, hard drive space or another available resource). However, sometimes optimization with regards to one resource requires increased usage of another one.
+    Program optimization is usually applied using established and proven methods. Those methods differ in the level at which the optimization occurs, as well as in the type of optimization problem they are trying to solve. The different levels of program optimization include:
+    1. Efficient choice of technologies
+    2. Algorithm design with attention to resouce efficiency
+    3. Writing source code with attention to efficiency
+    4. Compiler optimizations
+    The higher levels (where most of the work is usually done by humans instead of the computer) tend to have a bigger impact on program efficiency than the lower ones. Therefore they are usually targeted first when an optimization problem occurs.
 
     //TODO: downloaded wiki articles (Dynamic computing, Approximate computing, Memoization)
 
