@@ -7,9 +7,9 @@ TODO: sequences and series + recursion
 1. Introduction
     (REDO)
     Technology has made its way into our working environments, vehicles, mobile phones and even into our homes, in an attempt to make our lives easier and more convenient. One area of our lives, where technology has been gaining popularity is education. Educational technology in particular has been gaining increasing popularity due to its efforts in improving the application of technology in facilitating learning.
-    Learning words in languages = very important, declarative memory? A language user's mothertongue is learned at a very young age when not much conscious effort is put into the learning process, but instead the learner acquires the language unconsciously therefore that is referred to as "language acquisition". On the other hand when it comes to learning further foreign languages, the user has to actively participate in the learning process in which case we speak of "language learning".
+    Learning words in languages = very important, declarative memory? A language user's mother tongue is learned at a very young age when not much conscious effort is put into the learning process, but instead the learner acquires the language unconsciously therefore that is referred to as "language acquisition". On the other hand when it comes to learning further foreign languages, the user has to actively participate in the learning process in which case we speak of "language learning".
     Cognitive psychology has been able to identify a number of patterns, called cognitive biases, which try to explain how humans process information, such as the modality effect, the testing effect and the spacing effect. While being aware of these patterns allows educators to simply develop systems, which reliably produce improved learning results, computers require well defined and formalized rules in order to achieve this. One of the more famous and successful cognitive architectures is the Adaptive Control of Thought—Rational (known as ACT-R).
-    The goal of this thesis is to analyze an adaptive activation-based learning model, based on the ACT-R architecture and try to develop a more computationally efficient implementation of that model. I will compare the perforamnce as well as the accuracy of the resulting implementation to the original implementation of the model.
+    The goal of this thesis is to analyze an adaptive activation-based learning model, based on the ACT-R architecture and try to develop a more computationally efficient implementation of that model. I will compare the performance as well as the accuracy of the resulting implementation to the original implementation of the model.
 
 
 
@@ -39,15 +39,21 @@ TODO: sequences and series + recursion
 
 
     Subsection: Program optimization methods
-    The process of algorithm optimization usually aims to improve an algorithm by reducing the usage of a certain resource (whether it is execution time, hard drive space or another available resource). However, sometimes optimization with regards to one resource requires increased usage of another one.
+    The process of algorithm optimization usually aims to improve an algorithm by reducing the usage of a certain resource (whether it is execution time, hard drive space or another available resource). However, sometimes optimization with regards to one resource requires increased usage of another one. In the case of this learning algorithm, the valued resource is execution time (since the algorithm is executed before each item encounter and needs to quickly determine which word should be presented next).
     Program optimization is usually applied using established and proven methods. Those methods differ in the level at which the optimization occurs, as well as in the type of optimization problem they are trying to solve. The different levels of program optimization include:
-    1. Efficient choice of technologies
-    2. Algorithm design with attention to resouce efficiency
-    3. Writing source code with attention to efficiency
+    1. Optimal choice of technologies
+    2. Algorithm design with attention to resource efficiency
+    3. Writing source code with attention to efficient command execution
     4. Compiler optimizations
-    The higher levels (where most of the work is usually done by humans instead of the computer) tend to have a bigger impact on program efficiency than the lower ones. Therefore they are usually targeted first when an optimization problem occurs.
+    The higher levels of optimization (where most of the work is usually done by the developer instead of the computer) tend to have a greater impact on program efficiency than the lower ones. This means that an inefficient algorithm, which was run on a highly optimized system will execute slower than an efficient algorithm, which was run on a sub-optimal system. Therefore the higher levels are usually targeted first when an optimization problem occurs.
+    
+    Some of the most famous optimization methods make use of recursion in order to simplify the initial problem into smaller, more manageable sub-problems. One such method is the well known <ITALIC Divide and conquer ITALIC>, which splits the initial problem recursively until the sub-problems are simple enough to be easily solved. After the base problems are solved, their solutions are combined in a way that yields the solution to the initial problem. Divide and conquer algorithms have found a wide usage from sorting problems to syntactic analysis problems {Reference: Thomas H. Cormen, Charles E. Leiserson, and Ronald L. Rivest, Introduction to Algorithms (MIT Press, 2000)}. Another optimization technique, which tries to optimize recursively solvable problems is <ITALIC Dynamic programming ITALIC>.
+    While Divide and conquer is only suitable for problems, where the merging of the solutions to the recursively created sub-problems yields the result of the original problem, Dynamic programming is used in cases, where those solutions can be directly used to solve the original problem. The applicability of Dynamic programming techniques to the problem at hand depends on 2 properties: optimal substructure and overlapping sub-problems. Optimal substructure is fulfilled when an optimal solution to the problem contains optimal solutions to its sub-problems {ASTERISK: notice that when talking about optimization, there is no single optimal solution, there are multiple possible ones}. The other property of Dynamic programming refers to the fact that problems, to which it is applied do not constantly generate new sub-problems at each step (which is what Divide and conquer algorithms tend to do), but instead repeatedly solve the same problems. Since this repeated solving is very inefficient, Dynamic programming promotes the use of <ITALIC Memoization ITALIC> in order to store the results of sub-problems in a map so that the algorithm doesn't need to re-solve them every time they come up, but instead just fetch the solution from memory {Reference: Thomas H. Cormen, Charles E. Leiserson, and Ronald L. Rivest, Introduction to Algorithms (MIT Press, 2000)}.
+    An example of a problem, which 
 
-    //TODO: downloaded wiki articles (Dynamic computing, Approximate computing, Memoization)
+    // TODO: downloaded wiki articles (Dynamic computing, Divide and conquer, Approximate computing, Memoization)
+
+    // TODO: add more references to linguistic papers
 
 
 3. Optimization process
