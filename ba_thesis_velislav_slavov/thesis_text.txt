@@ -54,11 +54,12 @@ TODO: sequences and series + recursion
 
     // TODO: add more references to linguistic papers
 
+
     // TODO: approximation is also controlled by output monitoring to see if it still provides decent results
     // TODO: approximation error is controlled by updating the cache
 
 
-3. Optimization process
+3. The optimization process
 
 
 
