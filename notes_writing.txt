@@ -37,7 +37,7 @@ Latest title: Efficient/Optimized computational modeling of activation-based con
     * dynamic programming techniques to store partial results
     * Which technique I am gonna use
 
-3. Optimization process
+3. The optimization process
   - In its most-inefficient form, the algorithm is a mutual recursion between the activation function and the decay function (flooded the stack)
   - Reasonable implementation: a single recursion in the activation function
   - Try to identify the bottleneck: too many repeating recursive calls
