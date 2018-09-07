@@ -82,8 +82,11 @@ TODO: sequences and series + recursion
 
 
 4. Evaluation of Performance (Setup + Results)
+    Most research, which focuses on the spacing effect in vocabulary learning systems, uses different parameters (study session duration, time between study sessions, vocabulary list size, etc.) in order to test its effectiveness. The reason for this is because learner performance largely differs based on internal factors, such as the learner's language learning capabilities, their familiarity with the area, where the particular word is used, etc {Reference: van Woundenberg 2008}. User performance in turn affects the above mentioned parameters. Therefore, in order to provide a stable environment, which allows for comparison between the different experiment results, I have chosen to conduct simulations based on those in Christopher Dilley's Paper on the "Application of Personalized Adaptive Learner Modeling to Vocabulary Learning Software" {Reference: Chris' thesis}.
+    \\ TODO: Explain why his simulations are adequate for use
+    In order to evaluate the progress of the optimization process, I conducted a series of simulations at each step, tracking their average duration as a measure of how fast the activation computations took place and tracking the average <ITALIC ALPHA ITALIC> errors as a measure of how accurately the model adapts to the user's performance.
 
-
+    \\ TODO: think about running a simulation on 7 sessions, 4 days apart OR 14 sessions, 2 days apart
 
 5. Possible extensions/improvements (Outlook)
 
