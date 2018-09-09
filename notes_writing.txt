@@ -56,8 +56,8 @@ Latest title: Efficient/Optimized computational modeling of activation-based con
   - Explain how the simulations reflect real data, what is the point of the model in the simulation (encounter duration based on reaction time formula, random alphas chosen the way Chris does, the point is to adjust the alpha accordingly to the real one)
   - List of 37 words
   - Papers say that the word count to study time ratio depends on user performance
-  - word count for session, what makes sense to do based on simulation results
   - Will use 2 sessions x 30 minutes for consistency, even though 4 sessions x 60 minutes showed better results (The papers tries to improve computational performance, not effectiveness in learning)
+  - word count for session, what makes sense to do based on simulation results
   - Alpha adjust value chosen as a result of multiple tests
   - progressively introduce different test results and why I did the tests. after each result say why it happened
   - learning causes quicker forgetting; introducing competitiors
