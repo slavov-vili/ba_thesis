@@ -13,7 +13,7 @@ model_params = {"alpha_d":   0.3,   # default alpha for all items
                 "s":         0.255, # recall probability noise reduction factor
                 "delta":     0.025, # factor to scale down intersession time
                 "F":         1,     # scaling factor for the reaction time
-                "f":         0.3}     # base reaction time
+                "f":         0.3}   # base reaction time
 
 
 
