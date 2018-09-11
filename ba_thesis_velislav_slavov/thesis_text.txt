@@ -108,6 +108,21 @@ Title: Optimized computational modeling of adaptive activation-based concept lea
     Formula 4: Calculate reaction time based on activation
     Table 2: test_results_encounter_duration (change 'writing_time' to 'padding' or sth)
 
+    Subsection: Result comparison (<ITALIC ALPHA ITALIC> adjustment value)
+    Another important aspect of the model is how it adjusts the item <ITALIC ALPHA ITALIC>s after each encounter. While some implementations of a spacing effect system use the reaction time in order to calculate an appropriate new value {Reference: Van Rijn, Van Maanen, and Van Woudenberg, 2009}, our implementation uses the item's recall probability as a way of scaling the adjust value and applying it to the item's <ITALIC ALPHA ITALIC> depending on the outcome of the encounter. The <ITALIC ALPHA ITALIC> adjustment value is doubled, because of the fact that the model attempts to present words when they are at around 50% recall probability, which means that most of the time, the actual adjustment value will be applied. The calculation can be seen in the formulas below.
+
+    Formula 3.2_a: Adjusting the <ITALIC ALPHA ITALIC> when a correct answer is given
+    Formula 3.2_b: Adjusting the <ITALIC ALPHA ITALIC> when an incorrect answer is given
+    
+    Tables 3_a and 3_b show that an <ITALIC ALPHA ITALIC> adjust value of 0.02 not only leads to a lower average <ITALIC ALPHA ITALIC> error, but also provides stable results due to the fact that the <ITALIC ALPHA ITALIC> error is not skewed in favor of either the predicted <ITALIC ALPHA ITALIC> or the real one.
+
+    Table 3_a: test_results_alpha_adjust_value (MAIN TEST)
+    Table 3_b: test_results_alpha_adjust_value (FINER ADJUSTMENT TEST)
+
+    The tables also show the results of adjusting the items' <ITALIC ALPHA ITALIC>s after the study sessions is over, which leads to significant increase of <ITALIC ALPHA ITALIC> error and bias.
+
+    Subsection: test_results_cached_history
+
 
 5. Possible extensions/improvements (Outlook)
 
