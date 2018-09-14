@@ -78,15 +78,15 @@ Latest title: Efficient/Optimized computational modeling of activation-based con
   - The improved implementation can be implemented into a real-life system and used by actual language learners to gather real data
   - Analyzing the data might provide further options for performance optimizations (for example if patterns of activation/alpha change are identified, those items can be clustered and then instead of recalculating activation for each word, recalculation could take place only once for the entire cluster)
   - relates to: easy to grasp information from familiar domains
-  - empirically determain if we can predict results based on learner interest/knowledge
+  - empirically determine if we can predict results based on learner interest/knowledge
   - setting initial alpha can be based on ^
   - exciting to see in real life to look at actual cognitive differences
 
 
 7. Conclusions
+  - Its hard to come up with a conceptually complex enough theory to model human memory, but also computationally efficient enough to provide a reasonable user experience. Turns out that using estimated values is a decent enough compromise in order to achieve that.
   - The chosen implementation and the parameters clearly show the spacing effect (evident from the results of the encounter duration test)
   - The computational complexity was significantly improved and the end values were not too far off from the original implementation (evident from the average alpha error at the end of each learning process)
-  - Its hard to come up with a conceptually complex enough theory to model human memory, but also computationally efficient enough to provide a reasonable user experience. Turns out that using estimated values is a decent enough compromise in order to achieve that.
   - Technology allows us to make such simulations and try to develop a model based on expected results, but its limit regarding how humans process language are still evident. If the model is integrated into a system used by real language learners, their results can be processed in order to try and identify regular patterns in their retention of words from different areas.
   - What makes a word harder to learn? Domain, form, semantic or syntactic similarities, orthography
 
