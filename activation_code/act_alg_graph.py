@@ -70,6 +70,8 @@ def graph_item_info(item, items_info, learn_start, learn_end):
     nothing, shows the graph
     """
 
+    # set graph fonts
+    matplotlib.rcParams.update({'font.size': 20})
     # set the graph bounds
     plot_bounds_x_time  = (0, calc_time_diff(learn_end, learn_start))
     plot_bounds_y_act   = (-1.5, 1.5)
@@ -118,7 +120,7 @@ def graph_item_info(item, items_info, learn_start, learn_end):
     # plot the item's activations throughout learning
     plt.plot(x_act, y_act, color='g')
     # Set plot information
-    plt.title("Plot for \'" + item + "\'")
+    plt.title("Activation and Decay change of \'" + item + "\'")
     plt.ylabel("Item Activation")
     # Set the plot's axes
     plt.axis([plot_bounds_x_time[0], plot_bounds_x_time[1], plot_bounds_y_act[0], plot_bounds_y_act[1]])
@@ -131,7 +133,7 @@ def graph_item_info(item, items_info, learn_start, learn_end):
     plt.plot(x_act, y_alpha, color='r')
     # Set plot information
     plt.xlabel("Elapsed Session Time (seconds)")
-    plt.ylabel("Item Alpha")
+    plt.ylabel("Item Decay")
     # Set the plot's axes
     plt.axis([plot_bounds_x_time[0], plot_bounds_x_time[1], plot_bounds_y_alpha[0], plot_bounds_y_alpha[1]])
 
